@@ -181,11 +181,9 @@
 
 
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-Thin', 100);
-@include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-ExtraLight', 200);
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-Light', 300);
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-Regular', normal);
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-Medium', 500);
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-SemiBold', 600);
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-Bold', bold);
-@include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-ExtraBold', 800);
 @include font('SF Pro Display', '@/assets/fonts/SFProDisplay/SFProDisplay-Black', 900);
