@@ -1,0 +1,94 @@
+@charset 'UTF-8'; // set encoding to most common type
+
+@import 'core.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  position: relative;
+
+  min-height: 100vh;
+  padding-bottom: 200px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: -40px;
+  padding: 55px;
+  z-index: 9;
+
+  // backdrop-filter: blur(5px);
+  background-color: #fff;
+
+  padding-top: 160px;
+
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 45px 15px 36px;
+  
+  background-color: #F6F5FF;
+
+  &__title {
+    color: #000;
+    font-size: 32px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__body {
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__link {
+    color: #969EAB;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  &__input-hint {
+    position: absolute;
+    bottom: 15px;
+
+    color: #969EAB;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  &__error-message {
+    margin-bottom: 40px;
+
+    color: #C95454;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+}
