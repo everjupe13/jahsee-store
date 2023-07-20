@@ -19,7 +19,18 @@ defineOptions({
 </template>
 
 <style lang="scss">
-main {
-  // pb
+#app {
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    
+    background: url('@/assets/img/background-noise.png') center center;
+    mix-blend-mode: overlay;
+  }
 }
 </style>
