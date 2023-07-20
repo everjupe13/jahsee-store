@@ -13,6 +13,13 @@
   padding-bottom: 200px;
 }
 
+.outlined-text { 
+  font-family: 'Poppins';
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: var(--stroke-width, 1px) var(--stroke-color, #E1E1F1);
+  color: var(--stroke-color, #E1E1F1)
+}
+
 .modal {
   display: none;
   position: fixed;

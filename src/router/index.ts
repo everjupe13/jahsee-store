@@ -28,6 +28,11 @@ export const routes = [
     component: () => import('@/pages/DropPage.vue')
   },
   {
+    path: '/lore/:id',
+    name: 'lore',
+    component: () => import('@/pages/LorePage.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/pages/ErrorPage.vue')

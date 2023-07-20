@@ -96,10 +96,10 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
       <div class="drop__grid">
         <div class="drop__list">
           <div class="drop__header tw-pb-25">
-            <div class="drop__title">{{ CURRENT_DATA.title }}</div>
+            <div class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
           </div>
           <div class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
-          <div class="drop__cost tw-mb-60">
+          <div class="outlined-text drop__cost tw-mb-60">
             {{ CURRENT_DATA.cost }}
           </div>
           <div class="drop__options tw-flex tw-gap-x-90 tw-flex-wrap">
@@ -204,9 +204,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #E1E1F1;
-    color: #E1E1F1;
   }
 
   &__grid {
@@ -234,9 +231,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     font-style: normal;
     font-weight: 600;
     line-height: 1.1;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px #E1E1F1;
-    color: #E1E1F1;
   }
 
   &__options {

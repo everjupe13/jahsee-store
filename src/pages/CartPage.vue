@@ -22,7 +22,7 @@ const decCount = () => {
       <div class="cart__grid">
         <div class="cart__list">
           <div class="cart__header tw-pb-25">
-            <div class="cart__title">MY BAG</div>
+            <div class="outlined-text cart__title" style="--stroke-width: 2px">MY BAG</div>
           </div>
           <div class="cart-order">
             <img src="@/assets/img/cross.svg" alt="" class="cart-order__cancel">
@@ -171,9 +171,6 @@ const decCount = () => {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #E1E1F1;
-    color: #E1E1F1;
   }
 
   &__header {

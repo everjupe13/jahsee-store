@@ -22,11 +22,9 @@
         <div class="link-item__aside">
           <div class="link-item__number">03</div>
           <ul class="link-item__menu-list">
+            <li class="link-item__menu-list-item">COMING SOON</li>
             <li class="link-item__menu-list-item">
-              <router-link to="" class="link-item__menu-list-link">COMING SOON</router-link>
-            </li>
-            <li class="link-item__menu-list-item">
-              <router-link to="" class="link-item__menu-list-link">DROP LORE</router-link>
+              <router-link to="/lore/1" class="link-item__menu-list-link">DROP LORE</router-link>
             </li>
           </ul>
         </div>
@@ -83,7 +81,7 @@
     flex-direction: column;
     justify-content: center;
 
-    margin-right: 150px;
+    padding-right: 150px;
     height: 100%;
   }
 
@@ -92,17 +90,27 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-   
+    
+    left: unset;
+    right: 20px;
+    transform: translateY(-50%);
+
     color: rgba(134, 134, 138, 0.03);
     font-family: SF Pro Display;
     font-size: 380px;
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
+    pointer-events: none;
   }
 
   &__menu-list-item {
     margin-bottom: 35px;
+    cursor: default;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__menu-list-item,
