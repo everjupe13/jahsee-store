@@ -23,6 +23,11 @@ export const routes = [
     component: () => import('@/pages/CartPage.vue')
   },
   {
+    path: '/drop/:id',
+    name: 'drop',
+    component: () => import('@/pages/DropPage.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/pages/ErrorPage.vue')

@@ -92,3 +92,11 @@
     text-transform: uppercase;
   }
 }
+
+.drop {
+  .swiper-button-prev,
+  .swiper-button-next {
+    transform: translateY(-50%);
+    mix-blend-mode: exclusion;
+  }
+}

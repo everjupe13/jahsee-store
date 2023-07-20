@@ -46,5 +46,11 @@ const componentsClasses = computed(() => {
   text-transform: uppercase;
 
   transition: .2s all ease;
+
+  @apply tw-flex tw-items-center;
+
+  &_theme-alternative {
+    @apply tw-bg-[#D9D9D9] tw-text-[#202022]
+  }
 }
 </style>
