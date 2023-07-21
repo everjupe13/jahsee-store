@@ -72,8 +72,8 @@ import AppLogo from '@/components/shared/AppLogo.vue'
   }
 
   @media (max-width: 767px) {
-    height: 90px;
-    padding: 10px 0;
+    height: 105px;
+    padding: 25px 0 50px;
   }
 
   &__logo {
@@ -82,8 +82,7 @@ import AppLogo from '@/components/shared/AppLogo.vue'
     transition: .2s all ease;
 
     @media (max-width: 767px) {
-      width: 150px;
-      padding-right: 10px;
+      height: 100%;
     }
   }
 
@@ -93,6 +92,10 @@ import AppLogo from '@/components/shared/AppLogo.vue'
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 }
 </style>

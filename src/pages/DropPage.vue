@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, inject } from 'vue'
 import AppCollapse from '@/components/shared/AppCollapse.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -9,6 +9,8 @@ import "swiper/css/navigation"
 import "swiper/css/thumbs"
 import { useRoute } from 'vue-router'
 
+
+const isMdScreen = inject('isMdScreen')
 
 const thumbsSwiper = ref(null)
 
@@ -99,10 +101,10 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             <div class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
           </div>
           <div class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
-          <div class="outlined-text drop__cost tw-mb-60">
+          <div class="outlined-text drop__cost tw-mb-30 md:tw-mb-60">
             {{ CURRENT_DATA.cost }}
           </div>
-          <div class="drop__options tw-flex tw-gap-x-90 tw-flex-wrap">
+          <div class="drop__options tw-flex tw-gap-x-90 tw-flex-wrap tw-justify-between md:tw-justify-normal">
             <div 
               class="drop__details-label tw-flex tw-items-center tw-gap-x-3 tw-cursor-pointer"
               @click="toggleDetailsOpened"
@@ -123,7 +125,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
               </AppCollapse>
             </div>
           </div>
-          <div class="drop__controls tw-mt-60 tw-gap-x-35 tw-flex tw-items-start">
+          <div class="drop__controls tw-mt-20 md:tw-mt-60 tw-gap-x-35 tw-flex tw-items-start tw-flex-wrap md:tw-flex-nowrap">
             <div class="drop__size">
               <div class="size-picker">
                 <div :class="['size-picker__label', { '--selected': selectedSize }]" @click="toggleSizesOpened">
@@ -148,7 +150,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
                 </AppCollapse>
               </div>
             </div>
-            <AppButton class="!tw-bg-[#969EAB]" theme="alternative">SOLD OUT</AppButton>
+            <AppButton class="!tw-bg-[#969EAB] tw-h-76 tw-mt-20 md:tw-mt-0 tw-w-full md:tw-w-auto tw-justify-center" theme="alternative">SOLD OUT</AppButton>
           </div>
         </div>
         <div class="drop__gallery">
@@ -179,6 +181,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             :modules="modules"
             :direction="'vertical'"
             class="drop-gallery-thumb"
+            v-if="!isMdScreen"
           >
             <swiper-slide v-for="item in CURRENT_DATA.gallery">
               <div class="drop-gallery-thumb__item">
@@ -197,20 +200,35 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
   padding-top: 100px;
   padding-bottom: 180px;
 
+  @media (max-width: 767px) {
+    padding-top: 20px;   
+  }
+
   &__title {
     position: relative;
     font-family: 'Poppins';
-    font-size: 96px;
+    font-size: 86px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 1.3;
+
+    @media (max-width: 767px) {
+      padding-top: 10px;
+
+      font-size: 36px; 
+      -webkit-text-stroke-width: 1px;
+    }
   }
 
   &__grid {
     display: grid;
     // grid-template-columns: 650px calc(100% - 650px - 15px);
-    grid-template-columns: calc(100% - 875px - 15px) 875px;
+    grid-template-columns: calc(100% - 820px - 15px) 820px;
     column-gap: 15px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 100%; 
+    }
   }
 
   &__desc {
@@ -221,7 +239,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 40px;
+    line-height: 32px;
     text-transform: uppercase;
   }
 
@@ -231,6 +249,12 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     font-style: normal;
     font-weight: 600;
     line-height: 1.1;
+
+    @media (max-width: 767px) {
+      font-size: 24px;
+      -webkit-text-fill-color: unset;
+      -webkit-text-stroke: unset;
+    }
   }
 
   &__options {
@@ -240,16 +264,34 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+
+  &__size {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   &__gallery {
     display: flex;
-    column-gap: 50px;
+    column-gap: 30px;
+
+    @media (max-width: 767px) {
+      grid-row: 1/2
+    }
   }
 }
 
 .size-picker {
-  width: 285px;
+  width: 245px;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 
   &__label {
     display: flex;
@@ -311,7 +353,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
   &__item {
     width: 100%;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 
     color: #E1E1F1;
     font-family: Montserrat;
@@ -328,12 +370,21 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 }
 
 .drop-gallery {
-  margin-top: 50px;
-  width: 650px;
+  margin-top: 30px;
+  width: 600px;
   height: 660px;
 
+  @media (max-width: 767px) {
+    width: 100%;
+    height: auto;
+  }
+
   &__item {
-    width: 650px;
+    width: 600px;
+
+    @media (max-width: 767px) {
+      width: 100% 
+    }
 
     img {
       display: block;
@@ -346,12 +397,12 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 }
 
 .drop-gallery-thumb {
-  margin-top: -50px;
-  height: calc(180px * 4 + 40px * 3);
+  margin-top: -10px;
+  height: calc(160px * 4 + 20px * 3);
 
   &__item {
-    width: 175px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
 
     img {
       display: block;

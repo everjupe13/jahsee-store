@@ -49,6 +49,10 @@ const componentsClasses = computed(() => {
 
   @apply tw-flex tw-items-center;
 
+  @media (max-width: 767px) {
+    padding: 18px 30px;
+  }
+
   &_theme-alternative {
     @apply tw-bg-[#D9D9D9] tw-text-[#202022]
   }

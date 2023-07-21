@@ -56,12 +56,21 @@
     font-size: 32px;
     font-weight: 600;
     text-transform: uppercase;
+
+    @include phone {
+      font-size: 28px;
+      text-align: center;
+    }
   }
 
   &__body {
     max-width: 760px;
     width: 100%;
     margin: 0 auto;
+
+    @include phone {
+      max-width: 300px;      
+    }
   }
 
   &__link {
@@ -85,6 +94,10 @@
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+
+    @include phone {
+      bottom: 3px;
+    }
   }
 
   &__error-message {
@@ -97,6 +110,21 @@
     font-weight: 500;
     line-height: normal;
     text-transform: uppercase;
+
+    @include phone {
+      max-width: 300px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__btn {
+    @include phone {
+      justify-content: center;
+
+      max-width: 300px;
+      width: 100%;
+    }
   }
 }
 

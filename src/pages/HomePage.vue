@@ -66,12 +66,21 @@
   padding: 185px 0;
   border-bottom: 2px solid #B4BBC7;
 
+  @media (max-width: 767px) {
+    padding: 39px 16px 49px;
+    margin: 0 -16px;
+  }
+
   &__title {
     color: #86868A;
     font-family: 'SF Pro Display';
     font-size: 112px;
     font-weight: 700;
-    line-height: 100px;
+    line-height: 1;
+
+    @media (max-width: 767px) {
+      font-size: 37px;
+    }
   }
 
   &__aside {
@@ -83,6 +92,10 @@
 
     padding-right: 150px;
     height: 100%;
+
+    @media (max-width: 767px) {
+      padding-right: 0;
+    }
   }
 
   &__number {
@@ -102,6 +115,10 @@
     line-height: 1;
     text-transform: uppercase;
     pointer-events: none;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 
   &__menu-list-item {
@@ -110,6 +127,10 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
     }
   }
 
@@ -123,6 +144,10 @@
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
   }
 }
 </style>

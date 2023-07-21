@@ -74,6 +74,10 @@ const refValue = props.modelValue ? props.modelValue : ref('')
 
   cursor: text;
 
+  @media (max-width: 767px) {
+    padding: 22px 30px;
+  }
+
   &.--active {
     justify-content: flex-end;
   }

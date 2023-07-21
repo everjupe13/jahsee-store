@@ -4,16 +4,16 @@
 
 <template>
   <AppContainer>
-    <section class="tw-pt-50">
+    <section class="tw-pt-30 md:tw-pt-50 -tw-mx-15 md:tw-mx-0">
       <form class="form">
-        <div class="form__title tw-mb-57">Welcome to ayaysee</div>
-        <div class="form__body !tw-mb-30">
-          <AppInput placeholder="EMAIL*" class="tw-mb-45" />
-          <div class="tw-relative tw-pb-45">
+        <div class="form__title tw-mb-30 md:tw-mb-57">Welcome to ayaysee</div>
+        <div class="form__body !tw-mb-0 !md:tw-mb-30">
+          <AppInput placeholder="EMAIL*" class="tw-mb-20 md:tw-mb-45" />
+          <div class="tw-relative tw-pb-20 md:tw-pb-45">
             <AppInput placeholder="CREATE A PASSWORD*" />
             <span class="form__input-hint">Password must be at least 8 char</span>
           </div>
-          <AppInput placeholder="FIRST NAME" class="tw-mb-45" />
+          <AppInput placeholder="FIRST NAME" class="tw-mb-20 md:tw-mb-45" />
           <AppInput placeholder="LAST NAME" class="" />
         </div>
         <div class="form__error-message">

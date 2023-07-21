@@ -53,7 +53,7 @@ const decCount = () => {
           </div>
           <div class="cart__info-body">
             <div class="cart__info-list">
-              <div class="cart__info-list-item tw-flex  tw-justify-between">
+              <div class="cart__info-list-item tw-flex tw-justify-between">
                 <div class="cart__info-list-text">Sub-total</div>
                 <div class="cart__info-list-cost">205$</div>
               </div>
@@ -64,8 +64,8 @@ const decCount = () => {
               <div class="cart__info-list-item">
                 <div class="cart__info-list-text tw-mb-30">Coupon Code</div>
                 <div class="tw-flex tw-gap-x-15 tw-mb-25">
-                  <AppInput class="!tw-bg-[#FFF]" />
-                  <AppButton class="!tw-h-66 !tw-bg-[#D9D9D9] !tw-flex !tw-items-center !tw-px-21 !tw-py-10 !tw-text-[#202022] !tw-text-[18px]">Apply</AppButton>
+                  <AppInput class="!tw-bg-[#FFF] !tw-h-46 md:!tw-h-66 !tw-w-[60%] md:!tw-w-full" />
+                  <AppButton class="!tw-h-46 md:!tw-h-66 !tw-bg-[#D9D9D9] !tw-flex !tw-items-center !tw-px-21 !tw-py-10 !tw-text-[#202022] !tw-text-[18px]">Apply</AppButton>
                 </div>
               </div>
               <div class="cart__info-radios tw-mb-25">
@@ -82,7 +82,7 @@ const decCount = () => {
                     <span>International delivery and other</span>
                   </label>
                 </div>
-                <AppButton class="tw-w-full">Checkout</AppButton>
+                <AppButton class="tw-w-full tw-justify-center">Checkout</AppButton>
             </div>
           </div>
         </div>
@@ -100,8 +100,18 @@ const decCount = () => {
   background-color: #FFFFFF;
   padding: 20px;
 
+  @media (max-width: 767px) {
+    column-gap: 5px;
+    padding: 20px;
+    padding-left: 7px;
+  }
+
   &__body {
     padding-top: 40px;
+
+    @media (max-width: 767px) {
+      padding-top: 10px;
+    }
   }
 
   &__cancel {
@@ -110,6 +120,14 @@ const decCount = () => {
     right: 30px;
     
     cursor: pointer;
+
+    @media (max-width: 767px) {
+      top: 10px;
+      right: 10px;
+
+      width: 18px;
+      height: 18px;
+    }
   }
 
   &__name {
@@ -122,6 +140,11 @@ const decCount = () => {
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
+
+    @media (max-width: 767px) {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
   }
 
   &__cost {
@@ -134,6 +157,11 @@ const decCount = () => {
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
+
+    @media (max-width: 767px) {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
   }
 
   &__size {
@@ -144,6 +172,10 @@ const decCount = () => {
     font-weight: 400;
     line-height: normal;
     text-transform: uppercase;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
   }
 
   &__count {
@@ -156,13 +188,23 @@ const decCount = () => {
     text-transform: uppercase;
 
     display: flex;
+    align-items: center;
     column-gap: 5px;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
   }
 }
 
 .cart {
   padding-top: 100px;
   padding-bottom: 180px;
+
+  @media (max-width: 767px) {
+    padding-top: 30px;
+    padding-bottom: 180px;
+  }
 
   &__title {
     position: relative;
@@ -171,6 +213,10 @@ const decCount = () => {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+
+    @media (max-width: 767px) {
+      font-size: 69px;
+    }
   }
 
   &__header {
@@ -181,6 +227,11 @@ const decCount = () => {
     display: grid;
     grid-template-columns: calc(100% - 560px - 70px) 560px;
     column-gap: 70px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 100%;
+      row-gap: 20px;
+    }
   }
 
   &__info {
@@ -189,10 +240,18 @@ const decCount = () => {
     &-header {
       padding: 35px 50px 40px;
       border-bottom: 1px solid #969EAB;
+
+      @media (max-width: 767px) {
+        padding: 20px 30px;
+      }
     }
 
     &-body {
       padding: 50px 50px 60px;
+
+      @media (max-width: 767px) {
+        padding: 20px 30px;
+      }
     }
 
     &-title {
@@ -203,10 +262,18 @@ const decCount = () => {
       font-weight: 700;
       line-height: normal;
       text-transform: uppercase;
+
+      @media (max-width: 767px) {
+        font-size: 24px;
+      }
     }
 
     &-list-item {
       margin-bottom: 40px;
+
+      @media (max-width: 767px) {
+        margin-bottom: 10px;
+      }
     }
 
     &-list-text {
@@ -217,6 +284,10 @@ const decCount = () => {
       font-weight: 600;
       line-height: normal;
       text-transform: uppercase;
+
+      @media (max-width: 767px) {
+        font-size: 18px;
+      }
     }
 
     &-list-cost {
@@ -227,6 +298,10 @@ const decCount = () => {
       font-weight: 400;
       line-height: normal;
       text-transform: uppercase;
+
+      @media (max-width: 767px) {
+        font-size: 20px;
+      }
     }
 
     &-radios {
