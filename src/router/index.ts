@@ -33,6 +33,16 @@ export const routes = [
     component: () => import('@/pages/LorePage.vue')
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('@/pages/ProfilePage.vue'),
+  },
+  {
+    path: '/profile/edit',
+    name: 'edit-profile',
+    component: () => import('@/pages/EditProfilePage.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/pages/ErrorPage.vue')

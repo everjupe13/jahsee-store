@@ -6,7 +6,7 @@
   <section class="main">
     <AppContainer>
       <div class="main__grid">
-        <div class="main__header">
+        <div data-aos="fade-up" class="main__header">
           <div class="main__header-wrapper">
             <h1 class="outlined-text main__title" style="--stroke-width: 2px">DROP LORE</h1>
             <h2 class="outlined-text main__subtitle">Solana Flipper</h2>

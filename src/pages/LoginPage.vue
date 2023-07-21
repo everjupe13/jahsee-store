@@ -5,7 +5,7 @@
 <template>
   <AppContainer>
     <section class="tw-pt-30 md:tw-pt-50 -tw-mx-15 md:tw-mx-0">
-      <form class="form">
+      <form @submit.prevent class="form">
         <div class="form__title tw-mb-30 md:tw-mb-57">Welcome to ayaysee</div>
         <div class="form__body !tw-mb-0 !md:tw-mb-30">
           <AppInput placeholder="EMAIL*" class="tw-mb-20 md:tw-mb-45" />

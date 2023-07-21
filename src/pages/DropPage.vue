@@ -98,7 +98,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
       <div class="drop__grid">
         <div class="drop__list">
           <div class="drop__header tw-pb-25">
-            <div class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
+            <div data-aos="fade-right" class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
           </div>
           <div class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
           <div class="outlined-text drop__cost tw-mb-30 md:tw-mb-60">

@@ -135,3 +135,20 @@
     mix-blend-mode: exclusion;
   }
 }
+
+.history-order {
+  .swiper-button-prev,
+  .swiper-button-next {
+    
+    &::after {
+      mix-blend-mode: difference;
+    }
+  }
+
+  .swiper-button-prev {
+    transform: scale(0.6) translateX(-25px);
+  }
+  .swiper-button-next {
+    transform: scale(0.6) translateX(25px);
+  }
+}

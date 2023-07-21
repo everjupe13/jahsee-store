@@ -18,7 +18,7 @@
   <section class="links">
     <AppContainer>
       <div class="link-item">
-        <router-link to="/not-found" class="link-item__title">3RD DROP</router-link>
+        <router-link to="/not-found" data-aos="fade-right" class="link-item__title">3RD DROP</router-link>
         <div class="link-item__aside">
           <div class="link-item__number">03</div>
           <ul class="link-item__menu-list">
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="link-item">
-        <router-link to="/drop/2" class="link-item__title">2ND DROP</router-link>
+        <router-link to="/drop/2" data-aos="fade-right" class="link-item__title">2ND DROP</router-link>
         <div class="link-item__aside">
           <div class="link-item__number">02</div>
           <ul class="link-item__menu-list">
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="link-item">
-        <router-link to="/drop/1" class="link-item__title">1ST DROP</router-link>
+        <router-link to="/drop/1" data-aos="fade-right" class="link-item__title">1ST DROP</router-link>
         <div class="link-item__aside">
           <div class="link-item__number">01</div>
           <ul class="link-item__menu-list">
