@@ -21,15 +21,19 @@ defineOptions({
 <style lang="scss">
 #app {
   position: relative;
-
   &::after {
     content: '';
 
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
     z-index: -2;
 
     background: url('@/assets/img/background-noise.png') center center;
+    background-repeat: repeat;
     mix-blend-mode: overlay;
   }
 
@@ -43,7 +47,7 @@ defineOptions({
     transform: translateX(-50%);
 
     width: 1332px;
-    height: 1342px;
+    height: calc(100% - 150px);
     border-radius: 100%;
     background: rgba(93, 104, 121, 0.54);
     mix-blend-mode: color-dodge;

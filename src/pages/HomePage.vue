@@ -22,8 +22,8 @@
         <div class="link-item__aside">
           <div class="link-item__number">03</div>
           <ul class="link-item__menu-list">
-            <li class="link-item__menu-list-item">COMING SOON</li>
-            <li class="link-item__menu-list-item">
+            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">COMING SOON</li>
+            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="150">
               <router-link to="/lore/1" class="link-item__menu-list-link">DROP LORE</router-link>
             </li>
           </ul>
@@ -34,7 +34,7 @@
         <div class="link-item__aside">
           <div class="link-item__number">02</div>
           <ul class="link-item__menu-list">
-            <li class="link-item__menu-list-item">Sold out</li>
+            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">Sold out</li>
           </ul>
         </div>
       </div>
@@ -43,15 +43,12 @@
         <div class="link-item__aside">
           <div class="link-item__number">01</div>
           <ul class="link-item__menu-list">
-            <li class="link-item__menu-list-item">Sold out</li>
+            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">Sold out</li>
           </ul>
         </div>
       </div>
     </AppContainer>
   </section>
-  
-  
-  
 </template>
 
 <style lang="scss" scoped>

@@ -9,9 +9,9 @@
         <div class="form__title tw-mb-30 md:tw-mb-57">Welcome to ayaysee</div>
         <div class="form__body !tw-mb-0 !md:tw-mb-30">
           <AppInput placeholder="EMAIL*" class="tw-mb-20 md:tw-mb-45" />
-          <div class="tw-relative tw-pb-20 md:tw-pb-45">
+          <div class="tw-relative tw-pb-45">
             <AppInput placeholder="CREATE A PASSWORD*" />
-            <router-link to="/" class="form__input-hint">FORGOT PASSWORD?</router-link>
+            <router-link to="/reset-password" class="form__input-hint">FORGOT PASSWORD?</router-link>
           </div>
         </div>
         <div class="form__error-message">

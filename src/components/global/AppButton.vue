@@ -32,6 +32,9 @@ const componentsClasses = computed(() => {
 
 <style lang="scss" scoped>
 .btn {
+  justify-content: center;
+  align-items: center;
+  
   padding: 26px 70px;
 
   background: #202022;

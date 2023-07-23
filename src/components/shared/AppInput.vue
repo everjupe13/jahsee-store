@@ -85,13 +85,20 @@ const refValue = props.modelValue ? props.modelValue : ref('')
 
 .input {
   display: block;
-  color: #969EAB;
+  
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
   text-transform: uppercase;
   background: transparent;
 
-  flex-grow: 1
+  flex-grow: 1;
+
+  color: #202022;
+
+  &::placeholder {
+    color: #969EAB;
+    
+  }
 }
 </style>

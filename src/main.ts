@@ -24,3 +24,26 @@ AOS.init({
 })
 
 app.mount('#app')
+
+const fadeOut = (element: HTMLElement | null) => {
+  if (!element) {
+    return 
+  }
+
+  let op = 1
+  let timer = setInterval(function () {
+      if (op <= 0.1) {
+          clearInterval(timer)
+          element.style.display = 'none'
+      }
+
+      element.style.opacity = String(op)
+      element.style.filter = 'alpha(opacity=' + op * 100 + ")"
+      op -= op * 0.1
+  }, 10)
+}
+
+window.addEventListener('load', () => {
+  fadeOut(document.querySelector('#loader'))
+  document.body.classList.remove('body-loading')
+})

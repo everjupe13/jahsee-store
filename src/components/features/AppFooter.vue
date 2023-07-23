@@ -30,10 +30,13 @@
 
 <style lang="scss" scoped>
 .footer {
-  position: absolute;
-  bottom: 130px;
-  left: 0;
-  right: 0;
+  margin-top: auto;
+
+  display: flex;
+  align-items: center;
+  
+  padding: 50px 0;
+  height: 150px;
 
   &__link {
     color: #969EAB;

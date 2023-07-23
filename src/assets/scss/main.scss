@@ -6,11 +6,16 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  min-height: 100vh;
+}
+
 #app {
-  position: relative;
+  display: flex;
+  flex-direction: column;
 
   min-height: 100vh;
-  padding-bottom: 200px;
+  height: 100%;
 }
 
 .outlined-text { 
@@ -96,7 +101,7 @@
     text-transform: uppercase;
 
     @include phone {
-      bottom: 3px;
+      bottom: 0px;
     }
   }
 

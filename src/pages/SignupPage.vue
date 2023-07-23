@@ -14,7 +14,7 @@
             <span class="form__input-hint">Password must be at least 8 char</span>
           </div>
           <AppInput placeholder="FIRST NAME" class="tw-mb-20 md:tw-mb-45" />
-          <AppInput placeholder="LAST NAME" class="" />
+          <AppInput placeholder="LAST NAME" class="tw-mb-20 md:tw-mb-45" />
         </div>
         <div class="form__error-message">
           this email is already in use

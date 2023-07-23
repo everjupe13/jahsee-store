@@ -13,6 +13,16 @@ export const routes = [
     component: () => import('@/pages/LoginPage.vue')
   },
   {
+    path: '/reset-password',
+    name: 'reset-password',
+    component: () => import('@/pages/ResetPasswordPage.vue')
+  },
+  {
+    path: '/new-password',
+    name: 'new-password',
+    component: () => import('@/pages/NewPasswordPage.vue')
+  },
+  {
     path: '/signup',
     name: 'signup',
     component: () => import('@/pages/SignupPage.vue')

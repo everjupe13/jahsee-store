@@ -87,7 +87,7 @@ const isPasswordEditable = ref(false)
   <section class="main">
     <AppContainer>
       <div class="main__grid">
-        <div class="main__header">
+        <div data-aos="fade-up" class="main__header">
           <div class="main__header-wrapper">
             <h1 class="outlined-text main__title" style="--stroke-width: 2px">My account</h1>
           </div>
@@ -107,28 +107,28 @@ const isPasswordEditable = ref(false)
               <div>
                 <div class="main__label">Information</div>
                 <div class="main__tabs-grid">
-                  <div class="main__tabs-box">
+                  <div data-aos="fade-down" data-aos-delay="50" class="main__tabs-box">
                     <div class="main__tabs-box-label">first name</div>
                     <div class="main__tabs-box-content">first name</div>
                   </div>
-                  <div class="main__tabs-box">
+                  <div data-aos="fade-down" data-aos-delay="100" class="main__tabs-box">
                     <div class="main__tabs-box-label">last name</div>
                     <div class="main__tabs-box-content">last name</div>
                   </div>
-                  <div class="main__tabs-box">
+                  <div data-aos="fade-down" data-aos-delay="150" class="main__tabs-box">
                     <div class="main__tabs-box-label">EMAIL</div>
                     <div class="main__tabs-box-content">EMAIL</div>
                   </div>
-                  <div class="main__tabs-box">
+                  <div data-aos="fade-down" data-aos-delay="200" class="main__tabs-box">
                     <div class="main__tabs-box-label">PHONE NUMBER</div>
                     <div class="main__tabs-box-content">PHONE NUMBER</div>
                   </div>
-                  <div class="main__tabs-box">
+                  <div data-aos="fade-down" data-aos-delay="250" class="main__tabs-box">
                     <div class="main__tabs-box-label">PASSWORD</div>
                     <div :contenteditable="isPasswordEditable" class="main__tabs-box-content">PASSWORD</div>
                     <img src="@/assets/img/edit-icon.svg" alt="" class="main__tabs-box-edit" @click="isPasswordEditable = !isPasswordEditable">
                   </div>
-                  <div class="main__tabs-box tw-flex tw-justify-end tw-items-end">
+                  <div data-aos="fade-down" data-aos-delay="300" class="main__tabs-box tw-flex tw-justify-end tw-items-end">
                     <AppButton @click="$router.push('/profile/edit')" class="tw-h-70">EDIT</AppButton>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ const isPasswordEditable = ref(false)
 
             <template v-if="activeTab === tabs[1].name">
               <div>
-                <div class="history-order">
+                <div data-aos="fade-down" data-aos-delay="100" class="history-order">
                   <div class="history-order__label">№1234567</div>
                   <div class="history-order__body">
                     <div class="history-order__field history-order__field_slider !tw-max-w-[285px] tw-px-10">

@@ -100,11 +100,11 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
           <div class="drop__header tw-pb-25">
             <div data-aos="fade-right" class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
           </div>
-          <div class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
-          <div class="outlined-text drop__cost tw-mb-30 md:tw-mb-60">
+          <div data-aos="fade-right" data-aos-delay="100" class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
+          <div data-aos="fade-right" data-aos-delay="200" class="outlined-text drop__cost tw-mb-30 md:tw-mb-60">
             {{ CURRENT_DATA.cost }}
           </div>
-          <div class="drop__options tw-flex tw-gap-x-90 tw-flex-wrap tw-justify-between md:tw-justify-normal">
+          <div data-aos="fade-down" data-aos-delay="250" class="drop__options tw-flex tw-gap-x-90 tw-flex-wrap tw-justify-between md:tw-justify-normal">
             <div 
               class="drop__details-label tw-flex tw-items-center tw-gap-x-3 tw-cursor-pointer"
               @click="toggleDetailsOpened"
@@ -125,7 +125,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
               </AppCollapse>
             </div>
           </div>
-          <div class="drop__controls tw-mt-20 md:tw-mt-60 tw-gap-x-35 tw-flex tw-items-start tw-flex-wrap md:tw-flex-nowrap">
+          <div data-aos="fade-down" data-aos-delay="300" class="drop__controls tw-mt-20 md:tw-mt-60 tw-gap-x-35 tw-flex tw-items-start tw-flex-wrap md:tw-flex-nowrap">
             <div class="drop__size">
               <div class="size-picker">
                 <div :class="['size-picker__label', { '--selected': selectedSize }]" @click="toggleSizesOpened">
@@ -153,7 +153,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             <AppButton class="!tw-bg-[#969EAB] tw-h-76 tw-mt-20 md:tw-mt-0 tw-w-full md:tw-w-auto tw-justify-center" theme="alternative">SOLD OUT</AppButton>
           </div>
         </div>
-        <div class="drop__gallery">
+        <div data-aos="fade-left" data-aos-delay="100" data-aos-duration="400" class="drop__gallery">
           <swiper
             :style="{
               '--swiper-navigation-color': '#969EAB',
