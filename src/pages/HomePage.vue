@@ -105,7 +105,7 @@
     right: 20px;
     transform: translateY(-50%);
 
-    color: rgba(134, 134, 138, 0.03);
+    color: rgba(134, 134, 138, 0.1);
     font-family: SF Pro Display;
     font-size: 380px;
     font-weight: 700;

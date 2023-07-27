@@ -51,7 +51,7 @@ const route = useRoute()
 const ZIP_DATA = {
   title: 'ZIP HOODIE',
   desc: 'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-  cost: '$125',
+  cost: '$125.00',
   list: [
     'Fabric density - 360gr/m',
     '80% cotton',
@@ -72,7 +72,7 @@ const ZIP_DATA = {
 const SWEAT_DATA = {
   title: 'SWEATSHIRT',
   desc: 'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-  cost: '$80',
+  cost: '$80.00',
   list: [
     'Fabric density - 360gr/m',
     '80% cotton',
@@ -97,13 +97,13 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     <AppContainer>
       <div class="drop__grid">
         <div class="drop__list">
-          <div class="drop__header tw-pb-25">
-            <div data-aos="fade-right" class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
+          <div class="drop__header tw-mb-25">
+            <div class="outlined-text drop__title" style="--stroke-width: 2px">{{ CURRENT_DATA.title }}</div>
           </div>
-          <div data-aos="fade-right" data-aos-delay="100" class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
-          <div data-aos="fade-right" data-aos-delay="200" class="outlined-text drop__cost tw-mb-30 md:tw-mb-60">
+          <div data-aos="fade-down" data-aos-delay="100" class="drop__cost tw-mb-25">
             {{ CURRENT_DATA.cost }}
           </div>
+          <div data-aos="fade-down" data-aos-delay="200" class="drop__desc tw-mb-40" v-html="CURRENT_DATA.desc"></div>
           <div data-aos="fade-down" data-aos-delay="250" class="drop__options tw-flex tw-gap-x-90 tw-flex-wrap tw-justify-between md:tw-justify-normal">
             <div 
               class="drop__details-label tw-flex tw-items-center tw-gap-x-3 tw-cursor-pointer"
@@ -206,11 +206,11 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
   &__title {
     position: relative;
-    font-family: 'Poppins';
-    font-size: 86px;
+    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
+    font-size: 64px;
     font-style: normal;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1;
 
     @media (max-width: 767px) {
       padding-top: 10px;
@@ -231,30 +231,28 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     }
   }
 
-  &__desc {
-    max-width: 530px;
-
-    color: #969EAB;
-    font-family: Montserrat;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 32px;
-    text-transform: uppercase;
+  &__list {
+    margin-top: 40px;
+    max-width: 490px;
   }
 
   &__cost {
-    font-family: 'Poppins';
-    font-size: 84px;
+    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
+    font-size: 24px;
     font-style: normal;
-    font-weight: 600;
-    line-height: 1.1;
+    font-weight: 800;
+    line-height: 1;
+  }
 
-    @media (max-width: 767px) {
-      font-size: 24px;
-      -webkit-text-fill-color: unset;
-      -webkit-text-stroke: unset;
-    }
+  &__desc {
+    max-width: 530px;
+
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
   }
 
   &__options {
@@ -370,7 +368,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 }
 
 .drop-gallery {
-  margin-top: 30px;
+  margin-top: 40px;
   width: 600px;
   height: 660px;
 

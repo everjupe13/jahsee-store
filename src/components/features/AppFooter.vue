@@ -49,7 +49,7 @@ import {
   padding: 50px 0;
 
   &__text {
-    font-family: Helvetica Now Display, Arial, Helvetica, sans-serif;
+    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
   
     font-size: 16px;
     font-style: normal;
