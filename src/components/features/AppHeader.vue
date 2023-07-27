@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import AppLogo from '@/components/shared/AppLogo.vue'
+import AppMarquee from '@/components/features/AppMarquee.vue'
 // import { inject, ref } from 'vue'
 
 // const isLgScreen: boolean | undefined = inject('isLgScreen')
@@ -21,20 +22,23 @@ import AppLogo from '@/components/shared/AppLogo.vue'
 
 <template>
   <header id="header" class="header">
-    <AppContainer>
-      <div class="tw-flex tw-items-center">
-        <div class="tw-grid tw-items-center header__logo">
-          <AppLogo></AppLogo>
+    <AppMarquee class="tw-mb-">3rd drop coming soon</AppMarquee>
+    <div class="header__second">
+      <AppContainer>
+        <div class="tw-flex tw-items-center">
+          <div class="tw-grid tw-items-center header__logo">
+            <AppLogo></AppLogo>
+          </div>
+          <div class="tw-flex tw-items-center tw-gap-x-30 tw-mr-30">
+            <RouterLink class="header__links" to="/login">LOG IN</RouterLink>
+            <RouterLink class="header__links" to="/signup">SIGN UP</RouterLink>
+          </div>
+          <router-link to="/cart">
+            <img src="@/assets/img/market.svg" alt="">
+          </router-link>
         </div>
-        <div class="tw-flex tw-items-center tw-gap-x-50 tw-mr-67">
-          <RouterLink class="header__links" to="/login">LOG IN</RouterLink>
-          <RouterLink class="header__links" to="/signup">SIGN UP</RouterLink>
-        </div>
-        <router-link to="/cart">
-          <img src="@/assets/img/market.svg" alt="">
-        </router-link>
-      </div>
-    </AppContainer>
+      </AppContainer>
+    </div>
   </header>
 </template>
 
@@ -47,33 +51,20 @@ import AppLogo from '@/components/shared/AppLogo.vue'
   z-index: 10;
 
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  height: 150px;
-  padding: 25px 0;
-  padding-bottom: 60px;
+  border-bottom: 1px solid rgba($color: #FFFFFF, $alpha: 0.1);
+  // glassmorphism effect
+  backdrop-filter: blur(3px);
+  background-color: rgba(32, 32, 34, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(32, 32, 34, 0.2);
 
-  border-bottom: 2px solid #D9D9D9;
-
-  background-color: #202022;
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    bottom: 33px;
-    left: 0;
-    right: 0;
-
-    display: block;
-
-    height: 2px;
-    background-color: #D9D9D9;
+  &__second {
+    padding: 20px 0;
   }
 
   @media (max-width: 767px) {
-    height: 105px;
-    padding: 25px 0 50px;
   }
 
   &__logo {
@@ -88,7 +79,7 @@ import AppLogo from '@/components/shared/AppLogo.vue'
 
   &__links {
     color: #F6F5FF;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
