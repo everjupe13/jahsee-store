@@ -208,7 +208,6 @@ const decCount = () => {
 
   &__title {
     position: relative;
-    font-family: 'Poppins';
     font-size: 96px;
     font-style: normal;
     font-weight: 700;

@@ -206,7 +206,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
   &__title {
     position: relative;
-    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
     font-size: 64px;
     font-style: normal;
     font-weight: 700;
