@@ -16,8 +16,6 @@ const app = createApp(App)
 app.use(router)
 app.use(vGlobalComponentsPlugin)
 
-
-// window.$router = router
 AOS.init({
   once: true,
   duration: 400
@@ -44,6 +42,8 @@ const fadeOut = (element: HTMLElement | null) => {
 }
 
 window.addEventListener('load', () => {
-  fadeOut(document.querySelector('#loader'))
-  document.body.classList.remove('body-loading')
+  setTimeout(() => {
+    fadeOut(document.querySelector('#loader'))
+    document.body.classList.remove('body-loading')
+  }, 600)
 })

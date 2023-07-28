@@ -12,7 +12,12 @@ defineOptions({
 
 <template>
   <AppHeader></AppHeader>
-  <main>
+  <main
+    class="main-section-layout"
+    data-aos="zoom-out"
+    data-aos-duration="600"
+    data-aos-delay="700"
+  >
     <slot></slot>
   </main>
   <AppFooter></AppFooter>
@@ -71,6 +76,16 @@ defineOptions({
         transform: translate(0, 0);
       }
     }
+  }
+}
+
+.main-section-layout {
+  position: relative;
+  z-index: 4;
+  &.aos-animate {
+    // opacity: 1;
+    // transform: scale(1);
+    // transform-style: flat;
   }
 }
 </style>

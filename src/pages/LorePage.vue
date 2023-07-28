@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-
+import AppBackNav from '@/components/features/AppBackNav.vue'
 </script>
 
 <template>
   <section class="main">
     <AppContainer>
+      <AppBackNav />
       <div class="main__grid">
         <div data-aos="fade-up" class="main__header">
           <div class="main__header-wrapper">
@@ -31,9 +32,9 @@
 
 <style lang="scss" scoped>
 .main {
-
+  padding-top: 40px;
   &__grid {
-    padding-top: 60px;
+    padding-top: 85px;
 
     display: flex;
     column-gap: 50px;

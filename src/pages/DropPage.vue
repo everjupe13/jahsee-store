@@ -4,10 +4,10 @@ import { useRoute, RouterLink } from 'vue-router'
 import { AppDropInfo } from '@/components/widgets/app-drop'
 import {
   ForwardLinkArrowIcon,
-  DropdownCollapseArrowIcon,
-  ChevronArrowBackIcon
+  DropdownCollapseArrowIcon
 } from '@/components/icons'
 import AppCollapse from '@/components/shared/AppCollapse.vue'
+import AppBackNav from '@/components/features/AppBackNav.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
@@ -19,12 +19,11 @@ import "swiper/css/thumbs"
 const isMdScreen = inject('isMdScreen')
 
 const thumbsSwiper = ref(null)
-
 const setThumbsSwiper = (swiper: any) => {
   thumbsSwiper.value = swiper;
 }
-
 const modules = [FreeMode, Navigation, Thumbs]
+
 
 const detailsOpened = ref(false)
 const toggleDetailsOpened = () => {
@@ -33,7 +32,6 @@ const toggleDetailsOpened = () => {
 
 
 const selectedSize = ref('')
-
 const setSelectedSize = (value: string) => {
   const _size = CURRENT_DATA.sizes.find(size => size.label === value)
 
@@ -41,8 +39,6 @@ const setSelectedSize = (value: string) => {
     selectedSize.value = value
 }
 
-
-const route = useRoute()
 
 const ZIP_DATA = {
   title: 'ZIP HOODIE',
@@ -137,21 +133,14 @@ const SWEAT_DATA = {
   ]
 }
 
+const route = useRoute()
 const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 </script>
 
 <template>
   <section class="drop">
     <AppContainer>
-      <button
-        class="drop__back-nav"
-        @click="$router.back()"
-      >
-        <span class="drop__back-nav-glass">
-          <ChevronArrowBackIcon class="drop__back-nav-icon" />
-        </span>
-        <span class="drop__back-nav-text">Back</span>
-      </button>
+      <AppBackNav />
 
       <div class="drop__grid">
         <div class="drop__list">
@@ -199,7 +188,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
                 </div>
 
                 <div class="drop__options-details">
-                  <AppCollapse v-model="detailsOpened">
+                  <AppCollapse v-model="detailsOpened" class="drop__options-details-collapse">
                     <ul class="details-list">
                       <li v-for="item in CURRENT_DATA.list" class="details-list__item">{{ item }}</li>
                     </ul>
@@ -235,7 +224,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             </div>
           </div>
         </div>
-        <div data-aos="fade-left" data-aos-delay="100" data-aos-duration="400" class="drop__gallery">
+        <div class="drop__gallery">
           <swiper
             :style="{
               '--swiper-navigation-color': '#969EAB',
@@ -246,6 +235,9 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             :thumbs="{ swiper: thumbsSwiper }"
             :modules="modules"
             class="drop-gallery"
+            data-aos="zoom-out"
+            data-aos-delay="50"
+            data-aos-duration="600"
           >
             <swiper-slide v-for="item in CURRENT_DATA.gallery">
               <div class="drop-gallery__item">
@@ -256,7 +248,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
           <swiper
             @swiper="setThumbsSwiper"
-            :spaceBetween="10"
+            :spaceBetween="20"
             :slidesPerView="4"
             :freeMode="true"
             :watchSlidesProgress="true"
@@ -265,9 +257,9 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             class="drop-gallery-thumb"
             v-if="!isMdScreen"
           >
-            <swiper-slide v-for="item in CURRENT_DATA.gallery">
+            <swiper-slide v-for="(item, index) in CURRENT_DATA.gallery">
               <div class="drop-gallery-thumb__item">
-                <img :src="item" />
+                <img :src="item" alt="" data-aos="fade-left" :data-aos-delay="(index + 1) * 50" data-aos-duration="400" />
               </div>
             </swiper-slide>
           </swiper>
@@ -280,38 +272,10 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 <style lang="scss" scoped>
 .drop {
   padding-top: 40px;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 
   @media (max-width: 767px) {
     padding-top: 20px;   
-  }
-
-  &__back-nav {
-    display: flex;
-    align-items: center;
-    column-gap: 2px;
-
-    width: max-content;
-
-    cursor: pointer;
-  }
-
-  &__back-nav-glass {
-    display: block;
-    flex-shrink: 0;
-  }
-
-  &__back-nav-text {
-    flex-shrink: 0;
-    display: block;
-
-    color: #FFF;
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
-    text-transform: uppercase;
   }
 
   &__grid {
@@ -398,11 +362,34 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
   }
 
   &__options-details-wrapper {
+    position: relative;
+    z-index: 10;
+
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+
+    transform: translateZ(10px);
   }
 
+  &__options-details {
+    position: relative;
+    z-index: 10;
+  }
+
+  &__options-details-collapse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  &__controls {
+    &.aos-animate {
+      transform: none;
+    }
+  }
 
   &__gallery {
     display: flex;

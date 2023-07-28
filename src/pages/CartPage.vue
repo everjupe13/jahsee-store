@@ -1,90 +1,106 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { reactive } from 'vue'
+import AppBackNav from '@/components/features/AppBackNav.vue'
+import { AppRadiosFieldset, AppRadio } from '@/components/features/AppRadiosFieldset.vue'
+import { AppCartOrder } from '@/components/widgets/app-cart'
 
+const cartImg = new URL('@/assets/img/order1.png', import.meta.url).href
 
-const count = ref(1)
-
-const incCount = () => {
-  count.value += 1
+const handleUpdateRadios = (_e: InputEvent) => {
+  // additional hook for radios change
+  // console.log(radiosModel)
 }
+const radiosModel = reactive([true, false, false])
+const handleRadiosClick = (index: number) => {
+  if (radiosModel[index]) {
+    return
+  }
 
-const decCount = () => {
-  if (count.value > 1) {
-    count.value -= 1
+  radiosModel[index] = true
+  for (let i = 0; i < radiosModel.length; i++) {
+    if (i !== index) {
+      radiosModel[i] = false
+    }
   }
 }
-
 </script>
 
 <template>
   <section class="cart">
     <AppContainer>
+      <AppBackNav />
+      <div class="cart__header tw-my-40">
+        <div class="outlined-text cart__title" style="--stroke-width: 2px">My bag</div>
+      </div>
       <div class="cart__grid">
         <div class="cart__list">
-          <div class="cart__header tw-pb-25">
-            <div class="outlined-text cart__title" style="--stroke-width: 2px">MY BAG</div>
-          </div>
-          <div class="cart-order">
-            <img src="@/assets/img/cross.svg" alt="" class="cart-order__cancel">
-            <div class="cart-order__glass">
-              <img src="@/assets/img/order1.png" alt="" class="cart-order__img">
-            </div>
-            <div class="cart-order__body">
-              <div class="cart-order__name">iic x crypton - sweatshirt</div>
-              <div class="cart-order__cost">80$</div>
-              <div class="tw-flex tw-justify-between">
-                <div class="cart-order__size">Size: M</div>
-                <div class="cart-order__count">
-                  <button @click="decCount">
-                    <img src="@/assets/img/minus.svg" alt="">
-                  </button>
-                  <span>{{ count }}</span>
-                  <button @click="incCount">
-                    <img src="@/assets/img/plus.svg" alt="">
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          
+          <AppCartOrder
+            :img="cartImg"
+            :title="'iic x crypton - sweatshirt'"
+            :cost="'$80.00'"
+            :size="'XL'"
+          ></AppCartOrder>
+
         </div>
-        <div class="cart__info">
-          <div class="cart__info-header">
-            <div class="cart__info-title">TOTAL</div>
-          </div>
-          <div class="cart__info-body">
-            <div class="cart__info-list">
-              <div class="cart__info-list-item tw-flex tw-justify-between">
-                <div class="cart__info-list-text">Sub-total</div>
-                <div class="cart__info-list-cost">205$</div>
-              </div>
-              <div class="cart__info-list-item tw-flex tw-justify-between">
-                <div class="cart__info-list-text">Delivery</div>
-                <div class="cart__info-list-cost">10$</div>
-              </div>
-              <div class="cart__info-list-item">
-                <div class="cart__info-list-text tw-mb-30">Coupon Code</div>
-                <div class="tw-flex tw-gap-x-15 tw-mb-25">
-                  <AppInput class="!tw-bg-[#FFF] !tw-h-46 md:!tw-h-66 !tw-w-[60%] md:!tw-w-full" />
-                  <AppButton class="!tw-h-46 md:!tw-h-66 !tw-bg-[#D9D9D9] !tw-flex !tw-items-center !tw-px-21 !tw-py-10 !tw-text-[#202022] !tw-text-[18px]">Apply</AppButton>
-                </div>
-              </div>
-              <div class="cart__info-radios tw-mb-25">
-                  <label class="form-control">
-                    <input type="radio" name="order-type">
-                    <span>CDEK</span>
-                  </label>
-                  <label class="form-control">
-                    <input type="radio" name="order-type">
-                    <span>Russian Post</span>
-                  </label>
-                  <label class="form-control">
-                    <input type="radio" name="order-type">
-                    <span>International delivery and other</span>
-                  </label>
-                </div>
-                <AppButton class="tw-w-full tw-justify-center">Checkout</AppButton>
+        <div class="cart__schema">
+          <form @submit.prevent class="cart__schema-form">
+
+            <div class="cart__schema-item-border cart__schema-header">
+              <p class="cart__heading">TOTAL</p>
             </div>
-          </div>
+
+            <div class="cart__schema-body">
+
+              <div class="cart__schema-list">
+                <div class="cart__schema-item-border tw-flex tw-justify-between tw-items-center tw-py-25">
+                  <p class="cart__subheading">Sub-total</p>
+                  <div class="cart__heading">$285.00</div>
+                </div>
+
+                <div class="tw-flex tw-justify-between tw-items-center tw-py-25">
+                  <p class="cart__subheading">Delivery</p>
+                  <div class="cart__heading">$10.00</div>
+                </div>
+              </div>
+
+              <AppRadiosFieldset
+                class="tw-mb-25"
+                @update="handleUpdateRadios"
+              >
+                <AppRadio
+                  :value="radiosModel[0]"
+                  @input="handleRadiosClick(0)"
+                  class="tw-mb-15"
+                >CDEK</AppRadio>
+                <AppRadio
+                  :value="radiosModel[1]"
+                  @input="handleRadiosClick(1)"
+                  class="tw-mb-15"
+                >Russian Post</AppRadio>
+                <AppRadio
+                  :value="radiosModel[2]"
+                  @input="handleRadiosClick(2)"
+                >International delivery and other</AppRadio>
+              </AppRadiosFieldset>
+
+              <div class="cart__schema-input-field">
+                <fieldset class="tw-block tw-w-full tw-h-full">
+                  <div class="tw-flex tw-items-center">
+                    <AppInput
+                      class="cart__schema-input"
+                      placeholder="Coupon Code"
+                    />
+                    <AppButton type="button" class="cart__schema-input-btn">Apply</AppButton>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="cart__schema-footer">
+                <AppButton class="cart__schema-submit tw-w-full">Checkout</AppButton>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </AppContainer>
@@ -92,140 +108,18 @@ const decCount = () => {
 </template>
 
 <style lang="scss" scoped>
-.cart-order {
-  position: relative;
-  display: flex;
-  column-gap: 70px;
-
-  background-color: #FFFFFF;
-  padding: 20px;
-
-  @media (max-width: 767px) {
-    column-gap: 5px;
-    padding: 20px;
-    padding-left: 7px;
-  }
-
-  &__body {
-    padding-top: 40px;
-
-    @media (max-width: 767px) {
-      padding-top: 10px;
-    }
-  }
-
-  &__cancel {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    
-    cursor: pointer;
-
-    @media (max-width: 767px) {
-      top: 10px;
-      right: 10px;
-
-      width: 18px;
-      height: 18px;
-    }
-  }
-
-  &__name {
-    margin-bottom: 40px;
-
-    color: #000;
-    font-family: Montserrat;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-  }
-
-  &__cost {
-    margin-bottom: 40px;
-
-    color: #202023;
-    font-family: Montserrat;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
-  }
-
-  &__size {
-    color: #000;
-    font-family: Montserrat;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 18px;
-    }
-  }
-
-  &__count {
-    color: #000;
-    font-family: Montserrat;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
-
-    @media (max-width: 767px) {
-      font-size: 18px;
-    }
-  }
-}
-
 .cart {
-  padding-top: 100px;
-  padding-bottom: 180px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 
   @media (max-width: 767px) {
     padding-top: 30px;
-    padding-bottom: 180px;
-  }
-
-  &__title {
-    position: relative;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-
-    @media (max-width: 767px) {
-      font-size: 69px;
-    }
-  }
-
-  &__header {
-    border-bottom: 2px solid #D9D9D9;
+    padding-bottom: 40px;
   }
 
   &__grid {
     display: grid;
-    grid-template-columns: calc(100% - 560px - 70px) 560px;
-    column-gap: 70px;
+    grid-template-columns: calc(100% - 440px) 440px;
 
     @media (max-width: 767px) {
       grid-template-columns: 100%;
@@ -233,130 +127,104 @@ const decCount = () => {
     }
   }
 
-  &__info {
-    background-color: #fff;
+  &__title {
+    position: relative;
 
-    &-header {
-      padding: 35px 50px 40px;
-      border-bottom: 1px solid #969EAB;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 100%;
+    letter-spacing: 2.56px;
+    text-transform: uppercase;
 
-      @media (max-width: 767px) {
-        padding: 20px 30px;
-      }
-    }
-
-    &-body {
-      padding: 50px 50px 60px;
-
-      @media (max-width: 767px) {
-        padding: 20px 30px;
-      }
-    }
-
-    &-title {
-      color: #202022;
-      font-family: Montserrat;
-      font-size: 32px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      text-transform: uppercase;
-
-      @media (max-width: 767px) {
-        font-size: 24px;
-      }
-    }
-
-    &-list-item {
-      margin-bottom: 40px;
-
-      @media (max-width: 767px) {
-        margin-bottom: 10px;
-      }
-    }
-
-    &-list-text {
-      color: #202022;
-      font-family: Montserrat;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      text-transform: uppercase;
-
-      @media (max-width: 767px) {
-        font-size: 18px;
-      }
-    }
-
-    &-list-cost {
-      color: #000;
-      font-family: Montserrat;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      text-transform: uppercase;
-
-      @media (max-width: 767px) {
-        font-size: 20px;
-      }
-    }
-
-    &-radios {
-      display: flex;
-      flex-direction: column;
-
-      row-gap: 15px;
+    @media (max-width: 767px) {
+      font-size: 69px;
     }
   }
-}
 
-input[type="radio"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #fff;
-  margin: 0;
+  &__heading,
+  &__subheading {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
 
-  font: inherit;
-  color: #202022;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #202022;
-  border-radius: 50%;
+  &__heading {
+    color: #000;
+  }
 
-  transform: translateY(-1px);
+  &__subheading {
+    color: #848A99;
+    text-transform: none;
+  }
 
-  display: grid;
-  place-content: center;
-}
+  &__schema {
+    background-color: #E8E8E9;
+  }
 
-input[type="radio"]::before {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
-  border-radius: 50%;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em #202022;
-}
+  &__schema-form {
+    padding: 40px;
+  }
 
-input[type="radio"]:checked::before {
-  transform: scale(1);
-}
 
-.form-control {
-  color: #000;
-  font-family: Montserrat;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-transform: uppercase;
+  &__schema-item-border {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
 
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
+  &__schema-header {
+    padding-bottom: 25px;
+
+    @media (max-width: 767px) {
+      padding: 20px;
+    }
+  }
+
+  &__schema-input-field {
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  &__schema-input {
+    flex-grow: 1;
+
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    padding-left: 15px;
+
+    background-color: transparent;
+  }
+
+  &__schema-input-btn {
+    padding: 12px;
+
+    background-color: rgba(0, 0, 0, .2);
+
+    color: #FFF;
+    font-family: 'Helvetica Now Display';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
+
+  &__schema-submit {
+    color: #FFF;
+    font-family: 'Helvetica Now Display';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    text-transform: uppercase;
+  }
+
+  &__schema-footer {
+    margin-top: 150px;
+  }
 }
 </style>
