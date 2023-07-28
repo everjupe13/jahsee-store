@@ -89,7 +89,7 @@ module.exports = {
       '2xl': '1536px'
     },
     colors: {
-      black: '#0B2630',
+      black: '#202022',
       white: '#FFFFFF',
       green: {
         DEFAULT: '#35977D',
