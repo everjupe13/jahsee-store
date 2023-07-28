@@ -492,7 +492,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     line-height: 100%;
     text-transform: uppercase;
 
-    transform: translate(5px, 5px);
     transition: .2s all ease;
   }
 }
