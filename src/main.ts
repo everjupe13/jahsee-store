@@ -5,7 +5,12 @@ import './normalize.css'
 
 import 'swiper/css'
 import 'aos/dist/aos.css'
+
+import './assets/css/tailwind.css'
+import './assets/css/custom-scrollbar.css'
+
 import './assets/scss/main.scss'
+
 import AOS from 'aos'
 
 import App from '@/App.vue'
@@ -25,25 +30,28 @@ app.mount('#app')
 
 const fadeOut = (element: HTMLElement | null) => {
   if (!element) {
-    return 
+    return Promise.resolve()
   }
 
-  let op = 1
-  let timer = setInterval(function () {
-      if (op <= 0.1) {
-          clearInterval(timer)
-          element.style.display = 'none'
-      }
-
-      element.style.opacity = String(op)
-      element.style.filter = 'alpha(opacity=' + op * 100 + ")"
-      op -= op * 0.1
-  }, 10)
+  return new Promise<void>((resolve, _reject) => {
+    let op = 1
+    let timer = setInterval(function () {
+        if (op <= 0.1) {
+            clearInterval(timer)
+            element.style.display = 'none'
+            resolve()
+        }
+  
+        element.style.opacity = String(op)
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")"
+        op -= op * 0.1
+    }, 10)
+  })
 }
 
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    fadeOut(document.querySelector('#loader'))
+  setTimeout(async () => {
+    await fadeOut(document.querySelector('#loader'))
     document.body.classList.remove('body-loading')
   }, 600)
 })

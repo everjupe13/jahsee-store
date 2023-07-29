@@ -33,7 +33,11 @@ const handleRadiosClick = (index: number) => {
         <div class="outlined-text cart__title" style="--stroke-width: 2px">My bag</div>
       </div>
       <div class="cart__grid">
-        <div class="cart__list">
+        <div class="cart__table">
+          <div class="cart__table-header">
+            <div class="cart__table-heading">Product</div>
+            <div class="cart__table-heading">Size</div>
+          </div>
           
           <AppCartOrder
             :img="cartImg"
@@ -117,16 +121,6 @@ const handleRadiosClick = (index: number) => {
     padding-bottom: 40px;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: calc(100% - 440px) 440px;
-
-    @media (max-width: 767px) {
-      grid-template-columns: 100%;
-      row-gap: 20px;
-    }
-  }
-
   &__title {
     position: relative;
 
@@ -140,6 +134,40 @@ const handleRadiosClick = (index: number) => {
     @media (max-width: 767px) {
       font-size: 69px;
     }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: calc(100% - 440px) 440px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 100%;
+      row-gap: 20px;
+    }
+  }
+
+  &__table {
+    padding: 40px;
+    background: #FFF;
+  }
+
+  &__table-header {
+    display: grid;
+    grid-template-columns: calc(100% / 3 * 2) calc(100% / 3 * 1);
+    align-items: center;
+
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  &__table-heading {
+    color: #848A99;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    text-transform: uppercase;
   }
 
   &__heading,

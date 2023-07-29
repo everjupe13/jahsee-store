@@ -8,6 +8,7 @@ import ForwardLinkArrowIcon from './ForwardLinkArrowIcon.vue'
 import DropdownCollapseArrowIcon from './DropdownCollapseArrowIcon.vue'
 
 import ChevronArrowBackIcon from './ChevronArrowBackIcon.vue'
+import CrossIcon from './CrossIcon.vue'
 
 export { 
   SocialDiscordIcon,
@@ -17,5 +18,6 @@ export {
   SocialXIcon,
   ForwardLinkArrowIcon,
   DropdownCollapseArrowIcon,
-  ChevronArrowBackIcon
+  ChevronArrowBackIcon,
+  CrossIcon
 }
