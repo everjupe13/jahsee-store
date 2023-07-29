@@ -9,6 +9,8 @@ import DropdownCollapseArrowIcon from './DropdownCollapseArrowIcon.vue'
 
 import ChevronArrowBackIcon from './ChevronArrowBackIcon.vue'
 import CrossIcon from './CrossIcon.vue'
+import PlusIcon from './PlusIcon.vue'
+import MinusIcon from './MinusIcon.vue'
 
 export { 
   SocialDiscordIcon,
@@ -19,5 +21,7 @@ export {
   ForwardLinkArrowIcon,
   DropdownCollapseArrowIcon,
   ChevronArrowBackIcon,
-  CrossIcon
+  CrossIcon,
+  PlusIcon,
+  MinusIcon
 }

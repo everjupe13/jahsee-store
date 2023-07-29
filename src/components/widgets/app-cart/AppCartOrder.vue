@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { CrossIcon } from '@/components/icons';
+import { CrossIcon, PlusIcon, MinusIcon } from '@/components/icons'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -32,26 +32,28 @@ const decCount = () => {
 
         <div class="cart-order__info">
           <div class="cart-order__title tw-mb-10">{{ props.title }}</div>
-          <div class="cart-order__cost tw-mb-25">{{ props.cost }}</div>
+          <div class="cart-order__cost tw-mb-5 md:tw-mb-25">{{ props.cost }}</div>
 
-          <div class="tw-flex tw-justify-between">
-            <div class="cart-order__count">
-              <button @click="decCount">
-                <img src="@/assets/img/minus.svg" alt="">
-              </button>
-              <span>{{ count }}</span>
-              <button @click="incCount">
-                <img src="@/assets/img/plus.svg" alt="">
-              </button>
-            </div>
+          <div class="cart-order__count">
+            <button @click="decCount">
+              <div class="badge-hover tw-w-16 tw-h-16">
+                <MinusIcon />
+              </div>
+            </button>
+            <div class="cart-order__count-text">{{ count }}</div>
+            <button @click="incCount">
+              <div class="badge-hover tw-w-16 tw-h-16">
+                <PlusIcon />
+              </div>
+            </button>
           </div>
         </div>
       </div>
-      <div class="cart-order__controls">
-        <div class="tw-flex tw-justify-between tw-items-center">
+      <div class="cart-order__controls tw-h-full">
+        <div class="tw-flex tw-justify-center md:tw-justify-between tw-items-end md:tw-items-center tw-h-full">
           <div class="cart-order__size">{{ props.size }}</div>
-          <div class="badge-hover">
-            <CrossIcon class="cart-order__cancel" />
+          <div class="cart-order__cancel badge-hover tw-w-28 tw-h-28">
+            <CrossIcon />
           </div>
         </div>
       </div>
@@ -73,8 +75,7 @@ const decCount = () => {
 
   @media (max-width: 767px) {
     column-gap: 5px;
-    padding: 20px;
-    padding-left: 7px;
+    padding: 10px 0;
   }
 
   &__grid {
@@ -83,18 +84,31 @@ const decCount = () => {
     align-items: center;
 
     width: 100%;
+
+    @media (max-width: 767px) {
+      grid-template-columns: calc(100% / 12 * 11) calc(100% / 12 * 1);
+    }
   }
 
   &__body {
     display: flex;
     align-items: center;
     column-gap: 40px;
+
+    @media (max-width: 767px) {
+      column-gap: 10px;
+    }
   }
 
   &__glass {
     flex-shrink: 0;
     width: 140px;
     height: 140px;
+
+    @media (max-width: 767px) {
+      width: 80px;
+      height: 80px;
+    }
   }
 
   &__img {
@@ -122,8 +136,7 @@ const decCount = () => {
     text-transform: uppercase;
 
     @media (max-width: 767px) {
-      // margin-bottom: 10px;
-      // font-size: 22px;
+      font-size: 16px;
     }
   }
 
@@ -138,12 +151,24 @@ const decCount = () => {
     text-transform: uppercase;
 
     @media (max-width: 767px) {
-      font-size: 20px;
+      font-size: 14px;
     }
   }
 
 
   &__count {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+
+  &__count-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 25px;
+
     color: #000;
     font-family: Montserrat;
     font-size: 16px;
@@ -153,12 +178,8 @@ const decCount = () => {
     letter-spacing: 0.64px;
     text-transform: uppercase;
 
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
-
     @media (max-width: 767px) {
-      font-size: 18px;
+      font-size: 14px;
     }
   }
 
@@ -179,49 +200,23 @@ const decCount = () => {
   &__cancel {
     position: relative;
     z-index: 2;
-
+    
     cursor: pointer;
-    fill: rgba(0, 0, 0, .5);
     transition: .3s ease all;
 
-    @media (max-width: 767px) {
-      // width: 18px;
-      // height: 18px;
-    }
-  }
-}
-
-.badge-hover {
-  position: relative;
-  cursor: pointer;
-
-  &:after {
-    content: '';
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-
-    display: block;
-
-    width: 28px;
-    height: 28px;
-    border-radius: 100%;
-
-    background-color: rgba(0, 0, 0, .0);
-
-    transition: .3s all ease
-  }
-
-  &:hover {
     svg {
-      fill: #fff
+      fill: rgba(0, 0, 0, .5);
     }
 
-    &:after {
-      background-color: rgba(0, 0, 0, .9); 
+    &:hover {
+      svg {
+        fill: #fff;
+      }
+    }
+
+    @media (max-width: 767px) {
+      position: absolute;
+      top: 15px;
     }
   }
 }

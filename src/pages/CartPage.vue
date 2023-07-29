@@ -29,7 +29,7 @@ const handleRadiosClick = (index: number) => {
   <section class="cart">
     <AppContainer>
       <AppBackNav />
-      <div class="cart__header tw-my-40">
+      <div class="cart__header tw-my-20 md:tw-my-40">
         <div class="outlined-text cart__title" style="--stroke-width: 2px">My bag</div>
       </div>
       <div class="cart__grid">
@@ -46,6 +46,13 @@ const handleRadiosClick = (index: number) => {
             :size="'XL'"
           ></AppCartOrder>
 
+          <AppCartOrder
+            :img="cartImg"
+            :title="'iic x crypton - sweatshirt'"
+            :cost="'$80.00'"
+            :size="'L'"
+          ></AppCartOrder>
+
         </div>
         <div class="cart__schema">
           <form @submit.prevent class="cart__schema-form">
@@ -57,12 +64,12 @@ const handleRadiosClick = (index: number) => {
             <div class="cart__schema-body">
 
               <div class="cart__schema-list">
-                <div class="cart__schema-item-border tw-flex tw-justify-between tw-items-center tw-py-25">
+                <div class="cart__schema-item-border tw-flex tw-justify-between tw-items-center tw-py-20 md:tw-py-25">
                   <p class="cart__subheading">Sub-total</p>
                   <div class="cart__heading">$285.00</div>
                 </div>
 
-                <div class="tw-flex tw-justify-between tw-items-center tw-py-25">
+                <div class="tw-flex tw-justify-between tw-items-center tw-py-20 md:tw-py-25">
                   <p class="cart__subheading">Delivery</p>
                   <div class="cart__heading">$10.00</div>
                 </div>
@@ -132,7 +139,7 @@ const handleRadiosClick = (index: number) => {
     text-transform: uppercase;
 
     @media (max-width: 767px) {
-      font-size: 69px;
+      font-size: 48px;
     }
   }
 
@@ -140,15 +147,19 @@ const handleRadiosClick = (index: number) => {
     display: grid;
     grid-template-columns: calc(100% - 440px) 440px;
 
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       grid-template-columns: 100%;
-      row-gap: 20px;
+      // row-gap: 20px;
     }
   }
 
   &__table {
     padding: 40px;
     background: #FFF;
+
+    @media (max-width: 767px) {
+      padding: 30px;
+    }
   }
 
   &__table-header {
@@ -158,6 +169,11 @@ const handleRadiosClick = (index: number) => {
 
     padding-bottom: 25px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+    @media (max-width: 767px) {
+      grid-template-columns: calc(100% / 12 * 11) calc(100% / 12 * 1);
+      padding-bottom: 15px;
+    }
   }
 
   &__table-heading {
@@ -195,6 +211,10 @@ const handleRadiosClick = (index: number) => {
 
   &__schema-form {
     padding: 40px;
+
+    @media (max-width: 767px) {
+      padding: 30px;
+    }
   }
 
 
@@ -206,7 +226,7 @@ const handleRadiosClick = (index: number) => {
     padding-bottom: 25px;
 
     @media (max-width: 767px) {
-      padding: 20px;
+      padding-bottom: 20px;
     }
   }
 
@@ -253,6 +273,10 @@ const handleRadiosClick = (index: number) => {
 
   &__schema-footer {
     margin-top: 150px;
+
+    @media (max-width: 767px) {
+      margin-top: 20px;
+    }
   }
 }
 </style>
