@@ -1,11 +1,63 @@
 <script lang="ts" setup>
 import { IDropInfoProps } from '../types/IDropInfoProps'
+import { ref, onMounted } from 'vue'
 
 const props = defineProps<IDropInfoProps>()
+
+const title = ref<HTMLElement>()
+const titleText = ref<String>('')
+
+
+onMounted(() => {
+  const initAnimation = () => {
+    if (!title.value) return
+    
+    const _heightCss = window.getComputedStyle(title.value as Element).getPropertyValue('height')
+    title.value.style.height = _heightCss
+    titleText.value = title.value.textContent || ''
+    title.value.textContent = ''
+    title.value.style.opacity = '1'
+
+  }
+
+  const endAnimation = () => {
+    if (!title.value) return
+    title.value.style.removeProperty('height')
+  }
+
+  if (!title.value) return
+
+
+  initAnimation() 
+  
+  const typingDelay = 50
+  const startDelay = 500
+  let charIndex = 0
+
+  const typingAnimation = () => {
+    if (!title.value) return
+
+    if (charIndex < titleText.value.length) {
+      title.value.textContent += titleText.value.charAt(charIndex)
+      charIndex += 1
+
+      setTimeout(typingAnimation, typingDelay);
+    } 
+    else {
+      endAnimation()
+    }
+  }
+
+  setTimeout(typingAnimation, startDelay + 250)
+})
 </script>
 
 <template>
-  <div class="outlined-text drop-info__title tw-mb-25" style="--stroke-width: 2px">{{ props.title }}</div>
+  <div
+    class="outlined-text drop-info__title tw-mb-25"
+    style="--stroke-width: 2px; opacity: 1;"
+    ref="title"
+  >{{ props.title }}</div>
   <div class="drop-info__cost tw-mb-25" data-aos="fade-down" data-aos-delay="100">{{ props.cost }}</div>
   <div class="drop-info__desc" data-aos="fade-down" data-aos-delay="200" v-html="props.desc"></div>
 </template>
