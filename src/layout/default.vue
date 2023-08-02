@@ -2,12 +2,16 @@
 import AppHeader from '@/components/features/AppHeader.vue'
 import AppFooter from '@/components/features/AppFooter.vue'
 
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
 defineOptions({
   name: 'AppLayout'
 })
 
-
-
+const route = useRoute()
+const isFooterVisible = computed(() => route?.meta?.footerVisible !== false)
+console.log(isFooterVisible.value)
 </script>
 
 <template>
@@ -20,7 +24,7 @@ defineOptions({
   >
     <slot></slot>
   </main>
-  <AppFooter></AppFooter>
+  <AppFooter v-if="isFooterVisible"></AppFooter>
 </template>
 
 <style lang="scss">

@@ -97,6 +97,6 @@ const onSlideChange = (swiper: any) => {
   </swiper>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './AppHomeSlider.scss';
 </style>

@@ -10,22 +10,34 @@ export const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/pages/LoginPage.vue')
+    component: () => import('@/pages/LoginPage.vue'),
+    meta: {
+      footerVisible: false
+    }
   },
   {
     path: '/reset-password',
     name: 'reset-password',
-    component: () => import('@/pages/ResetPasswordPage.vue')
+    component: () => import('@/pages/ResetPasswordPage.vue'),
+    meta: {
+      footerVisible: false
+    }
   },
   {
     path: '/new-password',
     name: 'new-password',
-    component: () => import('@/pages/NewPasswordPage.vue')
+    component: () => import('@/pages/NewPasswordPage.vue'),
+    meta: {
+      footerVisible: false
+    }
   },
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('@/pages/SignupPage.vue')
+    component: () => import('@/pages/SignupPage.vue'),
+    meta: {
+      footerVisible: false
+    }
   },
   {
     path: '/cart',

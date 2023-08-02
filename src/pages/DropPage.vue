@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, inject } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { AppDropInfo } from '@/components/widgets/app-drop'
+import { AppDropInfo } from '@/components/screens/app-drop'
 import {
   ForwardLinkArrowIcon,
   DropdownCollapseArrowIcon
@@ -14,6 +14,7 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import "swiper/css/free-mode"
 import "swiper/css/navigation"
 import "swiper/css/thumbs"
+
 
 
 const isMdScreen = inject('isMdScreen')
@@ -60,30 +61,12 @@ const ZIP_DATA = {
     new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href,
   ],
   sizes: [
-    {
-      label: 'XS',
-      disabled: false
-    },
-    {
-      label: 'S',
-      disabled: false
-    },
-    {
-      label: 'M',
-      disabled: false
-    },
-    {
-      label: 'L',
-      disabled: false
-    },
-    {
-      label: 'XL',
-      disabled: true
-    },
-    {
-      label: 'XXL',
-      disabled: false
-    }
+    { label: 'XS', disabled: false },
+    { label: 'S', disabled: false },
+    { label: 'M', disabled: false },
+    { label: 'L', disabled: false },
+    { label: 'XL', disabled: true },
+    { label: 'XXL', disabled: false }
   ]
 }
 
@@ -106,30 +89,12 @@ const SWEAT_DATA = {
     new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href,
   ],
   sizes: [
-    {
-      label: 'XS',
-      disabled: false
-    },
-    {
-      label: 'S',
-      disabled: false
-    },
-    {
-      label: 'M',
-      disabled: false
-    },
-    {
-      label: 'L',
-      disabled: true
-    },
-    {
-      label: 'XL',
-      disabled: true
-    },
-    {
-      label: 'XXL',
-      disabled: false
-    }
+    { label: 'XS', disabled: false },
+    { label: 'S', disabled: false },
+    { label: 'M', disabled: false },
+    { label: 'L', disabled: true },
+    { label: 'XL', disabled: true },
+    { label: 'XXL', disabled: false }
   ]
 }
 
@@ -542,4 +507,4 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     opacity: 1;
   }
 }
-</style>
+</style>@/components/screens/app-drop

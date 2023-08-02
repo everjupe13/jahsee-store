@@ -2,7 +2,7 @@
 import { reactive } from 'vue'
 import AppBackNav from '@/components/features/AppBackNav.vue'
 import { AppRadiosFieldset, AppRadio } from '@/components/features/AppRadiosFieldset.vue'
-import { AppCartOrder } from '@/components/widgets/app-cart'
+import { AppCartOrder } from '@/components/screens/app-cart'
 
 const cartImg = new URL('@/assets/img/order1.png', import.meta.url).href
 
@@ -279,4 +279,4 @@ const handleRadiosClick = (index: number) => {
     }
   }
 }
-</style>
+</style>@/components/screens/app-cart

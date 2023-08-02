@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import AppHomeSlider from '@/components/screens/home/AppHomeSlider.vue'
+import { AppHomeSlider } from '@/components/screens/app-home'
 
 // const tourCardsData = [
 //   {
