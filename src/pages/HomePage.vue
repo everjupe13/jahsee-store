@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import AppHomeSlider from '@/components/screens/home/AppHomeSlider.vue'
 
 // const tourCardsData = [
 //   {
@@ -15,9 +16,12 @@
 </script>
 
 <template>
-  <section class="links">
+  <section class="tw-pt-60">
     <AppContainer>
-      <div class="link-item">
+      <div class="tw-max-w-[800px] tw-m-auto">
+        <AppHomeSlider />
+      </div>
+      <!-- <div class="link-item">
         <router-link to="/not-found" data-aos="fade-right" class="link-item__title">3RD DROP</router-link>
         <div class="link-item__aside">
           <div class="link-item__number">03</div>
@@ -46,7 +50,7 @@
             <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">Sold out</li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </AppContainer>
   </section>
 </template>
