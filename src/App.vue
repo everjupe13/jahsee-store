@@ -29,5 +29,3 @@ provide('isLgScreen', isLgScreen)
     <router-view></router-view>
   </Layout>
 </template>
-
-<style lang="scss" scoped></style>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { CrossIcon, MinusIcon, PlusIcon } from '@/components/icons'
+import { CrossIcon, MinusIcon, PlusIcon } from '@/components/shared/icons'
 
 const props = defineProps({
   img: String,

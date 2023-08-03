@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 
-import { ChevronArrowBackIcon } from '@/components/icons'
+import { ChevronArrowBackIcon } from '@/components/shared/icons'
 
 const router = useRouter()
 const handleBacknavClick = async () => {

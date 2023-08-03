@@ -5,7 +5,7 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
 import {
   AppRadio,
   AppRadiosFieldset
-} from '@/components/features/AppRadiosFieldset.vue'
+} from '@/components/features/AppRadiosFieldset'
 import { AppCartOrder } from '@/components/screens/app-cart'
 
 const cartImg = new URL('@/assets/img/order1.png', import.meta.url).href
@@ -33,8 +33,8 @@ const handleRadiosClick = (index: number) => {
   <section class="cart">
     <AppContainer>
       <AppBackNav />
-      <div class="cart__header my-20 md:my-40">
-        <div class="outlined-text cart__title" style="--stroke-width: 2px">
+      <div class="my-20 md:my-40">
+        <div class="outlined-text title font-hnd" style="--stroke-width: 2px">
           My bag
         </div>
       </div>
@@ -128,6 +128,18 @@ const handleRadiosClick = (index: number) => {
 </template>
 
 <style lang="scss" scoped>
+.title {
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 100%;
+  letter-spacing: 2.56px;
+  text-transform: uppercase;
+
+  @media (max-width: 767px) {
+    font-size: 48px;
+  }
+}
 .cart {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -135,21 +147,6 @@ const handleRadiosClick = (index: number) => {
   @media (max-width: 767px) {
     padding-top: 30px;
     padding-bottom: 40px;
-  }
-
-  &__title {
-    position: relative;
-
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 100%;
-    letter-spacing: 2.56px;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 48px;
-    }
   }
 
   &__grid {
@@ -288,4 +285,3 @@ const handleRadiosClick = (index: number) => {
   }
 }
 </style>
-@/components/screens/app-cart

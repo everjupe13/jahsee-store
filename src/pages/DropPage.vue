@@ -11,12 +11,12 @@ import { inject, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import AppBackNav from '@/components/features/AppBackNav.vue'
+import { AppDropInfo } from '@/components/screens/app-drop'
+import AppCollapse from '@/components/shared/AppCollapse.vue'
 import {
   DropdownCollapseArrowIcon,
   ForwardLinkArrowIcon
-} from '@/components/icons'
-import { AppDropInfo } from '@/components/screens/app-drop'
-import AppCollapse from '@/components/shared/AppCollapse.vue'
+} from '@/components/shared/icons'
 
 const isMdScreen = inject('isMdScreen')
 
@@ -531,4 +531,3 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
   }
 }
 </style>
-@/components/screens/app-drop

@@ -1,52 +1,29 @@
 import 'aos/dist/aos.css'
-import '@/assets/css/tailwind.css'
-import '@/assets/css/custom-scrollbar.css'
-import '@/assets/scss/main.scss'
+import '@/assets/scss/index.scss'
+import '@/assets/scss/tailwind.scss'
+import '@/assets/scss/fonts.scss'
+import '@/assets/scss/custom-scrollbar.scss'
 
 import AOS from 'aos'
 import { createApp } from 'vue'
 
 import App from '@/App.vue'
-import { vGlobalComponentsPlugin } from '@/components/global/vGlobalComponentsPlugin'
+import { vGlobalComponentsPlugin } from '@/plugins/vGlobalComponentsPlugin'
+import { Preloader } from '@/utils/preloader'
 
 import { router } from './router'
 
-const app = createApp(App)
+const bootstrap = () => {
+  const app = createApp(App)
+  app.use(router)
+  app.use(vGlobalComponentsPlugin)
+  app.mount('#app')
 
-app.use(router)
-app.use(vGlobalComponentsPlugin)
-
-AOS.init({
-  once: true,
-  duration: 400
-})
-
-app.mount('#app')
-
-const fadeOut = (element: HTMLElement | null) => {
-  if (!element) {
-    return Promise.resolve()
-  }
-
-  return new Promise<void>((resolve, _reject) => {
-    let op = 1
-    const timer = setInterval(function () {
-      if (op <= 0.1) {
-        clearInterval(timer)
-        element.style.display = 'none'
-        resolve()
-      }
-
-      element.style.opacity = String(op)
-      element.style.filter = 'alpha(opacity=' + op * 100 + ')'
-      op -= op * 0.1
-    }, 10)
+  Preloader.invoke()
+  AOS.init({
+    once: true,
+    duration: 400
   })
 }
 
-window.addEventListener('load', () => {
-  setTimeout(async () => {
-    await fadeOut(document.querySelector('#loader'))
-    document.body.classList.remove('body-loading')
-  }, 600)
-})
+bootstrap()

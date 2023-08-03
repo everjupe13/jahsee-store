@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import AppFormInput from './AppFormInput.vue'
+import AppInput from '@/components/shared/AppInput.vue'
 
 const emit = defineEmits(['submit'])
 const onSubmitForm = () => {
@@ -14,12 +14,12 @@ const onSubmitForm = () => {
   >
     <div class="title mb-30 md:mb-40">Welcome to ayaysee</div>
     <div class="mb-30 md:mb-40">
-      <AppFormInput
+      <AppInput
         placeholder="e-mail*"
         class="mb-15"
         validation-message="Invalid e-mail"
       />
-      <AppFormInput
+      <AppInput
         placeholder="password*"
         type="password"
         validation-message="Password must be at least 8 char"

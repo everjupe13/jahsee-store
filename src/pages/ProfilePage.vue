@@ -4,97 +4,137 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
-import { Navigation } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { ref } from 'vue'
+// import { Navigation } from 'swiper/modules'
+// import { Swiper, SwiperSlide } from 'swiper/vue'
+// import { ref } from 'vue'
+import AppBackNav from '@/components/features/AppBackNav.vue'
+import {
+  // AppProfileAddress,
+  AppProfileInfo
+  // AppProfileOrders
+} from '@/components/screens/app-profile'
+// import AppCollapse from '@/components/shared/AppCollapse.vue'
 
-import AppCollapse from '@/components/shared/AppCollapse.vue'
+// const modules = [Navigation]
 
-const modules = [Navigation]
+// const detailsOpened = ref(false)
+// const toggleDetailsOpened = () => {
+//   detailsOpened.value = !detailsOpened.value
+// }
 
-const detailsOpened = ref(false)
-const toggleDetailsOpened = () => {
-  detailsOpened.value = !detailsOpened.value
-}
+// const ZIP_DATA = {
+//   title: 'ZIP HOODIE',
+//   desc: 'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
+//   cost: '$125',
+//   list: [
+//     'Fabric density - 360gr/m',
+//     '80% cotton',
+//     '20% polyester',
+//     'Chest - embroidery',
+//     'Hood - Puff',
+//     'Back - silkscreen'
+//   ],
+//   gallery: [
+//     new URL('@/assets/img/drop-zip-hoodie/1.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-zip-hoodie/2.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-zip-hoodie/3.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-zip-hoodie/4.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href
+//   ]
+// }
 
-const ZIP_DATA = {
-  title: 'ZIP HOODIE',
-  desc: 'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-  cost: '$125',
-  list: [
-    'Fabric density - 360gr/m',
-    '80% cotton',
-    '20% polyester',
-    'Chest - embroidery',
-    'Hood - Puff',
-    'Back - silkscreen'
-  ],
-  gallery: [
-    new URL('@/assets/img/drop-zip-hoodie/1.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/2.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/3.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/4.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href
-  ]
-}
+// const SWEAT_DATA = {
+//   title: 'SWEATSHIRT',
+//   desc: 'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
+//   cost: '$80',
+//   list: [
+//     'Fabric density - 360gr/m',
+//     '80% cotton',
+//     '20% polyester',
+//     'Chest - embroidery',
+//     'Branded patch that tells you the bear market is about to end',
+//     'Tag that allows you to choose your individual nickname printed on it'
+//   ],
+//   gallery: [
+//     new URL('@/assets/img/drop-sweat/1.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-sweat/2.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-sweat/3.png', import.meta.url).href,
+//     new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href
+//   ]
+// }
 
-const SWEAT_DATA = {
-  title: 'SWEATSHIRT',
-  desc: 'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-  cost: '$80',
-  list: [
-    'Fabric density - 360gr/m',
-    '80% cotton',
-    '20% polyester',
-    'Chest - embroidery',
-    'Branded patch that tells you the bear market is about to end',
-    'Tag that allows you to choose your individual nickname printed on it'
-  ],
-  gallery: [
-    new URL('@/assets/img/drop-sweat/1.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/2.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/3.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href
-  ]
-}
+// const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA]
 
-const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA]
+// const tabs = [
+//   {
+//     name: 'profile',
+//     label: 'My profile'
+//   },
+//   {
+//     name: 'address',
+//     label: 'Address book'
+//   },
+//   {
+//     name: 'orders',
+//     label: 'My orders'
+//   },
+//   {
+//     name: 'logout',
+//     label: 'logout'
+//   }
+// ]
+// const activeTab = ref(tabs[0].name)
+// const setActvieTab = (name: string) => {
+//   if (activeTab.value === name) {
+//     return
+//   }
 
-const tabs = [
-  {
-    name: 'profile',
-    label: 'MY PROFILE'
-  },
-  {
-    name: 'orders',
-    label: 'MY ORDERS'
-  }
-]
-const activeTab = ref(tabs[0].name)
-const setActvieTab = (name: string) => {
-  if (activeTab.value === name) {
-    return
-  }
+//   activeTab.value = name
+// }
 
-  activeTab.value = name
-}
-
-const isPasswordEditable = ref(false)
+// const isPasswordEditable = ref(false)
 </script>
 
 <template>
-  <section class="main">
+  <section class="py-40">
     <AppContainer>
-      <div class="main__grid">
-        <div data-aos="fade-up" class="main__header">
-          <div class="main__header-wrapper">
-            <h1 class="outlined-text main__title" style="--stroke-width: 2px">
-              My account
-            </h1>
-          </div>
+      <AppBackNav />
+      <div class="my-20 md:my-40">
+        <h1 class="outlined-text title font-hnd" style="--stroke-width: 2px">
+          My account
+        </h1>
+      </div>
+      <div class="cart-grid">
+        <div class="bg-gray px-50 py-40">
+          <nav>
+            <ul class="flex flex-col gap-y-24">
+              <li>
+                <button class="nav-link font-hbd transition-colors">
+                  My profile
+                </button>
+              </li>
+              <li>
+                <button class="nav-link font-hbd transition-colors">
+                  Address book
+                </button>
+              </li>
+              <li>
+                <button class="nav-link font-hbd transition-colors">
+                  My orders
+                </button>
+              </li>
+              <li>
+                <button class="nav-link font-hbd transition-colors">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <div class="main__body">
-          <div class="main__tabs-list">
+
+        <div class="min-h-[600px] bg-white p-40">
+          <AppProfileInfo class="max-w-[640px]" />
+          <!-- <div class="main__tabs-list">
             <div
               v-for="tab in tabs"
               :class="[
@@ -303,7 +343,7 @@ const isPasswordEditable = ref(false)
                 </div>
               </div>
             </template>
-          </div>
+          </div> -->
         </div>
       </div>
     </AppContainer>
@@ -311,14 +351,38 @@ const isPasswordEditable = ref(false)
 </template>
 
 <style lang="scss" scoped>
-.main {
-  &__body {
-    flex-grow: 1;
+.title {
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 100%;
+  letter-spacing: 2.56px;
+  text-transform: uppercase;
 
-    @media (max-width: 767px) {
-      margin-top: 20px;
-    }
+  @media (max-width: 767px) {
+    font-size: 48px;
   }
+}
+
+.cart-grid {
+  display: grid;
+  grid-template-columns: 440px calc(100% - 440px);
+}
+
+.nav-link {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #848a99;
+
+  &.--active {
+    color: #000;
+  }
+}
+
+.profile {
   &__tabs-list {
     display: flex;
     align-items: center;
@@ -498,7 +562,6 @@ const isPasswordEditable = ref(false)
   }
 
   &__title {
-    font-family: 'Poppins';
     font-size: 96px;
     font-style: normal;
     font-weight: 700;

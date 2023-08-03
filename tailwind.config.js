@@ -5,6 +5,14 @@ const plugin = require('tailwindcss/plugin')
 const toPX = values => Object.fromEntries(values.map(v => [+v, `${v}px`]))
 const object0to100px = toPX(Array.from({ length: 101 }).map((_, i) => +i))
 
+const fallbackSansSerifFonts = [
+  '-apple-system',
+  'BlinkMacSystemFont',
+  'Helvetica',
+  'Segoe UI',
+  'Arial',
+  'sans-serif'
+]
 
 const typography = {
   '.text-medium-30': {
@@ -81,6 +89,10 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
 
+  corePlugins: {
+    container: false
+  },
+
   theme: {
     screens: {
       xs: '0px',
@@ -99,23 +111,30 @@ module.exports = {
         disabled: '#CCCCCC'
       },
       white: '#FFFFFF',
-      green: {
-        DEFAULT: '#35977D',
-        'button-hover': '#336363'
-      },
+
       transparent: 'transparent',
       current: 'currentColor',
-      zinc: '#E5E5E5',
-      gray: '#F8F8F8',
+      gray: '#E8E8E9',
+
       tapestry: '#DDADB5',
-      pink: {
-        DEFAULT: '#FFBEC9',
-        hover: '#FFCBD4'
-      },
-      danger: '#DA1C1C',
-      red: '#FF3B30'
     },
 
     spacing: object0to100px,
+
+    fontFamily: {
+      sans: ['Montserrat', ...fallbackSansSerifFonts],
+      hnd: ['"Helvetica Now Display"', ...fallbackSansSerifFonts]
+    },
+
+    keyframes: {
+      'posing-levitation': {
+        '0%, 100%': { transform: 'translate(0, 0)' },
+        '50%': { transform: 'translate(-50px, -10px) scale(1.1, 1.25)' }
+      }
+    },
+
+    animation: {
+      'logo-levitation': 'posing-levitation 20s linear infinite'
+    }
   }
 }

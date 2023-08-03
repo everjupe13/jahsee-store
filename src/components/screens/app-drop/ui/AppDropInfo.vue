@@ -61,7 +61,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="outlined-text drop-info__title mb-25"
+    class="outlined-text drop-info__title mb-25 font-hnd"
     style="--stroke-width: 2px; opacity: 1"
     ref="title"
   >

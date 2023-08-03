@@ -1,13 +1,26 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+
+import AppCollapse from '@/components/shared/AppCollapse.vue'
 
 function useEvents(context: (e: any, value: any) => void) {
   const handleChange = (e: Event) => {
-    context('update:modelValue', (e.target as HTMLTextAreaElement).value)
+    if (props.modelValue) {
+      context('update:modelValue', (e.target as HTMLTextAreaElement).value)
+      return
+    }
+    refValue.value = (e.target as HTMLTextAreaElement).value
+    context('change', (e.target as HTMLTextAreaElement).value)
   }
   const handleInput = (e: Event) => {
-    context('update:modelValue', (e.target as HTMLTextAreaElement).value)
+    if (props.modelValue) {
+      context('update:modelValue', (e.target as HTMLTextAreaElement).value)
+      return
+    }
+
+    refValue.value = (e.target as HTMLTextAreaElement).value
+    context('input', (e.target as HTMLTextAreaElement).value)
   }
 
   return {
@@ -39,75 +52,88 @@ interface Props {
     | 'range'
     | 'color'
     | 'search'
+  validationMessage?: string
+  validatable?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'text'
+  type: 'text',
+  validationMessage: 'Invalid'
 })
 const emits = defineEmits(['change', 'input', 'update:modelValue'])
 const { handleChange, handleInput } = useEvents(emits)
 
 const uuid = ref(randomID())
+const refValue = ref('')
 
-const refValue = props.modelValue ?? ref('')
+onMounted(() => {
+  refValue.value = props.modelValue ?? ''
+})
+
+watch(
+  () => props.modelValue,
+  () => {
+    refValue.value = props.modelValue
+  }
+)
+// TODO add logic for validation shown
+const validationFn = computed(() => refValue.value.length > 0)
+const isValidationMessageShown = computed(() => {
+  return validationFn.value
+})
 </script>
 
 <template>
-  <label class="input-label-box" :class="props.modelValue ? '--active' : ''">
-    <input
-      :id="uuid"
-      :value="refValue"
-      :disabled="props.disabled"
-      :placeholder="props.placeholder"
-      :readonly="props.readonly"
-      :type="props.type"
-      class="input"
-      @change="handleChange"
-      @input="handleInput"
-    />
-  </label>
+  <div>
+    <div class="relative w-full">
+      <input
+        class="input peer block w-full border border-solid border-black/10 px-20 pb-12 pt-28 text-[#555862] transition placeholder:opacity-0 hover:border-black hover:text-[#000] focus:border-black focus:text-[#000]"
+        :id="uuid"
+        :value="refValue"
+        :disabled="props.disabled"
+        :placeholder="props.placeholder"
+        :readonly="props.readonly"
+        :type="props.type"
+        @change="handleChange"
+        @input="handleInput"
+      />
+      <label
+        class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"
+        :for="uuid"
+      >
+        {{ placeholder }}
+      </label>
+    </div>
+    <AppCollapse v-if="props.validatable" v-model="isValidationMessageShown">
+      <div class="validation-message bg-black px-20 py-10">
+        {{ validationMessage }}
+      </div>
+    </AppCollapse>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.input-label-box {
-  border: 1px solid #202022;
-  padding: 22px 48px;
-  background: #f6f5ff;
-
-  position: relative;
-
-  display: flex;
-  align-items: center;
-
-  width: 100%;
-  height: 66px;
-
-  cursor: text;
-
-  @media (max-width: 767px) {
-    padding: 22px 30px;
-  }
-
-  &.--active {
-    justify-content: flex-end;
-  }
+.label {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
 }
 
 .input {
-  display: block;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
 
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
-  text-transform: uppercase;
-  background: transparent;
-
-  flex-grow: 1;
-
-  color: #202022;
-
-  &::placeholder {
-    color: #969eab;
-  }
+.validation-message {
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
 }
 </style>

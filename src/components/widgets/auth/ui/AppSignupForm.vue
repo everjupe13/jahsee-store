@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import AppFormInput from './AppFormInput.vue'
+import AppInput from '@/components/shared/AppInput.vue'
 
 const emit = defineEmits(['submit'])
 const onSubmitForm = () => {
@@ -14,23 +14,15 @@ const onSubmitForm = () => {
   >
     <div class="title mb-30 md:mb-40">Welcome to ayaysee</div>
     <div class="mb-30 md:mb-40">
-      <AppFormInput
+      <AppInput
         placeholder="e-mail*"
         class="mb-15"
         :validatable="true"
         validation-message="Invalid e-mail"
       />
-      <AppFormInput
-        placeholder="first name*"
-        class="mb-15"
-        :validatable="false"
-      />
-      <AppFormInput
-        placeholder="last name"
-        class="mb-15"
-        :validatable="false"
-      />
-      <AppFormInput
+      <AppInput placeholder="first name*" class="mb-15" :validatable="false" />
+      <AppInput placeholder="last name" class="mb-15" :validatable="false" />
+      <AppInput
         placeholder="password*"
         type="password"
         :validatable="true"

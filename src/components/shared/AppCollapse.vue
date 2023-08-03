@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { onMounted, reactive, Ref, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 
-interface Props {
+interface ICollapse {
   modelValue?: boolean
 }
 
-const props = defineProps<Props>()
+const props = defineProps<ICollapse>()
 const contentRef = ref<HTMLElement>()
-const contentHeight: Ref<number | undefined | null> = ref(null)
+const contentHeight = ref<number | undefined | null>(null)
 const collapseState = ref(false)
 let componentClasses = reactive({
   'app-collapse': true,

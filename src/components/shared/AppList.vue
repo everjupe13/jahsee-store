@@ -9,7 +9,8 @@ interface IAppList {
 
 const props = withDefaults(defineProps<IAppList>(), {
   items: () => [],
-  bulleted: true
+  bulleted: true,
+  listClasses: ''
 })
 </script>
 

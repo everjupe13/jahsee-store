@@ -64,7 +64,7 @@ const onSlideChange = (swiper: ISwiper) => {
       <div>
         <div class="mb-20 flex flex-wrap justify-between md:flex-nowrap">
           <div
-            class="outlined-text heading grow-1 cursor-default select-none"
+            class="outlined-text heading grow-1 cursor-default select-none font-hnd"
             style="--stroke-width: 2px"
           >
             {{ item.heading }}
@@ -77,7 +77,7 @@ const onSlideChange = (swiper: ISwiper) => {
             class="z-1 relative block w-full select-none object-fill"
           />
           <div
-            class="z-2 sold-out absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            class="z-2 sold-out absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
             v-if="item.soldOut"
           >
             SOLD OUT

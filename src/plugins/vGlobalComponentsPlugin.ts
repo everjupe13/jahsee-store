@@ -1,8 +1,8 @@
 import { App } from 'vue'
 
-import AppInput from '../shared/AppInput.vue'
-import AppButton from './AppButton.vue'
-import AppContaier from './AppContainer.vue'
+import AppButton from '@/components/shared/AppButton.vue'
+import AppContaier from '@/components/shared/AppContainer.vue'
+import AppInput from '@/components/shared/AppInput.vue'
 
 export const vGlobalComponentsPlugin = {
   install(app: App) {

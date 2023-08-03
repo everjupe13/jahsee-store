@@ -1,93 +1,21 @@
 @charset 'UTF-8'; // set encoding to most common type
 
 
+
 /* SCSS utilities
    ========================================================================== */
-
-/**
- * 1 - mixins and scss functions
- * 3 - media breakpoints/media mixins
- */
-
-@import 'utils/media-queries';
-/* 2 */
-@import 'utils/mixins';
-/* 3 */
+@import 'utils/media-breakpoints'; // mixins and scss functions
+@import 'utils/mixins'; // media breakpoints/media mixins
 
 /* Complex reset
    ========================================================================== */
-
-/**
- * 1 - normalize.css https://github.com/necolas/normalize.css/
- * 2 - my custom reset file
- */
-
-// @import 'normalize.css';
-/* 1 */
-@import 'utils/custom-reset';
-/* 2 */
-
-/* Fonts
-   ========================================================================== */
-
-/**
- * 1 - font mixins
- */
-
-@import 'utils/fonts';
-/* 1 */
+@import 'utils/reset'; // custom reset file
 
 /* Support
    ========================================================================== */
-
-/**
- * 1 - main/root/utilities tags
- * 2 - styles for print
- */
-@import 'utils/layouts';
-/* 1 */
-@import 'utils/print';
-/* 2 */
-
-
-
-/* Objects/blocks
-   ========================================================================== */
-
-
-
+@import 'utils/container'; // container styles
 
 
 
 /* Styles
    ========================================================================== */
-
-
-
-
-
-body {
-  font-family: Montserrat, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.25;
-  color: #F6F5FF;
-
-  background: #0d0f10;
-
-  transition: .3s all ease;
-
-  @include laptop-big {
-    //  font-size: 14px;
-  }
-
-  @include laptop {
-    //  font-size: 14px;
-  }
-
-  @include tablet {
-    //  font-size: 12px;       
-  }
-
-  @include phone-big {
-    //  font-size: 14px;       
-  }
-}

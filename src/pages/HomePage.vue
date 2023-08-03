@@ -17,7 +17,7 @@ import { AppHomeSlider } from '@/components/screens/app-home'
 <template>
   <section class="pt-60">
     <AppContainer>
-      <div class="m-auto max-w-[800px]">
+      <div class="m-auto w-full max-w-[800px]">
         <AppHomeSlider />
       </div>
     </AppContainer>
