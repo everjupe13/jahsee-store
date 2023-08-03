@@ -12,15 +12,12 @@ const props = withDefaults(defineProps<IAppLogo>(), {
 
 <template>
   <div class="logo-box">
-    <div class="logo">
-      <router-link
-        :to="props.toLink"
-        class="logo__link tw-flex tw-items-center"
-      >
+    <div class="flex items-center">
+      <router-link :to="props.toLink" class="flex items-center">
         <img
           src="@/assets/img/logo.svg"
           alt=""
-          class="logo__link-image tw-pointer-events-none tw-max-h-40"
+          class="pointer-events-none max-h-40"
         />
       </router-link>
     </div>
