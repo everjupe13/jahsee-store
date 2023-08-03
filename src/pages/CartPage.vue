@@ -33,7 +33,7 @@ const handleRadiosClick = (index: number) => {
   <section class="cart">
     <AppContainer>
       <AppBackNav />
-      <div class="cart__header tw-my-20 md:tw-my-40">
+      <div class="cart__header my-20 md:my-40">
         <div class="outlined-text cart__title" style="--stroke-width: 2px">
           My bag
         </div>
@@ -68,32 +68,30 @@ const handleRadiosClick = (index: number) => {
             <div class="cart__schema-body">
               <div class="cart__schema-list">
                 <div
-                  class="cart__schema-item-border tw-flex tw-items-center tw-justify-between tw-py-20 md:tw-py-25"
+                  class="cart__schema-item-border flex items-center justify-between py-20 md:py-25"
                 >
                   <p class="cart__subheading">Sub-total</p>
                   <div class="cart__heading">$285.00</div>
                 </div>
 
-                <div
-                  class="tw-flex tw-items-center tw-justify-between tw-py-20 md:tw-py-25"
-                >
+                <div class="flex items-center justify-between py-20 md:py-25">
                   <p class="cart__subheading">Delivery</p>
                   <div class="cart__heading">$10.00</div>
                 </div>
               </div>
 
-              <AppRadiosFieldset class="tw-mb-25" @update="handleUpdateRadios">
+              <AppRadiosFieldset class="mb-25" @update="handleUpdateRadios">
                 <AppRadio
                   :value="radiosModel[0]"
                   @input="handleRadiosClick(0)"
-                  class="tw-mb-15"
+                  class="mb-15"
                 >
                   CDEK
                 </AppRadio>
                 <AppRadio
                   :value="radiosModel[1]"
                   @input="handleRadiosClick(1)"
-                  class="tw-mb-15"
+                  class="mb-15"
                 >
                   Russian Post
                 </AppRadio>
@@ -103,8 +101,8 @@ const handleRadiosClick = (index: number) => {
               </AppRadiosFieldset>
 
               <div class="cart__schema-input-field">
-                <fieldset class="tw-block tw-h-full tw-w-full">
-                  <div class="tw-flex tw-items-center">
+                <fieldset class="block h-full w-full">
+                  <div class="flex items-center">
                     <AppInput
                       class="cart__schema-input"
                       placeholder="Coupon Code"
@@ -117,7 +115,7 @@ const handleRadiosClick = (index: number) => {
               </div>
 
               <div class="cart__schema-footer">
-                <AppButton class="cart__schema-submit tw-w-full">
+                <AppButton class="cart__schema-submit w-full">
                   Checkout
                 </AppButton>
               </div>

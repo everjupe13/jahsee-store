@@ -1,25 +1,25 @@
 /* WebKit / Blink */
 ::-webkit-scrollbar {
-  @apply tw-h-8 tw-w-8;
+  @apply h-8 w-8;
 }
 
 ::-webkit-scrollbar-track {
-  /* @apply tw-bg-white; */
-  @apply tw-bg-black/10;
+  /* @apply bg-white; */
+  @apply bg-black/10;
 }
 
 ::-webkit-scrollbar-thumb {
-  /* @apply tw-bg-black/30; */
-  @apply tw-bg-black;
+  /* @apply bg-black/30; */
+  @apply bg-black;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply tw-bg-black/50;
+  @apply bg-black/50;
 }
 
 ::-webkit-scrollbar-corner {
-  @apply tw-bg-white;
-  @apply tw-bg-black;
+  @apply bg-white;
+  @apply bg-black;
 }
 
 /* Gecko */

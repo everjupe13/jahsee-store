@@ -21,17 +21,20 @@ import AppLogo from '@/components/shared/AppLogo.vue'
 </script>
 
 <template>
-  <header id="header" class="header">
-    <AppMarquee class="tw-mb-">3rd drop coming soon</AppMarquee>
-    <div class="header__second">
+  <header
+    id="header"
+    class="header fixed inset-x-0 top-0 z-10 flex flex-col justify-center"
+  >
+    <AppMarquee>3rd drop coming soon</AppMarquee>
+    <div class="py-20">
       <AppContainer>
-        <div class="tw-flex tw-items-center">
-          <div class="header__logo tw-grid tw-items-center">
+        <div class="flex items-center">
+          <div class="header__logo grid items-center">
             <AppLogo></AppLogo>
           </div>
-          <div class="tw-mr-30 tw-flex tw-items-center tw-gap-x-30">
-            <RouterLink class="header__links" to="/login">LOG IN</RouterLink>
-            <RouterLink class="header__links" to="/signup">SIGN UP</RouterLink>
+          <div class="mr-30 flex items-center gap-x-30">
+            <RouterLink class="header__links" to="/login">Log In</RouterLink>
+            <RouterLink class="header__links" to="/signup">Sign Up</RouterLink>
           </div>
           <router-link to="/cart">
             <img src="@/assets/img/market.svg" alt="" />
@@ -44,25 +47,11 @@ import AppLogo from '@/components/shared/AppLogo.vue'
 
 <style lang="scss">
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
   border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.1);
   // glassmorphism effect
   backdrop-filter: blur(3px);
   background-color: rgba(32, 32, 34, 0.3);
   box-shadow: 0 8px 32px 0 rgba(32, 32, 34, 0.2);
-
-  &__second {
-    padding: 20px 0;
-  }
 
   @media (max-width: 767px) {
   }
@@ -79,7 +68,7 @@ import AppLogo from '@/components/shared/AppLogo.vue'
 
   &__links {
     color: #f6f5ff;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;

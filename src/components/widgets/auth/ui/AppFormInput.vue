@@ -76,9 +76,9 @@ const isValidationMessageShown = computed(() => {
 
 <template>
   <div>
-    <div class="tw-relative tw-w-full">
+    <div class="relative w-full">
       <input
-        class="input tw-peer tw-block tw-w-full tw-border tw-border-solid tw-border-black/10 tw-px-20 tw-pb-12 tw-pt-28 tw-text-[#555862] tw-transition placeholder:tw-opacity-0 hover:tw-border-black hover:tw-text-[#000] focus:tw-border-black focus:tw-text-[#000]"
+        class="input peer block w-full border border-solid border-black/10 px-20 pb-12 pt-28 text-[#555862] transition placeholder:opacity-0 hover:border-black hover:text-[#000] focus:border-black focus:text-[#000]"
         :id="uuid"
         :value="refValue"
         :disabled="props.disabled"
@@ -89,14 +89,14 @@ const isValidationMessageShown = computed(() => {
         @input="handleInput"
       />
       <label
-        class="label tw-absolute tw-left-22 tw-top-12 tw-text-[12px] tw-text-[#848A99] tw-transition-all peer-placeholder-shown:tw-top-1/2 peer-placeholder-shown:-tw-translate-y-1/2 peer-placeholder-shown:tw-text-[14px] peer-hover:tw-text-[#000] peer-focus:tw-top-11 peer-focus:-tw-translate-y-0 peer-focus:tw-text-[12px] peer-focus:tw-text-[#848A99]"
+        class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"
         :for="uuid"
       >
         {{ placeholder }}
       </label>
     </div>
     <AppCollapse v-if="props.validatable" v-model="isValidationMessageShown">
-      <div class="validation-message tw-bg-black tw-px-20 tw-py-10">
+      <div class="validation-message bg-black px-20 py-10">
         {{ validationMessage }}
       </div>
     </AppCollapse>

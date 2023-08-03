@@ -4,7 +4,7 @@ import { AppSignupForm } from '@/components/widgets/auth'
 
 <template>
   <AppContainer>
-    <section class="-tw-mx-15 tw-pt-30 md:tw-mx-0 md:tw-pt-50">
+    <section class="-mx-15 pt-30 md:mx-0 md:pt-50">
       <AppSignupForm />
     </section>
   </AppContainer>

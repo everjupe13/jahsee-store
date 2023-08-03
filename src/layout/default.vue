@@ -2,8 +2,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import AppFooter from '@/components/features/AppFooter.vue'
-import AppHeader from '@/components/features/AppHeader.vue'
+import { AppFooter } from '@/components/widgets/AppFooter'
+import { AppHeader } from '@/components/widgets/AppHeader'
 
 defineOptions({
   name: 'AppLayout'

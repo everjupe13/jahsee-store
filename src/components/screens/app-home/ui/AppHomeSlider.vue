@@ -62,30 +62,28 @@ const onSlideChange = (swiper: ISwiper) => {
   >
     <swiper-slide v-for="item in SLIDER_DATA" :key="item.id">
       <div>
-        <div
-          class="tw-mb-20 tw-flex tw-flex-wrap tw-justify-between md:tw-flex-nowrap"
-        >
+        <div class="mb-20 flex flex-wrap justify-between md:flex-nowrap">
           <div
-            class="outlined-text heading tw-grow-1 tw-cursor-default tw-select-none"
+            class="outlined-text heading grow-1 cursor-default select-none"
             style="--stroke-width: 2px"
           >
             {{ item.heading }}
           </div>
-          <AppHomeSliderButtons class="swiper-slide-navs tw-shrink-0" />
+          <AppHomeSliderButtons class="swiper-slide-navs shrink-0" />
         </div>
-        <div class="tw-relative tw-mb-20 tw-block tw-max-w-[800px]">
+        <div class="relative mb-20 block max-w-[800px]">
           <img
             :src="item.image"
-            class="tw-z-1 w-full tw-relative tw-block tw-select-none tw-object-fill"
+            class="z-1 relative block w-full select-none object-fill"
           />
           <div
-            class="tw-z-2 sold-out tw-absolute tw-left-1/2 tw-top-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
+            class="z-2 sold-out absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             v-if="item.soldOut"
           >
             SOLD OUT
           </div>
         </div>
-        <div class="tags tw-flex tw-items-center tw-gap-x-8">
+        <div class="tags flex items-center gap-x-8">
           <template v-for="(tag, index) in item.tags" :key="index">
             <span>{{ tag }}</span>
             <span v-if="index !== item.tags.length - 1">

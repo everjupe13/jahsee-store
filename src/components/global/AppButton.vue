@@ -6,10 +6,12 @@ interface IAppButton {
   size?: 'sm' | 'md'
   rounded?: boolean
   outlined?: boolean
+  fluid?: boolean
 }
 
 const props = withDefaults(defineProps<IAppButton>(), {
-  theme: 'default'
+  theme: 'default',
+  fluid: false
 })
 
 const componentsClasses = computed(() => {
@@ -21,45 +23,36 @@ const componentsClasses = computed(() => {
   return [
     props.theme ? `btn_theme-${props.theme}` : '',
     _size,
-    { btn_outlined: props.outlined }
+    { btn_outlined: props.outlined },
+    { 'w-full': props.fluid }
   ]
 })
 </script>
 
 <template>
-  <button class="btn" :class="componentsClasses">
+  <button
+    class="btn flex items-center justify-center bg-button-black p-32 text-white transition hover:bg-button-black-hover active:bg-button-black-active disabled:bg-button-black-disabled"
+    :class="componentsClasses"
+  >
     <slot></slot>
   </button>
 </template>
 
 <style lang="scss" scoped>
 .btn {
-  justify-content: center;
-  align-items: center;
-
-  padding: 26px 70px;
-
-  background: #202022;
-
-  color: #f6f5ff;
-  text-align: center;
-
-  font-size: 24px;
+  font-family: 'Helvetica Now Display';
+  font-size: 18px;
   font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 700;
+  line-height: 100%;
   text-transform: uppercase;
-
-  transition: 0.2s all ease;
-
-  @apply tw-flex tw-items-center;
 
   @media (max-width: 767px) {
     padding: 18px 30px;
   }
 
   &_theme-alternative {
-    @apply tw-bg-[#D9D9D9] tw-text-[#202022];
+    @apply bg-[#D9D9D9] text-[#202022];
   }
 }
 </style>

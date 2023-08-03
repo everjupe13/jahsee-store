@@ -9,28 +9,28 @@ const proceedChangePassword = () => {
 
 <template>
   <AppContainer>
-    <section class="-tw-mx-15 tw-pt-30 md:tw-mx-0 md:tw-pt-50">
+    <section class="-mx-15 pt-30 md:mx-0 md:pt-50">
       <form @submit.prevent class="form">
-        <div class="form__title tw-mb-30 md:tw-mb-57">CHANGE YOUR PASSWORD</div>
+        <div class="form__title mb-30 md:mb-57">CHANGE YOUR PASSWORD</div>
         <template v-if="!lastStep">
-          <div class="form__body !md:tw-mb-30 !tw-mb-0">
-            <AppInput placeholder="EMAIL*" class="tw-mb-20 md:tw-mb-45" />
+          <div class="form__body !md:mb-30 !mb-0">
+            <AppInput placeholder="EMAIL*" class="mb-20 md:mb-45" />
           </div>
           <div class="form__error-message">Unknown profile</div>
           <div
-            class="tw-flex tw-w-[300px] tw-flex-col tw-justify-center tw-gap-x-40 md:tw-w-auto md:tw-flex-row"
+            class="flex w-[300px] flex-col justify-center gap-x-40 md:w-auto md:flex-row"
           >
             <AppButton
               type="button"
               @click="$router.push('/login')"
-              class="btn form__btn tw-mb-10 tw-w-[240px] !tw-bg-[#969EAB] md:tw-mb-25"
+              class="btn form__btn mb-10 w-[240px] !bg-[#969EAB] md:mb-25"
               theme="alternative"
             >
               CANCEL
             </AppButton>
             <AppButton
               type="button"
-              class="btn form__btn tw-mb-25 tw-w-[240px] tw-justify-center"
+              class="btn form__btn mb-25 w-[240px] justify-center"
               @click="proceedChangePassword"
             >
               SEND

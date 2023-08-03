@@ -1,5 +1,6 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
+import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
@@ -107,7 +108,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
       <div class="drop__grid">
         <div class="drop__list">
-          <div class="drop__header tw-mb-40">
+          <div class="drop__header mb-40">
             <AppDropInfo
               v-bind="{
                 title: CURRENT_DATA.title,
@@ -119,11 +120,11 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
           <div class="drop__body">
             <div
-              class="drop__options tw-mb-10 md:tw-mb-50"
+              class="drop__options mb-10 md:mb-50"
               data-aos="fade-down"
               data-aos-delay="250"
             >
-              <div class="drop__options-item tw-cursor-pointer">
+              <div class="drop__options-item cursor-pointer">
                 <div class="drop__options-label">Size guide</div>
                 <div class="drop__options-glass">
                   <ForwardLinkArrowIcon class="drop__options-icon" />
@@ -132,7 +133,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
               <RouterLink
                 :to="{ name: 'lore', params: { id: $route.params.id } }"
-                class="drop__options-item tw-cursor-pointer"
+                class="drop__options-item cursor-pointer"
               >
                 <div class="drop__options-label">Drop lore</div>
                 <div class="drop__options-glass">
@@ -142,7 +143,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
               <div class="drop__options-details-wrapper">
                 <div
-                  class="drop__options-item tw-cursor-pointer"
+                  class="drop__options-item cursor-pointer"
                   :class="[{ '--active': detailsOpened }]"
                   @click="toggleDetailsOpened"
                 >
@@ -190,7 +191,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
                 </button>
               </div>
               <AppButton
-                class="tw-h-80 tw-w-full tw-justify-center !tw-bg-[#fff]"
+                class="h-80 w-full justify-center !bg-[#fff]"
                 theme="alternative"
                 disabled
               >
@@ -523,7 +524,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
   .swiper-slide {
     opacity: 0.4;
-    @apply tw-transition;
+    @apply transition;
   }
   .swiper-slide-thumb-active {
     opacity: 1;

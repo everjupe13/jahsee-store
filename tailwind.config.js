@@ -70,14 +70,16 @@ const typography = {
 }
 
 module.exports = {
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities(typography)
+    })
+  ],
 
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
-
-  prefix: 'tw-',
 
   theme: {
     screens: {
@@ -90,6 +92,12 @@ module.exports = {
     },
     colors: {
       black: '#202022',
+      'button-black': {
+        DEFAULT: '#000000',
+        hover: '#333333',
+        active: '#5C5C5C',
+        disabled: '#CCCCCC'
+      },
       white: '#FFFFFF',
       green: {
         DEFAULT: '#35977D',

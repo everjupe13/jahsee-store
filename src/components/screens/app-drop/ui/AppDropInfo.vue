@@ -61,17 +61,13 @@ onMounted(() => {
 
 <template>
   <div
-    class="outlined-text drop-info__title tw-mb-25"
+    class="outlined-text drop-info__title mb-25"
     style="--stroke-width: 2px; opacity: 1"
     ref="title"
   >
     {{ props.title }}
   </div>
-  <div
-    class="drop-info__cost tw-mb-25"
-    data-aos="fade-down"
-    data-aos-delay="100"
-  >
+  <div class="drop-info__cost mb-25" data-aos="fade-down" data-aos-delay="100">
     {{ props.cost }}
   </div>
   <div

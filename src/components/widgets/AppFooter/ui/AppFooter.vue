@@ -11,13 +11,11 @@ import {
 <template>
   <footer class="footer">
     <AppContainer>
-      <div class="tw-mb-20 tw-flex tw-items-center tw-justify-center">
+      <div class="mb-20 flex items-center justify-center">
         <p class="footer__text">Contacts</p>
       </div>
 
-      <div
-        class="tw-mb-40 tw-flex tw-items-center tw-justify-center tw-gap-x-20"
-      >
+      <div class="mb-40 flex items-center justify-center gap-x-20">
         <a href="/" class="footer__link-icon">
           <SocialTelegramIcon class="footer__icon" />
         </a>
@@ -35,7 +33,7 @@ import {
         </a>
       </div>
 
-      <div class="tw-flex tw-items-center tw-justify-center">
+      <div class="flex items-center justify-center">
         <a href="/" class="footer__text footer__link">SUPPORT</a>
       </div>
     </AppContainer>

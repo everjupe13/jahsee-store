@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
@@ -165,11 +166,11 @@ const isPasswordEditable = ref(false)
                   <div
                     data-aos="fade-down"
                     data-aos-delay="300"
-                    class="main__tabs-box tw-flex tw-items-end tw-justify-end"
+                    class="main__tabs-box flex items-end justify-end"
                   >
                     <AppButton
                       @click="$router.push('/profile/edit')"
-                      class="tw-h-70"
+                      class="h-70"
                     >
                       EDIT
                     </AppButton>
@@ -188,7 +189,7 @@ const isPasswordEditable = ref(false)
                   <div class="history-order__label">№1234567</div>
                   <div class="history-order__body">
                     <div
-                      class="history-order__field history-order__field_slider !tw-max-w-[285px] tw-px-10"
+                      class="history-order__field history-order__field_slider !max-w-[285px] px-10"
                     >
                       <div class="history-order__glass">
                         <swiper
@@ -219,12 +220,12 @@ const isPasswordEditable = ref(false)
 
                     <div class="history-order__field">
                       <div
-                        class="history-order__text tw-flex tw-cursor-pointer tw-select-none tw-items-center tw-gap-x-4"
+                        class="history-order__text flex cursor-pointer select-none items-center gap-x-4"
                         @click="toggleDetailsOpened"
                       >
                         <span>Track</span>
                         <span
-                          class="tw-transition"
+                          class="transition"
                           :style="{
                             transform: detailsOpened
                               ? 'rotate(90deg)'
@@ -249,11 +250,11 @@ const isPasswordEditable = ref(false)
                         </span>
                       </div>
                       <AppCollapse v-model="detailsOpened">
-                        <div class="history-order__text !tw-font-normal">
+                        <div class="history-order__text !font-normal">
                           1329841455
                         </div>
                       </AppCollapse>
-                      <div class="history-order__text tw-mt-10">REPURCHASE</div>
+                      <div class="history-order__text mt-10">REPURCHASE</div>
                     </div>
 
                     <div class="history-order__field">

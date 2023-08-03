@@ -32,20 +32,20 @@ const handleDropitemClick = (index: number) => {
   <div class="dropdown">
     <div v-for="(state, idx) in dropdownData" :key="idx" class="dropdown__item">
       <div
-        class="dropdown__label tw-flex tw-cursor-pointer tw-items-center tw-justify-between tw-gap-x-10 tw-py-18 md:tw-py-28"
+        class="dropdown__label flex cursor-pointer items-center justify-between gap-x-10 py-18 md:py-28"
         @click="() => handleDropitemClick(idx)"
       >
         <h4
-          class="dropdown__label-text tw-grow-1 tw-font-medium"
+          class="dropdown__label-text grow-1 font-medium"
           v-html="state.label"
         ></h4>
         <div
-          class="dropdown__label-badge tw-grow-0"
+          class="dropdown__label-badge grow-0"
           :class="{ '--active': state.opened }"
         ></div>
       </div>
       <AppCollapse v-model="state.opened">
-        <div class="dropdown__body tw-p-x-28">
+        <div class="dropdown__body p-x-28">
           <p class="dropdown__body-text" v-html="state.body"></p>
         </div>
       </AppCollapse>

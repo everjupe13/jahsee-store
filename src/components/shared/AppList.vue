@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<IAppList>(), {
       v-for="(item, index) in props.items"
       :key="index"
       :bulleted="props.bulleted"
-      class="tw-mb-16"
+      class="mb-16"
       :class="listClasses"
     >
       {{ item?.label || '' }}

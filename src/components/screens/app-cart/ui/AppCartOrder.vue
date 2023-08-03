@@ -32,32 +32,32 @@ const decCount = () => {
         </div>
 
         <div class="cart-order__info">
-          <div class="cart-order__title tw-mb-10">{{ props.title }}</div>
-          <div class="cart-order__cost tw-mb-5 md:tw-mb-25">
+          <div class="cart-order__title mb-10">{{ props.title }}</div>
+          <div class="cart-order__cost mb-5 md:mb-25">
             {{ props.cost }}
           </div>
 
           <div class="cart-order__count">
             <button @click="decCount">
-              <div class="badge-hover tw-h-16 tw-w-16">
+              <div class="badge-hover h-16 w-16">
                 <MinusIcon />
               </div>
             </button>
             <div class="cart-order__count-text">{{ count }}</div>
             <button @click="incCount">
-              <div class="badge-hover tw-h-16 tw-w-16">
+              <div class="badge-hover h-16 w-16">
                 <PlusIcon />
               </div>
             </button>
           </div>
         </div>
       </div>
-      <div class="cart-order__controls tw-h-full">
+      <div class="cart-order__controls h-full">
         <div
-          class="tw-flex tw-h-full tw-items-end tw-justify-center md:tw-items-center md:tw-justify-between"
+          class="flex h-full items-end justify-center md:items-center md:justify-between"
         >
           <div class="cart-order__size">{{ props.size }}</div>
-          <div class="cart-order__cancel badge-hover tw-h-28 tw-w-28">
+          <div class="cart-order__cancel badge-hover h-28 w-28">
             <CrossIcon />
           </div>
         </div>

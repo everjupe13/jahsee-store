@@ -36,7 +36,7 @@ const determineCrumbsComponent = (index: number) => {
 </script>
 
 <template>
-  <div class="tw-flex">
+  <div class="flex">
     <span class="bread-crumbs">
       <span
         v-for="(crumb, index) in breads"

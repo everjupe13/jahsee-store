@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import AppFormButton from './AppFormButton.vue'
 import AppFormInput from './AppFormInput.vue'
 
 const emit = defineEmits(['submit'])
@@ -10,14 +9,14 @@ const onSubmitForm = () => {
 
 <template>
   <form
-    class="tw-mx-auto tw-max-w-[580px] tw-bg-white tw-p-30 tw-pb-30 md:tw-p-60 md:tw-pb-50"
+    class="mx-auto max-w-[580px] bg-white p-30 pb-30 md:p-60 md:pb-50"
     @submit.prevent="onSubmitForm"
   >
-    <div class="title tw-mb-30 md:tw-mb-40">Welcome to ayaysee</div>
-    <div class="tw-mb-30 md:tw-mb-40">
+    <div class="title mb-30 md:mb-40">Welcome to ayaysee</div>
+    <div class="mb-30 md:mb-40">
       <AppFormInput
         placeholder="e-mail*"
-        class="tw-mb-15"
+        class="mb-15"
         validation-message="Invalid e-mail"
       />
       <AppFormInput
@@ -26,10 +25,10 @@ const onSubmitForm = () => {
         validation-message="Password must be at least 8 char"
       />
     </div>
-    <AppFormButton class="tw-mb-25">Log In</AppFormButton>
+    <AppButton fluid class="mb-25">Log In</AppButton>
     <div class="post-message">
-      Already have an account?
-      <router-link to="/signup" class="post-message__link">Log in</router-link>
+      Don’t have an account?
+      <router-link to="/signup" class="post-message__link">Sign Up</router-link>
     </div>
   </form>
 </template>
