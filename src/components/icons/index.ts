@@ -1,27 +1,11 @@
-import SocialDiscordIcon from './SocialDiscordIcon.vue'
-import SocialInstagramIcon from './SocialInstagramIcon.vue'
-import SocialTelegramIcon from './SocialTelegramIcon.vue'
-import SocialVkIcon from './SocialVkIcon.vue'
-import SocialXIcon from './SocialXIcon.vue'
-
-import ForwardLinkArrowIcon from './ForwardLinkArrowIcon.vue'
-import DropdownCollapseArrowIcon from './DropdownCollapseArrowIcon.vue'
-
-import ChevronArrowBackIcon from './ChevronArrowBackIcon.vue'
-import CrossIcon from './CrossIcon.vue'
-import PlusIcon from './PlusIcon.vue'
-import MinusIcon from './MinusIcon.vue'
-
-export { 
-  SocialDiscordIcon,
-  SocialInstagramIcon,
-  SocialTelegramIcon,
-  SocialVkIcon,
-  SocialXIcon,
-  ForwardLinkArrowIcon,
-  DropdownCollapseArrowIcon,
-  ChevronArrowBackIcon,
-  CrossIcon,
-  PlusIcon,
-  MinusIcon
-}
+export { default as ChevronArrowBackIcon } from './ChevronArrowBackIcon.vue'
+export { default as CrossIcon } from './CrossIcon.vue'
+export { default as DropdownCollapseArrowIcon } from './DropdownCollapseArrowIcon.vue'
+export { default as ForwardLinkArrowIcon } from './ForwardLinkArrowIcon.vue'
+export { default as MinusIcon } from './MinusIcon.vue'
+export { default as PlusIcon } from './PlusIcon.vue'
+export { default as SocialDiscordIcon } from './SocialDiscordIcon.vue'
+export { default as SocialInstagramIcon } from './SocialInstagramIcon.vue'
+export { default as SocialTelegramIcon } from './SocialTelegramIcon.vue'
+export { default as SocialVkIcon } from './SocialVkIcon.vue'
+export { default as SocialXIcon } from './SocialXIcon.vue'

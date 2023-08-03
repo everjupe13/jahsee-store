@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-
 const props = defineProps({
   bulleted: {
     type: Boolean,
     default: true
   }
 })
-
 </script>
 
 <template>
@@ -40,4 +38,3 @@ const props = defineProps({
   }
 }
 </style>
-

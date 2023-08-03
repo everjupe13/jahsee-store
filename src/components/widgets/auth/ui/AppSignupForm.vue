@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import AppFormInput from './AppFormInput.vue'
 import AppFormButton from './AppFormButton.vue'
+import AppFormInput from './AppFormInput.vue'
 
 const emit = defineEmits(['submit'])
 const onSubmitForm = () => {
@@ -10,7 +10,7 @@ const onSubmitForm = () => {
 
 <template>
   <form
-    class="tw-p-30 tw-pb-30 md:tw-p-60 md:tw-pb-50 tw-bg-white tw-max-w-[580px] tw-mx-auto"
+    class="tw-mx-auto tw-max-w-[580px] tw-bg-white tw-p-30 tw-pb-30 md:tw-p-60 md:tw-pb-50"
     @submit.prevent="onSubmitForm"
   >
     <div class="title tw-mb-30 md:tw-mb-40">Welcome to ayaysee</div>
@@ -40,7 +40,8 @@ const onSubmitForm = () => {
     </div>
     <AppFormButton class="tw-mb-25">Log In</AppFormButton>
     <div class="post-message">
-      Already have an account? <router-link to="/signup" class="post-message__link">Log in</router-link>
+      Already have an account?
+      <router-link to="/signup" class="post-message__link">Log in</router-link>
     </div>
   </form>
 </template>
@@ -58,12 +59,12 @@ const onSubmitForm = () => {
   text-transform: uppercase;
 
   @media (max-width: 767px) {
-    font-size: 30px
+    font-size: 30px;
   }
 }
 
 .post-message {
-  color: #6A6E7A;
+  color: #6a6e7a;
   text-align: center;
   font-family: Montserrat;
   font-size: 16px;

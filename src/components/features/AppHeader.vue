@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import AppLogo from '@/components/shared/AppLogo.vue'
 import AppMarquee from '@/components/features/AppMarquee.vue'
+import AppLogo from '@/components/shared/AppLogo.vue'
 // import { inject, ref } from 'vue'
 
 // const isLgScreen: boolean | undefined = inject('isLgScreen')
@@ -26,15 +26,15 @@ import AppMarquee from '@/components/features/AppMarquee.vue'
     <div class="header__second">
       <AppContainer>
         <div class="tw-flex tw-items-center">
-          <div class="tw-grid tw-items-center header__logo">
+          <div class="header__logo tw-grid tw-items-center">
             <AppLogo></AppLogo>
           </div>
-          <div class="tw-flex tw-items-center tw-gap-x-30 tw-mr-30">
+          <div class="tw-mr-30 tw-flex tw-items-center tw-gap-x-30">
             <RouterLink class="header__links" to="/login">LOG IN</RouterLink>
             <RouterLink class="header__links" to="/signup">SIGN UP</RouterLink>
           </div>
           <router-link to="/cart">
-            <img src="@/assets/img/market.svg" alt="">
+            <img src="@/assets/img/market.svg" alt="" />
           </router-link>
         </div>
       </AppContainer>
@@ -54,7 +54,7 @@ import AppMarquee from '@/components/features/AppMarquee.vue'
   justify-content: center;
   flex-direction: column;
 
-  border-bottom: 1px solid rgba($color: #FFFFFF, $alpha: 0.1);
+  border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.1);
   // glassmorphism effect
   backdrop-filter: blur(3px);
   background-color: rgba(32, 32, 34, 0.3);
@@ -70,7 +70,7 @@ import AppMarquee from '@/components/features/AppMarquee.vue'
   &__logo {
     width: 230px;
     margin-right: auto;
-    transition: .2s all ease;
+    transition: 0.2s all ease;
 
     @media (max-width: 767px) {
       height: 100%;
@@ -78,7 +78,7 @@ import AppMarquee from '@/components/features/AppMarquee.vue'
   }
 
   &__links {
-    color: #F6F5FF;
+    color: #f6f5ff;
     font-size: 22px;
     font-weight: 600;
     line-height: normal;

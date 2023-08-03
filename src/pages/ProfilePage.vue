@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import AppCollapse from '@/components/shared/AppCollapse.vue'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 
-import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation } from 'swiper/modules'
-import "swiper/css/free-mode"
-import "swiper/css/navigation"
-import "swiper/css/thumbs"
-
+import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
+
+import AppCollapse from '@/components/shared/AppCollapse.vue'
 
 const modules = [Navigation]
 
@@ -15,7 +15,6 @@ const detailsOpened = ref(false)
 const toggleDetailsOpened = () => {
   detailsOpened.value = !detailsOpened.value
 }
-
 
 const ZIP_DATA = {
   title: 'ZIP HOODIE',
@@ -34,7 +33,7 @@ const ZIP_DATA = {
     new URL('@/assets/img/drop-zip-hoodie/2.png', import.meta.url).href,
     new URL('@/assets/img/drop-zip-hoodie/3.png', import.meta.url).href,
     new URL('@/assets/img/drop-zip-hoodie/4.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href,
+    new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href
   ]
 }
 
@@ -48,18 +47,17 @@ const SWEAT_DATA = {
     '20% polyester',
     'Chest - embroidery',
     'Branded patch that tells you the bear market is about to end',
-    'Tag that allows you to choose your individual nickname printed on it',
+    'Tag that allows you to choose your individual nickname printed on it'
   ],
   gallery: [
     new URL('@/assets/img/drop-sweat/1.png', import.meta.url).href,
     new URL('@/assets/img/drop-sweat/2.png', import.meta.url).href,
     new URL('@/assets/img/drop-sweat/3.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href,
+    new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href
   ]
 }
 
 const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA]
-
 
 const tabs = [
   {
@@ -89,15 +87,21 @@ const isPasswordEditable = ref(false)
       <div class="main__grid">
         <div data-aos="fade-up" class="main__header">
           <div class="main__header-wrapper">
-            <h1 class="outlined-text main__title" style="--stroke-width: 2px">My account</h1>
+            <h1 class="outlined-text main__title" style="--stroke-width: 2px">
+              My account
+            </h1>
           </div>
         </div>
         <div class="main__body">
           <div class="main__tabs-list">
             <div
               v-for="tab in tabs"
-              :class="['main__tabs-list-item', { '--active': tab.name === activeTab }]"
+              :class="[
+                'main__tabs-list-item',
+                { '--active': tab.name === activeTab }
+              ]"
               @click="setActvieTab(tab.name)"
+              :key="tab.name"
             >
               {{ tab.label }}
             </div>
@@ -107,29 +111,68 @@ const isPasswordEditable = ref(false)
               <div>
                 <div class="main__label">Information</div>
                 <div class="main__tabs-grid">
-                  <div data-aos="fade-down" data-aos-delay="50" class="main__tabs-box">
+                  <div
+                    data-aos="fade-down"
+                    data-aos-delay="50"
+                    class="main__tabs-box"
+                  >
                     <div class="main__tabs-box-label">first name</div>
                     <div class="main__tabs-box-content">first name</div>
                   </div>
-                  <div data-aos="fade-down" data-aos-delay="100" class="main__tabs-box">
+                  <div
+                    data-aos="fade-down"
+                    data-aos-delay="100"
+                    class="main__tabs-box"
+                  >
                     <div class="main__tabs-box-label">last name</div>
                     <div class="main__tabs-box-content">last name</div>
                   </div>
-                  <div data-aos="fade-down" data-aos-delay="150" class="main__tabs-box">
+                  <div
+                    data-aos="fade-down"
+                    data-aos-delay="150"
+                    class="main__tabs-box"
+                  >
                     <div class="main__tabs-box-label">EMAIL</div>
                     <div class="main__tabs-box-content">EMAIL</div>
                   </div>
-                  <div data-aos="fade-down" data-aos-delay="200" class="main__tabs-box">
+                  <div
+                    data-aos="fade-down"
+                    data-aos-delay="200"
+                    class="main__tabs-box"
+                  >
                     <div class="main__tabs-box-label">PHONE NUMBER</div>
                     <div class="main__tabs-box-content">PHONE NUMBER</div>
                   </div>
-                  <div data-aos="fade-down" data-aos-delay="250" class="main__tabs-box">
+                  <div
+                    data-aos="fade-down"
+                    data-aos-delay="250"
+                    class="main__tabs-box"
+                  >
                     <div class="main__tabs-box-label">PASSWORD</div>
-                    <div :contenteditable="isPasswordEditable" class="main__tabs-box-content">PASSWORD</div>
-                    <img src="@/assets/img/edit-icon.svg" alt="" class="main__tabs-box-edit" @click="isPasswordEditable = !isPasswordEditable">
+                    <div
+                      :contenteditable="isPasswordEditable"
+                      class="main__tabs-box-content"
+                    >
+                      PASSWORD
+                    </div>
+                    <img
+                      src="@/assets/img/edit-icon.svg"
+                      alt=""
+                      class="main__tabs-box-edit"
+                      @click="isPasswordEditable = !isPasswordEditable"
+                    />
                   </div>
-                  <div data-aos="fade-down" data-aos-delay="300" class="main__tabs-box tw-flex tw-justify-end tw-items-end">
-                    <AppButton @click="$router.push('/profile/edit')" class="tw-h-70">EDIT</AppButton>
+                  <div
+                    data-aos="fade-down"
+                    data-aos-delay="300"
+                    class="main__tabs-box tw-flex tw-items-end tw-justify-end"
+                  >
+                    <AppButton
+                      @click="$router.push('/profile/edit')"
+                      class="tw-h-70"
+                    >
+                      EDIT
+                    </AppButton>
                   </div>
                 </div>
               </div>
@@ -137,22 +180,31 @@ const isPasswordEditable = ref(false)
 
             <template v-if="activeTab === tabs[1].name">
               <div>
-                <div data-aos="fade-down" data-aos-delay="100" class="history-order">
+                <div
+                  data-aos="fade-down"
+                  data-aos-delay="100"
+                  class="history-order"
+                >
                   <div class="history-order__label">№1234567</div>
                   <div class="history-order__body">
-                    <div class="history-order__field history-order__field_slider !tw-max-w-[285px] tw-px-10">
+                    <div
+                      class="history-order__field history-order__field_slider !tw-max-w-[285px] tw-px-10"
+                    >
                       <div class="history-order__glass">
                         <swiper
                           :style="{
                             '--swiper-navigation-color': '#969EAB',
-                            '--swiper-pagination-color': '#969EAB',
+                            '--swiper-pagination-color': '#969EAB'
                           }"
-                          :spaceBetween="10"
+                          :space-between="10"
                           :navigation="true"
                           :modules="modules"
                           class="drop-gallery"
                         >
-                          <swiper-slide v-for="item in CURRENT_DATA[1].gallery">
+                          <swiper-slide
+                            v-for="(item, index) in CURRENT_DATA[1].gallery"
+                            :key="index"
+                          >
                             <div class="history-order__item">
                               <img :src="item" />
                             </div>
@@ -166,16 +218,40 @@ const isPasswordEditable = ref(false)
                     </div>
 
                     <div class="history-order__field">
-                      <div class="history-order__text tw-flex tw-gap-x-4 tw-items-center tw-cursor-pointer tw-select-none" @click="toggleDetailsOpened">
+                      <div
+                        class="history-order__text tw-flex tw-cursor-pointer tw-select-none tw-items-center tw-gap-x-4"
+                        @click="toggleDetailsOpened"
+                      >
                         <span>Track</span>
-                        <span class="tw-transition" :style="{ transform: detailsOpened ? 'rotate(90deg)' : 'rotate(0deg)' }">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="9" height="13" viewBox="0 0 9 13" fill="none">
-                            <path d="M1.82129 11.8574L7.17843 6.50021L1.82129 1.14307" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <span
+                          class="tw-transition"
+                          :style="{
+                            transform: detailsOpened
+                              ? 'rotate(90deg)'
+                              : 'rotate(0deg)'
+                          }"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="9"
+                            height="13"
+                            viewBox="0 0 9 13"
+                            fill="none"
+                          >
+                            <path
+                              d="M1.82129 11.8574L7.17843 6.50021L1.82129 1.14307"
+                              stroke="black"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
                           </svg>
                         </span>
                       </div>
                       <AppCollapse v-model="detailsOpened">
-                        <div class="history-order__text !tw-font-normal">1329841455</div>  
+                        <div class="history-order__text !tw-font-normal">
+                          1329841455
+                        </div>
                       </AppCollapse>
                       <div class="history-order__text tw-mt-10">REPURCHASE</div>
                     </div>
@@ -184,11 +260,41 @@ const isPasswordEditable = ref(false)
                       <div class="history-order__text">Delivered</div>
 
                       <span class="history-order__delete">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
-                          <path d="M5 8H7H23" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M10 8V6C10 5.46957 10.2107 4.96086 10.5858 4.58579C10.9609 4.21071 11.4696 4 12 4H16C16.5304 4 17.0391 4.21071 17.4142 4.58579C17.7893 4.96086 18 5.46957 18 6V8M21 8V22C21 22.5304 20.7893 23.0391 20.4142 23.4142C20.0391 23.7893 19.5304 24 19 24H9C8.46957 24 7.96086 23.7893 7.58579 23.4142C7.21071 23.0391 7 22.5304 7 22V8H21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M12 13V19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M16 13V19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="28"
+                          height="28"
+                          viewBox="0 0 28 28"
+                          fill="none"
+                        >
+                          <path
+                            d="M5 8H7H23"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M10 8V6C10 5.46957 10.2107 4.96086 10.5858 4.58579C10.9609 4.21071 11.4696 4 12 4H16C16.5304 4 17.0391 4.21071 17.4142 4.58579C17.7893 4.96086 18 5.46957 18 6V8M21 8V22C21 22.5304 20.7893 23.0391 20.4142 23.4142C20.0391 23.7893 19.5304 24 19 24H9C8.46957 24 7.96086 23.7893 7.58579 23.4142C7.21071 23.0391 7 22.5304 7 22V8H21Z"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M12 13V19"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M16 13V19"
+                            stroke="black"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
                         </svg>
                       </span>
                     </div>
@@ -205,7 +311,6 @@ const isPasswordEditable = ref(false)
 
 <style lang="scss" scoped>
 .main {
-
   &__body {
     flex-grow: 1;
 
@@ -224,7 +329,7 @@ const isPasswordEditable = ref(false)
   }
 
   &__tabs-list-item {
-    color: #969EAB;
+    color: #969eab;
     font-family: Montserrat;
     font-size: 32px;
     font-style: normal;
@@ -232,11 +337,11 @@ const isPasswordEditable = ref(false)
     line-height: normal;
     text-transform: uppercase;
 
-    transition: .2s all ease;
+    transition: 0.2s all ease;
     cursor: default;
 
     &.--active {
-      color: #FFF;
+      color: #fff;
     }
 
     @media (max-width: 767px) {
@@ -247,7 +352,7 @@ const isPasswordEditable = ref(false)
   &__label {
     margin-bottom: 40px;
 
-    color: #969EAB;
+    color: #969eab;
     font-family: Montserrat;
     font-size: 24px;
     font-style: normal;
@@ -285,7 +390,7 @@ const isPasswordEditable = ref(false)
   &__tabs-box-label {
     margin-bottom: 25px;
 
-    color: #969EAB;
+    color: #969eab;
     font-family: Montserrat;
     font-size: 18px;
     font-style: normal;
@@ -303,9 +408,9 @@ const isPasswordEditable = ref(false)
     position: relative;
 
     padding: 23px 40px;
-    border: 1px solid #FFF;
+    border: 1px solid #fff;
 
-    color: #969EAB;
+    color: #969eab;
     font-family: Montserrat;
     font-size: 18px;
     font-style: normal;
@@ -348,7 +453,7 @@ const isPasswordEditable = ref(false)
 
     @media (max-width: 767px) {
       padding-top: 30px;
-      row-gap: 20px; 
+      row-gap: 20px;
       display: block;
     }
   }
@@ -363,7 +468,7 @@ const isPasswordEditable = ref(false)
     width: 135px;
 
     @media (max-width: 767px) {
-      width: 100%; 
+      width: 100%;
     }
   }
 
@@ -378,14 +483,14 @@ const isPasswordEditable = ref(false)
 
     width: max-content;
     padding-bottom: 5px;
-    border-bottom: 2px solid #D9D9D9;
+    border-bottom: 2px solid #d9d9d9;
 
     transform: rotate(-90deg) translateX(-100%);
     transform-origin: top left;
 
     @media (max-width: 767px) {
       position: static;
-      transform: none; 
+      transform: none;
 
       width: 100%;
     }
@@ -400,17 +505,16 @@ const isPasswordEditable = ref(false)
     text-transform: uppercase;
 
     @media (max-width: 767px) {
-      font-size: 48px; 
+      font-size: 48px;
     }
   }
 }
 
 .history-order {
-  
   &__label {
     margin-bottom: 13px;
 
-    color: #969EAB;
+    color: #969eab;
     font-family: Montserrat;
     font-size: 18px;
     font-style: normal;
@@ -460,12 +564,12 @@ const isPasswordEditable = ref(false)
     width: 100%;
     height: 200px;
     max-width: 220px;
-    border-left: 2px solid #969EAB;
+    border-left: 2px solid #969eab;
     background: #fff;
 
     @media (max-width: 767px) {
       border-left: 0;
-      border-top: 2px solid #969EAB;
+      border-top: 2px solid #969eab;
       max-width: 100% !important;
       height: 120px;
     }

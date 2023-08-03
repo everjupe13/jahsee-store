@@ -2,9 +2,9 @@
 import { computed } from 'vue'
 
 interface IAppButton {
-  theme?: 'default' | 'alternative' | 'black',
-  size?: 'sm' | 'md',
-  rounded?: boolean,
+  theme?: 'default' | 'alternative' | 'black'
+  size?: 'sm' | 'md'
+  rounded?: boolean
   outlined?: boolean
 }
 
@@ -13,15 +13,17 @@ const props = withDefaults(defineProps<IAppButton>(), {
 })
 
 const componentsClasses = computed(() => {
-  const _size = { 'btn_small': props.size === 'sm', 'btn_medium': props.size === 'md' }
+  const _size = {
+    btn_small: props.size === 'sm',
+    btn_medium: props.size === 'md'
+  }
 
   return [
     props.theme ? `btn_theme-${props.theme}` : '',
     _size,
-    { 'btn_outlined': props.outlined }
+    { btn_outlined: props.outlined }
   ]
 })
-
 </script>
 
 <template>
@@ -38,10 +40,10 @@ const componentsClasses = computed(() => {
 
   width: 100%;
   padding: 32px;
-  
+
   background: #000;
 
-  color: #FFF;
+  color: #fff;
   font-family: 'Helvetica Now Display';
   font-size: 18px;
   font-style: normal;
@@ -49,16 +51,17 @@ const componentsClasses = computed(() => {
   line-height: 100%;
   text-transform: uppercase;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: #333;
   }
 
   &:active {
-    background: #5C5C5C;
+    background: #5c5c5c;
   }
 
   &:disabled {
-    background: #CCC;
+    background: #ccc;
   }
 
   @media (max-width: 767px) {

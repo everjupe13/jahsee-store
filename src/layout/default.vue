@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import AppHeader from '@/components/features/AppHeader.vue'
-import AppFooter from '@/components/features/AppFooter.vue'
-
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+
+import AppFooter from '@/components/features/AppFooter.vue'
+import AppHeader from '@/components/features/AppHeader.vue'
 
 defineOptions({
   name: 'AppLayout'
@@ -11,7 +11,6 @@ defineOptions({
 
 const route = useRoute()
 const isFooterVisible = computed(() => route?.meta?.footerVisible !== false)
-console.log(isFooterVisible.value)
 </script>
 
 <template>
@@ -64,7 +63,8 @@ console.log(isFooterVisible.value)
     // background: rgba(93, 104, 121, 0.54);
     // mix-blend-mode: color-dodge;
 
-    background: url('@/assets/img/big-logo-back.svg') center center/cover no-repeat;
+    background: url('@/assets/img/big-logo-back.svg') center center/cover
+      no-repeat;
     opacity: 0.02;
     animation: posing-levitation 20s linear infinite;
     // filter: blur(250px);

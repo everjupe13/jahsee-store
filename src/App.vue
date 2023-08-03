@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { computed, onMounted, onUnmounted, provide, ref } from 'vue'
+
 import Layout from '@/layout/default.vue'
-import { provide, ref, onMounted, onUnmounted, computed } from 'vue'
 
 const appWidth = ref(window.innerWidth)
 
@@ -9,17 +10,12 @@ function setSizing() {
 }
 
 onMounted(() => {
-  window.addEventListener(
-    'resize',
-    setSizing,
-    { passive: true }
-  )
+  window.addEventListener('resize', setSizing, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', setSizing)
 })
-
 
 const isMdScreen = computed(() => appWidth.value < 768)
 const isLgScreen = computed(() => appWidth.value > 992)
@@ -34,6 +30,4 @@ provide('isLgScreen', isLgScreen)
   </Layout>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

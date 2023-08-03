@@ -2,8 +2,8 @@
 import AppListItem from '@/components/shared/AppListItem.vue'
 
 interface IAppList {
-  items: { label: string }[],
-  bulleted?: boolean,
+  items: { label: string }[]
+  bulleted?: boolean
   listClasses?: string
 }
 
@@ -15,8 +15,8 @@ const props = withDefaults(defineProps<IAppList>(), {
 
 <template>
   <ul class="list">
-    <AppListItem 
-      v-for="(item, index) in props.items" 
+    <AppListItem
+      v-for="(item, index) in props.items"
       :key="index"
       :bulleted="props.bulleted"
       class="tw-mb-16"

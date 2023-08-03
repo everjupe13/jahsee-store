@@ -1,5 +1,5 @@
 export interface IDropInfoProps {
-  title: string,
-  cost: string,
+  title: string
+  cost: string
   desc: string
 }

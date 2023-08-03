@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { CrossIcon, PlusIcon, MinusIcon } from '@/components/icons'
 import { ref } from 'vue'
+
+import { CrossIcon, MinusIcon, PlusIcon } from '@/components/icons'
 
 const props = defineProps({
   img: String,
@@ -27,22 +28,24 @@ const decCount = () => {
     <div class="cart-order__grid">
       <div class="cart-order__body">
         <div class="cart-order__glass">
-          <img :src="props.img" alt="" class="cart-order__img">
+          <img :src="props.img" alt="" class="cart-order__img" />
         </div>
 
         <div class="cart-order__info">
           <div class="cart-order__title tw-mb-10">{{ props.title }}</div>
-          <div class="cart-order__cost tw-mb-5 md:tw-mb-25">{{ props.cost }}</div>
+          <div class="cart-order__cost tw-mb-5 md:tw-mb-25">
+            {{ props.cost }}
+          </div>
 
           <div class="cart-order__count">
             <button @click="decCount">
-              <div class="badge-hover tw-w-16 tw-h-16">
+              <div class="badge-hover tw-h-16 tw-w-16">
                 <MinusIcon />
               </div>
             </button>
             <div class="cart-order__count-text">{{ count }}</div>
             <button @click="incCount">
-              <div class="badge-hover tw-w-16 tw-h-16">
+              <div class="badge-hover tw-h-16 tw-w-16">
                 <PlusIcon />
               </div>
             </button>
@@ -50,9 +53,11 @@ const decCount = () => {
         </div>
       </div>
       <div class="cart-order__controls tw-h-full">
-        <div class="tw-flex tw-justify-center md:tw-justify-between tw-items-end md:tw-items-center tw-h-full">
+        <div
+          class="tw-flex tw-h-full tw-items-end tw-justify-center md:tw-items-center md:tw-justify-between"
+        >
           <div class="cart-order__size">{{ props.size }}</div>
-          <div class="cart-order__cancel badge-hover tw-w-28 tw-h-28">
+          <div class="cart-order__cancel badge-hover tw-h-28 tw-w-28">
             <CrossIcon />
           </div>
         </div>
@@ -71,7 +76,7 @@ const decCount = () => {
   width: 100%;
   padding: 20px;
 
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
   @media (max-width: 767px) {
     column-gap: 5px;
@@ -155,7 +160,6 @@ const decCount = () => {
     }
   }
 
-
   &__count {
     display: flex;
     align-items: center;
@@ -200,12 +204,12 @@ const decCount = () => {
   &__cancel {
     position: relative;
     z-index: 2;
-    
+
     cursor: pointer;
-    transition: .3s ease all;
+    transition: 0.3s ease all;
 
     svg {
-      fill: rgba(0, 0, 0, .5);
+      fill: rgba(0, 0, 0, 0.5);
     }
 
     &:hover {

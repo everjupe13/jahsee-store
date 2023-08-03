@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import HomePage from '@/pages/HomePage.vue'
 
 export const routes = [
@@ -57,12 +58,12 @@ export const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: () => import('@/pages/ProfilePage.vue'),
+    component: () => import('@/pages/ProfilePage.vue')
   },
   {
     path: '/profile/edit',
     name: 'edit-profile',
-    component: () => import('@/pages/EditProfilePage.vue'),
+    component: () => import('@/pages/EditProfilePage.vue')
   },
   {
     path: '/:pathMatch(.*)*',
@@ -77,26 +78,26 @@ const router = createRouter({
   scrollBehavior(_to, _from, _savedPosition) {
     // always scroll to top
     return { top: 0 }
-  },
+  }
 })
 
 router.beforeEach((to, _) => {
   const _app = document.querySelector('#app') as HTMLElement
   const _header = document.querySelector('#header') as HTMLElement
 
-  if (_app && _header)
+  if (_app && _header) {
     _app.style.paddingTop = `${_header?.getBoundingClientRect().height || 0}px`
+  }
 
-  if (to.name !== 'home') {
-    document.querySelector('.header')?.classList.add('header_full')
-    document.querySelector('#app')?.classList.add('animated')
-    // document.body.style.background = '#F5F7F9'
-  } else {
+  if (to.name === 'home') {
     document.querySelector('.header')?.classList.remove('header_full')
     document.querySelector('#app')?.classList.remove('animated')
     // document.body.style.background = '#fff'
+  } else {
+    document.querySelector('.header')?.classList.add('header_full')
+    document.querySelector('#app')?.classList.add('animated')
+    // document.body.style.background = '#F5F7F9'
   }
 })
-
 
 export { router }

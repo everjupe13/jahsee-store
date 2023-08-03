@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { ChevronArrowBackIcon } from '@/components/icons'
 import { useRouter } from 'vue-router'
+
+import { ChevronArrowBackIcon } from '@/components/icons'
 
 const router = useRouter()
 const handleBacknavClick = async () => {
@@ -9,7 +10,9 @@ const handleBacknavClick = async () => {
       return router.back()
     }
     return router.push('/')
-  } catch (e) {}
+  } catch {
+    /* empty */
+  }
 }
 </script>
 
@@ -41,7 +44,7 @@ const handleBacknavClick = async () => {
     flex-shrink: 0;
     display: block;
 
-    color: #FFF;
+    color: #fff;
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;

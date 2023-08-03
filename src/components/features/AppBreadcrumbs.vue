@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { RouterLinkProps } from 'vue-router'
 import { computed } from 'vue'
-
+import { RouterLinkProps } from 'vue-router'
 
 interface IAppBreadcrumbLink {
-  label: string,
+  label: string
   toLink?: RouterLinkProps['to']
 }
 
@@ -22,7 +21,7 @@ const props = withDefaults(defineProps<IAppBreadcrumbsComponent>(), {
 })
 
 const breads = computed<IAppBreadcrumbLink[]>(() => {
-  return [ baseBreadcrumb, ...props.crumbs ]
+  return [baseBreadcrumb, ...props.crumbs]
 })
 
 const isLastCrumb = (index: number) => {
@@ -30,7 +29,9 @@ const isLastCrumb = (index: number) => {
 }
 
 const determineCrumbsComponent = (index: number) => {
-  return !isLastCrumb(index) && breads.value.length !== 1 ? 'router-link' : 'span'
+  return !isLastCrumb(index) && breads.value.length !== 1
+    ? 'router-link'
+    : 'span'
 }
 </script>
 
@@ -42,14 +43,16 @@ const determineCrumbsComponent = (index: number) => {
         :key="crumb.label"
         class="bread-crumbs__item"
       >
-        <component 
-          :is='determineCrumbsComponent(index)'
+        <component
+          :is="determineCrumbsComponent(index)"
           :to="!isLastCrumb(index) ? crumb?.toLink : ''"
           :class="['bread-link', { 'bread-link_pured': isLastCrumb(index) }]"
         >
           {{ crumb.label }}
         </component>
-        <span v-if="!isLastCrumb(index)" class="bread-link_pured">{{ ' > ' }}</span>
+        <span v-if="!isLastCrumb(index)" class="bread-link_pured">
+          {{ ' > ' }}
+        </span>
       </span>
     </span>
   </div>
@@ -57,13 +60,13 @@ const determineCrumbsComponent = (index: number) => {
 
 <style lang="scss" scoped>
 .bread-link {
-  color: #808E95;
+  color: #808e95;
   font-size: 12px;
   font-weight: 400;
   line-height: 150%;
 
   &_pured {
-    color: #0B2630;
+    color: #0b2630;
     font-size: 12px;
     font-weight: 400;
     line-height: 150%;

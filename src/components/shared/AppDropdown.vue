@@ -1,43 +1,48 @@
 <script lang="ts" setup>
-import AppCollapse from '@/components/shared/AppCollapse.vue'
 import { reactive } from 'vue'
+
+import AppCollapse from '@/components/shared/AppCollapse.vue'
 
 interface IAppDropdown {
   dropdownData: {
-    label: string,
-    body: string,
+    label: string
+    body: string
     opened: boolean
   }[]
 }
 const props = defineProps<IAppDropdown>()
 
+// eslint-disable-next-line vue/no-setup-props-destructure
 const dropdownData = reactive(props.dropdownData)
 const handleDropitemClick = (index: number) => {
   dropdownData.forEach((state, idx) => {
     state.opened = !state.opened
 
-    if (idx !== index) {
-      if (state.opened) {
-        state.opened = false
-        return
-      }
+    if (idx !== index && state.opened) {
+      state.opened = false
+      return
     }
 
-    return 
+    return
   })
 }
 </script>
 
 <template>
   <div class="dropdown">
-    <div
-      v-for="(state, idx) in dropdownData"
-      :key="idx"
-      class="dropdown__item"
-    >
-      <div class="tw-cursor-pointer tw-flex tw-items-center tw-gap-x-10 tw-justify-between tw-py-18 md:tw-py-28 dropdown__label" @click="() => handleDropitemClick(idx)">
-        <h4 class="dropdown__label-text tw-grow-1 tw-font-medium" v-html="state.label"></h4>
-        <div class="dropdown__label-badge tw-grow-0" :class="{ '--active': state.opened }"></div>
+    <div v-for="(state, idx) in dropdownData" :key="idx" class="dropdown__item">
+      <div
+        class="dropdown__label tw-flex tw-cursor-pointer tw-items-center tw-justify-between tw-gap-x-10 tw-py-18 md:tw-py-28"
+        @click="() => handleDropitemClick(idx)"
+      >
+        <h4
+          class="dropdown__label-text tw-grow-1 tw-font-medium"
+          v-html="state.label"
+        ></h4>
+        <div
+          class="dropdown__label-badge tw-grow-0"
+          :class="{ '--active': state.opened }"
+        ></div>
       </div>
       <AppCollapse v-model="state.opened">
         <div class="dropdown__body tw-p-x-28">
@@ -50,14 +55,13 @@ const handleDropitemClick = (index: number) => {
 
 <style lang="scss" scoped>
 .dropdown {
-
   &__item {
-    border-top: 1px solid rgba($color: #0B2630, $alpha: 0.15);
+    border-top: 1px solid rgba($color: #0b2630, $alpha: 0.15);
     border-left: 0;
     border-right: 0;
 
     &:last-child {
-      border-bottom: 1px solid rgba($color: #0B2630, $alpha: 0.15);
+      border-bottom: 1px solid rgba($color: #0b2630, $alpha: 0.15);
     }
   }
 
@@ -85,7 +89,8 @@ const handleDropitemClick = (index: number) => {
       min-width: 68px;
     }
 
-    &:after, &:before {
+    &:after,
+    &:before {
       content: '';
       position: absolute;
       top: 50%;
@@ -97,7 +102,7 @@ const handleDropitemClick = (index: number) => {
       height: 2px;
       background-color: var(--color-green-darker);
 
-      transition: .3s height ease;
+      transition: 0.3s height ease;
     }
 
     &.--active {

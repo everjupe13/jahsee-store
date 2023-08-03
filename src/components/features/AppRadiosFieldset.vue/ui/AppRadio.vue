@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import AppBaseRadio from '@/components/shared/AppBaseRadio.vue'
-
 import { inject } from 'vue'
+
+import AppBaseRadio from '@/components/shared/AppBaseRadio.vue'
 
 const props = defineProps(['modelValue', 'value'])
 const emit = defineEmits(['update:modelValue', 'input'])
@@ -15,7 +15,10 @@ const handleModelValueChange = (e: InputEvent) => {
 </script>
 
 <template>
-  <AppBaseRadio :model-value="props.value" @update:model-value="(e) => handleModelValueChange(e)">
+  <AppBaseRadio
+    :model-value="props.value"
+    @update:model-value="e => handleModelValueChange(e)"
+  >
     <slot></slot>
   </AppBaseRadio>
 </template>

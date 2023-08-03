@@ -12,45 +12,14 @@ import { AppHomeSlider } from '@/components/screens/app-home'
 //     toLink: { name: 'tour' }
 //   },
 // ]
-
 </script>
 
 <template>
   <section class="tw-pt-60">
     <AppContainer>
-      <div class="tw-max-w-[800px] tw-m-auto">
+      <div class="tw-m-auto tw-max-w-[800px]">
         <AppHomeSlider />
       </div>
-      <!-- <div class="link-item">
-        <router-link to="/not-found" data-aos="fade-right" class="link-item__title">3RD DROP</router-link>
-        <div class="link-item__aside">
-          <div class="link-item__number">03</div>
-          <ul class="link-item__menu-list">
-            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">COMING SOON</li>
-            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="150">
-              <router-link to="/lore/1" class="link-item__menu-list-link">DROP LORE</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="link-item">
-        <router-link to="/drop/2" data-aos="fade-right" class="link-item__title">2ND DROP</router-link>
-        <div class="link-item__aside">
-          <div class="link-item__number">02</div>
-          <ul class="link-item__menu-list">
-            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">Sold out</li>
-          </ul>
-        </div>
-      </div>
-      <div class="link-item">
-        <router-link to="/drop/1" data-aos="fade-right" class="link-item__title">1ST DROP</router-link>
-        <div class="link-item__aside">
-          <div class="link-item__number">01</div>
-          <ul class="link-item__menu-list">
-            <li class="link-item__menu-list-item" data-aos="fade-left" data-aos-delay="100">Sold out</li>
-          </ul>
-        </div>
-      </div> -->
     </AppContainer>
   </section>
 </template>
@@ -58,97 +27,5 @@ import { AppHomeSlider } from '@/components/screens/app-home'
 <style lang="scss" scoped>
 .links {
   padding-bottom: 180px;
-}
-.link-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 185px 0;
-  border-bottom: 2px solid #B4BBC7;
-
-  @media (max-width: 767px) {
-    padding: 39px 16px 49px;
-    margin: 0 -16px;
-  }
-
-  &__title {
-    color: #86868A;
-    font-family: 'SF Pro Display';
-    font-size: 112px;
-    font-weight: 700;
-    line-height: 1;
-
-    @media (max-width: 767px) {
-      font-size: 37px;
-    }
-  }
-
-  &__aside {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    padding-right: 150px;
-    height: 100%;
-
-    @media (max-width: 767px) {
-      padding-right: 0;
-    }
-  }
-
-  &__number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    left: unset;
-    right: 20px;
-    transform: translateY(-50%);
-
-    color: rgba(134, 134, 138, 0.1);
-    font-family: SF Pro Display;
-    font-size: 380px;
-    font-weight: 700;
-    line-height: 1;
-    text-transform: uppercase;
-    pointer-events: none;
-
-    @media (max-width: 767px) {
-      display: none;
-    }
-  }
-
-  &__menu-list-item {
-    margin-bottom: 35px;
-    cursor: default;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @media (max-width: 767px) {
-      margin-bottom: 10px;
-    }
-  }
-
-  &__menu-list-item,
-  &__menu-list-link {
-    color: #969EAB;
-    text-align: right;
-    font-family: Montserrat;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-    }
-  }
 }
 </style>

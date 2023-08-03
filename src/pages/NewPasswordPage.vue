@@ -9,24 +9,37 @@ const proceedChangePassword = () => {
 
 <template>
   <AppContainer>
-    <section class="tw-pt-30 md:tw-pt-50 -tw-mx-15 md:tw-mx-0">
+    <section class="-tw-mx-15 tw-pt-30 md:tw-mx-0 md:tw-pt-50">
       <form @submit.prevent class="form">
         <div class="form__title tw-mb-30 md:tw-mb-57">CHANGE YOUR PASSWORD</div>
         <template v-if="!lastStep">
-          <div class="form__body !tw-mb-0 !md:tw-mb-30">
+          <div class="form__body !md:tw-mb-30 !tw-mb-0">
             <AppInput placeholder="PASSWORD*" class="tw-mb-20 md:tw-mb-45" />
-            <AppInput placeholder="CONFIRM PASSWORD*" class="tw-mb-20 md:tw-mb-45" />
+            <AppInput
+              placeholder="CONFIRM PASSWORD*"
+              class="tw-mb-20 md:tw-mb-45"
+            />
           </div>
-          <div class="form__error-message">
-            the password is incorrect
-          </div>
+          <div class="form__error-message">the password is incorrect</div>
           <div class="tw-flex tw-justify-center tw-gap-x-40">
-            <AppButton type="button" class="btn form__btn tw-mb-25 tw-w-[240px] tw-justify-center" @click="proceedChangePassword">SEND</AppButton>
+            <AppButton
+              type="button"
+              class="btn form__btn tw-mb-25 tw-w-[240px] tw-justify-center"
+              @click="proceedChangePassword"
+            >
+              SEND
+            </AppButton>
           </div>
         </template>
         <template v-else>
           <p class="reset-pass__text">Your password has been reset</p>
-          <AppButton type="button" @click="$router.push('/login')" class="btn form__btn tw-mb-25">GO BACK TO SIGN IN</AppButton>
+          <AppButton
+            type="button"
+            @click="$router.push('/login')"
+            class="btn form__btn tw-mb-25"
+          >
+            GO BACK TO SIGN IN
+          </AppButton>
         </template>
       </form>
     </section>

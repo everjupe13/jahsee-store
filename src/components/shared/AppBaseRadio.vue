@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const props = defineProps(['modelValue'])
 defineEmits(['update:modelValue'])
-
 </script>
 
 <template>
@@ -12,7 +11,7 @@ defineEmits(['update:modelValue'])
       class="radio-input__radio"
       :checked="props.modelValue"
       @input="$emit('update:modelValue', !props.modelValue)"
-    >
+    />
     <span class="radio-input__text">
       <slot></slot>
     </span>
@@ -47,7 +46,7 @@ defineEmits(['update:modelValue'])
   }
 
   &__text {
-    color: #848A99;
+    color: #848a99;
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
@@ -55,7 +54,7 @@ defineEmits(['update:modelValue'])
     line-height: 100%;
     user-select: none;
 
-    transition: all .3s ease;
+    transition: all 0.3s ease;
   }
 
   &__radio {
@@ -69,28 +68,28 @@ defineEmits(['update:modelValue'])
     margin: 0;
     width: 20px;
     height: 20px;
-    border: 1.5px solid rgba(0, 0, 0, .2);
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
     border-radius: 50%;
 
     font: inherit;
 
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &::before {
       content: '';
 
       display: block;
-      
+
       width: 8px;
       height: 8px;
       border-radius: 50%;
 
-      background-color: rgba(0, 0, 0, .2);
-      
+      background-color: rgba(0, 0, 0, 0.2);
+
       transform: scale(0);
       transition: 0.12s transform ease-in-out;
 
-      transition: all .3s ease;
+      transition: all 0.3s ease;
     }
 
     &:checked::before {

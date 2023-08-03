@@ -1,3 +1,1 @@
-import AppCartOrder from './ui/AppCartOrder.vue'
-
-export { AppCartOrder }
+export { default as AppCartOrder } from './ui/AppCartOrder.vue'

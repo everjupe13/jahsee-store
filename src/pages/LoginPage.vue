@@ -4,12 +4,10 @@ import { AppLoginForm } from '@/components/widgets/auth'
 
 <template>
   <AppContainer>
-    <section class="tw-pt-40 md:tw-pt-80 -tw-mx-15 md:tw-mx-0">
+    <section class="-tw-mx-15 tw-pt-40 md:tw-mx-0 md:tw-pt-80">
       <AppLoginForm />
     </section>
   </AppContainer>
 </template>
 
-<style lang="scss" scoped>
-  
-</style>
+<style lang="scss" scoped></style>

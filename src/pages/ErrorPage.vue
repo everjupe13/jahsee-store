@@ -1,13 +1,7 @@
-<script lang="ts" setup>
-
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div class="tw-text-center tw-mx-40">
-    Не найдено!
-  </div>
+  <div class="tw-mx-40 tw-text-center">Не найдено!</div>
 </template>
 
-<style lang="scss">
-  
-</style>
+<style lang="scss"></style>

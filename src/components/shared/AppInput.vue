@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
 import { ref } from 'vue'
 
@@ -15,19 +16,29 @@ function useEvents(context: (e: any, value: any) => void) {
   }
 }
 
-
 function randomID() {
-  return `${Date.now()}-${Math.floor(Math.random() * 1_000_000)}`;
+  return `${Date.now()}-${Math.floor(Math.random() * 1_000_000)}`
 }
 
 interface Props {
   label?: string
-  disabled?: boolean,
-  placeholder?: string,
-  readonly?: boolean,
-  state?: any,
-  modelValue?: any,
-  type?: 'text' | 'number' | 'email' | 'password' | 'url' | 'tel' | 'date' | 'time' | 'range' | 'color' | 'search'
+  disabled?: boolean
+  placeholder?: string
+  readonly?: boolean
+  state?: any
+  modelValue?: any
+  type?:
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'password'
+    | 'url'
+    | 'tel'
+    | 'date'
+    | 'time'
+    | 'range'
+    | 'color'
+    | 'search'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -38,8 +49,7 @@ const { handleChange, handleInput } = useEvents(emits)
 
 const uuid = ref(randomID())
 
-const refValue = props.modelValue ? props.modelValue : ref('')
-
+const refValue = props.modelValue ?? ref('')
 </script>
 
 <template>
@@ -62,10 +72,10 @@ const refValue = props.modelValue ? props.modelValue : ref('')
 .input-label-box {
   border: 1px solid #202022;
   padding: 22px 48px;
-  background: #F6F5FF;
+  background: #f6f5ff;
 
   position: relative;
-  
+
   display: flex;
   align-items: center;
 
@@ -85,7 +95,7 @@ const refValue = props.modelValue ? props.modelValue : ref('')
 
 .input {
   display: block;
-  
+
   font-size: 18px;
   font-weight: 400;
   line-height: normal;
@@ -97,8 +107,7 @@ const refValue = props.modelValue ? props.modelValue : ref('')
   color: #202022;
 
   &::placeholder {
-    color: #969EAB;
-    
+    color: #969eab;
   }
 }
 </style>

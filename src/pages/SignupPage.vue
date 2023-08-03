@@ -4,12 +4,10 @@ import { AppSignupForm } from '@/components/widgets/auth'
 
 <template>
   <AppContainer>
-    <section class="tw-pt-30 md:tw-pt-50 -tw-mx-15 md:tw-mx-0">
+    <section class="-tw-mx-15 tw-pt-30 md:tw-mx-0 md:tw-pt-50">
       <AppSignupForm />
     </section>
   </AppContainer>
 </template>
 
-<style lang="scss" scoped>
-  
-</style>
+<style lang="scss" scoped></style>

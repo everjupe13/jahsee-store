@@ -1,45 +1,43 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { ref, inject } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
-import { AppDropInfo } from '@/components/screens/app-drop'
-import {
-  ForwardLinkArrowIcon,
-  DropdownCollapseArrowIcon
-} from '@/components/icons'
-import AppCollapse from '@/components/shared/AppCollapse.vue'
-import AppBackNav from '@/components/features/AppBackNav.vue'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 
-import { Swiper, SwiperSlide } from 'swiper/vue'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
-import "swiper/css/free-mode"
-import "swiper/css/navigation"
-import "swiper/css/thumbs"
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { inject, ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
-
+import AppBackNav from '@/components/features/AppBackNav.vue'
+import {
+  DropdownCollapseArrowIcon,
+  ForwardLinkArrowIcon
+} from '@/components/icons'
+import { AppDropInfo } from '@/components/screens/app-drop'
+import AppCollapse from '@/components/shared/AppCollapse.vue'
 
 const isMdScreen = inject('isMdScreen')
 
 const thumbsSwiper = ref(null)
 const setThumbsSwiper = (swiper: any) => {
-  thumbsSwiper.value = swiper;
+  thumbsSwiper.value = swiper
 }
 const modules = [FreeMode, Navigation, Thumbs]
-
 
 const detailsOpened = ref(false)
 const toggleDetailsOpened = () => {
   detailsOpened.value = !detailsOpened.value
 }
 
-
 const selectedSize = ref('')
 const setSelectedSize = (value: string) => {
   const _size = CURRENT_DATA.sizes.find(size => size.label === value)
 
-  if (selectedSize.value !== value && !_size?.disabled)
+  if (selectedSize.value !== value && !_size?.disabled) {
     selectedSize.value = value
+  }
 }
-
 
 const ZIP_DATA = {
   title: 'ZIP HOODIE',
@@ -58,7 +56,7 @@ const ZIP_DATA = {
     new URL('@/assets/img/drop-zip-hoodie/2.png', import.meta.url).href,
     new URL('@/assets/img/drop-zip-hoodie/3.png', import.meta.url).href,
     new URL('@/assets/img/drop-zip-hoodie/4.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href,
+    new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href
   ],
   sizes: [
     { label: 'XS', disabled: false },
@@ -80,13 +78,13 @@ const SWEAT_DATA = {
     '20% polyester',
     'Chest - embroidery',
     'Branded patch that tells you the bear market is about to end',
-    'Tag that allows you to choose your individual nickname printed on it',
+    'Tag that allows you to choose your individual nickname printed on it'
   ],
   gallery: [
     new URL('@/assets/img/drop-sweat/1.png', import.meta.url).href,
     new URL('@/assets/img/drop-sweat/2.png', import.meta.url).href,
     new URL('@/assets/img/drop-sweat/3.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href,
+    new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href
   ],
   sizes: [
     { label: 'XS', disabled: false },
@@ -99,7 +97,7 @@ const SWEAT_DATA = {
 }
 
 const route = useRoute()
-const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
+const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 </script>
 
 <template>
@@ -109,7 +107,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
       <div class="drop__grid">
         <div class="drop__list">
-
           <div class="drop__header tw-mb-40">
             <AppDropInfo
               v-bind="{
@@ -124,7 +121,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             <div
               class="drop__options tw-mb-10 md:tw-mb-50"
               data-aos="fade-down"
-              data-aos-delay="250" 
+              data-aos-delay="250"
             >
               <div class="drop__options-item tw-cursor-pointer">
                 <div class="drop__options-label">Size guide</div>
@@ -133,7 +130,10 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
                 </div>
               </div>
 
-              <RouterLink :to="{ name: 'lore', params: { id: $route.params.id } }" class="drop__options-item tw-cursor-pointer">
+              <RouterLink
+                :to="{ name: 'lore', params: { id: $route.params.id } }"
+                class="drop__options-item tw-cursor-pointer"
+              >
                 <div class="drop__options-label">Drop lore</div>
                 <div class="drop__options-glass">
                   <ForwardLinkArrowIcon class="drop__options-icon" />
@@ -143,7 +143,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
               <div class="drop__options-details-wrapper">
                 <div
                   class="drop__options-item tw-cursor-pointer"
-                  :class="[{'--active': detailsOpened}]"
+                  :class="[{ '--active': detailsOpened }]"
                   @click="toggleDetailsOpened"
                 >
                   <div class="drop__options-label">Details</div>
@@ -153,14 +153,22 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
                 </div>
 
                 <div class="drop__options-details">
-                  <AppCollapse v-model="detailsOpened" class="drop__options-details-collapse">
+                  <AppCollapse
+                    v-model="detailsOpened"
+                    class="drop__options-details-collapse"
+                  >
                     <ul class="details-list">
-                      <li v-for="item in CURRENT_DATA.list" class="details-list__item">{{ item }}</li>
+                      <li
+                        v-for="(item, index) in CURRENT_DATA.list"
+                        :key="index"
+                        class="details-list__item"
+                      >
+                        {{ item }}
+                      </li>
                     </ul>
                   </AppCollapse>
                 </div>
               </div>
-
             </div>
             <div
               class="drop__controls"
@@ -168,7 +176,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
               data-aos-delay="300"
             >
               <div class="size-picker">
-                <button 
+                <button
                   v-for="size in CURRENT_DATA.sizes"
                   :class="[
                     'size-picker__item',
@@ -182,10 +190,12 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
                 </button>
               </div>
               <AppButton
-                class="!tw-bg-[#fff] tw-h-80 tw-w-full tw-justify-center"
+                class="tw-h-80 tw-w-full tw-justify-center !tw-bg-[#fff]"
                 theme="alternative"
                 disabled
-              >Sold out</AppButton>
+              >
+                Sold out
+              </AppButton>
             </div>
           </div>
         </div>
@@ -193,9 +203,9 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
           <swiper
             :style="{
               '--swiper-navigation-color': '#969EAB',
-              '--swiper-pagination-color': '#969EAB',
+              '--swiper-pagination-color': '#969EAB'
             }"
-            :spaceBetween="40"
+            :space-between="40"
             :navigation="true"
             :thumbs="{ swiper: thumbsSwiper }"
             :modules="modules"
@@ -204,7 +214,10 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
             data-aos-delay="50"
             data-aos-duration="600"
           >
-            <swiper-slide v-for="item in CURRENT_DATA.gallery">
+            <swiper-slide
+              v-for="(item, index) in CURRENT_DATA.gallery"
+              :key="index"
+            >
               <div class="drop-gallery__item">
                 <img :src="item" />
               </div>
@@ -213,18 +226,27 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
           <swiper
             @swiper="setThumbsSwiper"
-            :spaceBetween="20"
-            :slidesPerView="4"
-            :freeMode="true"
-            :watchSlidesProgress="true"
+            :space-between="20"
+            :slides-per-view="4"
+            :free-mode="true"
+            :watch-slides-progress="true"
             :modules="modules"
             :direction="'vertical'"
             class="drop-gallery-thumb"
             v-if="!isMdScreen"
           >
-            <swiper-slide v-for="(item, index) in CURRENT_DATA.gallery">
+            <swiper-slide
+              v-for="(item, index) in CURRENT_DATA.gallery"
+              :key="index"
+            >
               <div class="drop-gallery-thumb__item">
-                <img :src="item" alt="" data-aos="fade-left" :data-aos-delay="(index + 1) * 50" data-aos-duration="400" />
+                <img
+                  :src="item"
+                  alt=""
+                  data-aos="fade-left"
+                  :data-aos-delay="(index + 1) * 50"
+                  data-aos-duration="400"
+                />
               </div>
             </swiper-slide>
           </swiper>
@@ -240,7 +262,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
   padding-bottom: 40px;
 
   @media (max-width: 767px) {
-    padding-top: 20px;   
+    padding-top: 20px;
   }
 
   &__grid {
@@ -251,7 +273,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     column-gap: 15px;
 
     @media (max-width: 767px) {
-      grid-template-columns: 100%; 
+      grid-template-columns: 100%;
     }
   }
 
@@ -267,7 +289,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
   }
 
   &__options {
-    color: #F6F5FF;
+    color: #f6f5ff;
     font-family: Montserrat;
     font-size: 24px;
     font-style: normal;
@@ -287,15 +309,15 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
     padding-bottom: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, .2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
-    transition: .3s all ease;
+    transition: 0.3s all ease;
 
     &:hover,
     &.--active {
       border-bottom: 1px solid rgba(255, 255, 255, 1);
       .drop__options-icon {
-        opacity: 1
+        opacity: 1;
       }
     }
 
@@ -305,7 +327,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
   }
 
   &__options-label {
-    color: #FFF;
+    color: #fff;
     font-family: 'Helvetica Now Display';
     font-size: 16px;
     font-style: normal;
@@ -323,7 +345,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
   &__options-icon {
     opacity: 0.2;
-    transition: .3s all ease;
+    transition: 0.3s all ease;
   }
 
   &__options-details-wrapper {
@@ -361,7 +383,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     column-gap: 30px;
 
     @media (max-width: 767px) {
-      grid-row: 1/2
+      grid-row: 1/2;
     }
   }
 }
@@ -375,7 +397,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     width: 100%;
     margin-bottom: 15px;
 
-    color: #E1E1F1;
+    color: #e1e1f1;
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
@@ -406,7 +428,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     aspect-ratio: 1;
     background-color: #242424;
 
-    transition: .2s all ease;
+    transition: 0.2s all ease;
     cursor: pointer;
 
     &:hover {
@@ -414,11 +436,11 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     }
 
     &.--active {
-      background-color: #FFF;
+      background-color: #fff;
       opacity: 1;
 
       .size-picker__item-text {
-        color: #0A090A;
+        color: #0a090a;
       }
     }
 
@@ -436,7 +458,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
   &__item-text {
     display: block;
 
-    color: #FFF;
+    color: #fff;
     font-family: 'Helvetica Now Display';
     font-size: 16px;
     font-style: normal;
@@ -444,7 +466,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     line-height: 100%;
     text-transform: uppercase;
 
-    transition: .2s all ease;
+    transition: 0.2s all ease;
   }
 }
 
@@ -468,7 +490,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
     height: 666px;
 
     @media (max-width: 767px) {
-      width: 100% 
+      width: 100%;
     }
 
     img {
@@ -501,10 +523,11 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][route.params.id as any - 1]
 
   .swiper-slide {
     opacity: 0.4;
-    @apply tw-transition
+    @apply tw-transition;
   }
   .swiper-slide-thumb-active {
     opacity: 1;
   }
 }
-</style>@/components/screens/app-drop
+</style>
+@/components/screens/app-drop

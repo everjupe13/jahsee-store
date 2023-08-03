@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted, watch, reactive, Ref, } from 'vue'
+import { onMounted, reactive, Ref, ref, watch } from 'vue'
 
 interface Props {
   modelValue?: boolean
@@ -14,7 +14,10 @@ const componentClasses = reactive({ collapse: true, show: true })
 const changeState = (state: boolean) => {
   if (contentRef.value) {
     if (state) {
-     contentRef.value.style.setProperty('--content-height', `${contentHeight.value}px`)
+      contentRef.value.style.setProperty(
+        '--content-height',
+        `${contentHeight.value}px`
+      )
     } else {
       contentRef.value.style.setProperty('--content-height', `0px`)
     }
@@ -38,13 +41,19 @@ onMounted(() => {
   useChangeState()
 })
 
-watch(() => props.modelValue, () => {
-  changeState(props.modelValue)
-})
+watch(
+  () => props.modelValue,
+  () => {
+    changeState(props.modelValue)
+  }
+)
 
-watch(() => collapseState.value, () => {
-  changeState(collapseState.value)
-})
+watch(
+  () => collapseState.value,
+  () => {
+    changeState(collapseState.value)
+  }
+)
 
 const handleClick = () => {
   if (!props.modelValue) {
@@ -62,9 +71,9 @@ const handleClick = () => {
 <style lang="scss" scoped>
 .collapse {
   height: var(--content-height);
-  transition: height .35s ease;
+  transition: height 0.35s ease;
   overflow: hidden;
 
-  --content-height: auto
+  --content-height: auto;
 }
 </style>

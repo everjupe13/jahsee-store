@@ -11,11 +11,13 @@ import {
 <template>
   <footer class="footer">
     <AppContainer>
-      <div class="tw-flex tw-items-center tw-justify-center tw-mb-20">
+      <div class="tw-mb-20 tw-flex tw-items-center tw-justify-center">
         <p class="footer__text">Contacts</p>
       </div>
 
-      <div class="tw-flex tw-items-center tw-justify-center tw-gap-x-20 tw-mb-40">
+      <div
+        class="tw-mb-40 tw-flex tw-items-center tw-justify-center tw-gap-x-20"
+      >
         <a href="/" class="footer__link-icon">
           <SocialTelegramIcon class="footer__icon" />
         </a>
@@ -50,7 +52,7 @@ import {
 
   &__text {
     font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
-  
+
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -62,9 +64,11 @@ import {
     text-decoration: underline;
     text-underline-offset: 2px;
 
-    transition: all .4s ease;
+    transition: all 0.4s ease;
 
-    &:hover, &:focus, &:active {
+    &:hover,
+    &:focus,
+    &:active {
       text-underline-offset: 6px;
     }
   }
@@ -76,8 +80,8 @@ import {
   &__icon {
     width: 30px;
 
-    fill: #969EAB;
-    transition: all .3s ease;
+    fill: #969eab;
+    transition: all 0.3s ease;
 
     &:hover {
       fill: #fff;

@@ -2,9 +2,9 @@
 import { computed } from 'vue'
 
 interface IAppButton {
-  theme?: 'default' | 'alternative' | 'black',
-  size?: 'sm' | 'md',
-  rounded?: boolean,
+  theme?: 'default' | 'alternative' | 'black'
+  size?: 'sm' | 'md'
+  rounded?: boolean
   outlined?: boolean
 }
 
@@ -13,15 +13,17 @@ const props = withDefaults(defineProps<IAppButton>(), {
 })
 
 const componentsClasses = computed(() => {
-  const _size = { 'btn_small': props.size === 'sm', 'btn_medium': props.size === 'md' }
+  const _size = {
+    btn_small: props.size === 'sm',
+    btn_medium: props.size === 'md'
+  }
 
   return [
     props.theme ? `btn_theme-${props.theme}` : '',
     _size,
-    { 'btn_outlined': props.outlined }
+    { btn_outlined: props.outlined }
   ]
 })
-
 </script>
 
 <template>
@@ -34,12 +36,12 @@ const componentsClasses = computed(() => {
 .btn {
   justify-content: center;
   align-items: center;
-  
+
   padding: 26px 70px;
 
   background: #202022;
 
-  color: #F6F5FF;
+  color: #f6f5ff;
   text-align: center;
 
   font-size: 24px;
@@ -48,7 +50,7 @@ const componentsClasses = computed(() => {
   line-height: normal;
   text-transform: uppercase;
 
-  transition: .2s all ease;
+  transition: 0.2s all ease;
 
   @apply tw-flex tw-items-center;
 
@@ -57,7 +59,7 @@ const componentsClasses = computed(() => {
   }
 
   &_theme-alternative {
-    @apply tw-bg-[#D9D9D9] tw-text-[#202022]
+    @apply tw-bg-[#D9D9D9] tw-text-[#202022];
   }
 }
 </style>

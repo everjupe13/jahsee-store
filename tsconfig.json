@@ -26,9 +26,9 @@
 
     "typeRoots": [
       "./src/types/*.d.ts",
+      "@types",
       "node_modules/@types/**/index.d.ts"
     ]
-
   },
   "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.d.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
