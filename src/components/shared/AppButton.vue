@@ -23,7 +23,9 @@ const componentsClasses = computed(() => {
   return [
     props.theme ? `btn_theme-${props.theme}` : '',
     _size,
-    { btn_outlined: props.outlined },
+    props.outlined
+      ? 'bg-transparent border border-button-black text-button-black hover:text-white active:text-white disabled:text-white hover:bg-button-black-hover active:bg-button-black-active disabled:bg-button-black-disabled'
+      : 'bg-button-black text-white hover:bg-button-black-hover active:bg-button-black-active disabled:bg-button-black-disabled',
     { 'w-full': props.fluid }
   ]
 })
@@ -31,7 +33,7 @@ const componentsClasses = computed(() => {
 
 <template>
   <button
-    class="btn flex items-center justify-center bg-button-black p-32 text-white transition hover:bg-button-black-hover active:bg-button-black-active disabled:bg-button-black-disabled"
+    class="btn flex items-center justify-center p-32 transition"
     :class="componentsClasses"
   >
     <slot></slot>

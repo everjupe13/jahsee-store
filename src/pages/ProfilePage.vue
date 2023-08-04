@@ -129,7 +129,7 @@ const setActvieTab = (id: number) => {
           </nav>
         </div>
 
-        <div class="min-h-[600px] bg-white p-40">
+        <div class="content-body min-h-[600px] bg-white p-40">
           <component
             :is="tabs[activeTab].component"
             :class="tabs[activeTab].componentClasses"
@@ -367,9 +367,46 @@ const setActvieTab = (id: number) => {
   }
 }
 
+.content-body {
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    @apply h-8 w-8;
+  }
+
+  ::-webkit-scrollbar-track {
+    /* @apply bg-white; */
+    @apply bg-black/10;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /* @apply bg-black/30; */
+    @apply bg-black;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-black/50;
+  }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-white;
+    @apply bg-black;
+  }
+
+  /* Gecko */
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+  }
+}
+
 .cart-grid {
   display: grid;
   grid-template-columns: 440px calc(100% - 440px);
+
+  @media (max-width: 991px) {
+    grid-template-columns: 100%;
+  }
 }
 
 .nav-link {

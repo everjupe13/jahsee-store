@@ -30,12 +30,5 @@ const userData = reactive({
 </template>
 
 <style lang="scss" scoped>
-.heading {
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 100%;
-  letter-spacing: 0.72px;
-  text-transform: uppercase;
-}
+@import './style.scss';
 </style>
