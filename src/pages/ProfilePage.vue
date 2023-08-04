@@ -6,12 +6,13 @@ import 'swiper/css/thumbs'
 
 // import { Navigation } from 'swiper/modules'
 // import { Swiper, SwiperSlide } from 'swiper/vue'
-// import { ref } from 'vue'
+import { ref } from 'vue'
+
 import AppBackNav from '@/components/features/AppBackNav.vue'
 import {
-  // AppProfileAddress,
-  AppProfileInfo
-  // AppProfileOrders
+  AppProfileAddress,
+  AppProfileInfo,
+  AppProfileOrders
 } from '@/components/screens/app-profile'
 // import AppCollapse from '@/components/shared/AppCollapse.vue'
 
@@ -65,32 +66,36 @@ import {
 
 // const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA]
 
-// const tabs = [
-//   {
-//     name: 'profile',
-//     label: 'My profile'
-//   },
-//   {
-//     name: 'address',
-//     label: 'Address book'
-//   },
-//   {
-//     name: 'orders',
-//     label: 'My orders'
-//   },
-//   {
-//     name: 'logout',
-//     label: 'logout'
-//   }
-// ]
-// const activeTab = ref(tabs[0].name)
-// const setActvieTab = (name: string) => {
-//   if (activeTab.value === name) {
-//     return
-//   }
+const tabs = [
+  {
+    id: 0,
+    name: 'profile',
+    label: 'My profile',
+    component: AppProfileInfo,
+    componentClasses: 'max-w-[640px]'
+  },
+  {
+    id: 1,
+    name: 'address',
+    label: 'Address book',
+    component: AppProfileAddress
+  },
+  {
+    id: 2,
+    name: 'orders',
+    label: 'My orders',
+    component: AppProfileOrders
+  }
+]
 
-//   activeTab.value = name
-// }
+const activeTab = ref(0)
+const setActvieTab = (id: number) => {
+  if (activeTab.value === id) {
+    return
+  }
+
+  activeTab.value = id
+}
 
 // const isPasswordEditable = ref(false)
 </script>
@@ -106,34 +111,32 @@ import {
       </div>
       <div class="cart-grid">
         <div class="bg-gray px-50 py-40">
-          <nav>
-            <ul class="flex flex-col gap-y-24">
-              <li>
-                <button class="nav-link font-hbd transition-colors">
-                  My profile
-                </button>
-              </li>
-              <li>
-                <button class="nav-link font-hbd transition-colors">
-                  Address book
-                </button>
-              </li>
-              <li>
-                <button class="nav-link font-hbd transition-colors">
-                  My orders
-                </button>
-              </li>
-              <li>
-                <button class="nav-link font-hbd transition-colors">
-                  Logout
-                </button>
-              </li>
-            </ul>
+          <nav class="flex flex-col gap-y-10">
+            <div v-for="tab in tabs" :key="tab.id">
+              <button
+                class="nav-link font-hbd p-8 pl-0 transition-colors"
+                :class="{ '--active': activeTab === tab.id }"
+                @click="setActvieTab(tab.id)"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+            <div>
+              <button class="nav-link font-hbd p-8 pl-0 transition-colors">
+                Logout
+              </button>
+            </div>
           </nav>
         </div>
 
         <div class="min-h-[600px] bg-white p-40">
-          <AppProfileInfo class="max-w-[640px]" />
+          <component
+            :is="tabs[activeTab].component"
+            :class="tabs[activeTab].componentClasses"
+            data-aos="fade-up"
+            data-aos-duration="400"
+          ></component>
+
           <!-- <div class="main__tabs-list">
             <div
               v-for="tab in tabs"
@@ -376,6 +379,8 @@ import {
   line-height: 100%;
   text-transform: uppercase;
   color: #848a99;
+
+  @apply active:text-button-black/70;
 
   &.--active {
     color: #000;

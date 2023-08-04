@@ -1,10 +1,12 @@
 export class Preloader {
   static invoke() {
     window.addEventListener('load', () => {
+      document.querySelector('#loader')?.classList.add('before-load')
       setTimeout(async () => {
+        await this.loaded(document.querySelector('#loader'))
         await this.fadeOut(document.querySelector('#loader'))
         document.body.classList.remove('body-loading')
-      }, 600)
+      }, 400)
     })
   }
 
@@ -26,6 +28,19 @@ export class Preloader {
         element.style.filter = 'alpha(opacity=' + op * 100 + ')'
         op -= op * 0.1
       }, 10)
+    })
+  }
+
+  private static loaded(element: HTMLElement | null) {
+    if (!element) {
+      return Promise.resolve()
+    }
+
+    return new Promise<void>((resolve, _reject) => {
+      element.classList.add('erase')
+      setTimeout(() => {
+        resolve()
+      }, 1000)
     })
   }
 }

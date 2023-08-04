@@ -87,7 +87,7 @@ const isValidationMessageShown = computed(() => {
   <div>
     <div class="relative w-full">
       <input
-        class="input peer block w-full border border-solid border-black/10 px-20 pb-12 pt-28 text-[#555862] transition placeholder:opacity-0 hover:border-black hover:text-[#000] focus:border-black focus:text-[#000]"
+        class="input peer block w-full border border-solid border-black/10 px-20 pb-12 pt-28 text-[#555862] outline-none transition placeholder:opacity-0 hover:border-black hover:text-[#000] focus:border-black focus:text-[#000]"
         :id="uuid"
         :value="refValue"
         :disabled="props.disabled"

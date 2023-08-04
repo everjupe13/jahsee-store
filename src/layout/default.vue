@@ -23,7 +23,9 @@ const isFooterVisible = computed(() => route?.meta?.footerVisible !== false)
   >
     <slot></slot>
   </main>
-  <AppFooter v-if="isFooterVisible"></AppFooter>
+  <AppFooter
+    :class="{ 'pointer-events-none opacity-0': !isFooterVisible }"
+  ></AppFooter>
 </template>
 
 <style lang="scss"></style>
