@@ -48,7 +48,6 @@ const proceedChangePassword = () => {
   margin-bottom: 40px;
 
   color: #000;
-  font-family: Montserrat;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;

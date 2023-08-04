@@ -45,7 +45,6 @@ const handleBacknavClick = async () => {
     display: block;
 
     color: #fff;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

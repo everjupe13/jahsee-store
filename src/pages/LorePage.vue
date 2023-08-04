@@ -154,7 +154,6 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
 
   &__body-text {
     color: #969eab;
-    font-family: Montserrat;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;

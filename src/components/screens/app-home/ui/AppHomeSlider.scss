@@ -47,7 +47,6 @@
 
 .tags {
   color: #ffffff;
-  font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -58,7 +57,6 @@
 .sold-out {
   color: #ffffff;
   text-align: center;
-  font-family: Helvetica Now Display;
   font-size: 64px;
   font-style: normal;
   font-weight: 950;
@@ -67,4 +65,6 @@
   text-transform: uppercase;
 
   mix-blend-mode: difference;
+
+  @apply font-hnd;
 }

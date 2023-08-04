@@ -184,7 +184,6 @@ const handleRadiosClick = (index: number) => {
 
   &__table-heading {
     color: #848a99;
-    font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -194,7 +193,6 @@ const handleRadiosClick = (index: number) => {
 
   &__heading,
   &__subheading {
-    font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -258,22 +256,24 @@ const handleRadiosClick = (index: number) => {
     background-color: rgba(0, 0, 0, 0.2);
 
     color: #fff;
-    font-family: 'Helvetica Now Display';
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
     line-height: 100%;
     text-transform: uppercase;
+
+    @apply font-hnd;
   }
 
   &__schema-submit {
     color: #fff;
-    font-family: 'Helvetica Now Display';
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 100%;
     text-transform: uppercase;
+
+    @apply font-hnd;
   }
 
   &__schema-footer {

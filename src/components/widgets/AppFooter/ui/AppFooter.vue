@@ -79,13 +79,13 @@ import { SOCIAL_LINKS } from '../model'
 
 <style lang="scss" scoped>
 .text {
-  font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
-
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   letter-spacing: 0.64px;
   text-transform: uppercase;
+
+  @apply font-hnd;
 }
 
 .text-link {

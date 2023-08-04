@@ -67,7 +67,11 @@ onMounted(() => {
   >
     {{ props.title }}
   </div>
-  <div class="drop-info__cost mb-25" data-aos="fade-down" data-aos-delay="100">
+  <div
+    class="drop-info__cost mb-25 font-hnd"
+    data-aos="fade-down"
+    data-aos-delay="100"
+  >
     {{ props.cost }}
   </div>
   <div
@@ -94,7 +98,6 @@ onMounted(() => {
   }
 
   &__cost {
-    font-family: 'Helvetica Now Display', Helvetica, Arial, sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 800;
@@ -102,7 +105,6 @@ onMounted(() => {
   }
 
   &__desc {
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

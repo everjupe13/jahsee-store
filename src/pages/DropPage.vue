@@ -291,7 +291,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
   &__options {
     color: #f6f5ff;
-    font-family: Montserrat;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -329,7 +328,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
 
   &__options-label {
     color: #fff;
-    font-family: 'Helvetica Now Display';
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -338,6 +336,8 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
     text-transform: uppercase;
 
     user-select: none;
+
+    @apply font-hnd;
   }
 
   &__options-glass {
@@ -399,7 +399,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
     margin-bottom: 15px;
 
     color: #e1e1f1;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -460,7 +459,6 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
     display: block;
 
     color: #fff;
-    font-family: 'Helvetica Now Display';
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -468,6 +466,8 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
     text-transform: uppercase;
 
     transition: 0.2s all ease;
+
+    @apply font-hnd;
   }
 }
 

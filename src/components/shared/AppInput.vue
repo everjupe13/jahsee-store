@@ -114,14 +114,12 @@ const isValidationMessageShown = computed(() => {
 
 <style lang="scss" scoped>
 .label {
-  font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
 }
 
 .input {
-  font-family: Montserrat;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -130,7 +128,6 @@ const isValidationMessageShown = computed(() => {
 
 .validation-message {
   color: #fff;
-  font-family: Montserrat;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

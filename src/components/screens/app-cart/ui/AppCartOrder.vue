@@ -132,13 +132,14 @@ const decCount = () => {
 
   &__title {
     color: #000;
-    font-family: 'Helvetica Now Display';
     font-size: 18px;
     font-style: normal;
     font-weight: 800;
     line-height: 100%;
     letter-spacing: 0.72px;
     text-transform: uppercase;
+
+    @apply font-hnd;
 
     @media (max-width: 767px) {
       font-size: 16px;
@@ -147,7 +148,6 @@ const decCount = () => {
 
   &__cost {
     color: #000;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -174,7 +174,6 @@ const decCount = () => {
     min-width: 25px;
 
     color: #000;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -189,7 +188,6 @@ const decCount = () => {
 
   &__size {
     color: #000;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

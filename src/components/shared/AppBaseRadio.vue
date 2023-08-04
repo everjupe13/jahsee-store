@@ -47,7 +47,6 @@ defineEmits(['update:modelValue'])
 
   &__text {
     color: #848a99;
-    font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

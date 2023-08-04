@@ -33,7 +33,7 @@ const componentsClasses = computed(() => {
 
 <template>
   <button
-    class="btn flex items-center justify-center p-32 transition"
+    class="btn flex items-center justify-center p-32 font-hnd transition"
     :class="componentsClasses"
   >
     <slot></slot>
@@ -42,7 +42,6 @@ const componentsClasses = computed(() => {
 
 <style lang="scss" scoped>
 .btn {
-  font-family: 'Helvetica Now Display';
   font-size: 18px;
   font-style: normal;
   font-weight: 700;

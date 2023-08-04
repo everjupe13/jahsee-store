@@ -62,7 +62,6 @@ const nodes: string[] = Array.from({ length: 10 }).map(
   &__label {
     flex: 0 0 auto;
     color: #202022;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

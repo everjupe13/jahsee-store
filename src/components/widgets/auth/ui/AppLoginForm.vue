@@ -37,13 +37,14 @@ const onSubmitForm = () => {
 .title {
   color: #000;
   text-align: center;
-  font-family: 'Helvetica Now Display';
   font-size: 40px;
   font-style: normal;
   font-weight: 500;
   line-height: 120%;
   letter-spacing: 1.6px;
   text-transform: uppercase;
+
+  @apply font-hnd;
 
   @media (max-width: 767px) {
     font-size: 30px;
@@ -53,7 +54,6 @@ const onSubmitForm = () => {
 .post-message {
   color: #6a6e7a;
   text-align: center;
-  font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -61,7 +61,6 @@ const onSubmitForm = () => {
 
   &__link {
     color: #000;
-    font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
