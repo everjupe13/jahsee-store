@@ -13,17 +13,19 @@ import { Preloader } from '@/utils/preloader'
 
 import { router } from './router'
 
-const bootstrap = () => {
+const bootstrap = async () => {
   const app = createApp(App)
   app.use(router)
   app.use(vGlobalComponentsPlugin)
   app.mount('#app')
 
-  Preloader.invoke()
-  AOS.init({
-    once: true,
-    duration: 400
+  await Preloader.invoke(() => {
+    AOS.init({
+      once: true,
+      duration: 400
+    })
   })
+  console.log('inited')
 }
 
 bootstrap()

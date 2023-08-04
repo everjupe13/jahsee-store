@@ -1,12 +1,15 @@
 export class Preloader {
-  static invoke() {
-    window.addEventListener('load', () => {
-      document.querySelector('#loader')?.classList.add('before-load')
-      setTimeout(async () => {
-        await this.loaded(document.querySelector('#loader'))
-        await this.fadeOut(document.querySelector('#loader'))
-        document.body.classList.remove('body-loading')
-      }, 400)
+  static invoke(callback: () => void) {
+    return new Promise<void>((_resolve, _reject) => {
+      window.addEventListener('load', () => {
+        document.querySelector('#loader')?.classList.add('before-load')
+        setTimeout(async () => {
+          callback()
+          await this.loaded(document.querySelector('#loader'))
+          await this.fadeOut(document.querySelector('#loader'))
+          document.body.classList.remove('body-loading')
+        }, 400)
+      })
     })
   }
 

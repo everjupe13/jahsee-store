@@ -2,8 +2,8 @@
   @font-face {
     font-family: $family;
     src: url("#{$filePath}.woff") format("woff"),
-    url("#{$filePath}.woff2") format("woff2"),
-    url("#{$filePath}.ttf") format("truetype");
+    url("#{$filePath}.woff2") format("woff2");
+    // url("#{$filePath}.ttf") format("truetype");
 
     font-weight: $weight;
     font-style: $style;
