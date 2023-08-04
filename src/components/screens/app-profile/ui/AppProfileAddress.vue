@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="border border-solid border-button-black/10">
+      <div class="border border-solid border-button-black/10 p-20 md:p-30">
         <div class="flex justify-between">
           <div class="flex flex-col gap-y-24">
             <p class="text">Ahmad Dias</p>
