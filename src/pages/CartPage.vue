@@ -239,15 +239,17 @@ const handleRadiosClick = (index: number) => {
   }
 
   &__schema-input {
-    flex-grow: 1;
+    input {
+      flex-grow: 1 !important;
 
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 0;
-    padding-left: 15px;
+      width: 100% !important;
+      height: 100% !important;
+      padding: 0 !important;
+      border: 0 !important;
+      padding-left: 15px !important;
 
-    background-color: transparent;
+      background-color: transparent !important;
+    }
   }
 
   &__schema-input-btn {

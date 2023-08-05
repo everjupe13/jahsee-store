@@ -7,6 +7,8 @@ import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { provide, ref } from 'vue'
 
+import { RouteNamesEnum } from '@/router/router.types'
+
 import AppHomeSliderButtons from './AppHomeSliderButtons.vue'
 
 const modules = [FreeMode]
@@ -15,6 +17,7 @@ const SLIDER_DATA = [
   {
     id: 0,
     heading: 'Heading',
+    dropSlug: 'first-drop',
     image: new URL('@/assets/img/home/3rd.png', import.meta.url).href,
     status: '',
     tags: ['4 items', 'Q2 2023', 'ACTIVE']
@@ -22,6 +25,7 @@ const SLIDER_DATA = [
   {
     id: 1,
     heading: 'Heading',
+    dropSlug: 'second-drop',
     image: new URL('@/assets/img/home/2rd.png', import.meta.url).href,
     status: '',
     tags: ['3 items', 'Q2 2023', 'SOLD OUT'],
@@ -30,6 +34,7 @@ const SLIDER_DATA = [
   {
     id: 2,
     heading: 'Heading',
+    dropSlug: 'third-drop',
     image: new URL('@/assets/img/home/1rd.png', import.meta.url).href,
     status: '',
     tags: ['5 items', 'Q2 2023', 'ACTIVE']
@@ -71,17 +76,22 @@ const onSlideChange = (swiper: ISwiper) => {
           </div>
           <AppHomeSliderButtons class="swiper-slide-navs shrink-0" />
         </div>
-        <div class="relative mb-20 block max-w-[800px]">
-          <img
-            :src="item.image"
-            class="z-1 relative block w-full select-none object-fill"
-          />
-          <div
-            class="z-2 sold-out absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
-            v-if="item.soldOut"
+        <div class="mb-20 block max-w-[800px]">
+          <router-link
+            :to="`${RouteNamesEnum.catalog}/${item.dropSlug}`"
+            class="catalog-link relative block h-auto w-full"
           >
-            SOLD OUT
-          </div>
+            <img
+              :src="item.image"
+              class="z-1 relative block w-full select-none object-fill"
+            />
+            <div
+              class="z-2 sold-out pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
+              v-if="item.soldOut"
+            >
+              SOLD OUT
+            </div>
+          </router-link>
         </div>
         <div class="tags flex items-center gap-x-8">
           <template v-for="(tag, index) in item.tags" :key="index">

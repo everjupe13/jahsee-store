@@ -13,11 +13,11 @@ import { SOCIAL_LINKS } from '../model'
 <template>
   <footer class="mt-auto flex items-center py-50">
     <AppContainer>
-      <div class="mb-10 flex items-center justify-center md:mb-20">
+      <div class="mb-10 flex items-center justify-center md:mb-10">
         <p class="text">Contacts</p>
       </div>
 
-      <div class="mb-20 flex items-center justify-center gap-x-20 md:mb-40">
+      <div class="mb-20 flex items-center justify-center gap-x-20 md:mb-30">
         <a
           :href="SOCIAL_LINKS.TELEGRAM"
           target="_blank"
@@ -25,7 +25,7 @@ import { SOCIAL_LINKS } from '../model'
           class="px-3 py-5"
         >
           <SocialTelegramIcon
-            class="w-30 fill-[#969eab] transition-colors hover:fill-white"
+            class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
           />
         </a>
         <a
@@ -35,7 +35,7 @@ import { SOCIAL_LINKS } from '../model'
           class="px-3 py-5"
         >
           <SocialInstagramIcon
-            class="w-30 fill-[#969eab] transition-colors hover:fill-white"
+            class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
           />
         </a>
         <a
@@ -45,7 +45,7 @@ import { SOCIAL_LINKS } from '../model'
           class="px-3 py-5"
         >
           <SocialVkIcon
-            class="w-30 fill-[#969eab] transition-colors hover:fill-white"
+            class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
           />
         </a>
         <a
@@ -55,7 +55,7 @@ import { SOCIAL_LINKS } from '../model'
           class="px-3 py-5"
         >
           <SocialXIcon
-            class="w-30 fill-[#969eab] transition-colors hover:fill-white"
+            class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
           />
         </a>
         <a
@@ -65,7 +65,7 @@ import { SOCIAL_LINKS } from '../model'
           class="px-3 py-5"
         >
           <SocialDiscordIcon
-            class="w-30 fill-[#969eab] transition-colors hover:fill-white"
+            class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
           />
         </a>
       </div>

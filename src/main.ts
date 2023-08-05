@@ -25,7 +25,6 @@ const bootstrap = async () => {
       duration: 400
     })
   })
-  console.log('inited')
 }
 
 bootstrap()

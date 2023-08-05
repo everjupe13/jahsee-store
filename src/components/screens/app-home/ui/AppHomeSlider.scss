@@ -2,32 +2,40 @@
   overflow: visible !important;
 
   .swiper-slide {
-    opacity: 0.2;
+    @apply opacity-20;
     transition: opacity .25s ease;
 
     .heading {
-      opacity: 0;
+      @apply opacity-0;
     }
 
     .swiper-slide-navs {
-      opacity: 0;
+      @apply opacity-0;
 
       @media (max-width: 767px) {
         display: none;
       }
     }
+
+    .catalog-link {
+      @apply pointer-events-none;
+    }
   }
 
   .swiper-slide-active {
-    opacity: 1;
+    @apply opacity-100;
 
     .heading {
-      opacity: 1;
+      @apply opacity-100;
       transition: opacity .5s ease;
     }
 
     .swiper-slide-navs {
-      opacity: 1;
+      @apply opacity-100;
+    }
+
+    .catalog-link {
+      @apply pointer-events-auto
     }
   }
 }

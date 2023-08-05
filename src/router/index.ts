@@ -1,73 +1,86 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomePage from '@/pages/HomePage.vue'
+import { AppLayoutsEnum } from '@/layout/layout.types'
+import { RouteNamesEnum } from '@/router/router.types'
+
+import { loadLayoutMiddleware } from './middleware/layout.middleware'
+import { stylesWatcherMiddleware } from './middleware/stylesWatcher.middleware'
 
 export const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomePage
+    name: RouteNamesEnum.home,
+    component: () => import('@/pages/HomePage.vue')
   },
   {
     path: '/login',
-    name: 'login',
+    name: RouteNamesEnum.login,
     component: () => import('@/pages/LoginPage.vue'),
     meta: {
-      footerVisible: false
+      footerVisible: false,
+      layout: AppLayoutsEnum.login
     }
   },
   {
     path: '/reset-password',
-    name: 'reset-password',
+    name: RouteNamesEnum['reset-password'],
     component: () => import('@/pages/ResetPasswordPage.vue'),
     meta: {
-      footerVisible: false
+      footerVisible: false,
+      layout: AppLayoutsEnum.login
     }
   },
   {
     path: '/new-password',
-    name: 'new-password',
+    name: RouteNamesEnum['new-password'],
     component: () => import('@/pages/NewPasswordPage.vue'),
     meta: {
-      footerVisible: false
+      footerVisible: false,
+      layout: AppLayoutsEnum.login
     }
   },
   {
     path: '/signup',
-    name: 'signup',
+    name: RouteNamesEnum.signup,
     component: () => import('@/pages/SignupPage.vue'),
     meta: {
-      footerVisible: false
+      footerVisible: false,
+      layout: AppLayoutsEnum.login
     }
   },
   {
     path: '/cart',
-    name: 'cart',
+    name: RouteNamesEnum.cart,
     component: () => import('@/pages/CartPage.vue')
   },
   {
     path: '/drop/:id',
-    name: 'drop',
+    name: RouteNamesEnum.drop,
     component: () => import('@/pages/DropPage.vue')
   },
   {
     path: '/lore/:id',
-    name: 'lore',
+    name: RouteNamesEnum.lore,
     component: () => import('@/pages/LorePage.vue')
   },
   {
     path: '/profile',
-    name: 'profile',
+    name: RouteNamesEnum.profile,
     component: () => import('@/pages/ProfilePage.vue')
   },
   {
-    path: '/profile/edit',
-    name: 'edit-profile',
-    component: () => import('@/pages/EditProfilePage.vue')
+    path: '/catalog/:dropSlug',
+    name: RouteNamesEnum.catalog,
+    component: () => import('@/pages/CatalogPage.vue')
   },
+  // {
+  //   path: '/profile/edit',
+  //   name: 'edit-profile',
+  //   component: () => import('@/pages/EditProfilePage.vue')
+  // },
   {
     path: '/:pathMatch(.*)*',
-    name: 'not-found',
+    name: RouteNamesEnum['not-found'],
     component: () => import('@/pages/ErrorPage.vue')
   }
 ]
@@ -81,23 +94,7 @@ const router = createRouter({
   }
 })
 
-router.beforeEach((to, _) => {
-  const _app = document.querySelector('#app') as HTMLElement
-  const _header = document.querySelector('#header') as HTMLElement
-
-  if (_app && _header) {
-    _app.style.paddingTop = `${_header?.getBoundingClientRect().height || 0}px`
-  }
-
-  if (to.name === 'home') {
-    document.querySelector('.header')?.classList.remove('header_full')
-    document.querySelector('#app')?.classList.remove('animated')
-    // document.body.style.background = '#fff'
-  } else {
-    document.querySelector('.header')?.classList.add('header_full')
-    document.querySelector('#app')?.classList.add('animated')
-    // document.body.style.background = '#F5F7F9'
-  }
-})
+router.beforeEach(loadLayoutMiddleware)
+router.beforeEach(stylesWatcherMiddleware)
 
 export { router }
