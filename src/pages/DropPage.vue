@@ -98,7 +98,7 @@ const SWEAT_DATA = {
 }
 
 const route = useRoute()
-const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.id as any) - 1]
+const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
 </script>
 
 <template>

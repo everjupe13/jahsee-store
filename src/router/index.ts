@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { AppLayoutsEnum } from '@/layout/layout.types'
 import { RouteNamesEnum } from '@/router/router.types'
 
+import { authMiddleware } from './middleware/auth.middleware'
 import { loadLayoutMiddleware } from './middleware/layout.middleware'
 import { stylesWatcherMiddleware } from './middleware/stylesWatcher.middleware'
 
@@ -18,7 +19,8 @@ export const routes = [
     component: () => import('@/pages/LoginPage.vue'),
     meta: {
       footerVisible: false,
-      layout: AppLayoutsEnum.login
+      layout: AppLayoutsEnum.login,
+      requiresUnauth: true
     }
   },
   {
@@ -27,7 +29,8 @@ export const routes = [
     component: () => import('@/pages/ResetPasswordPage.vue'),
     meta: {
       footerVisible: false,
-      layout: AppLayoutsEnum.login
+      layout: AppLayoutsEnum.login,
+      requiresUnauth: true
     }
   },
   {
@@ -36,7 +39,8 @@ export const routes = [
     component: () => import('@/pages/NewPasswordPage.vue'),
     meta: {
       footerVisible: false,
-      layout: AppLayoutsEnum.login
+      layout: AppLayoutsEnum.login,
+      requiresUnauth: true
     }
   },
   {
@@ -45,18 +49,9 @@ export const routes = [
     component: () => import('@/pages/SignupPage.vue'),
     meta: {
       footerVisible: false,
-      layout: AppLayoutsEnum.login
+      layout: AppLayoutsEnum.login,
+      requiresUnauth: true
     }
-  },
-  {
-    path: '/cart',
-    name: RouteNamesEnum.cart,
-    component: () => import('@/pages/CartPage.vue')
-  },
-  {
-    path: '/drop/:id',
-    name: RouteNamesEnum.drop,
-    component: () => import('@/pages/DropPage.vue')
   },
   {
     path: '/lore/:id',
@@ -66,12 +61,28 @@ export const routes = [
   {
     path: '/profile',
     name: RouteNamesEnum.profile,
-    component: () => import('@/pages/ProfilePage.vue')
+    component: () => import('@/pages/ProfilePage.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/cart',
+    name: RouteNamesEnum.cart,
+    component: () => import('@/pages/CartPage.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/catalog/:dropSlug',
     name: RouteNamesEnum.catalog,
     component: () => import('@/pages/CatalogPage.vue')
+  },
+  {
+    path: '/catalog/:dropSlug/drop/:dropId',
+    name: RouteNamesEnum.drop,
+    component: () => import('@/pages/DropPage.vue')
   },
   // {
   //   path: '/profile/edit',
@@ -95,6 +106,7 @@ const router = createRouter({
 })
 
 router.beforeEach(loadLayoutMiddleware)
+router.beforeEach(authMiddleware)
 router.beforeEach(stylesWatcherMiddleware)
 
 export { router }

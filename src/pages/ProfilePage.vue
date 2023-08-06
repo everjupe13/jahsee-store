@@ -8,6 +8,7 @@ import 'swiper/css/thumbs'
 // import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
 
+import { useAuthStore } from '@/api/modules/auth/auth.store'
 import AppBackNav from '@/components/features/AppBackNav.vue'
 import {
   AppProfileAddress,
@@ -22,49 +23,6 @@ import {
 // const toggleDetailsOpened = () => {
 //   detailsOpened.value = !detailsOpened.value
 // }
-
-// const ZIP_DATA = {
-//   title: 'ZIP HOODIE',
-//   desc: 'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-//   cost: '$125',
-//   list: [
-//     'Fabric density - 360gr/m',
-//     '80% cotton',
-//     '20% polyester',
-//     'Chest - embroidery',
-//     'Hood - Puff',
-//     'Back - silkscreen'
-//   ],
-//   gallery: [
-//     new URL('@/assets/img/drop-zip-hoodie/1.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-zip-hoodie/2.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-zip-hoodie/3.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-zip-hoodie/4.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href
-//   ]
-// }
-
-// const SWEAT_DATA = {
-//   title: 'SWEATSHIRT',
-//   desc: 'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-//   cost: '$80',
-//   list: [
-//     'Fabric density - 360gr/m',
-//     '80% cotton',
-//     '20% polyester',
-//     'Chest - embroidery',
-//     'Branded patch that tells you the bear market is about to end',
-//     'Tag that allows you to choose your individual nickname printed on it'
-//   ],
-//   gallery: [
-//     new URL('@/assets/img/drop-sweat/1.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-sweat/2.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-sweat/3.png', import.meta.url).href,
-//     new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href
-//   ]
-// }
-
-// const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA]
 
 const tabs = [
   {
@@ -98,6 +56,11 @@ const setActvieTab = (id: number) => {
 }
 
 // const isPasswordEditable = ref(false)
+
+const store = useAuthStore()
+const onLogoutClick = () => {
+  store.logoutUser()
+}
 </script>
 
 <template>
@@ -114,7 +77,7 @@ const setActvieTab = (id: number) => {
           <nav class="flex flex-col gap-y-10">
             <div v-for="tab in tabs" :key="tab.id">
               <button
-                class="nav-link font-hbd p-8 pl-0 transition-colors"
+                class="nav-link p-8 pl-0 font-hnd transition-colors"
                 :class="{ '--active': activeTab === tab.id }"
                 @click="setActvieTab(tab.id)"
               >
@@ -122,7 +85,10 @@ const setActvieTab = (id: number) => {
               </button>
             </div>
             <div>
-              <button class="nav-link font-hbd p-8 pl-0 transition-colors">
+              <button
+                class="nav-link p-8 pl-0 font-hnd transition-colors"
+                @click="onLogoutClick"
+              >
                 Logout
               </button>
             </div>

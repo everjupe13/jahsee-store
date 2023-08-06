@@ -1,9 +1,34 @@
 <script lang="ts" setup>
+import { reactive } from 'vue'
+
+import { useAuthStore } from '@/api/modules/auth/auth.store'
 import AppInput from '@/components/shared/AppInput.vue'
 
-const emit = defineEmits(['submit'])
+// const emit = defineEmits(['submit'])
+
+const formData = reactive({
+  email: '',
+  name: '',
+  lastName: '',
+  password: ''
+})
+
+// watch(
+//   formData,
+//   () => {
+//     console.log(formData)
+//   },
+//   { deep: true }
+// )
+
+const store = useAuthStore()
 const onSubmitForm = () => {
-  emit('submit')
+  store.signUpUser({
+    email: formData.email,
+    name: formData.name,
+    lastName: formData.lastName,
+    password: formData.password
+  })
 }
 </script>
 
@@ -15,14 +40,26 @@ const onSubmitForm = () => {
     <div class="title mb-30 md:mb-40">Welcome to ayaysee</div>
     <div class="mb-30 md:mb-40">
       <AppInput
+        v-model="formData.email"
         placeholder="e-mail*"
         class="mb-15"
         :validatable="true"
         validation-message="Invalid e-mail"
       />
-      <AppInput placeholder="first name*" class="mb-15" :validatable="false" />
-      <AppInput placeholder="last name" class="mb-15" :validatable="false" />
       <AppInput
+        v-model="formData.name"
+        placeholder="first name*"
+        class="mb-15"
+        :validatable="false"
+      />
+      <AppInput
+        v-model="formData.lastName"
+        placeholder="last name"
+        class="mb-15"
+        :validatable="false"
+      />
+      <AppInput
+        v-model="formData.password"
         placeholder="password*"
         type="password"
         :validatable="true"

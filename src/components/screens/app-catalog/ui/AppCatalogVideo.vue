@@ -2,10 +2,10 @@
 import 'plyr/dist/plyr.css'
 
 import Plyr from 'plyr'
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { DROPS_DATA } from '@/api/domain/drops'
+import { DROPS_DATA } from '@/api/modules/drops'
 
 const videoRef = ref(null)
 const videoPlayer = ref()
@@ -44,7 +44,7 @@ onMounted(() => {
     controls: [],
     displayDuration: false,
     fullscreen: { enabled: false, fallback: false },
-    ...(process.env.NODE_ENV === 'development' ? { debug: true } : {})
+    ...(import.meta.env.DEV ? { debug: true } : {})
   })
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,6 +59,14 @@ onMounted(() => {
     instance.config.muted = true
     instance.play()
   })
+})
+
+onUnmounted(() => {
+  if (!videoPlayer.value) {
+    return
+  }
+
+  videoPlayer.value.destroy?.()
 })
 </script>
 

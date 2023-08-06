@@ -1,6 +1,10 @@
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+
+import { useAuthStore } from '@/api/modules/auth/auth.store'
 import AppMarquee from '@/components/features/AppMarquee.vue'
 import AppLogo from '@/components/shared/AppLogo.vue'
+import { CartBagIcon, ProfileUserIcon } from '@/components/shared/icons'
 // import { inject, ref } from 'vue'
 
 // const isLgScreen: boolean | undefined = inject('isLgScreen')
@@ -18,6 +22,8 @@ import AppLogo from '@/components/shared/AppLogo.vue'
 //     isModalOpened.value = true
 //   }
 // }
+const store = useAuthStore()
+const { isAuth } = storeToRefs(store)
 </script>
 
 <template>
@@ -33,11 +39,20 @@ import AppLogo from '@/components/shared/AppLogo.vue'
             <AppLogo></AppLogo>
           </div>
           <div class="mr-30 flex items-center gap-x-30">
-            <RouterLink class="header__links" to="/login">Log In</RouterLink>
-            <RouterLink class="header__links" to="/signup">Sign Up</RouterLink>
+            <template v-if="isAuth">
+              <router-link to="/profile">
+                <ProfileUserIcon class="pointer-events-none" />
+              </router-link>
+            </template>
+            <template v-else>
+              <RouterLink class="header__links" to="/login">Log In</RouterLink>
+              <RouterLink class="header__links" to="/signup">
+                Sign Up
+              </RouterLink>
+            </template>
           </div>
           <router-link to="/cart">
-            <img src="@/assets/img/market.svg" alt="" />
+            <CartBagIcon lass="pointer-events-none" />
           </router-link>
         </div>
       </AppContainer>
@@ -71,7 +86,8 @@ import AppLogo from '@/components/shared/AppLogo.vue'
     font-size: 18px;
     font-weight: 600;
     line-height: normal;
-    text-transform: uppercase;
+
+    @apply uppercase;
 
     @media (max-width: 767px) {
       display: none;

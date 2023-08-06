@@ -1,9 +1,21 @@
 <script lang="ts" setup>
-import AppInput from '@/components/shared/AppInput.vue'
+import { reactive } from 'vue'
 
-const emit = defineEmits(['submit'])
+import { useAuthStore } from '@/api/modules/auth/auth.store'
+import AppInput from '@/components/shared/AppInput.vue'
+// const emit = defineEmits(['submit'])
+
+const formData = reactive({
+  email: '',
+  password: ''
+})
+
+const store = useAuthStore()
 const onSubmitForm = () => {
-  emit('submit')
+  store.authUser({
+    email: formData.email,
+    password: formData.password
+  })
 }
 </script>
 
@@ -15,11 +27,13 @@ const onSubmitForm = () => {
     <div class="title mb-30 md:mb-40">Welcome to ayaysee</div>
     <div class="mb-30 md:mb-40">
       <AppInput
+        v-model="formData.email"
         placeholder="e-mail*"
         class="mb-15"
         validation-message="Invalid e-mail"
       />
       <AppInput
+        v-model="formData.password"
         placeholder="password*"
         type="password"
         validation-message="Password must be at least 8 char"

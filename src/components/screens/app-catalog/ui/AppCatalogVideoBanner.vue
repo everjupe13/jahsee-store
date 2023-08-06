@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
 
-import { DROPS_DATA } from '@/api/domain/drops'
+import { DROPS_DATA } from '@/api/modules/drops'
 
 import AppCatalogVideo from './AppCatalogVideo.vue'
 

@@ -2,8 +2,7 @@ import { NavigationGuardWithThis } from 'vue-router'
 
 export const stylesWatcherMiddleware: NavigationGuardWithThis<undefined> = (
   to,
-  _from,
-  next
+  _from
 ) => {
   const _app = document.querySelector('#app') as HTMLElement
   const _header = document.querySelector('#header') as HTMLElement
@@ -21,7 +20,4 @@ export const stylesWatcherMiddleware: NavigationGuardWithThis<undefined> = (
     document.querySelector('#app')?.classList.add('animated')
     // document.body.style.background = '#F5F7F9'
   }
-
-  next()
-  return
 }

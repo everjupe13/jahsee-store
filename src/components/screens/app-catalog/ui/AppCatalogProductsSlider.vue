@@ -7,11 +7,10 @@ import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { provide, ref } from 'vue'
 
-import { DROPS_DATA, IDrop } from '@/api/modules/drops'
+import { DROPS_DATA } from '@/api/modules/drops'
 import { RouteNamesEnum } from '@/router/router.types'
 
-import { AppHomeCardTagDividerIconRaw } from '../models/tagDivider'
-import AppHomeSliderButtons from './AppHomeSliderButtons.vue'
+import AppCatalogSliderButtons from './AppCatalogSliderButtons.vue'
 
 const modules = [FreeMode]
 
@@ -26,12 +25,6 @@ provide('swiperOptions', {
 const onSlideChange = (swiper: ISwiper) => {
   isSwiperEnd.value = swiper.isEnd
   isSwiperBeginning.value = swiper.isBeginning
-}
-
-const renderTagsString = (drop: IDrop): string => {
-  return [`${drop.products.length} items`, drop.yearTag, drop.status]
-    .map(tag => `<span>${tag}</span>`)
-    .join(AppHomeCardTagDividerIconRaw)
 }
 </script>
 
@@ -57,7 +50,7 @@ const renderTagsString = (drop: IDrop): string => {
           >
             {{ item.name }}
           </div>
-          <AppHomeSliderButtons class="swiper-slide-navs shrink-0" />
+          <AppCatalogSliderButtons class="swiper-slide-navs shrink-0" />
         </div>
         <div class="mb-20 block max-w-[800px]">
           <router-link
@@ -76,15 +69,7 @@ const renderTagsString = (drop: IDrop): string => {
             </div>
           </router-link>
         </div>
-        <div
-          class="tags flex items-center gap-x-8"
-          v-html="renderTagsString(item)"
-        ></div>
       </div>
     </swiper-slide>
   </swiper>
 </template>
-
-<style lang="scss" scoped>
-@import './AppHomeSlider.scss';
-</style>

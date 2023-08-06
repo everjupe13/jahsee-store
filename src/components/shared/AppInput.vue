@@ -1,26 +1,15 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 import AppCollapse from '@/components/shared/AppCollapse.vue'
 
 function useEvents(context: (e: any, value: any) => void) {
   const handleChange = (e: Event) => {
-    if (props.modelValue) {
-      context('update:modelValue', (e.target as HTMLTextAreaElement).value)
-      return
-    }
-    refValue.value = (e.target as HTMLTextAreaElement).value
-    context('change', (e.target as HTMLTextAreaElement).value)
+    context('update:modelValue', (e.target as HTMLTextAreaElement).value)
   }
   const handleInput = (e: Event) => {
-    if (props.modelValue) {
-      context('update:modelValue', (e.target as HTMLTextAreaElement).value)
-      return
-    }
-
-    refValue.value = (e.target as HTMLTextAreaElement).value
-    context('input', (e.target as HTMLTextAreaElement).value)
+    context('update:modelValue', (e.target as HTMLTextAreaElement).value)
   }
 
   return {
@@ -58,26 +47,16 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
-  validationMessage: 'Invalid'
+  validationMessage: 'Invalid',
+  modelValue: undefined
 })
 const emits = defineEmits(['change', 'input', 'update:modelValue'])
 const { handleChange, handleInput } = useEvents(emits)
 
 const uuid = ref(randomID())
-const refValue = ref('')
 
-onMounted(() => {
-  refValue.value = props.modelValue ?? ''
-})
-
-watch(
-  () => props.modelValue,
-  () => {
-    refValue.value = props.modelValue
-  }
-)
 // TODO add logic for validation shown
-const validationFn = computed(() => refValue.value.length > 0)
+const validationFn = computed(() => props.modelValue.length > 0)
 const isValidationMessageShown = computed(() => {
   return validationFn.value
 })
@@ -89,13 +68,13 @@ const isValidationMessageShown = computed(() => {
       <input
         class="input peer block w-full border border-solid border-black/10 px-20 pb-12 pt-28 text-[#555862] outline-none transition placeholder:opacity-0 hover:border-black hover:text-[#000] focus:border-black focus:text-[#000]"
         :id="uuid"
-        :value="refValue"
+        :value="props.modelValue"
         :disabled="props.disabled"
         :placeholder="props.placeholder"
         :readonly="props.readonly"
         :type="props.type"
-        @change="handleChange"
         @input="handleInput"
+        @change="handleChange"
       />
       <label
         class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"

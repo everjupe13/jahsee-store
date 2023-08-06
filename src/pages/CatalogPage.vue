@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { AppCatalogVideoBanner } from '@/components/screens/app-catalog'
+import {
+  AppCatalogProductsSlider,
+  AppCatalogVideoBanner
+} from '@/components/screens/app-catalog'
 
 const isBannerClosed = ref(false)
 const handleCloseBannerClick = () => {
@@ -11,7 +14,7 @@ const handleCloseBannerClick = () => {
 
 <template>
   <section>
-    <div v-if="!isBannerClosed" class="bg-white pb-12">
+    <div v-if="!isBannerClosed" class="mb-80 bg-white pb-12">
       <AppContainer>
         <AppCatalogVideoBanner>
           <template #close>
@@ -25,6 +28,9 @@ const handleCloseBannerClick = () => {
         </AppCatalogVideoBanner>
       </AppContainer>
     </div>
+    <AppContainer>
+      <AppCatalogProductsSlider />
+    </AppContainer>
   </section>
 </template>
 

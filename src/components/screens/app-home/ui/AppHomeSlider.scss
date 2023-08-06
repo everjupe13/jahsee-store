@@ -60,6 +60,10 @@
   font-weight: 500;
   line-height: 150%;
   opacity: 0.6;
+
+  &:last-child {
+    text-transform: uppercase;
+  }
 }
 
 .sold-out {
