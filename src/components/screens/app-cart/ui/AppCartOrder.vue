@@ -1,25 +1,21 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 import { CrossIcon, MinusIcon, PlusIcon } from '@/components/shared/icons'
 
 const props = defineProps({
   img: String,
   title: String,
   cost: String,
-  size: String
+  size: String,
+  count: Number
 })
-
-const count = ref(1)
+const emit = defineEmits(['incrementCount', 'decrementCount'])
 
 const incCount = () => {
-  count.value += 1
+  emit('incrementCount')
 }
 
 const decCount = () => {
-  if (count.value > 1) {
-    count.value -= 1
-  }
+  emit('decrementCount')
 }
 </script>
 
@@ -43,7 +39,7 @@ const decCount = () => {
                 <MinusIcon />
               </div>
             </button>
-            <div class="cart-order__count-text">{{ count }}</div>
+            <div class="cart-order__count-text">{{ props.count }}</div>
             <button @click="incCount">
               <div class="badge-hover h-16 w-16">
                 <PlusIcon />

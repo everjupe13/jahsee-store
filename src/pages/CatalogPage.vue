@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import { useCatalogStore } from '@/api/modules/catalog'
 import {
   AppCatalogProductsSlider,
   AppCatalogVideoBanner
@@ -10,6 +11,9 @@ const isBannerClosed = ref(false)
 const handleCloseBannerClick = () => {
   isBannerClosed.value = true
 }
+
+const catalogStore = useCatalogStore()
+await catalogStore.fetchCatalog()
 </script>
 
 <template>
@@ -29,7 +33,9 @@ const handleCloseBannerClick = () => {
       </AppContainer>
     </div>
     <AppContainer>
-      <AppCatalogProductsSlider />
+      <div class="mt-60">
+        <AppCatalogProductsSlider />
+      </div>
     </AppContainer>
   </section>
 </template>

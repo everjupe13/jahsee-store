@@ -37,7 +37,7 @@ onMounted(() => {
   initAnimation()
 
   const typingDelay = 50
-  const startDelay = 500
+  const startDelay = window.history.state.back ? 500 : 1000
   let charIndex = 0
 
   const typingAnimation = () => {
@@ -90,6 +90,8 @@ onMounted(() => {
     font-style: normal;
     font-weight: 700;
     line-height: 1;
+
+    @apply uppercase;
 
     @media (max-width: 767px) {
       font-size: 36px;

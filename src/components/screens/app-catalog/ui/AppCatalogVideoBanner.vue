@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
 
-import { DROPS_DATA } from '@/api/modules/drops'
+import { CATALOG_DATA } from '@/api/modules/catalog'
 
 import AppCatalogVideo from './AppCatalogVideo.vue'
 
 const route = useRoute()
 const dropNumber =
-  DROPS_DATA.map(drop => drop.dropSlug).indexOf(
+  CATALOG_DATA.map(drop => drop.dropSlug).indexOf(
     route.params.dropSlug as string
   ) + 1
 </script>

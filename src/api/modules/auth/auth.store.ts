@@ -2,7 +2,7 @@
 import { isPlainObject } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import { useAppFetch } from '@/api/shared/network/useAppFetch'
 import { RouteNamesEnum } from '@/router/router.types'
@@ -58,6 +58,7 @@ import { RouteNamesEnum } from '@/router/router.types'
 
 export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
+  const route = useRoute()
   const userData = ref<object | null>(null)
   const isAuth = computed<boolean>(
     () =>
@@ -79,10 +80,21 @@ export const useAuthStore = defineStore('auth', () => {
         userPassword: password
       }
 
+      if (
+        route.query.redirect &&
+        Object.values(RouteNamesEnum).includes(
+          route.query.redirect.slice(
+            1
+          ) as (typeof RouteNamesEnum)[keyof typeof RouteNamesEnum]
+        )
+      ) {
+        await router.push(route.query.redirect.slice(1) as string)
+        return
+      }
+
       await router.push({ name: RouteNamesEnum.home })
 
       const _fetchReturn = await useAppFetch('login').post().json()
-      console.log(_fetchReturn)
 
       return true
     } catch (error) {

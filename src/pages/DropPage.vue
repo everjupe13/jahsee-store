@@ -7,9 +7,11 @@ import 'swiper/css/thumbs'
 
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { inject, ref } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import { computed, inject, type Ref, ref } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 
+import { useCartStore } from '@/api/modules/cart'
+import { ICatalog, IProduct, useCatalogStore } from '@/api/modules/catalog'
 import AppBackNav from '@/components/features/AppBackNav.vue'
 import { AppDropInfo } from '@/components/screens/app-drop'
 import AppCollapse from '@/components/shared/AppCollapse.vue'
@@ -26,79 +28,54 @@ const setThumbsSwiper = (swiper: any) => {
 }
 const modules = [FreeMode, Navigation, Thumbs]
 
+const router = useRouter()
+const route = useRoute()
+const catalogStore = useCatalogStore()
+await catalogStore.fetchCatalog()
+const currentCatalog: Ref<undefined | ICatalog> = computed(() => {
+  return catalogStore.catalog
+    ? catalogStore.catalog.find(
+        catalog => catalog.dropSlug === route.params.dropSlug
+      )
+    : undefined
+})
+const currentDrop: Ref<undefined | IProduct> = computed(() => {
+  return catalogStore.products
+    ? (catalogStore.products.find(
+        product => product.id === Number(route.params.dropId)
+      ) as IProduct)
+    : undefined
+})
+
+if (!currentDrop?.value || !currentCatalog?.value) {
+  await router.push('/')
+}
+
+const isOutOfStock = computed<boolean>(
+  () => currentCatalog?.value?.status === 'sold out'
+)
+
+const selectedSize = ref('')
+const setSelectedSize = (value: string) => {
+  const _size = currentDrop.value!.sizes.find(size => size.label === value)
+
+  if (selectedSize.value !== value && !_size?.soldOut) {
+    selectedSize.value = value
+  }
+}
+
 const detailsOpened = ref(false)
 const toggleDetailsOpened = () => {
   detailsOpened.value = !detailsOpened.value
 }
 
-const selectedSize = ref('')
-const setSelectedSize = (value: string) => {
-  const _size = CURRENT_DATA.sizes.find(size => size.label === value)
-
-  if (selectedSize.value !== value && !_size?.disabled) {
-    selectedSize.value = value
+const cartStore = useCartStore()
+const handleAddProductToCart = () => {
+  if (selectedSize.value) {
+    cartStore.addItem(Number(route.params.dropId), selectedSize.value)
+    console.log(cartStore.cart)
   }
 }
-
-const ZIP_DATA = {
-  title: 'ZIP HOODIE',
-  desc: 'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-  cost: '$125.00',
-  list: [
-    'Fabric density - 360gr/m',
-    '80% cotton',
-    '20% polyester',
-    'Chest - embroidery',
-    'Hood - Puff',
-    'Back - silkscreen'
-  ],
-  gallery: [
-    new URL('@/assets/img/drop-zip-hoodie/1.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/2.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/3.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/4.png', import.meta.url).href,
-    new URL('@/assets/img/drop-zip-hoodie/5.png', import.meta.url).href
-  ],
-  sizes: [
-    { label: 'XS', disabled: false },
-    { label: 'S', disabled: false },
-    { label: 'M', disabled: false },
-    { label: 'L', disabled: false },
-    { label: 'XL', disabled: true },
-    { label: 'XXL', disabled: false }
-  ]
-}
-
-const SWEAT_DATA = {
-  title: 'SWEATSHIRT',
-  desc: 'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-  cost: '$80.00',
-  list: [
-    'Fabric density - 360gr/m',
-    '80% cotton',
-    '20% polyester',
-    'Chest - embroidery',
-    'Branded patch that tells you the bear market is about to end',
-    'Tag that allows you to choose your individual nickname printed on it'
-  ],
-  gallery: [
-    new URL('@/assets/img/drop-sweat/1.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/2.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/3.png', import.meta.url).href,
-    new URL('@/assets/img/drop-sweat/4.png', import.meta.url).href
-  ],
-  sizes: [
-    { label: 'XS', disabled: false },
-    { label: 'S', disabled: false },
-    { label: 'M', disabled: false },
-    { label: 'L', disabled: true },
-    { label: 'XL', disabled: true },
-    { label: 'XXL', disabled: false }
-  ]
-}
-
-const route = useRoute()
-const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
 </script>
 
 <template>
@@ -111,9 +88,9 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
           <div class="drop__header mb-40">
             <AppDropInfo
               v-bind="{
-                title: CURRENT_DATA.title,
-                cost: CURRENT_DATA.cost,
-                desc: CURRENT_DATA.desc
+                title: currentDrop!.productName,
+                cost: currentDrop!.cost,
+                desc: currentDrop!.description
               }"
             />
           </div>
@@ -132,7 +109,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
               </div>
 
               <RouterLink
-                :to="{ name: 'lore', params: { id: $route.params.id } }"
+                :to="{ name: 'lore', params: { id: $route.params.dropId } }"
                 class="drop__options-item cursor-pointer"
               >
                 <div class="drop__options-label">Drop lore</div>
@@ -160,7 +137,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
                   >
                     <ul class="details-list">
                       <li
-                        v-for="(item, index) in CURRENT_DATA.list"
+                        v-for="(item, index) in currentDrop!.aboutList"
                         :key="index"
                         class="details-list__item"
                       >
@@ -178,11 +155,11 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
             >
               <div class="size-picker">
                 <button
-                  v-for="size in CURRENT_DATA.sizes"
+                  v-for="size in currentDrop!.sizes"
                   :class="[
                     'size-picker__item',
                     { '--active': size.label === selectedSize },
-                    { '--disabled': size.disabled }
+                    { '--disabled': isOutOfStock || size.soldOut }
                   ]"
                   :key="size.label"
                   @click="() => setSelectedSize(size.label)"
@@ -193,9 +170,10 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
               <AppButton
                 class="h-80 w-full justify-center !bg-[#fff]"
                 theme="alternative"
-                disabled
+                :disabled="isOutOfStock"
+                @click="handleAddProductToCart"
               >
-                Sold out
+                {{ isOutOfStock ? 'Sold out' : 'Buy' }}
               </AppButton>
             </div>
           </div>
@@ -216,7 +194,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
             data-aos-duration="600"
           >
             <swiper-slide
-              v-for="(item, index) in CURRENT_DATA.gallery"
+              v-for="(item, index) in currentDrop!.gallery"
               :key="index"
             >
               <div class="drop-gallery__item">
@@ -237,7 +215,7 @@ const CURRENT_DATA = [ZIP_DATA, SWEAT_DATA][(route.params.dropId as any) - 1]
             v-if="!isMdScreen"
           >
             <swiper-slide
-              v-for="(item, index) in CURRENT_DATA.gallery"
+              v-for="(item, index) in currentDrop!.gallery"
               :key="index"
             >
               <div class="drop-gallery-thumb__item">

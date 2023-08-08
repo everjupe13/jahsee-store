@@ -5,13 +5,13 @@ import Plyr from 'plyr'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { DROPS_DATA } from '@/api/modules/drops'
+import { CATALOG_DATA } from '@/api/modules/catalog'
 
 const videoRef = ref(null)
 const videoPlayer = ref()
 const route = useRoute()
 const currentDropData = ref(
-  DROPS_DATA.find(data => data.dropSlug === route.params.dropSlug)
+  CATALOG_DATA.find(data => data.dropSlug === route.params.dropSlug)
 )
 const defaultPoster = new URL(
   '@/assets/media/catalog-video-plug-poster.png',

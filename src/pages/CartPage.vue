@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 
+import { useCartStore } from '@/api/modules/cart'
+import { useCatalogStore } from '@/api/modules/catalog'
 import AppBackNav from '@/components/features/AppBackNav.vue'
 import {
   AppRadio,
   AppRadiosFieldset
 } from '@/components/features/AppRadiosFieldset'
 import { AppCartOrder } from '@/components/screens/app-cart'
-
-const cartImg = new URL('@/assets/img/order1.png', import.meta.url).href
 
 const handleUpdateRadios = (_e: InputEvent) => {
   // TODO not todo just additional hook for radios change
@@ -26,6 +26,35 @@ const handleRadiosClick = (index: number) => {
       radiosModel[i] = false
     }
   }
+}
+
+const cartStore = useCartStore()
+const catalogStore = useCatalogStore()
+await catalogStore.fetchProducts()
+// const cartItems =
+//   cartStore.cart?.map(item => ({
+//     ...(catalogStore.products && Array.isArray(catalogStore.products)
+//       ? catalogStore.products!.find(product => product.id === item.id)
+//       : {}),
+//     size: item.size
+//   })) || []
+
+const cartItems = computed(
+  () =>
+    cartStore.cart?.map(item => ({
+      ...(catalogStore.products && Array.isArray(catalogStore.products)
+        ? catalogStore.products!.find(product => product.id === item.id)
+        : {}),
+      size: item.size,
+      count: item.count
+    })) || []
+)
+const handleIncrementItem = (itemId: number, size: string) => {
+  cartStore.addItem(itemId, size)
+}
+
+const handleDecrementItem = (itemId: number, size: string) => {
+  cartStore.addItem(itemId, size)
 }
 </script>
 
@@ -45,19 +74,21 @@ const handleRadiosClick = (index: number) => {
             <div class="cart__table-heading">Size</div>
           </div>
 
-          <AppCartOrder
-            :img="cartImg"
-            :title="'iic x crypton - sweatshirt'"
-            :cost="'$80.00'"
-            :size="'XL'"
-          ></AppCartOrder>
-
-          <AppCartOrder
-            :img="cartImg"
-            :title="'iic x crypton - sweatshirt'"
-            :cost="'$80.00'"
-            :size="'L'"
-          ></AppCartOrder>
+          <template v-for="item in cartItems" :key="item!.id">
+            <AppCartOrder
+              :img="item!.gallery?.[0]"
+              :title="item!.productName"
+              :cost="item!.cost"
+              :size="item!.size"
+              :count="item!.count"
+              @incrementCount="
+                () => handleIncrementItem(item!.id as number, item!.size)
+              "
+              @decrementCount="
+                () => handleDecrementItem(item!.id as number, item!.size)
+              "
+            ></AppCartOrder>
+          </template>
         </div>
         <div class="cart__schema">
           <form @submit.prevent class="cart__schema-form">

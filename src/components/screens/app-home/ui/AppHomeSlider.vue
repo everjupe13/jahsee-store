@@ -7,7 +7,7 @@ import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { provide, ref } from 'vue'
 
-import { DROPS_DATA, IDrop } from '@/api/modules/drops'
+import { ICatalog, useCatalogStore } from '@/api/modules/catalog'
 import { RouteNamesEnum } from '@/router/router.types'
 
 import { AppHomeCardTagDividerIconRaw } from '../models/tagDivider'
@@ -28,7 +28,13 @@ const onSlideChange = (swiper: ISwiper) => {
   isSwiperBeginning.value = swiper.isBeginning
 }
 
-const renderTagsString = (drop: IDrop): string => {
+const catalogStore = useCatalogStore()
+
+const renderTagsString = (drop: ICatalog): string => {
+  if (!Array.isArray(drop.products)) {
+    return ''
+  }
+
   return [`${drop.products.length} items`, drop.yearTag, drop.status]
     .map(tag => `<span>${tag}</span>`)
     .join(AppHomeCardTagDividerIconRaw)
@@ -45,10 +51,7 @@ const renderTagsString = (drop: IDrop): string => {
     data-aos-delay="50"
     data-aos-duration="600"
   >
-    <swiper-slide
-      v-for="item in [...DROPS_DATA].sort((a, b) => b.id - a.id)"
-      :key="item.id"
-    >
+    <swiper-slide v-for="item in catalogStore.sortedCatalog" :key="item.id">
       <div>
         <div class="mb-20 flex flex-wrap justify-between md:flex-nowrap">
           <div

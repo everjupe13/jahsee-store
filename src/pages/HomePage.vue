@@ -1,5 +1,9 @@
 <script lang="ts" setup>
+import { useCatalogStore } from '@/api/modules/catalog'
 import { AppHomeSlider } from '@/components/screens/app-home'
+
+const catalogStore = useCatalogStore()
+await catalogStore.fetchCatalog()
 </script>
 
 <template>

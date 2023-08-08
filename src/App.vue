@@ -26,6 +26,8 @@ provide('isLgScreen', isLgScreen)
 
 <template>
   <Layout>
-    <router-view></router-view>
+    <Suspense>
+      <router-view></router-view>
+    </Suspense>
   </Layout>
 </template>
