@@ -146,7 +146,7 @@ const deliveryCost = computed<string>(() => cartStore.calculateDeliveryCost())
                     input-wrapper-classes="!bg-transparent"
                   >
                     <template #after-input>
-                      <AppButton type="button" class="p-12 !text-[12px]">
+                      <AppButton type="button" class="!p-12 !text-[12px]">
                         Apply
                       </AppButton>
                     </template>
