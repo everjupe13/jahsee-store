@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { useAppFetch } from '@/api/shared/network/useAppFetch'
+// import { useAppFetch } from '@/api/shared/network/useAppFetch'
 import { RouteNamesEnum } from '@/router/router.types'
 
 // export const useAuthStore = defineStore('auth', {

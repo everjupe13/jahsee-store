@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import { useAppFetch } from '@/api/shared/network/useAppFetch'
-
+// import { useAppFetch } from '@/api/shared/network/useAppFetch'
 import { CATALOG_DATA, PRODUCTS_DATA } from './catalog.data'
 import { ICatalog, IProduct } from './catalog.types'
 

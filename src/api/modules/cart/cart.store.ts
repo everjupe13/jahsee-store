@@ -3,7 +3,7 @@ import { defineStore, storeToRefs } from 'pinia'
 import { type Ref, ref } from 'vue'
 
 import { useCatalogStore } from '@/api/modules/catalog'
-import { useAppFetch } from '@/api/shared/network/useAppFetch'
+// import { useAppFetch } from '@/api/shared/network/useAppFetch'
 import { formatDollars } from '@/utils/cost'
 
 import { ICartItem } from './cart.types'
