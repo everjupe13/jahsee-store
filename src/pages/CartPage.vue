@@ -31,13 +31,6 @@ const handleRadiosClick = (index: number) => {
 const cartStore = useCartStore()
 const catalogStore = useCatalogStore()
 await catalogStore.fetchProducts()
-// const cartItems =
-//   cartStore.cart?.map(item => ({
-//     ...(catalogStore.products && Array.isArray(catalogStore.products)
-//       ? catalogStore.products!.find(product => product.id === item.id)
-//       : {}),
-//     size: item.size
-//   })) || []
 
 const cartItems = computed(
   () =>
@@ -54,8 +47,19 @@ const handleIncrementItem = (itemId: number, size: string) => {
 }
 
 const handleDecrementItem = (itemId: number, size: string) => {
-  cartStore.addItem(itemId, size)
+  cartStore.removeItem(itemId, size)
 }
+
+const handleDeleteItem = (itemId: number, size: string) => {
+  cartStore.deleteItem(itemId, size)
+}
+
+const onCreateOrder = () => {
+  cartStore.createOrder()
+}
+
+const totalCost = computed<string>(() => cartStore.calculateCost())
+const deliveryCost = computed<string>(() => cartStore.calculateDeliveryCost())
 </script>
 
 <template>
@@ -87,12 +91,15 @@ const handleDecrementItem = (itemId: number, size: string) => {
               @decrementCount="
                 () => handleDecrementItem(item!.id as number, item!.size)
               "
+              @deleteItem="
+                () => handleDeleteItem(item!.id as number, item!.size)
+              "
             ></AppCartOrder>
           </template>
         </div>
         <div class="cart__schema">
           <form @submit.prevent class="cart__schema-form">
-            <div class="cart__schema-item-border cart__schema-header">
+            <div class="cart__schema-item-border pb-25 md:pb-20">
               <p class="cart__heading">TOTAL</p>
             </div>
 
@@ -102,12 +109,12 @@ const handleDecrementItem = (itemId: number, size: string) => {
                   class="cart__schema-item-border flex items-center justify-between py-20 md:py-25"
                 >
                   <p class="cart__subheading">Sub-total</p>
-                  <div class="cart__heading">$285.00</div>
+                  <div class="cart__heading">{{ totalCost }}</div>
                 </div>
 
                 <div class="flex items-center justify-between py-20 md:py-25">
                   <p class="cart__subheading">Delivery</p>
-                  <div class="cart__heading">$10.00</div>
+                  <div class="cart__heading">{{ deliveryCost }}</div>
                 </div>
               </div>
 
@@ -131,22 +138,24 @@ const handleDecrementItem = (itemId: number, size: string) => {
                 </AppRadio>
               </AppRadiosFieldset>
 
-              <div class="cart__schema-input-field">
-                <fieldset class="block h-full w-full">
-                  <div class="flex items-center">
-                    <AppInput
-                      class="cart__schema-input"
-                      placeholder="Coupon Code"
-                    />
-                    <AppButton type="button" class="cart__schema-input-btn">
-                      Apply
-                    </AppButton>
-                  </div>
-                </fieldset>
-              </div>
+              <fieldset class="block h-full w-full">
+                <div class="flex items-center">
+                  <AppInput
+                    class="w-full"
+                    placeholder="Coupon Code"
+                    input-wrapper-classes="!bg-transparent"
+                  >
+                    <template #after-input>
+                      <AppButton type="button" class="p-12 !text-[12px]">
+                        Apply
+                      </AppButton>
+                    </template>
+                  </AppInput>
+                </div>
+              </fieldset>
 
-              <div class="cart__schema-footer">
-                <AppButton class="cart__schema-submit w-full">
+              <div class="mt-20 md:mt-[150px]">
+                <AppButton class="w-full" @click="onCreateOrder">
                   Checkout
                 </AppButton>
               </div>
@@ -254,67 +263,6 @@ const handleDecrementItem = (itemId: number, size: string) => {
 
   &__schema-item-border {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  &__schema-header {
-    padding-bottom: 25px;
-
-    @media (max-width: 767px) {
-      padding-bottom: 20px;
-    }
-  }
-
-  &__schema-input-field {
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  &__schema-input {
-    input {
-      flex-grow: 1 !important;
-
-      width: 100% !important;
-      height: 100% !important;
-      padding: 0 !important;
-      border: 0 !important;
-      padding-left: 15px !important;
-
-      background-color: transparent !important;
-    }
-  }
-
-  &__schema-input-btn {
-    padding: 12px;
-
-    background-color: rgba(0, 0, 0, 0.2);
-
-    color: #fff;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-    text-transform: uppercase;
-
-    @apply font-hnd;
-  }
-
-  &__schema-submit {
-    color: #fff;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-    text-transform: uppercase;
-
-    @apply font-hnd;
-  }
-
-  &__schema-footer {
-    margin-top: 150px;
-
-    @media (max-width: 767px) {
-      margin-top: 20px;
-    }
   }
 }
 </style>

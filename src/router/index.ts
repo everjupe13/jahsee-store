@@ -71,7 +71,7 @@ export const routes = [
     name: RouteNamesEnum.cart,
     component: () => import('@/pages/CartPage.vue'),
     meta: {
-      requiresAuth: true
+      // requiresAuth: true
     }
   },
   {

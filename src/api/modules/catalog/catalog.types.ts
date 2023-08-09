@@ -16,7 +16,7 @@ export interface IProduct {
   productName: string
   description: string
   dropId: ICatalog['id']
-  cost: string
+  cost: number
   aboutList: string[]
   gallery: string[]
   sizes: { label: string; soldOut: boolean }[]

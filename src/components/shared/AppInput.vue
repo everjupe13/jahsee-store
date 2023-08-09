@@ -1,6 +1,6 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, useSlots } from 'vue'
 
 import AppCollapse from '@/components/shared/AppCollapse.vue'
 
@@ -29,6 +29,7 @@ interface Props {
   readonly?: boolean
   state?: any
   modelValue?: any
+  inputWrapperClasses?: string
   type?:
     | 'text'
     | 'number'
@@ -48,7 +49,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   validationMessage: 'Invalid',
-  modelValue: undefined
+  modelValue: undefined,
+  inputWrapperClasses: ''
 })
 const emits = defineEmits(['change', 'input', 'update:modelValue'])
 const { handleChange, handleInput } = useEvents(emits)
@@ -60,28 +62,44 @@ const validationFn = computed(() => props.modelValue.length > 0)
 const isValidationMessageShown = computed(() => {
   return validationFn.value
 })
+
+const slots = useSlots()
+const isAfterInputSlotEmpty = computed(
+  () => slots?.['after-input'] === undefined
+)
 </script>
 
 <template>
   <div>
-    <div class="relative w-full">
-      <input
-        class="input peer block w-full border border-solid border-black/10 px-20 pb-12 pt-28 text-[#555862] outline-none transition placeholder:opacity-0 hover:border-black hover:text-[#000] focus:border-black focus:text-[#000]"
-        :id="uuid"
-        :value="props.modelValue"
-        :disabled="props.disabled"
-        :placeholder="props.placeholder"
-        :readonly="props.readonly"
-        :type="props.type"
-        @input="handleInput"
-        @change="handleChange"
-      />
-      <label
-        class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"
-        :for="uuid"
+    <div
+      class="group flex items-center border border-solid border-black/10 bg-white focus-within:border-black hover:border-black"
+      :class="[props.inputWrapperClasses]"
+    >
+      <div class="relative w-full flex-grow">
+        <input
+          class="input peer block w-full bg-transparent px-20 pb-12 pt-28 text-[#555862] outline-none transition placeholder:opacity-0 focus:text-[#000] group-hover:text-[#000]"
+          :id="uuid"
+          :value="props.modelValue"
+          :disabled="props.disabled"
+          :placeholder="props.placeholder"
+          :readonly="props.readonly"
+          :type="props.type"
+          @input="handleInput"
+          @change="handleChange"
+        />
+        <label
+          class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"
+          :for="uuid"
+        >
+          {{ placeholder }}
+        </label>
+      </div>
+      <div
+        class="flex-shrink-0 flex-grow-0"
+        :class="{ 'py-10 pr-10': !isAfterInputSlotEmpty }"
       >
-        {{ placeholder }}
-      </label>
+        <slot name="after-input"></slot>
+      </div>
     </div>
     <AppCollapse v-if="props.validatable" v-model="isValidationMessageShown">
       <div class="validation-message bg-black px-20 py-10">

@@ -19,6 +19,7 @@ import {
   DropdownCollapseArrowIcon,
   ForwardLinkArrowIcon
 } from '@/components/shared/icons'
+import { formatDollars } from '@/utils/cost'
 
 const isMdScreen = inject('isMdScreen')
 
@@ -73,9 +74,10 @@ const cartStore = useCartStore()
 const handleAddProductToCart = () => {
   if (selectedSize.value) {
     cartStore.addItem(Number(route.params.dropId), selectedSize.value)
-    console.log(cartStore.cart)
   }
 }
+
+cartStore.calculateCost()
 </script>
 
 <template>
@@ -89,7 +91,7 @@ const handleAddProductToCart = () => {
             <AppDropInfo
               v-bind="{
                 title: currentDrop!.productName,
-                cost: currentDrop!.cost,
+                cost: formatDollars(currentDrop!.cost),
                 desc: currentDrop!.description
               }"
             />

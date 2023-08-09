@@ -1,14 +1,21 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
+
 import { CrossIcon, MinusIcon, PlusIcon } from '@/components/shared/icons'
+import { formatDollars } from '@/utils/cost'
 
 const props = defineProps({
   img: String,
   title: String,
-  cost: String,
+  cost: Number,
   size: String,
   count: Number
 })
-const emit = defineEmits(['incrementCount', 'decrementCount'])
+const emit = defineEmits(['incrementCount', 'decrementCount', 'deleteItem'])
+
+const computedCost = computed<string>(() =>
+  formatDollars((props.count || 0) * (props.cost || 0))
+)
 
 const incCount = () => {
   emit('incrementCount')
@@ -16,6 +23,10 @@ const incCount = () => {
 
 const decCount = () => {
   emit('decrementCount')
+}
+
+const onDeleteItem = () => {
+  emit('deleteItem')
 }
 </script>
 
@@ -30,7 +41,7 @@ const decCount = () => {
         <div class="cart-order__info">
           <div class="cart-order__title mb-10">{{ props.title }}</div>
           <div class="cart-order__cost mb-5 md:mb-25">
-            {{ props.cost }}
+            {{ computedCost }}
           </div>
 
           <div class="cart-order__count">
@@ -53,9 +64,12 @@ const decCount = () => {
           class="flex h-full items-end justify-center md:items-center md:justify-between"
         >
           <div class="cart-order__size">{{ props.size }}</div>
-          <div class="cart-order__cancel badge-hover h-28 w-28">
+          <button
+            class="cart-order__cancel badge-hover h-28 w-28"
+            @click="onDeleteItem"
+          >
             <CrossIcon />
-          </div>
+          </button>
         </div>
       </div>
     </div>

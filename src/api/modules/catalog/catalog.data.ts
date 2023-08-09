@@ -63,7 +63,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Zip hoodie',
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: '$125.00',
+    cost: 125,
     dropId: 0,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -99,7 +99,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Sweatshirt',
     description:
       'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: '$80.00',
+    cost: 80,
     dropId: 0,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -133,7 +133,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Zip hoodie',
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: '$125.00',
+    cost: 125,
     dropId: 0,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -169,7 +169,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Sweatshirt',
     description:
       'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: '$80.00',
+    cost: 80,
     dropId: 0,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -203,7 +203,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Zip hoodie',
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: '$125.00',
+    cost: 125,
     dropId: 0,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -239,7 +239,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Sweatshirt',
     description:
       'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: '$80.00',
+    cost: 80,
     dropId: 1,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -273,7 +273,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Zip hoodie',
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: '$125.00',
+    cost: 125,
     dropId: 1,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -309,7 +309,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Sweatshirt',
     description:
       'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: '$80.00',
+    cost: 80,
     dropId: 1,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -343,7 +343,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Zip hoodie',
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: '$125.00',
+    cost: 125,
     dropId: 1,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -379,7 +379,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Sweatshirt',
     description:
       'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: '$80.00',
+    cost: 80,
     dropId: 1,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -413,7 +413,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Zip hoodie',
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: '$125.00',
+    cost: 125,
     dropId: 2,
     aboutList: [
       'Fabric density - 360gr/m',
@@ -449,7 +449,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     productName: 'Sweatshirt',
     description:
       'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: '$80.00',
+    cost: 80,
     dropId: 2,
     aboutList: [
       'Fabric density - 360gr/m',
