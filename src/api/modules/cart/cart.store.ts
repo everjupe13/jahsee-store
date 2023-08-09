@@ -130,7 +130,7 @@ export const useCartStore = defineStore('cart', () => {
       cartStorageProvider.deleteAll()
       cart.value = []
 
-      const _fetchReturn = useAppFetch('/order').post([cart.value]).json()
+      // const _fetchReturn = useAppFetch('/order').post([cart.value]).json()
     } catch (error) {
       console.log(error)
     }

@@ -36,7 +36,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     try {
       catalog.value = CATALOG_DATA
 
-      const _fetchReturn = await useAppFetch('catalog').get().json()
+      // const _fetchReturn = await useAppFetch('catalog').get().json()
 
       try {
         _assertProducts()
@@ -60,7 +60,7 @@ export const useCatalogStore = defineStore('catalog', () => {
     try {
       products.value = PRODUCTS_DATA
 
-      const _fetchReturn = await useAppFetch('products').get().json()
+      // const _fetchReturn = await useAppFetch('products').get().json()
 
       return true
     } catch (error) {
