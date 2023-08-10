@@ -8,10 +8,16 @@ interface ICollapse {
 const props = defineProps<ICollapse>()
 const contentRef = ref<HTMLElement>()
 const contentHeight = ref<number | undefined | null>(null)
-const collapseState = ref(false)
 let componentClasses = reactive({
   'app-collapse': true,
-  show: collapseState.value
+  show: false
+})
+
+onMounted(() => {
+  componentClasses = {
+    'app-collapse': true,
+    show: props.modelValue
+  }
 })
 
 watch(

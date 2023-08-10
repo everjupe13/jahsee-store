@@ -1,4 +1,5 @@
 export { default as CartBagIcon } from './CartBagIcon.vue'
+export { default as CheckIcon } from './CheckIcon.vue'
 export { default as ChevronArrowBackIcon } from './ChevronArrowBackIcon.vue'
 export { default as CrossIcon } from './CrossIcon.vue'
 export { default as DropdownCollapseArrowIcon } from './DropdownCollapseArrowIcon.vue'

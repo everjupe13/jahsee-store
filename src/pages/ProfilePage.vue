@@ -64,7 +64,7 @@ const onLogoutClick = () => {
 </script>
 
 <template>
-  <section class="py-40">
+  <section class="pb-40 pt-30 md:pt-40">
     <AppContainer>
       <AppBackNav />
       <div class="my-20 md:my-40">

@@ -3,7 +3,7 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
 </script>
 
 <template>
-  <section class="main">
+  <section class="pb-40 pt-30 md:pt-40">
     <AppContainer>
       <AppBackNav />
       <div class="main__grid">

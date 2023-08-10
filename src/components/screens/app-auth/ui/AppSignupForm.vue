@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import { useVuelidate } from '@vuelidate/core'
+import { email, minLength, required } from '@vuelidate/validators'
 import { reactive } from 'vue'
 
 import { useAuthStore } from '@/api/modules/auth/auth.store'
-import AppInput from '@/components/shared/AppInput.vue'
 
 // const emit = defineEmits(['submit'])
 
@@ -13,16 +14,21 @@ const formData = reactive({
   password: ''
 })
 
-// watch(
-//   formData,
-//   () => {
-//     console.log(formData)
-//   },
-//   { deep: true }
-// )
+const rules = {
+  email: { required, email },
+  name: { required },
+  password: { required, minLengthValue: minLength(6) }
+}
+
+const v$ = useVuelidate(rules, formData)
 
 const store = useAuthStore()
 const onSubmitForm = () => {
+  if (v$.value.$invalid) {
+    v$.value.$validate()
+    return
+  }
+
   store.signUpUser({
     email: formData.email,
     name: formData.name,
@@ -37,39 +43,46 @@ const onSubmitForm = () => {
     class="mx-auto max-w-[580px] bg-white p-30 pb-30 md:p-60 md:pb-50"
     @submit.prevent="onSubmitForm"
   >
-    <div class="title mb-30 md:mb-40">Welcome to ayaysee</div>
+    <div
+      class="mb-30 text-center font-hnd text-[30px] font-medium uppercase leading-tight tracking-[1.6px] text-button-black md:mb-40 md:text-[40px]"
+    >
+      Welcome to ayaysee
+    </div>
     <div class="mb-30 md:mb-40">
       <AppInput
-        v-model="formData.email"
+        v-model="v$.email.$model"
         placeholder="e-mail*"
         class="mb-15"
-        :validatable="true"
-        validation-message="Invalid e-mail"
+        :is-valid="v$.email.$dirty ? !v$.email.$invalid : true"
+        :is-dirty="v$.email.$dirty"
+        :validation-message="v$.email.$silentErrors[0]?.$message"
       />
       <AppInput
-        v-model="formData.name"
+        v-model="v$.name.$model"
         placeholder="first name*"
         class="mb-15"
-        :validatable="false"
+        :is-valid="v$.name.$dirty ? !v$.name.$invalid : true"
+        :is-dirty="v$.name.$dirty"
+        :validation-message="v$.name.$silentErrors[0]?.$message"
       />
       <AppInput
         v-model="formData.lastName"
         placeholder="last name"
         class="mb-15"
-        :validatable="false"
       />
       <AppInput
-        v-model="formData.password"
+        v-model="v$.password.$model"
         placeholder="password*"
         type="password"
-        :validatable="true"
-        validation-message="Password must be at least 8 char"
+        :is-valid="v$.password.$dirty ? !v$.password.$invalid : true"
+        :is-dirty="v$.password.$dirty"
+        :validation-message="v$.password.$silentErrors[0]?.$message"
       />
     </div>
     <AppButton fluid class="mb-25">Sign Up</AppButton>
-    <div class="post-message">
+    <div class="text-center font-medium leading-none text-[#6a6e7a]">
       Already have an account?
-      <router-link to="/login" class="post-message__link">Log in</router-link>
+      <router-link to="/login" class="text-button-black">Log in</router-link>
     </div>
   </form>
 </template>
@@ -89,23 +102,6 @@ const onSubmitForm = () => {
 
   @media (max-width: 767px) {
     font-size: 30px;
-  }
-}
-
-.post-message {
-  color: #6a6e7a;
-  text-align: center;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 100%;
-
-  &__link {
-    color: #000;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
   }
 }
 </style>

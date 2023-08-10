@@ -49,6 +49,7 @@ export const useAuthStore = defineStore('auth', () => {
       await router.push({ name: RouteNamesEnum.home })
 
       const _fetchReturn = await useAppFetch('login').post().json()
+      console.log(_fetchReturn)
 
       return true
     } catch (error) {
@@ -82,7 +83,7 @@ export const useAuthStore = defineStore('auth', () => {
       await router.push({ name: RouteNamesEnum.home })
 
       const _fetchReturn = await useAppFetch('signup').post().json()
-      // console.log(_fetchReturn)
+      console.log(_fetchReturn)
 
       return true
     } catch (error) {

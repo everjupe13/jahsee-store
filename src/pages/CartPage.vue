@@ -63,7 +63,7 @@ const deliveryCost = computed<string>(() => cartStore.calculateDeliveryCost())
 </script>
 
 <template>
-  <section class="cart">
+  <section class="pb-40 pt-30 md:pt-40">
     <AppContainer>
       <AppBackNav />
       <div class="my-20 md:my-40">
@@ -170,23 +170,19 @@ const deliveryCost = computed<string>(() => cartStore.calculateDeliveryCost())
 <style lang="scss" scoped>
 .title {
   font-size: 64px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 100%;
   letter-spacing: 2.56px;
-  text-transform: uppercase;
+
+  @apply font-extrabold uppercase leading-none;
 
   @media (max-width: 767px) {
     font-size: 48px;
   }
 }
 .cart {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  @apply py-40;
 
   @media (max-width: 767px) {
-    padding-top: 30px;
-    padding-bottom: 40px;
+    @apply pt-30;
   }
 
   &__grid {
@@ -200,11 +196,10 @@ const deliveryCost = computed<string>(() => cartStore.calculateDeliveryCost())
   }
 
   &__table {
-    padding: 40px;
-    background: #fff;
+    @apply bg-white p-40;
 
     @media (max-width: 767px) {
-      padding: 30px;
+      @apply p-30;
     }
   }
 

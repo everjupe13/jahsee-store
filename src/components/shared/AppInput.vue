@@ -3,6 +3,7 @@
 import { computed, ref, useSlots } from 'vue'
 
 import AppCollapse from '@/components/shared/AppCollapse.vue'
+import { CheckIcon } from '@/components/shared/icons'
 
 function useEvents(context: (e: any, value: any) => void) {
   const handleChange = (e: Event) => {
@@ -44,12 +45,16 @@ interface Props {
     | 'search'
   validationMessage?: string
   validatable?: boolean
+  isValid?: boolean
+  isDirty?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
-  validationMessage: 'Invalid',
+  validationMessage: '',
   modelValue: undefined,
+  isValid: undefined,
+  isDirty: undefined,
   inputWrapperClasses: ''
 })
 const emits = defineEmits(['change', 'input', 'update:modelValue'])
@@ -60,7 +65,7 @@ const uuid = ref(randomID())
 // TODO add logic for validation shown
 const validationFn = computed(() => props.modelValue.length > 0)
 const isValidationMessageShown = computed(() => {
-  return validationFn.value
+  return props.isValid === undefined ? validationFn.value : !props.isValid
 })
 
 const slots = useSlots()
@@ -96,12 +101,29 @@ const isAfterInputSlotEmpty = computed(
       </div>
       <div
         class="flex-shrink-0 flex-grow-0"
-        :class="{ 'py-10 pr-10': !isAfterInputSlotEmpty }"
+        :class="{
+          'py-10 pr-10': !isAfterInputSlotEmpty || isValid !== undefined
+        }"
       >
-        <slot name="after-input"></slot>
+        <template v-if="!isAfterInputSlotEmpty">
+          <slot name="after-input"></slot>
+        </template>
+        <template v-else-if="isAfterInputSlotEmpty && isValid !== undefined">
+          <div>
+            <span
+              class="flex items-center justify-center pr-10"
+              v-if="isValid && isDirty"
+            >
+              <CheckIcon />
+            </span>
+          </div>
+        </template>
       </div>
     </div>
-    <AppCollapse v-if="props.validatable" v-model="isValidationMessageShown">
+    <AppCollapse
+      v-if="props.isValid !== undefined"
+      v-model="isValidationMessageShown"
+    >
       <div class="validation-message bg-black px-20 py-10">
         {{ validationMessage }}
       </div>

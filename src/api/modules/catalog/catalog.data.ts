@@ -17,7 +17,7 @@ export const CATALOG_DATA: ICatalog[] = [
     ).href,
     status: 'active',
     yearTag: 'Q2 2023',
-    productsIds: [{ id: 0 }, { id: 1 }, { id: 3 }, { id: 4 }]
+    productsIds: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
   },
   {
     id: 1,
@@ -204,7 +204,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     description:
       'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
     cost: 125,
-    dropId: 0,
+    dropId: 1,
     aboutList: [
       'Fabric density - 360gr/m',
       '80% cotton',

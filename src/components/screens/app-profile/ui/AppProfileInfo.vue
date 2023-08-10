@@ -2,7 +2,6 @@
 import { reactive } from 'vue'
 
 import { useAuthStore } from '@/api/modules/auth/auth.store'
-import AppInput from '@/components/shared/AppInput.vue'
 
 function passwordMapper(password: string) {
   return password.replaceAll(/./g, '#')

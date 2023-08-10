@@ -81,7 +81,7 @@ cartStore.calculateCost()
 </script>
 
 <template>
-  <section class="drop">
+  <section class="pb-40 pt-30 md:pt-40">
     <AppContainer>
       <AppBackNav />
 
@@ -239,17 +239,9 @@ cartStore.calculateCost()
 
 <style lang="scss" scoped>
 .drop {
-  padding-top: 40px;
-  padding-bottom: 40px;
-
-  @media (max-width: 767px) {
-    padding-top: 20px;
-  }
-
   &__grid {
     display: grid;
     padding-top: 85px;
-    // grid-template-columns: 650px calc(100% - 650px - 15px);
     grid-template-columns: calc(100% - 820px - 15px) 820px;
     column-gap: 15px;
 

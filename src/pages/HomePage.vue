@@ -7,7 +7,7 @@ await catalogStore.fetchCatalog()
 </script>
 
 <template>
-  <section class="pt-60">
+  <section class="pb-40 pt-30 md:pt-40">
     <AppContainer>
       <div class="m-auto w-full max-w-[800px]">
         <AppHomeSlider />

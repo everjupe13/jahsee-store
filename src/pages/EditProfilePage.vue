@@ -2,7 +2,7 @@
 
 <template>
   <AppContainer>
-    <section class="-mx-15 pt-30 md:mx-0 md:pt-50">
+    <section class="-mx-15 pb-40 pt-30 md:mx-0 md:pt-40">
       <form @submit.prevent class="form">
         <div class="form__title mb-30 md:mb-57">edit account details</div>
         <div class="form__body !md:mb-30 !mb-0">
