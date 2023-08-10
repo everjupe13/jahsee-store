@@ -4,62 +4,15 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-// import { useAppFetch } from '@/api/shared/network/useAppFetch'
+import { useAppFetch } from '@/api/shared/network/useAppFetch'
 import { RouteNamesEnum } from '@/router/router.types'
 
-// export const useAuthStore = defineStore('auth', {
-//   state: () => ({ userData: null as object | null }),
-//   getters: {
-//     isAuth: state =>
-//       isPlainObject(state.userData) &&
-//       Object.keys(state.userData as object).length > 0
-//   },
-//   actions: {
-//     authUser() {
-//       return true
-//     },
-//     async signUpUser({
-//       email,
-//       name,
-//       lastName,
-//       password
-//     }: {
-//       email: string
-//       name: string
-//       lastName?: string
-//       password: string
-//     }) {
-//       try {
-//         this.$state.userData = {
-//           userEmail: email,
-//           userName: name,
-//           ...(lastName ? { userLastName: lastName } : { userLastName: null }),
-//           userPassword: password
-//         }
-
-//         const route = useRoute()
-//         console.log(route.fullPath)
-
-//         const _fetchReturn = await useAppFetch('123').post().json()
-//         console.log(_fetchReturn)
-
-//         return true
-//       } catch (error) {
-//         // TODO add notification observer center
-//         console.log(error)
-//         return false
-//       }
-//     },
-//     logoutUser() {
-//       this.$state.userData = null
-//     }
-//   }
-// })
+import { IUser } from './auth.types'
 
 export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
   const route = useRoute()
-  const userData = ref<object | null>(null)
+  const userData = ref<IUser | null>(null)
   const isAuth = computed<boolean>(
     () =>
       !!userData.value &&
@@ -77,7 +30,8 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       userData.value = {
         userEmail: email,
-        userPassword: password
+        userPassword: password,
+        userName: 'John Testenko'
       }
 
       if (
@@ -94,7 +48,7 @@ export const useAuthStore = defineStore('auth', () => {
 
       await router.push({ name: RouteNamesEnum.home })
 
-      // const _fetchReturn = await useAppFetch('login').post().json()
+      const _fetchReturn = await useAppFetch('login').post().json()
 
       return true
     } catch (error) {
@@ -119,13 +73,15 @@ export const useAuthStore = defineStore('auth', () => {
       userData.value = {
         userEmail: email,
         userName: name,
-        ...(lastName ? { userLastName: lastName } : { userLastName: null }),
+        ...(lastName
+          ? { userLastName: lastName }
+          : { userLastName: undefined }),
         userPassword: password
       }
 
       await router.push({ name: RouteNamesEnum.home })
 
-      // const _fetchReturn = await useAppFetch('signup').post().json()
+      const _fetchReturn = await useAppFetch('signup').post().json()
       // console.log(_fetchReturn)
 
       return true

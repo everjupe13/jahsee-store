@@ -1,14 +1,20 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
+import { useAuthStore } from '@/api/modules/auth/auth.store'
 import AppInput from '@/components/shared/AppInput.vue'
 
+function passwordMapper(password: string) {
+  return password.replaceAll(/./g, '#')
+}
+
+const authStore = useAuthStore()
 const userData = reactive({
-  email: 'example@mail.com',
-  phone: 'John',
-  firstName: 'John',
-  lastName: 'Donin',
-  password: '########'
+  email: authStore.userData?.userEmail || '',
+  phone: authStore.userData?.userPhone || '',
+  firstName: authStore.userData?.userName || '',
+  lastName: authStore.userData?.userLastName,
+  password: passwordMapper(authStore.userData?.userPassword || '')
 })
 </script>
 

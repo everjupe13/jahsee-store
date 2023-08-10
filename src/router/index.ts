@@ -16,27 +16,7 @@ export const routes = [
   {
     path: '/login',
     name: RouteNamesEnum.login,
-    component: () => import('@/pages/LoginPage.vue'),
-    meta: {
-      footerVisible: false,
-      layout: AppLayoutsEnum.login,
-      requiresUnauth: true
-    }
-  },
-  {
-    path: '/reset-password',
-    name: RouteNamesEnum['reset-password'],
-    component: () => import('@/pages/ResetPasswordPage.vue'),
-    meta: {
-      footerVisible: false,
-      layout: AppLayoutsEnum.login,
-      requiresUnauth: true
-    }
-  },
-  {
-    path: '/new-password',
-    name: RouteNamesEnum['new-password'],
-    component: () => import('@/pages/NewPasswordPage.vue'),
+    component: () => import('@/pages/auth/AuthenticatonPage.vue'),
     meta: {
       footerVisible: false,
       layout: AppLayoutsEnum.login,
@@ -46,7 +26,7 @@ export const routes = [
   {
     path: '/signup',
     name: RouteNamesEnum.signup,
-    component: () => import('@/pages/SignupPage.vue'),
+    component: () => import('@/pages/auth/RegistrationPage.vue'),
     meta: {
       footerVisible: false,
       layout: AppLayoutsEnum.login,
@@ -54,9 +34,24 @@ export const routes = [
     }
   },
   {
-    path: '/lore/:id',
-    name: RouteNamesEnum.lore,
-    component: () => import('@/pages/LorePage.vue')
+    path: '/forget/request-password',
+    name: RouteNamesEnum['request-password'],
+    component: () => import('@/pages/auth/RequestPasswordChangePage.vue'),
+    meta: {
+      footerVisible: false,
+      layout: AppLayoutsEnum.login,
+      requiresUnauth: true
+    }
+  },
+  {
+    path: '/forget/reset-password',
+    name: RouteNamesEnum['reset-password'],
+    component: () => import('@/pages/auth/ResetPasswordPage.vue'),
+    meta: {
+      footerVisible: false,
+      layout: AppLayoutsEnum.login,
+      requiresUnauth: true
+    }
   },
   {
     path: '/profile',
@@ -77,12 +72,17 @@ export const routes = [
   {
     path: '/catalog/:dropSlug',
     name: RouteNamesEnum.catalog,
-    component: () => import('@/pages/CatalogPage.vue')
+    component: () => import('@/pages/catalog/CatalogPage.vue')
   },
   {
     path: '/catalog/:dropSlug/drop/:dropId',
     name: RouteNamesEnum.drop,
-    component: () => import('@/pages/DropPage.vue')
+    component: () => import('@/pages/catalog/ProductPage.vue')
+  },
+  {
+    path: '/lore/:dropSlug',
+    name: RouteNamesEnum.lore,
+    component: () => import('@/pages/catalog/CatalogDropLorePage.vue')
   },
   // {
   //   path: '/profile/edit',
