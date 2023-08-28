@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { ModalsContainer } from 'vue-final-modal'
+
 import { AppFooter } from '@/components/widgets/AppFooter'
 import { AppHeader } from '@/components/widgets/AppHeader'
 
@@ -18,6 +20,5 @@ defineOptions({
     <slot></slot>
   </main>
   <AppFooter></AppFooter>
+  <ModalsContainer />
 </template>
-
-<style lang="scss"></style>
