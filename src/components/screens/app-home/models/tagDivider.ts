@@ -39,4 +39,4 @@ const getString = (function () {
   }
 })()
 
-export const AppHomeCardTagDividerIconRaw = getString(spanWrapper)
+export const HomeCardTagDividerIconRaw = getString(spanWrapper)

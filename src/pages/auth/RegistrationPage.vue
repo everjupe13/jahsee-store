@@ -9,5 +9,3 @@ import { AppSignupForm } from '@/components/screens/app-auth'
     </section>
   </AppContainer>
 </template>
-
-<style lang="scss" scoped></style>

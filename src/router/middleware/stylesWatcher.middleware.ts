@@ -14,10 +14,8 @@ export const stylesWatcherMiddleware: NavigationGuardWithThis<undefined> = (
   if (to.name === 'home') {
     document.querySelector('.header')?.classList.remove('header_full')
     document.querySelector('#app')?.classList.remove('animated')
-    // document.body.style.background = '#fff'
   } else {
     document.querySelector('.header')?.classList.add('header_full')
     document.querySelector('#app')?.classList.add('animated')
-    // document.body.style.background = '#F5F7F9'
   }
 }

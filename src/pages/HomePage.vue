@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCatalogStore } from '@/api/modules/catalog'
-import { AppHomeSlider } from '@/components/screens/app-home'
+import { HomeSlider } from '@/components/screens/app-home'
 
 const catalogStore = useCatalogStore()
 await catalogStore.fetchCatalog()
@@ -10,14 +10,8 @@ await catalogStore.fetchCatalog()
   <section class="pb-40 pt-30 md:pt-40">
     <AppContainer>
       <div class="m-auto w-full max-w-[800px]">
-        <AppHomeSlider />
+        <HomeSlider />
       </div>
     </AppContainer>
   </section>
 </template>
-
-<style lang="scss" scoped>
-.links {
-  padding-bottom: 180px;
-}
-</style>
