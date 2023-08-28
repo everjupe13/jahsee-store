@@ -9,7 +9,7 @@ import { provide, ref } from 'vue'
 
 import { useCatalogStore } from '@/api/modules/catalog'
 
-import AppHomeSliderCard from './AppHomeSliderCard.vue'
+import HomeSliderCard from './HomeSliderCard.vue'
 
 const modules = [FreeMode]
 
@@ -40,7 +40,7 @@ const catalogStore = useCatalogStore()
     data-aos-duration="600"
   >
     <swiper-slide v-for="item in catalogStore.sortedCatalog" :key="item.id">
-      <AppHomeSliderCard v-bind="item" />
+      <HomeSliderCard v-bind="item" />
     </swiper-slide>
   </swiper>
 </template>

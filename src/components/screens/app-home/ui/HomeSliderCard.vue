@@ -2,8 +2,8 @@
 import { ICatalog } from '@/api/modules/catalog'
 import { RouteNamesEnum } from '@/router/router.types'
 
-import { AppHomeCardTagDividerIconRaw } from '../models/tagDivider'
-import AppHomeSliderNavigation from './AppHomeSliderNavigation.vue'
+import { HomeCardTagDividerIconRaw } from '../models/tagDivider'
+import HomeSliderNavigation from './HomeSliderNavigation.vue'
 
 const props = withDefaults(defineProps<ICatalog>(), {})
 
@@ -14,7 +14,7 @@ const renderTagsString = (drop: ICatalog): string => {
 
   return [`${drop.products.length} items`, drop.yearTag, drop.status]
     .map(tag => `<span>${tag}</span>`)
-    .join(AppHomeCardTagDividerIconRaw)
+    .join(HomeCardTagDividerIconRaw)
 }
 </script>
 
@@ -27,7 +27,7 @@ const renderTagsString = (drop: ICatalog): string => {
       >
         {{ props.name }}
       </div>
-      <AppHomeSliderNavigation class="swiper-slide-navs shrink-0" />
+      <HomeSliderNavigation class="swiper-slide-navs shrink-0" />
     </div>
     <div class="mb-20 block max-w-[800px]">
       <router-link
