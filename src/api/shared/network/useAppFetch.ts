@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  AfterFetchContext,
+  // AfterFetchContext,
   BeforeFetchContext,
   createFetch,
   MaybeRefOrGetter,
-  OnFetchErrorContext,
+  // OnFetchErrorContext,
   UseFetchOptions
 } from '@vueuse/core'
 // import { isReactive, reactive } from 'vue'
 
 // import store from '@/store/index.js'
 
-export const API_URL = 'https://localhost:8080'
+export const API_URL = import.meta.env.VITE_APP_BASE_URL
 
 interface IFetchParameters {
   url: MaybeRefOrGetter<string>
@@ -27,27 +27,27 @@ const useAppFetch = (
   // const refStore = isReactive(store) ? store : reactive(store)
 
   const interceptors: UseFetchOptions = {
-    async onFetchError(_ctx: OnFetchErrorContext): Promise<any> {
-      // console.log('onFetchError', ctx)
-      return
-    },
-    async afterFetch(_ctx: AfterFetchContext): Promise<any> {
-      // console.log('404 not found @:', response.url);
-      // console.log('afterFetch', ctx)
-      return
+    // async onFetchError(_ctx: OnFetchErrorContext): Promise<any> {
+    //   console.log('onFetchError', _ctx)
+    //   return
+    // },
+    // async afterFetch(_ctx: AfterFetchContext): Promise<any> {
+    //   console.log('404 not found @:', _ctx.response.url)
+    //   console.log('afterFetch', _ctx)
+    //   return
 
-      // if (response.status === 200) {
-      //   console.log('Successfully fetched data @:', response.url);
-      // } else if (response.status === 404) {
-      //   console.log('404 not found @:', response.url);
-      //   console.log(response.response)
-      // }
-    },
+    //   // if (response.status === 200) {
+    //   //   console.log('Successfully fetched data @:', response.url);
+    //   // } else if (response.status === 404) {
+    //   //   console.log('404 not found @:', response.url);
+    //   //   console.log(response.response)
+    //   // }
+    // },
     async beforeFetch(ctx: BeforeFetchContext): Promise<any> {
       // const token = refStore.getters['auth/getToken']
       const token = 'asdasd'
       if (token !== null) {
-        ctx.options.headers = [['Authorization', `Bearer ${token}`]]
+        ctx.options.headers = { Authorization: `Bearer ${token}` }
       }
 
       return { options: ctx.options }
@@ -62,7 +62,7 @@ const useAppFetch = (
     }
   })
 
-  return useAppFetchFn(url as IFetchParameters['url'])
+  return useAppFetchFn(url as IFetchParameters['url'], { timeout: 5000 })
 }
 
 export { useAppFetch }

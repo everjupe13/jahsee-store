@@ -15,9 +15,43 @@ export const CATALOG_DATA: ICatalog[] = [
       '@/assets/media/catalog-video-plug-poster.png',
       import.meta.url
     ).href,
+    isCatalogExpanded: true,
     status: 'active',
     yearTag: 'Q2 2023',
-    productsIds: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
+    products: [
+      {
+        id: 0,
+        productName: 'Zip hoodie',
+        thumbImage: new URL(
+          '@/assets/img/products/zip-hoodie-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 1,
+        productName: 'Sweatshirt',
+        thumbImage: new URL(
+          '@/assets/img/products/sweatshirt-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 2,
+        productName: 'Zip hoodie',
+        thumbImage: new URL(
+          '@/assets/img/products/zip-hoodie-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 3,
+        productName: 'Sweatshirt',
+        thumbImage: new URL(
+          '@/assets/img/products/sweatshirt-plug/1.png',
+          import.meta.url
+        ).href
+      }
+    ]
   },
   {
     id: 1,
@@ -27,15 +61,61 @@ export const CATALOG_DATA: ICatalog[] = [
       '@/assets/img/catalog/2nd-drop-plug.png',
       import.meta.url
     ).href,
-    video: new URL('@/assets/media/catalog-video-plug.mp4', import.meta.url)
-      .href,
-    videoPoster: new URL(
-      '@/assets/media/catalog-video-plug-poster.png',
-      import.meta.url
-    ).href,
+    video: undefined,
+    videoPoster: undefined,
+    isCatalogExpanded: false,
     status: 'sold out',
     yearTag: 'Q2 2023',
-    productsIds: [{ id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }]
+    products: [
+      {
+        id: 4,
+        productName: 'Zip hoodie',
+        thumbImage: new URL(
+          '@/assets/img/products/zip-hoodie-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 5,
+        productName: 'Sweatshirt',
+        thumbImage: new URL(
+          '@/assets/img/products/sweatshirt-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 6,
+        productName: 'Zip hoodie',
+        thumbImage: new URL(
+          '@/assets/img/products/zip-hoodie-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 7,
+        productName: 'Sweatshirt',
+        thumbImage: new URL(
+          '@/assets/img/products/sweatshirt-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 8,
+        productName: 'Zip hoodie',
+        thumbImage: new URL(
+          '@/assets/img/products/zip-hoodie-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 9,
+        productName: 'Sweatshirt',
+        thumbImage: new URL(
+          '@/assets/img/products/sweatshirt-plug/1.png',
+          import.meta.url
+        ).href
+      }
+    ]
   },
   {
     id: 2,
@@ -45,15 +125,29 @@ export const CATALOG_DATA: ICatalog[] = [
       '@/assets/img/catalog/3rd-drop-plug.png',
       import.meta.url
     ).href,
-    video: new URL('@/assets/media/catalog-video-plug.mp4', import.meta.url)
-      .href,
-    videoPoster: new URL(
-      '@/assets/media/catalog-video-plug-poster.png',
-      import.meta.url
-    ).href,
+    video: undefined,
+    videoPoster: undefined,
+    isCatalogExpanded: false,
     status: 'active',
     yearTag: 'Q2 2023',
-    productsIds: [{ id: 10 }, { id: 11 }]
+    products: [
+      {
+        id: 10,
+        productName: 'Zip hoodie',
+        thumbImage: new URL(
+          '@/assets/img/products/zip-hoodie-plug/1.png',
+          import.meta.url
+        ).href
+      },
+      {
+        id: 11,
+        productName: 'Sweatshirt',
+        thumbImage: new URL(
+          '@/assets/img/products/sweatshirt-plug/1.png',
+          import.meta.url
+        ).href
+      }
+    ]
   }
 ]
 
