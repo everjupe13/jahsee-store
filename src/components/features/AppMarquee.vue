@@ -15,19 +15,26 @@ const nodes: string[] = Array.from({ length: 10 }).map(
 </script>
 
 <template>
-  <div class="marquee-wrapper">
+  <div class="overflow-x-hidden bg-white py-5 md:py-10">
     <Vue3Marquee :duration="30">
-      <div v-for="(node, index) in nodes" class="marquee__item" :key="index">
-        <div class="marquee__label">
+      <div
+        v-for="(node, index) in nodes"
+        class="mr-14 flex flex-shrink-0 flex-grow-0 basis-auto items-center gap-x-14"
+        :key="index"
+      >
+        <div
+          class="flex-shrink-0 flex-grow-0 basis-auto uppercase leading-none text-[#202022] text-medium-14 md:text-medium-16"
+        >
           {{ node }}
         </div>
-        <div class="marquee__divider">
+        <div class="h-18 w-18 md:h-24 md:w-24">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
             viewBox="0 0 24 24"
             fill="none"
+            class="h-full w-full"
           >
             <path
               fill-rule="evenodd"
@@ -41,32 +48,3 @@ const nodes: string[] = Array.from({ length: 10 }).map(
     </Vue3Marquee>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.marquee-wrapper {
-  padding: 10px 0;
-
-  background-color: #fff;
-  overflow-x: hidden;
-}
-.marquee {
-  &__item {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    column-gap: 14px;
-
-    margin-right: 14px;
-  }
-
-  &__label {
-    flex: 0 0 auto;
-    color: #202022;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-}
-</style>

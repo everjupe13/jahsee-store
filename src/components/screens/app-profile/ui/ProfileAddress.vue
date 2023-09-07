@@ -1,43 +1,98 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { unref } from 'vue'
+import { useModal, useModalSlot } from 'vue-final-modal'
+
+import { useUserStore } from '@/api/modules/user'
+import AppModal from '@/components/widgets/AppModal.vue'
+
+import AddressFormModal from './AddressFormModal.vue'
+import ProfileTabHeading from './ProfileTabHeading.vue'
+
+const userStore = useUserStore()
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useOpenModal = (props?: { [x: string]: any }) => {
+  const { open: openAddressForm, close: closeAddressForm } = useModal({
+    component: AppModal,
+    attrs: {},
+    slots: {
+      default: useModalSlot({
+        component: AddressFormModal,
+        attrs: {
+          ...unref(props),
+          onConfirm() {
+            closeAddressForm()
+          }
+        }
+      })
+    }
+  })
+
+  return { openAddressForm, closeAddressForm }
+}
+
+const onAddAddressClick = () => {
+  const { openAddressForm } = useOpenModal()
+  openAddressForm()
+}
+
+const onDeleteAddress = async (index: number) => {
+  await userStore.deleteAddress(index)
+}
+
+const onEditAddress = (index: number) => {
+  const propsData = userStore.addresses!.find(address => address.id === index)
+
+  const { openAddressForm } = useOpenModal(propsData)
+  openAddressForm()
+}
+</script>
 
 <template>
   <div>
-    <h2 class="heading mb-40 font-hnd text-button-black">My addresses</h2>
-    <AppButton outlined class="mb-20 px-48 py-24">Add new adress</AppButton>
+    <ProfileTabHeading>My addresses</ProfileTabHeading>
+    <AppButton outlined class="mb-20 px-48 py-24" @click="onAddAddressClick">
+      Add new adress
+    </AppButton>
     <div class="flex flex-col gap-y-20">
-      <div class="border border-solid border-button-black/10 p-20 md:p-30">
-        <div class="flex justify-between">
-          <div class="flex flex-col gap-y-24">
-            <p class="text">Ahmad Dias</p>
-            <p class="text">16 Willow St.Brooklyn, NY 11218</p>
-            <p class="text">New york, 11218 usa</p>
+      <template v-if="userStore.addresses && userStore.addresses?.length > 0">
+        <template v-for="address in userStore.addresses" :key="address.id">
+          <div class="border border-solid border-button-black/10 p-20 md:p-30">
+            <div class="flex justify-between">
+              <div class="flex flex-col gap-y-24">
+                <p class="text">{{ userStore.fullName }}</p>
+                <p class="text">
+                  {{ address.street }}, {{ address.numCard }}
+                  {{ address.zipCode }}
+                </p>
+                <p class="text">
+                  {{ address.city }}, {{ address.zipCode }}
+                  {{ address.country }}
+                </p>
+              </div>
+              <div class="flex flex-shrink-0 flex-col md:flex-row">
+                <button
+                  class="button-text p-10"
+                  @click="onDeleteAddress(address.id)"
+                >
+                  Delete
+                </button>
+                <button
+                  class="button-text p-10"
+                  @click="onEditAddress(address.id)"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="flex flex-shrink-0 flex-col md:flex-row">
-            <button class="button-text p-10">Delete</button>
-            <button class="button-text p-10">Edit</button>
-          </div>
-        </div>
-      </div>
-      <div class="border border-solid border-button-black/10 p-20 md:p-30">
-        <div class="flex justify-between">
-          <div class="flex flex-col gap-y-24">
-            <p class="text">Ahmad Dias</p>
-            <p class="text">16 Willow St.Brooklyn, NY 11218</p>
-            <p class="text">New york, 11218 usa</p>
-          </div>
-          <div class="flex flex-shrink-0 flex-col md:flex-row">
-            <button class="button-text p-10">Delete</button>
-            <button class="button-text p-10">Edit</button>
-          </div>
-        </div>
-      </div>
+        </template>
+      </template>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import './style.scss';
-
 .text {
   @apply text-[16px] font-semibold leading-none text-[#555862];
 }

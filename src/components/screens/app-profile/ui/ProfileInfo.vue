@@ -1,78 +1,94 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { onMounted, reactive, watch } from 'vue'
 import { useModal } from 'vue-final-modal'
 
-import { useAuthStore } from '@/api/modules/auth/auth.store'
+import { useUserStore } from '@/api/modules/user'
 
+import ProfileTabHeading from './ProfileTabHeading.vue'
 import UserEditFormModal from './UserEditFormModal.vue'
 
 function passwordMapper(password: string) {
   return password.replaceAll(/./g, '#')
 }
 
-const authStore = useAuthStore()
+const userStore = useUserStore()
 const userData = reactive({
-  email: authStore.userData?.userEmail || '',
-  phone: authStore.userData?.userPhone || '',
-  firstName: authStore.userData?.userName || '',
-  lastName: authStore.userData?.userLastName,
-  password: passwordMapper(authStore.userData?.userPassword || '')
+  email: userStore.profile?.userEmail || '',
+  phone: userStore.profile?.userPhone || '',
+  firstName: userStore.profile?.userName || '',
+  lastName: userStore.profile?.userLastName,
+  password: passwordMapper('*************')
 })
 
-const { open, close } = useModal({
+onMounted(() => {
+  ;(userData.email = userStore.profile?.userEmail || ''),
+    (userData.phone = userStore.profile?.userPhone || ''),
+    (userData.firstName = userStore.profile?.userName || ''),
+    (userData.lastName = userStore.profile?.userLastName),
+    (userData.password = passwordMapper('*************'))
+})
+
+watch(
+  () => userStore.profile,
+  () => {
+    ;(userData.email = userStore.profile?.userEmail || ''),
+      (userData.phone = userStore.profile?.userPhone || ''),
+      (userData.firstName = userStore.profile?.userName || ''),
+      (userData.lastName = userStore.profile?.userLastName),
+      (userData.password = passwordMapper('*************'))
+  },
+  { deep: true }
+)
+
+const { open: openUserForm, close: closeUserForm } = useModal({
   component: UserEditFormModal,
   attrs: {
     onConfirm() {
-      close()
+      closeUserForm()
     }
   }
 })
 
-const onClicked = () => {
-  console.log('clicked')
-  open()
+const onInputClick = () => {
+  openUserForm()
 }
 </script>
 
 <template>
   <div>
-    <h2 class="heading mb-40 font-hnd text-button-black">General info</h2>
+    <ProfileTabHeading>General info</ProfileTabHeading>
     <form @submit.prevent class="flex flex-col gap-y-16">
       <AppInput
         placeholder="e-mail"
         v-model="userData.email"
-        disabled
-        @click="onClicked"
+        readonly
+        @click="onInputClick"
       />
       <AppInput
         placeholder="phone number"
         v-model="userData.phone"
-        disabled
-        @click="onClicked"
+        readonly
+        @click="onInputClick"
       />
       <AppInput
         placeholder="first name"
         v-model="userData.firstName"
-        disabled
-        @click="onClicked"
+        readonly
+        @click="onInputClick"
       />
       <AppInput
         placeholder="last name"
         v-model="userData.lastName"
-        disabled
-        @click="onClicked"
+        readonly
+        @click="onInputClick"
       />
       <AppInput
         placeholder="password"
         v-model="userData.password"
         type="password"
-        disabled
-        @click="onClicked"
+        readonly
+        @click="onInputClick"
       />
     </form>
   </div>
 </template>
-
-<style lang="scss" scoped>
-@import './style.scss';
-</style>

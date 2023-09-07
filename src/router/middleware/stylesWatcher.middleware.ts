@@ -12,10 +12,10 @@ export const stylesWatcherMiddleware: NavigationGuardWithThis<undefined> = (
   }
 
   if (to.name === 'home') {
-    document.querySelector('.header')?.classList.remove('header_full')
+    document.querySelector('#header')?.classList.remove('header_full')
     document.querySelector('#app')?.classList.remove('animated')
   } else {
-    document.querySelector('.header')?.classList.add('header_full')
+    document.querySelector('#header')?.classList.add('header_full')
     document.querySelector('#app')?.classList.add('animated')
   }
 }

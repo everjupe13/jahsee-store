@@ -31,6 +31,7 @@ const catalogStore = useCatalogStore()
 
 <template>
   <swiper
+    v-if="catalogStore.sortedCatalog.length > 0"
     @slideChange="onSlideChange"
     :space-between="40"
     :modules="modules"

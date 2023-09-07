@@ -1,110 +1,35 @@
 /* eslint-disable unicorn/consistent-function-scoping */
-import { defineStore, storeToRefs } from 'pinia'
+import { AxiosError } from 'axios'
+import { defineStore } from 'pinia'
 import { type Ref, ref } from 'vue'
 
+import { IProduct } from '@/api/modules/catalog'
 import { useCatalogStore } from '@/api/modules/catalog'
-import { useAppFetch } from '@/api/shared/network/useAppFetch'
+import { useApiRequest } from '@/api/shared/network/http'
 import { formatDollars } from '@/utils/cost'
 
+import { useUserStore } from '../user'
+import { cartStorageProvider } from './cart.service'
+import { OrderApiMapper } from './cart.service'
 import { ICartItem } from './cart.types'
-
-export const LOCAL_STORAGE_CART_KEY = 'x-cart-product'
-
-const cartStorageProvider = {
-  add(id: number, size: string): boolean {
-    const _items = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_CART_KEY) || '[]'
-    )
-
-    if (!Array.isArray(_items)) {
-      return false
-    }
-
-    if (_items.length === 0) {
-      localStorage.setItem(
-        LOCAL_STORAGE_CART_KEY,
-        JSON.stringify([{ id, size, count: 1 }])
-      )
-      return true
-    }
-
-    const existedItemIdx = _items.findIndex(
-      item => item.id === id && item.size === size
-    )
-    if (existedItemIdx >= 0) {
-      _items[existedItemIdx].count += 1
-      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(_items))
-      return true
-    }
-
-    _items.push({ id, size, count: 1 })
-    localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(_items))
-    return true
-  },
-  decrease(id: number, size: string): boolean {
-    const _items = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_CART_KEY) || '[]'
-    )
-
-    if (!Array.isArray(_items)) {
-      return false
-    }
-
-    const existedItemIdx = _items.findIndex(
-      item => item.id === id && item.size === size
-    )
-    if (existedItemIdx >= 0 && _items[existedItemIdx].count > 1) {
-      _items[existedItemIdx].count -= 1
-      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(_items))
-      return true
-    }
-
-    return false
-  },
-  delete(id: number, size: string): boolean {
-    const _items = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_CART_KEY) || '[]'
-    )
-
-    if (!Array.isArray(_items)) {
-      return false
-    }
-
-    const existedItemIdx = _items.findIndex(
-      item => item.id === id && item.size === size
-    )
-
-    if (existedItemIdx >= 0) {
-      _items.splice(existedItemIdx, 1)
-      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(_items))
-      return true
-    }
-
-    return false
-  },
-  deleteAll() {
-    localStorage.removeItem(LOCAL_STORAGE_CART_KEY)
-  },
-  getAll() {
-    const _items = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_CART_KEY) || '[]'
-    )
-    return _items
-  }
-}
 
 export const useCartStore = defineStore('cart', () => {
   const cart: Ref<ICartItem[] | []> = ref(cartStorageProvider.getAll())
   const catalogStore = useCatalogStore()
-  const { products } = storeToRefs(catalogStore)
+  const userStore = useUserStore()
 
   function addItem(id: number, size: string) {
     try {
       cartStorageProvider.add(id, size)
       cart.value = cartStorageProvider.getAll()
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
     }
+  }
+
+  function forget() {
+    cartStorageProvider.deleteAll()
   }
 
   function removeItem(id: number, size: string) {
@@ -112,6 +37,7 @@ export const useCartStore = defineStore('cart', () => {
       cartStorageProvider.decrease(id, size)
       cart.value = cartStorageProvider.getAll()
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
     }
   }
@@ -121,37 +47,89 @@ export const useCartStore = defineStore('cart', () => {
       cartStorageProvider.delete(id, size)
       cart.value = cartStorageProvider.getAll()
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
     }
   }
 
-  function createOrder() {
+  async function createOrder() {
     try {
-      cartStorageProvider.deleteAll()
-      cart.value = []
+      const fetchResponse = await useApiRequest.post('/create_order', {
+        ...OrderApiMapper.toEntity({
+          products: cart.value,
+          address: userStore.addresses![0]
+        })
+      })
 
-      const _fetchReturn = useAppFetch('/order').post([cart.value]).json()
-      console.log(_fetchReturn)
+      if (fetchResponse?.status && fetchResponse.status <= 400) {
+        cartStorageProvider.deleteAll()
+        cart.value = []
+        return { error: false, status: true }
+      }
+
+      return {
+        error: false,
+        status: false
+      }
     } catch (error) {
+      // TODO add notification observer center
+      // eslint-disable-next-line no-console
       console.log(error)
+      const errors = (error as AxiosError)?.response?.data as {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [x: string]: any
+      }
+
+      if (errors instanceof Object && Object.entries(errors).length > 0) {
+        return { error: errors, status: false }
+      }
+      return { error: error, status: false }
+    }
+  }
+
+  const expandCartProducts = async () => {
+    const fetcher = async (productId: number | string) => {
+      return await catalogStore.fetchProduct(productId)
+    }
+
+    if (cart.value.length > 0) {
+      const _cart = cart.value
+      const _responsedCart: IProduct[] = []
+      for (const element of _cart) {
+        const _product = await fetcher(element.id)
+        if (_product) {
+          _responsedCart.push(_product)
+        }
+      }
+
+      catalogStore.products = _responsedCart
     }
   }
 
   function calculateCost() {
-    cart.value = cartStorageProvider.getAll()
-    if (cart.value.length === 0 || products.value === null) {
+    if (cart.value.length === 0) {
       return formatDollars(0)
     }
 
     let _total = 0
     for (const choosenProduct of cart.value) {
       const productCost =
-        products.value.find(product => product.id === choosenProduct.id)
+        catalogStore.products!.find(product => product.id === choosenProduct.id)
           ?.cost || 0
 
       _total += productCost * choosenProduct.count
     }
 
+    // console.log(1)
+    // const fetchResponse = await useApiRequest.post('/calculate_price')
+    // console.log(fetchResponse.data)
+    // if (
+    //   fetchResponse?.status &&
+    //   fetchResponse.status < 400 &&
+    //   fetchResponse?.data
+    // ) {
+    //   console.log(fetchResponse.data)
+    // }
     return formatDollars(_total)
   }
 
@@ -166,6 +144,8 @@ export const useCartStore = defineStore('cart', () => {
     calculateCost,
     calculateDeliveryCost,
     deleteItem,
-    createOrder
+    createOrder,
+    expandCartProducts,
+    forget
   }
 })

@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-import { useAppFetch } from '@/api/shared/network/useAppFetch'
+import { useApiRequest } from '@/api/shared/network/http'
 
-import { CATALOG_DATA, PRODUCTS_DATA } from './catalog.data'
-import { ICatalog, IProduct } from './catalog.types'
+import { CatalogApiMapper, ProductsApiMapper } from './catalog.service'
+import {
+  CatalogResponseDataType,
+  ICatalog,
+  IProduct,
+  ProductsResponseDataType
+} from './catalog.types'
 
 export const useCatalogStore = defineStore('catalog', () => {
   const catalog = ref<ICatalog[] | null>(null)
@@ -13,64 +18,100 @@ export const useCatalogStore = defineStore('catalog', () => {
     catalog.value ? catalog.value.sort((a, b) => b.id - a.id) : []
   )
 
-  async function _assertProducts() {
-    await fetchProducts()
-
-    if (Array.isArray(catalog.value) && Array.isArray(products.value)) {
-      catalog.value = catalog.value.map(drop => {
-        const _dropProducts = products.value!.filter(
-          product => product.dropId === drop.id
-        )
-        drop.products = _dropProducts
-
-        return drop
-      })
-    }
-  }
-
   async function fetchCatalog() {
-    if (Array.isArray(catalog)) {
+    if (catalog.value !== null) {
       return true
     }
 
     try {
-      catalog.value = CATALOG_DATA
+      const fetchResponse = await useApiRequest.get('/catalog')
 
-      const _fetchReturn = await useAppFetch('catalog').get().json()
-      console.log(_fetchReturn)
+      if (
+        fetchResponse?.status &&
+        fetchResponse.status < 400 &&
+        fetchResponse?.data
+      ) {
+        const data: CatalogResponseDataType[] = fetchResponse.data.data
+        const _domainCatalog = CatalogApiMapper.toDomain(data)
+        catalog.value = _domainCatalog
 
-      try {
-        _assertProducts()
-      } catch (error) {
-        console.log(error)
+        return true
       }
 
-      return true
+      return false
     } catch (error) {
       // TODO add notification observer center
+      // eslint-disable-next-line no-console
       console.log(error)
       return false
     }
   }
 
-  async function fetchProducts() {
-    if (Array.isArray(products)) {
-      return true
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  async function fetchProduct(productId?: string | number) {
+    if (!productId) {
+      return null
     }
 
     try {
-      products.value = PRODUCTS_DATA
+      const fetchResponse = await useApiRequest.get(`/product/${productId}`)
 
-      const _fetchReturn = await useAppFetch('products').get().json()
-      console.log(_fetchReturn)
+      if (
+        fetchResponse?.status &&
+        fetchResponse.status < 400 &&
+        fetchResponse?.data
+      ) {
+        const data: ProductsResponseDataType = fetchResponse.data.data
+        const _domainProducts = ProductsApiMapper.toPrimitiveDomain(data)
+        return _domainProducts
+      }
 
-      return true
+      return null
     } catch (error) {
       // TODO add notification observer center
+      // eslint-disable-next-line no-console
+      console.log(error)
+      return null
+    }
+  }
+
+  async function fetchProducts(catalogId: number) {
+    if (catalogId === undefined) {
+      return false
+    }
+
+    try {
+      const fetchResponse = await useApiRequest.get(
+        `/latest-products/${catalogId}`
+      )
+
+      if (
+        fetchResponse?.status &&
+        fetchResponse.status < 400 &&
+        fetchResponse?.data
+      ) {
+        const data: ProductsResponseDataType[] = fetchResponse.data.data
+        const _domainProducts = ProductsApiMapper.toDomain(data)
+        products.value = _domainProducts
+
+        return true
+      }
+
+      return false
+    } catch (error) {
+      // TODO add notification observer center
+      // eslint-disable-next-line no-console
       console.log(error)
       return false
     }
   }
 
-  return { catalog, sortedCatalog, products, fetchCatalog, fetchProducts }
+  return {
+    catalog,
+    sortedCatalog,
+    products,
+    fetchCatalog,
+    fetchProducts,
+    fetchProduct
+  }
 })

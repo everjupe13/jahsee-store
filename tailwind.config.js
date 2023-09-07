@@ -20,11 +20,6 @@ const typography = {
     lineHeight: '42px',
     fontWeight: 500
   },
-  '.text-regular-28': {
-    fontSize: '28px',
-    lineHeight: '34px',
-    fontWeight: 400
-  },
   '.text-regular-26': {
     fontSize: '26px',
     lineHeight: '36px',
@@ -35,35 +30,50 @@ const typography = {
     lineHeight: '32px',
     fontWeight: 500
   },
-  '.text-regular-22': {
-    fontSize: '22px',
-    lineHeight: '32px',
-    fontWeight: 400
-  },
   '.text-medium-20': {
     fontSize: '20px',
     lineHeight: '32px',
     fontWeight: 500
-  },
-  '.text-regular-20': {
-    fontSize: '20px',
-    lineHeight: '32px',
-    fontWeight: 400
   },
   '.text-medium-17': {
     fontSize: '17px',
     lineHeight: '22px',
     fontWeight: 500
   },
-  '.text-regular-17': {
-    fontSize: '17px',
-    lineHeight: '22px',
-    fontWeight: 400
+  '.text-medium-16': {
+    fontSize: '16px',
+    lineHeight: '21px',
+    fontWeight: 500
   },
   '.text-medium-15': {
     fontSize: '15px',
     lineHeight: '20px',
     fontWeight: 500
+  },
+  '.text-medium-14': {
+    fontSize: '14px',
+    lineHeight: '19px',
+    fontWeight: 500
+  },
+  '.text-regular-28': {
+    fontSize: '28px',
+    lineHeight: '34px',
+    fontWeight: 400
+  },
+  '.text-regular-22': {
+    fontSize: '22px',
+    lineHeight: '32px',
+    fontWeight: 400
+  },
+  '.text-regular-20': {
+    fontSize: '20px',
+    lineHeight: '32px',
+    fontWeight: 400
+  },
+  '.text-regular-17': {
+    fontSize: '17px',
+    lineHeight: '22px',
+    fontWeight: 400
   },
   '.text-regular-15': {
     fontSize: '15px',
@@ -130,11 +140,16 @@ module.exports = {
       'posing-levitation': {
         '0%, 100%': { transform: 'translate(0, 0)' },
         '50%': { transform: 'translate(-50px, -10px) scale(1.1, 1.25)' }
+      },
+      spin: {
+        '0%': { transform: 'rotate(0deg)' },
+        '100%': { transform: 'rotate(360deg)' }
       }
     },
 
     animation: {
-      'logo-levitation': 'posing-levitation 20s linear infinite'
+      'logo-levitation': 'posing-levitation 20s linear infinite',
+      spin: 'spin 1s linear infinite' 
     }
   }
 }

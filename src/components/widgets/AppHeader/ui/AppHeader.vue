@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
+import { computed, nextTick, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
-import { useAuthStore } from '@/api/modules/auth/auth.store'
+import { useUserStore } from '@/api/modules/user'
 import AppMarquee from '@/components/features/AppMarquee.vue'
 import AppLogo from '@/components/shared/AppLogo.vue'
 import { CartBagIcon, ProfileUserIcon } from '@/components/shared/icons'
+import { RouteNamesEnum } from '@/router/router.types'
 // import { inject, ref } from 'vue'
 
 // const isLgScreen: boolean | undefined = inject('isLgScreen')
@@ -22,8 +25,35 @@ import { CartBagIcon, ProfileUserIcon } from '@/components/shared/icons'
 //     isModalOpened.value = true
 //   }
 // }
-const store = useAuthStore()
+const store = useUserStore()
 const { isAuth } = storeToRefs(store)
+const route = useRoute()
+
+const marqueeHiddedPages: Set<RouteNamesEnum> = new Set([
+  RouteNamesEnum.profile,
+  RouteNamesEnum.login,
+  RouteNamesEnum.signup,
+  RouteNamesEnum.cart
+])
+const isMarqueeHidden = computed(() =>
+  marqueeHiddedPages.has(
+    route.name as (typeof RouteNamesEnum)[keyof typeof RouteNamesEnum]
+  )
+    ? true
+    : false
+)
+watch(isMarqueeHidden, () => {
+  nextTick(() => {
+    const _app = document.querySelector('#app') as HTMLElement
+    const _header = document.querySelector('#header') as HTMLElement
+
+    if (_app && _header) {
+      _app.style.paddingTop = `${
+        _header?.getBoundingClientRect().height || 0
+      }px`
+    }
+  })
+})
 </script>
 
 <template>
@@ -31,8 +61,8 @@ const { isAuth } = storeToRefs(store)
     id="header"
     class="header fixed inset-x-0 top-0 z-10 flex flex-col justify-center"
   >
-    <AppMarquee>3rd drop coming soon</AppMarquee>
-    <div class="py-20">
+    <AppMarquee v-if="!isMarqueeHidden">3rd drop coming soon</AppMarquee>
+    <div class="py-7 md:py-20">
       <AppContainer>
         <div class="flex items-center">
           <div class="header__logo grid items-center">
@@ -84,10 +114,8 @@ const { isAuth } = storeToRefs(store)
   &__links {
     color: #f6f5ff;
     font-size: 18px;
-    font-weight: 600;
-    line-height: normal;
 
-    @apply uppercase;
+    @apply font-semibold uppercase leading-none;
 
     @media (max-width: 767px) {
       display: none;

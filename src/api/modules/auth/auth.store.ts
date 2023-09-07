@@ -1,26 +1,19 @@
-// import { jwtDecode } from 'jwt-decode'
-import { isPlainObject } from 'lodash-es'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref } from 'vue'
 
-import { useAppFetch } from '@/api/shared/network/useAppFetch'
-import { RouteNamesEnum } from '@/router/router.types'
+import { useApiRequest } from '@/api/shared/network/http'
+import { SHARED_LOCALSTORAGE_KEYS } from '@/config'
 
-import { IUser } from './auth.types'
+import { AuthApiMapper } from './auth.service'
 
 export const useAuthStore = defineStore('auth', () => {
-  const router = useRouter()
-  const route = useRoute()
-  const userData = ref<IUser | null>(null)
-  const isAuth = computed<boolean>(
-    () =>
-      !!userData.value &&
-      isPlainObject(userData.value) &&
-      Object.keys(userData.value as object).length > 0
+  const token = ref<string | null>(
+    localStorage.getItem(SHARED_LOCALSTORAGE_KEYS.TOKEN)
   )
 
-  async function authUser({
+  async function signIn({
     email,
     password
   }: {
@@ -28,38 +21,42 @@ export const useAuthStore = defineStore('auth', () => {
     password: string
   }) {
     try {
-      userData.value = {
-        userEmail: email,
-        userPassword: password,
-        userName: 'John Testenko'
-      }
+      const fetchResponse = await useApiRequest.post('/token/login', {
+        email,
+        password
+      })
 
       if (
-        route.query.redirect &&
-        Object.values(RouteNamesEnum).includes(
-          route.query.redirect.slice(
-            1
-          ) as (typeof RouteNamesEnum)[keyof typeof RouteNamesEnum]
-        )
+        fetchResponse?.status &&
+        fetchResponse.status < 400 &&
+        fetchResponse?.data
       ) {
-        await router.push(route.query.redirect.slice(1) as string)
-        return
+        token.value = fetchResponse?.data?.auth_token || null
+
+        if (!token.value) {
+          return { error: false, status: true, data: null }
+        }
+
+        localStorage.setItem(SHARED_LOCALSTORAGE_KEYS.TOKEN, token.value)
       }
 
-      await router.push({ name: RouteNamesEnum.home })
-
-      const _fetchReturn = await useAppFetch('login').post().json()
-      console.log(_fetchReturn)
-
-      return true
+      return { error: false, status: true, data: { email, password } }
     } catch (error) {
       // TODO add notification observer center
+      // eslint-disable-next-line no-console
       console.log(error)
-      return false
+      const errors = (error as AxiosError)?.response?.data as {
+        [x: string]: any
+      }
+
+      if (errors instanceof Object && Object.entries(errors).length > 0) {
+        return { error: errors, data: null, status: false }
+      }
+      return { error: error, data: null, status: false }
     }
   }
 
-  async function signUpUser({
+  async function signUp({
     email,
     name,
     lastName,
@@ -71,32 +68,49 @@ export const useAuthStore = defineStore('auth', () => {
     password: string
   }) {
     try {
-      userData.value = {
-        userEmail: email,
-        userName: name,
-        ...(lastName
-          ? { userLastName: lastName }
-          : { userLastName: undefined }),
-        userPassword: password
+      const fetchResponse = await useApiRequest.post(
+        '/users/',
+        AuthApiMapper.toEntity({
+          userEmail: email,
+          userName: name,
+          userLastName: lastName,
+          userPassword: password
+        })
+      )
+
+      if (fetchResponse?.status && fetchResponse.status < 400) {
+        const { error, data, status } = await signIn({ email, password })
+        return { error, data, status }
       }
 
-      await router.push({ name: RouteNamesEnum.home })
-
-      const _fetchReturn = await useAppFetch('signup').post().json()
-      console.log(_fetchReturn)
-
-      return true
+      return {
+        error: false,
+        status: true,
+        data: { email, name, lastName, password }
+      }
     } catch (error) {
-      // TODO add notification observer center
+      // eslint-disable-next-line no-console
       console.log(error)
-      return false
+      const errors = (error as AxiosError)?.response?.data as {
+        [x: string]: any
+      }
+
+      if (errors instanceof Object && Object.entries(errors).length > 0) {
+        return { error: errors, data: null, status: false }
+      }
+      return { error: error, data: null, status: false }
     }
   }
 
-  async function logoutUser() {
-    userData.value = null
-    await router.push({ name: RouteNamesEnum.home })
+  async function forget() {
+    token.value = null
+    localStorage.removeItem(SHARED_LOCALSTORAGE_KEYS.TOKEN)
   }
 
-  return { userData, isAuth, authUser, signUpUser, logoutUser }
+  return {
+    token,
+    signIn,
+    signUp,
+    forget
+  }
 })
