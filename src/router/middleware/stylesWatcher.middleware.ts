@@ -9,13 +9,13 @@ export const stylesWatcherMiddleware: NavigationGuardWithThis<undefined> = (
 
   if (_app && _header) {
     _app.style.paddingTop = `${_header?.getBoundingClientRect().height || 0}px`
-  }
 
-  if (to.name === 'home') {
-    document.querySelector('#header')?.classList.remove('header_full')
-    document.querySelector('#app')?.classList.remove('animated')
-  } else {
-    document.querySelector('#header')?.classList.add('header_full')
-    document.querySelector('#app')?.classList.add('animated')
+    if (to.name === 'home') {
+      _header?.classList.remove('header_full')
+      _app?.classList.remove('animated')
+    } else {
+      _header?.classList.add('header_full')
+      _app?.classList.add('animated')
+    }
   }
 }
