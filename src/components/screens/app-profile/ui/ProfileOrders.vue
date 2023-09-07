@@ -1,8 +1,10 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import ProfileTabHeading from './ProfileTabHeading.vue'
+</script>
 
 <template>
   <div>
-    <h2 class="heading mb-40 font-hnd text-button-black">Orders</h2>
+    <ProfileTabHeading>Orders</ProfileTabHeading>
     <p class="empty-text font-hnd">
       You haven't ordered yet.
       <br />
@@ -13,8 +15,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import './style.scss';
-
 .empty-text {
   @apply text-[14px] font-extrabold uppercase text-[#848a99];
 

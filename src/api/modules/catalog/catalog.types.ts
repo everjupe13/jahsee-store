@@ -1,31 +1,3 @@
-export interface ICatalog {
-  id: number
-  dropSlug: (typeof CatalogSlugsEnum)[keyof typeof CatalogSlugsEnum]
-  name: string
-  thumbImage: string
-  yearTag: string
-  video?: string
-  videoPoster?: string
-  isCatalogExpanded: boolean
-  status: 'active' | 'sold out'
-  products: {
-    id: number
-    productName: string
-    thumbImage: string
-  }[]
-}
-
-export interface IProduct {
-  id: number
-  productName: string
-  description: string
-  dropId?: ICatalog['id']
-  cost: number
-  aboutList: string[]
-  gallery: string[]
-  sizes: { label: string; soldOut: boolean }[]
-}
-
 export const CatalogSlugsEnum = {
   first: 'first-drop',
   second: 'second-drop',
@@ -49,12 +21,43 @@ export type CatalogResponseDataType = {
   }[]
 }
 
+export interface ICatalog {
+  id: number
+  // dropSlug: (typeof CatalogSlugsEnum)[keyof typeof CatalogSlugsEnum]
+  dropSlug: string
+  name: string
+  thumbImage: string
+  yearTag: string
+  video?: string
+  videoPoster?: string
+  isCatalogExpanded: boolean
+  status: 'active' | 'sold out'
+  products: {
+    id: number
+    productName: string
+    thumbImage: string
+  }[]
+}
+
 export type ProductsResponseDataType = {
   id: string
+  product_name: string
   get_absolute_url: string
-  name: string
   description: string
-  get_thumbnail: string
   price: string
-  get_image: string[]
+  aboutList: string[]
+  images: { id: number; get_images: string }[]
+  sizes: { label: string; soldOut: boolean }[]
+}
+
+export interface IProduct {
+  id: number
+  productName: string
+  description: string
+  dropId?: number | string
+  dropSlug?: string
+  cost: number
+  aboutList: string[]
+  gallery: string[]
+  sizes: { label: string; soldOut: boolean }[]
 }

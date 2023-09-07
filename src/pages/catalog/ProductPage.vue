@@ -32,6 +32,7 @@ const modules = [FreeMode, Navigation, Thumbs]
 const router = useRouter()
 const route = useRoute()
 const catalogStore = useCatalogStore()
+
 await catalogStore.fetchCatalog()
 const currentCatalog: Ref<undefined | ICatalog> = computed(() => {
   return catalogStore.catalog
@@ -40,6 +41,8 @@ const currentCatalog: Ref<undefined | ICatalog> = computed(() => {
       )
     : undefined
 })
+
+await catalogStore.fetchProducts(currentCatalog.value?.id || 0)
 const currentDrop: Ref<undefined | IProduct> = computed(() => {
   return catalogStore.products
     ? (catalogStore.products.find(
@@ -111,7 +114,7 @@ cartStore.calculateCost()
               </div>
 
               <RouterLink
-                :to="{ name: 'lore', params: { id: $route.params.dropId } }"
+                :to="{ name: 'lore', state: { id: $route.params.dropId } }"
                 class="drop__options-item cursor-pointer"
               >
                 <div class="drop__options-label">Drop lore</div>

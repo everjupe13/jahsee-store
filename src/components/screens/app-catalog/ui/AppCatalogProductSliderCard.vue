@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<IProductSliderCard>(), {
 })
 const linkToProduct: Ref<RouteLocationRaw> = computed(() => ({
   name: RouteNamesEnum.drop,
-  params: {
+  state: {
     dropSlug: route.params.dropSlug,
     dropId: props.productId
   }
@@ -27,12 +27,12 @@ const linkToProduct: Ref<RouteLocationRaw> = computed(() => ({
 <template>
   <div class="group w-full max-w-[460px]">
     <div
-      class="mb-40 block aspect-square max-w-[460px] overflow-hidden opacity-10 transition-all group-hover:opacity-100"
+      class="mb-40 block aspect-square min-h-[200px] max-w-[460px] overflow-hidden bg-button-black/40 opacity-10 transition-all group-hover:opacity-100"
     >
       <router-link :to="linkToProduct" class="relative block h-auto w-full">
         <img
           :src="image"
-          class="z-1 relative block w-full select-none object-fill"
+          class="z-1 relative block w-full select-none object-cover"
         />
       </router-link>
     </div>

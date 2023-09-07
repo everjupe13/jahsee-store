@@ -1,15 +1,15 @@
 import { storeToRefs } from 'pinia'
 import { NavigationGuardWithThis } from 'vue-router'
 
-import { useAuthStore } from '@/api/modules/auth/auth.store'
+import { useUserStore } from '@/api/modules/user'
 
 import { RouteNamesEnum } from '../router.types'
 
-export const authMiddleware: NavigationGuardWithThis<undefined> = (
+export const authMiddleware: NavigationGuardWithThis<undefined> = async (
   to,
   _from
 ) => {
-  const store = useAuthStore()
+  const store = useUserStore()
   const { isAuth } = storeToRefs(store)
 
   if (

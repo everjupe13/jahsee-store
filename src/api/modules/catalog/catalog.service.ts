@@ -30,20 +30,25 @@ export const ProductsApiMapper = {
   toDomain(entity: ProductsResponseDataType[]): IProduct[] {
     return entity.map(product => ({
       id: Number(product.id),
-      productName: product.name,
+      productName: product.product_name,
       description: product.description,
-      dropSlug: product.get_absolute_url?.slice(1),
+      dropSlug: product.get_absolute_url,
       cost: Number.parseFloat(product.price),
-      aboutList: ['', ''],
-      gallery: [''],
-      sizes: [
-        { label: 'XS', soldOut: false },
-        { label: 'S', soldOut: false },
-        { label: 'M', soldOut: false },
-        { label: 'L', soldOut: false },
-        { label: 'XL', soldOut: true },
-        { label: 'XXL', soldOut: false }
-      ]
+      aboutList: product.aboutList,
+      gallery: product.images?.map(imageObject => imageObject.get_images) || [],
+      sizes: product.sizes
     }))
+  },
+  toPrimitiveDomain(entity: ProductsResponseDataType): IProduct {
+    return {
+      id: Number(entity.id),
+      productName: entity.product_name,
+      description: entity.description,
+      dropSlug: entity.get_absolute_url,
+      cost: Number.parseFloat(entity.price),
+      aboutList: entity.aboutList,
+      gallery: entity.images?.map(imageObject => imageObject.get_images) || [],
+      sizes: entity.sizes
+    }
   }
 }

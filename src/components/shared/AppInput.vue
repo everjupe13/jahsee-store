@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import { computed, ref, useSlots } from 'vue'
 
-import AppCollapse from '@/components/shared/AppCollapse.vue'
+// import AppCollapse from '@/components/shared/AppCollapse.vue'
 import { CheckIcon } from '@/components/shared/icons'
 
 function useEvents(context: (e: any, value: any) => void) {
@@ -24,11 +24,9 @@ function randomID() {
 }
 
 interface Props {
-  label?: string
   disabled?: boolean
   placeholder?: string
   readonly?: boolean
-  state?: any
   modelValue?: any
   inputWrapperClasses?: string
   type?:
@@ -52,6 +50,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   validationMessage: '',
+  placeholder: '',
   modelValue: undefined,
   isValid: undefined,
   isDirty: undefined,
@@ -72,6 +71,13 @@ const slots = useSlots()
 const isAfterInputSlotEmpty = computed(
   () => slots?.['after-input'] === undefined
 )
+
+const inputRef = ref<HTMLElement | null>(null)
+const onFocus = () => {
+  if (props.readonly && inputRef.value !== null) {
+    inputRef.value.blur()
+  }
+}
 </script>
 
 <template>
@@ -82,6 +88,7 @@ const isAfterInputSlotEmpty = computed(
     >
       <div class="relative w-full flex-grow">
         <input
+          ref="inputRef"
           class="input peer block w-full bg-transparent px-20 pb-12 pt-28 text-[#555862] outline-none transition placeholder:opacity-0 focus:text-[#000] group-hover:text-[#000]"
           :id="uuid"
           :value="props.modelValue"
@@ -91,6 +98,7 @@ const isAfterInputSlotEmpty = computed(
           :type="props.type"
           @input="handleInput"
           @change="handleChange"
+          @focus="onFocus"
         />
         <label
           class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"
@@ -120,14 +128,14 @@ const isAfterInputSlotEmpty = computed(
         </template>
       </div>
     </div>
-    <AppCollapse
-      v-if="props.isValid !== undefined"
-      v-model="isValidationMessageShown"
-    >
-      <div class="validation-message bg-black px-20 py-10">
+    <transition name="slightly-fade">
+      <div
+        v-if="props.isValid !== undefined && isValidationMessageShown"
+        class="validation-message bg-black px-20 py-7"
+      >
         {{ validationMessage }}
       </div>
-    </AppCollapse>
+    </transition>
   </div>
 </template>
 
@@ -146,10 +154,34 @@ const isAfterInputSlotEmpty = computed(
 }
 
 .validation-message {
-  color: #fff;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  overflow: hidden;
+  @apply text-white;
+}
+
+.slightly-fade-enter-active,
+.slightly-fade-leave-active {
+  @apply transition-all;
+}
+
+.slightly-fade-enter-from,
+.slightly-fade-leave-to {
+  @apply translate-y-5 pt-0 leading-[0px] text-black opacity-0;
+}
+
+.slightly-fade-enter-to,
+.slightly-fade-leave-from {
+  @apply translate-y-0 py-7 leading-none text-white opacity-100;
+}
+
+.input {
+  @apply leading-none text-medium-16;
 }
 </style>

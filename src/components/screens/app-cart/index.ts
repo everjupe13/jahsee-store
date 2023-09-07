@@ -1,1 +1,1 @@
-export { default as AppCartOrder } from './ui/AppCartOrder.vue'
+export { default as CartConfig } from './ui/CartConfig.vue'

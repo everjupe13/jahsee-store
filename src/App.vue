@@ -3,6 +3,8 @@ import { computed, onMounted, onUnmounted, provide, ref } from 'vue'
 
 import Layout from '@/layout/default.vue'
 
+import { AuthController } from './components/screens/app-root'
+
 const appWidth = ref(window.innerWidth)
 
 function setSizing() {
@@ -25,9 +27,11 @@ provide('isLgScreen', isLgScreen)
 </script>
 
 <template>
-  <Layout>
-    <Suspense>
-      <router-view></router-view>
-    </Suspense>
-  </Layout>
+  <Suspense>
+    <AuthController>
+      <Layout>
+        <RouterView></RouterView>
+      </Layout>
+    </AuthController>
+  </Suspense>
 </template>

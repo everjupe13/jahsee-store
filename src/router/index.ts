@@ -106,7 +106,7 @@ const router = createRouter({
 })
 
 router.beforeEach(loadLayoutMiddleware)
-router.beforeEach(authMiddleware)
-router.beforeEach(stylesWatcherMiddleware)
+router.beforeResolve(authMiddleware)
+router.beforeResolve(stylesWatcherMiddleware)
 
 export { router }

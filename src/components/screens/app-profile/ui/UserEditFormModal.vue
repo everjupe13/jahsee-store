@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core'
-import { email, required } from '@vuelidate/validators'
-import { nextTick, onMounted, reactive, ref, unref } from 'vue'
+import { email, minLength, required } from '@vuelidate/validators'
+import { computed, nextTick, onMounted, reactive, ref, unref, watch } from 'vue'
 import { VueFinalModal } from 'vue-final-modal'
+
+import { useUserStore } from '@/api/modules/user'
 
 const emit = defineEmits<{
   (e: 'confirm'): void
@@ -15,30 +17,27 @@ onMounted(() => {
   })
 })
 
+const userStore = useUserStore()
 const formData = reactive({
-  email: 'example@mailbox.io',
-  name: 'John',
-  phone: '8 999 999 99 99',
-  password: '12113123'
+  email: userStore.profile?.userEmail || '',
+  phone: userStore.profile?.userPhone || '',
+  firstName: userStore.profile?.userName || '',
+  lastName: userStore.profile?.userLastName,
+  password: ''
 })
 
 const rules = {
   email: { required, email },
-  name: { required },
-  phone: { required },
-  password: { required }
+  firstName: { required },
+  lastName: {},
+  phone: {},
+  password: { required, minLengthValue: minLength(8) }
 }
 
 const v$ = useVuelidate(rules, formData)
-const isLoading = ref(false)
-const isSuccess = ref(false)
 
 onMounted(() => {
-  isLoading.value = true
-  isSuccess.value = false
-  v$.value.$validate()
-  isLoading.value = false
-  isSuccess.value = true
+  // v$.value.$validate()
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,53 +48,113 @@ const inputPropsMapper = (props: { [x: string]: any }) => {
     validationMessage: unref(props.$silentErrors[0]?.$message)
   }
 }
-const onSubmitForm = () => {
-  emit('confirm')
+
+const serverMessage = ref<string | null>(null)
+const serverMessageVisible = computed(
+  () => serverMessage.value && serverMessage.value !== null
+)
+
+watch(formData, () => {
+  serverMessage.value = null
+})
+
+const isLoading = ref(false)
+const isSuccess = ref(true)
+
+const onSubmitForm = async () => {
+  serverMessage.value = null
+
+  if (v$.value.$invalid) {
+    v$.value.$validate()
+    return
+  }
+
+  isLoading.value = true
+  isSuccess.value = false
+
+  const response = await userStore.editProfile({
+    userEmail: formData.email,
+    userName: formData.firstName,
+    userLastName: formData.lastName,
+    userPhone: formData.phone,
+    userPassword: formData.password
+  })
+
+  if (response.status) {
+    setTimeout(() => {
+      isLoading.value = false
+      isSuccess.value = true
+      emit('confirm')
+    }, 1000)
+  } else if (response.error) {
+    isLoading.value = false
+    isSuccess.value = true
+    const messages = response.error as { [x: string]: string[] }
+    const pureMessage = Object.values(messages).flat(1)[0]
+    serverMessage.value = pureMessage
+  }
 }
 </script>
 
 <template>
   <VueFinalModal
     class="flex items-center justify-center"
-    content-class="px-40 py-50 bg-white rounded-[24px] max-w-[600px] w-full md:px-20 md:py-50 md:rounded-[12px] md:mx-10"
+    content-class="md:px-40 md:py-50 bg-white max-w-[600px] w-full px-20 py-30 md:mx-10"
   >
     <div>
-      <h2 class="text-extrabold-36 md:text-extrabold-28 mb-40 leading-none">
-        Введите новые данные
-      </h2>
       <form @submit.prevent="onSubmitForm">
-        <div class="mb-20">
+        <h3
+          class="mb-30 text-center font-hnd text-[30px] font-medium uppercase leading-tight tracking-[1.6px] text-button-black md:mb-40 md:text-[40px]"
+        >
+          Change your profile
+        </h3>
+        <div class="mb-30 md:mb-40">
           <AppInput
             v-model="v$.email.$model"
-            placeholder="Е-mail"
+            placeholder="e-mail"
             class="mb-15"
             v-bind="inputPropsMapper(v$.email)"
           />
           <AppInput
             v-model="v$.phone.$model"
-            placeholder="Номер телефона"
+            placeholder="phone number"
             class="mb-15"
             v-bind="inputPropsMapper(v$.phone)"
           />
           <AppInput
-            v-model="v$.name.$model"
-            placeholder="ФИО"
+            v-model="v$.firstName.$model"
+            placeholder="first name"
             class="mb-15"
-            v-bind="inputPropsMapper(v$.name)"
+            v-bind="inputPropsMapper(v$.firstName)"
+          />
+          <AppInput
+            v-model="v$.lastName.$model"
+            placeholder="last name"
+            class="mb-15"
+            v-bind="inputPropsMapper(v$.lastName)"
           />
           <AppInput
             v-model="v$.password.$model"
-            placeholder="Пароль"
+            placeholder="password"
             type="password"
             class="mb-15"
             v-bind="inputPropsMapper(v$.password)"
           />
         </div>
-        <div class="flex flex-col items-center">
-          <AppButton class="w-full max-w-[250px]" type="submit">
-            Change
-          </AppButton>
+        <div
+          v-if="serverMessageVisible"
+          class="mb-10 px-5 text-[#d84949] text-medium-15"
+        >
+          {{ serverMessage }}
         </div>
+        <AppButton
+          :disabled="isLoading || !isSuccess"
+          fluid
+          class="mb-25 h-65"
+          type="submit"
+        >
+          Submit
+        </AppButton>
       </form>
     </div>
   </VueFinalModal>

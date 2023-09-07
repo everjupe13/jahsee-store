@@ -61,6 +61,9 @@ const slidesProgress = computed(() => {
 
 <template>
   <swiper
+    v-if="
+      currentCatalog?.products.length && currentCatalog?.products.length > 0
+    "
     data-aos="zoom-out"
     data-aos-delay="50"
     data-aos-duration="600"
@@ -77,7 +80,7 @@ const slidesProgress = computed(() => {
         v-bind="{
           productName: item.productName,
           productId: item.id,
-          image: item.gallery[0]
+          image: item.thumbImage
         }"
       />
     </swiper-slide>
