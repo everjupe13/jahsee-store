@@ -50,7 +50,7 @@
       }
 
       .before-load .loader-box {
-        animation: rotate 1s linear reverse infinite;
+        /* animation: rotate 1s linear reverse infinite; */
       }
 
       .loader-box img {
@@ -62,7 +62,11 @@
         transition-timing-function: ease;
       }
 
-      .before-load .loader-box img {
+      .loader-box img:not(.loader-img-1) {
+        opacity: 0 !important
+      }
+
+      .before-load .loader-box img:not(.loader-img-1) {
         mix-blend-mode: multiply;
         animation: rotate 1s linear infinite;
         opacity: 0
@@ -121,16 +125,32 @@
         mix-blend-mode: normal;
         z-index: 10;
         opacity: 1 !important;
+
+        animation: MainLoaderPulseOut 1.5s ease-in-out infinite !important;
+        filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0.0));
+      }
+
+      @keyframes MainLoaderPulseOut {
+        0%,
+        50% {
+          filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0.0));
+          opacity: 0 !important;
+        }
+        100% {
+          filter: drop-shadow(0 0 1em rgba(255, 255, 255, 0.55));
+          opacity: 1 !important;
+        }
       }
 
       .loader.erase img {
         translate: 0 !important;
-        scale: 1 !important
+        /* opacity: 0 !important */
+        /* scale: 1 !important */
       }
 
       .loader.erase .loader-box {
-        scale: 5;
-        opacity: .2;
+        scale: 0;
+        opacity: 0;
         transition-delay: .4s;
       }
 
