@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, provide, ref } from 'vue'
 
+import { NetworkLoader } from '@/components/widgets/loaders'
 import Layout from '@/layout/default.vue'
 
 import { AuthController } from './components/screens/app-root'
@@ -32,6 +33,7 @@ provide('isLgScreen', isLgScreen)
       <Layout>
         <RouterView></RouterView>
       </Layout>
+      <NetworkLoader></NetworkLoader>
     </AuthController>
   </Suspense>
 </template>
