@@ -19,7 +19,7 @@ const dropNumber =
       <div class="close-icon">
         <slot name="close"></slot>
       </div>
-      <div class="flex flex-col justify-center">
+      <div v-if="false" class="flex flex-col justify-center">
         <h1 class="heading mb-5">Teaser</h1>
         <h2 class="outlined-text subheading pl-10" style="--stroke-color: #000">
           For tier {{ dropNumber }} items

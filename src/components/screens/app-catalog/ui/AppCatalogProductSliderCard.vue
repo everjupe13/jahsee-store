@@ -15,13 +15,12 @@ const route = useRoute()
 const props = withDefaults(defineProps<IProductSliderCard>(), {
   productName: ''
 })
-const linkToProduct: Ref<RouteLocationRaw> = computed(() => ({
-  name: RouteNamesEnum.drop,
-  state: {
-    dropSlug: route.params.dropSlug,
-    dropId: props.productId
-  }
-}))
+
+const linkToProduct: Ref<RouteLocationRaw> = computed(() =>
+  props.productId
+    ? `/${RouteNamesEnum.catalog}/${route.params.dropSlug}/${RouteNamesEnum.drop}/${props.productId}`
+    : '/404'
+)
 </script>
 
 <template>

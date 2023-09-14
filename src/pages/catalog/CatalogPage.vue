@@ -23,6 +23,7 @@ await catalogStore.fetchCatalog()
         <AppCatalogVideoBanner>
           <template #close>
             <button
+              v-if="false"
               class="p-10 text-[48px] font-black text-button-black"
               @click="handleCloseBannerClick"
             >
