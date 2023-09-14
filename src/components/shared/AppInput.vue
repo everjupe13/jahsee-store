@@ -101,7 +101,11 @@ const onFocus = () => {
           @focus="onFocus"
         />
         <label
-          class="label absolute left-22 top-12 text-[12px] text-[#848A99] transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]"
+          :class="[
+            'label transition-all ',
+            'absolute left-22 top-12 text-[12px] text-[#848A99]',
+            'peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-[14px] peer-hover:text-[#000] peer-focus:top-11 peer-focus:-translate-y-0 peer-focus:text-[12px] peer-focus:text-[#848A99]'
+          ]"
           :for="uuid"
         >
           {{ placeholder }}
@@ -151,6 +155,12 @@ const onFocus = () => {
   font-style: normal;
   font-weight: 500;
   line-height: 100%;
+
+  &:-webkit-autofill {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
 
 .validation-message {
