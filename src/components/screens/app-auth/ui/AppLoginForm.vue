@@ -6,7 +6,9 @@ import { RouteLocationRaw, useRoute, useRouter } from 'vue-router'
 
 import { useAuthStore } from '@/api/modules/auth/auth.store'
 import { useUserStore } from '@/api/modules/user'
+import { FormAlternativeLoader } from '@/components/widgets/loaders'
 import { RouteNamesEnum } from '@/router/router.types'
+import { sleep } from '@/utils'
 // const emit = defineEmits(['submit'])
 
 const formData = reactive({
@@ -58,26 +60,57 @@ async function _tryToRedirectFromQuery({
   }
 }
 
-const onSubmitForm = async () => {
+const loading = ref(false)
+const longLoading = ref(false)
+
+const beforeRequestLoaders = async () => {
+  longLoading.value = true
+  loading.value = true
+}
+
+const afterRequestLoaders = async () => {
+  await sleep(200)
+  loading.value = false
+  await sleep(700)
+  longLoading.value = false
+}
+
+const checkClientValidation = () => {
   if (v$.value.$invalid) {
     v$.value.$validate()
-    return
+    return false
   }
 
-  const response = await authStore.signIn({
+  return true
+}
+
+const onSubmitForm = async () => {
+  await beforeRequestLoaders()
+
+  const isValid = checkClientValidation()
+  if (!isValid) {
+    return await afterRequestLoaders()
+  }
+
+  const { status, error } = await authStore.signIn({
     email: formData.email,
     password: formData.password
   })
 
-  if (response.status) {
+  if (error) {
+    const messages = error as { [x: string]: string[] }
+    const pureMessage =
+      messages instanceof Object ? Object.values(messages).flat(1)[0] : ''
+    serverMessage.value = pureMessage
+
+    return await afterRequestLoaders()
+  }
+
+  if (status) {
     const isProfileSuccess = await userStore.fetchProfile()
     if (isProfileSuccess) {
       _tryToRedirectFromQuery({ elsePath: { name: RouteNamesEnum.home } })
     }
-  } else if (response.error) {
-    const messages = response.error as { [x: string]: string[] }
-    const pureMessage = Object.values(messages).flat(1)[0]
-    serverMessage.value = pureMessage
   }
 }
 </script>
@@ -97,6 +130,7 @@ const onSubmitForm = async () => {
         v-model="v$.email.$model"
         placeholder="e-mail*"
         class="mb-15"
+        :disabled="longLoading"
         :is-valid="v$.email.$dirty ? !v$.email.$invalid : true"
         :is-dirty="v$.email.$dirty"
         :validation-message="v$.email.$silentErrors[0]?.$message"
@@ -105,6 +139,7 @@ const onSubmitForm = async () => {
         v-model="v$.password.$model"
         placeholder="password*"
         type="password"
+        :disabled="longLoading"
         :is-valid="v$.password.$dirty ? !v$.password.$invalid : true"
         :is-dirty="v$.password.$dirty"
         :validation-message="v$.password.$silentErrors[0]?.$message"
@@ -116,7 +151,14 @@ const onSubmitForm = async () => {
     >
       {{ serverMessage }}
     </div>
-    <AppButton fluid class="mb-25 h-65">Log In</AppButton>
+    <AppButton fluid class="mb-25 h-65" :disabled="longLoading">
+      <template v-if="loading">
+        <div class="flex items-center justify-center">
+          <FormAlternativeLoader></FormAlternativeLoader>
+        </div>
+      </template>
+      <template v-else>Log In</template>
+    </AppButton>
     <div class="text-center font-medium leading-none text-[#6a6e7a]">
       Don’t have an account?
       <router-link to="/signup" class="text-button-black">Sign Up</router-link>
