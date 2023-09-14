@@ -10,7 +10,8 @@ export const stylesWatcherMiddleware: NavigationGuardWithThis<undefined> = (
   if (_app && _header) {
     _app.style.paddingTop = `${_header?.getBoundingClientRect().height || 0}px`
 
-    if (to.name === 'home') {
+    const hiddenAnimation = new Set(['home', 'catalog', 'product', 'drop'])
+    if (to.name && hiddenAnimation.has(to.name as string)) {
       _header?.classList.remove('header_full')
       _app?.classList.remove('animated')
     } else {
