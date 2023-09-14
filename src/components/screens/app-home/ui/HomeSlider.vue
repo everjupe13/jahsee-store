@@ -35,6 +35,7 @@ const catalogStore = useCatalogStore()
     @slideChange="onSlideChange"
     :space-between="40"
     :modules="modules"
+    :slide-to-clicked-slide="true"
     class="drop-gallery"
     data-aos="zoom-out"
     data-aos-delay="50"

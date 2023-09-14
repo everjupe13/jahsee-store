@@ -15,7 +15,11 @@ const renderTagsString = (drop: ICatalog): string => {
     return ''
   }
 
-  return [`${drop.products.length} items`, drop.yearTag, drop.status]
+  return [
+    `${drop.products.length} ${drop.products.length > 1 ? 'items' : 'item'}`,
+    drop.yearTag,
+    drop.status
+  ]
     .map(tag => `<span>${tag}</span>`)
     .join(HomeCardTagDividerIconRaw)
 }
