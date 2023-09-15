@@ -1,6 +1,7 @@
 import { App } from 'vue'
 
 import AppButton from '@/components/shared/AppButton.vue'
+import AppCollapse from '@/components/shared/AppCollapse.vue'
 import AppContaier from '@/components/shared/AppContainer.vue'
 import AppInput from '@/components/shared/AppInput.vue'
 
@@ -24,5 +25,9 @@ const attachedComponents = [
   {
     name: 'AppInput',
     component: AppInput
+  },
+  {
+    name: 'AppCollapse',
+    component: AppCollapse
   }
 ]

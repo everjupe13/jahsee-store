@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import { IDropInfoProps } from '../types/IDropInfoProps'
+interface IDropInfoProps {
+  text: string
+}
 
 const props = defineProps<IDropInfoProps>()
 
@@ -60,58 +62,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="outlined-text drop-info__title mb-25 font-hnd"
+  <h1
+    class="outlined-text info-title relative font-hnd text-[64px] font-bold uppercase leading-none"
     style="--stroke-width: 2px; opacity: 1"
     ref="title"
   >
-    {{ props.title }}
-  </div>
-  <div
-    class="drop-info__cost mb-25 font-hnd"
-    data-aos="fade-down"
-    data-aos-delay="100"
-  >
-    {{ props.cost }}
-  </div>
-  <div
-    class="drop-info__desc"
-    data-aos="fade-down"
-    data-aos-delay="200"
-    v-html="props.desc"
-  ></div>
+    {{ props.text }}
+  </h1>
 </template>
 
 <style lang="scss" scoped>
-.drop-info {
-  &__title {
-    position: relative;
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1;
-
-    @apply uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 36px;
-      -webkit-text-stroke-width: 1px;
-    }
-  }
-
-  &__cost {
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  &__desc {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%;
-    color: rgba(255, 255, 255, 0.6);
+.info-title {
+  @media (max-width: 767px) {
+    font-size: 36px;
+    -webkit-text-stroke-width: 1px;
   }
 }
 </style>

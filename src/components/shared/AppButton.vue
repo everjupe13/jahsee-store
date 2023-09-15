@@ -24,8 +24,8 @@ const componentsClasses = computed(() => {
     props.theme ? `btn_theme-${props.theme}` : '',
     _size,
     props.outlined
-      ? 'bg-transparent border border-button-black text-button-black hover:text-white active:text-white disabled:text-white hover:bg-button-black-hover active:bg-button-black-active disabled:bg-button-black-disabled'
-      : 'bg-button-black text-white hover:bg-button-black-hover active:bg-button-black-active disabled:bg-button-black-disabled',
+      ? 'bg-transparent border border-button-black text-button-black hover:text-white active:text-white disabled:text-white hover:bg-button-black-hover active:bg-button-black-active disabled:opacity-30 disabled:hover:bg-transparent'
+      : 'bg-button-black text-white hover:bg-button-black-hover active:bg-button-black-active disabled:opacity-30 disabled:hover:bg-button-black',
     { 'w-full': props.fluid }
   ]
 })
@@ -33,7 +33,7 @@ const componentsClasses = computed(() => {
 
 <template>
   <button
-    class="btn flex items-center justify-center p-32 font-hnd transition"
+    class="btn flex items-center justify-center p-32 font-hnd transition active:translate-y-2 disabled:translate-y-0"
     :class="componentsClasses"
   >
     <slot></slot>
@@ -53,7 +53,7 @@ const componentsClasses = computed(() => {
   }
 
   &_theme-alternative {
-    @apply bg-[#D9D9D9] text-[#202022];
+    @apply bg-[#fff] text-[#202022] hover:bg-[#efefef] active:bg-[#f6f6f6] disabled:opacity-70 disabled:hover:bg-white;
   }
 }
 </style>

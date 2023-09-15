@@ -20,11 +20,6 @@ const typography = {
     lineHeight: '42px',
     fontWeight: 500
   },
-  '.text-regular-26': {
-    fontSize: '26px',
-    lineHeight: '36px',
-    fontWeight: 400
-  },
   '.text-medium-22': {
     fontSize: '22px',
     lineHeight: '32px',
@@ -58,6 +53,16 @@ const typography = {
   '.text-regular-28': {
     fontSize: '28px',
     lineHeight: '34px',
+    fontWeight: 400
+  },
+  '.text-regular-26': {
+    fontSize: '26px',
+    lineHeight: '36px',
+    fontWeight: 400
+  },
+  '.text-regular-24': {
+    fontSize: '24px',
+    lineHeight: '36px',
     fontWeight: 400
   },
   '.text-regular-22': {

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import AppCollapse from '@/components/shared/AppCollapse.vue'
-
 interface IAppDropdown {
   dropdownData: {
     label: string
