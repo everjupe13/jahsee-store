@@ -59,26 +59,20 @@ const onEditAddress = (index: number) => {
         <template v-for="address in userStore.addresses" :key="address.id">
           <div class="border border-solid border-button-black/10 p-20 md:p-30">
             <div class="flex justify-between">
-              <div class="flex flex-col gap-y-24">
+              <div class="flex flex-col gap-y-10 lg:gap-y-18 2xl:gap-y-24">
                 <p class="text">{{ userStore.fullName }}</p>
-                <p class="text">
-                  {{ address.street }}, {{ address.numCard }}
-                  {{ address.zipCode }}
-                </p>
-                <p class="text">
-                  {{ address.city }}, {{ address.zipCode }}
-                  {{ address.country }}
-                </p>
+                <p class="text">{{ address.street }}, {{ address.zipCode }}</p>
+                <p class="text">{{ address.city }}, {{ address.country }}</p>
               </div>
               <div class="flex flex-shrink-0 flex-col md:flex-row">
                 <button
-                  class="button-text p-10"
+                  class="button-text p-7 lg:p-10"
                   @click="onDeleteAddress(address.id)"
                 >
                   Delete
                 </button>
                 <button
-                  class="button-text p-10"
+                  class="button-text p-7 lg:p-10"
                   @click="onEditAddress(address.id)"
                 >
                   Edit
@@ -94,7 +88,7 @@ const onEditAddress = (index: number) => {
 
 <style lang="scss" scoped>
 .text {
-  @apply text-[16px] font-semibold leading-none text-[#555862];
+  @apply text-[12px] font-semibold leading-none text-[#555862] lg:text-[14px] 2xl:text-[16px];
 }
 
 .button-text {

@@ -8,8 +8,7 @@ export const AddressApiMapper = {
       country: entity.country,
       city: entity.city,
       street: entity.street_address,
-      zipCode: entity.zipcode,
-      numCard: entity.num_card
+      zipCode: entity.zipcode
     }
   },
   toEntity(domainModel: Partial<IAddress>): Partial<AddressResponseType> {
@@ -18,8 +17,7 @@ export const AddressApiMapper = {
       street_address: domainModel.street,
       city: domainModel.city,
       country: domainModel.country,
-      zipcode: domainModel.zipCode,
-      num_card: domainModel.numCard
+      zipcode: domainModel.zipCode
     }
   },
   toDomainUserAddresses(entity: UserResponseDataType): IAddress[] {

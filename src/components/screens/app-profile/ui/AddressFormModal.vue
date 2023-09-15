@@ -22,15 +22,13 @@ type Props = {
   city?: string
   street?: string
   zipCode?: string
-  numCard?: string
 }
 const props = withDefaults(defineProps<Props>(), {
   id: undefined,
   country: '',
   city: '',
   street: '',
-  zipCode: '',
-  numCard: ''
+  zipCode: ''
 })
 const isEditMode = computed(() => props.id !== undefined)
 
@@ -39,8 +37,7 @@ const formData = reactive({
   country: '',
   city: '',
   street: '',
-  zipCode: '',
-  numCard: ''
+  zipCode: ''
 })
 onMounted(() => {
   if (isEditMode.value) {
@@ -48,7 +45,6 @@ onMounted(() => {
     formData.city = props.city
     formData.street = props.street
     formData.zipCode = props.zipCode
-    formData.numCard = props.numCard
   }
 })
 
@@ -56,8 +52,7 @@ const rules = {
   country: { required },
   city: { required },
   street: { required },
-  zipCode: { required },
-  numCard: { required }
+  zipCode: { required }
 }
 
 const v$ = useVuelidate(rules, formData)
@@ -103,8 +98,7 @@ const onSubmitForm = async () => {
       country: formData.country,
       city: formData.city,
       street: formData.street,
-      zipCode: formData.zipCode,
-      numCard: formData.numCard
+      zipCode: formData.zipCode
     })
 
     if (response.status) {
@@ -125,8 +119,7 @@ const onSubmitForm = async () => {
       country: formData.country,
       city: formData.city,
       street: formData.street,
-      zipCode: formData.zipCode,
-      numCard: formData.numCard
+      zipCode: formData.zipCode
     })
 
     if (response.status) {
@@ -176,14 +169,7 @@ const onSubmitForm = async () => {
         <AppInput
           v-model="v$.zipCode.$model"
           placeholder="zip code"
-          class="mb-15"
           v-bind="inputPropsMapper(v$.zipCode)"
-        />
-        <AppInput
-          v-model="v$.numCard.$model"
-          placeholder="num card"
-          class="mb-15"
-          v-bind="inputPropsMapper(v$.numCard)"
         />
       </div>
       <div

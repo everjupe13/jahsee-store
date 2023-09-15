@@ -4,7 +4,6 @@ export type IAddress = {
   city: string
   street: string
   zipCode: string
-  numCard: string
 }
 
 export type AddressResponseType = {
@@ -13,5 +12,4 @@ export type AddressResponseType = {
   city: string
   country: string
   zipcode: string
-  num_card: string
 }
