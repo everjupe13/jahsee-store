@@ -25,7 +25,7 @@ const modules = [FreeMode, Navigation, Thumbs]
 </script>
 
 <template>
-  <div class="flex gap-x-30">
+  <div class="flex gap-x-30 lg:gap-x-15">
     <swiper
       v-if="props.gallery && props.gallery.length > 0"
       :style="{

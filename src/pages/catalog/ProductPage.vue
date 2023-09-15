@@ -79,6 +79,9 @@ const handleAddProductToCart = (size: string) => {
 
     @include laptop-big {
       --dimension-ruler: 500px;
+      --wrapper-gallery-ruler: calc(
+        (var(--dimension-ruler) - 20px * 3) / 4 + var(--dimension-ruler) + 15px
+      );
     }
 
     @include laptop {
