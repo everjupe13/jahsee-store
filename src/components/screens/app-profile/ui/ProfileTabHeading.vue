@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <h2 class="heading mb-40 font-hnd text-button-black">
+  <h2 class="heading mb-20 font-hnd text-button-black xl:mb-40">
     <slot></slot>
   </h2>
 </template>

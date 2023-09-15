@@ -73,7 +73,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .info-title {
-  @media (max-width: 767px) {
+  @include phone-big {
     font-size: 36px;
     -webkit-text-stroke-width: 1px;
   }
