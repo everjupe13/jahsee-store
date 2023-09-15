@@ -2,9 +2,9 @@
 import { useVuelidate } from '@vuelidate/core'
 import { email, minLength, required } from '@vuelidate/validators'
 import { computed, nextTick, onMounted, reactive, ref, unref, watch } from 'vue'
-import { VueFinalModal } from 'vue-final-modal'
 
 import { useUserStore } from '@/api/modules/user'
+import { FormLoader } from '@/components/widgets/loaders'
 
 const emit = defineEmits<{
   (e: 'confirm'): void
@@ -97,65 +97,65 @@ const onSubmitForm = async () => {
 </script>
 
 <template>
-  <VueFinalModal
-    class="flex items-center justify-center"
-    content-class="md:px-40 md:py-50 bg-white max-w-[600px] w-full px-20 py-30 md:mx-10"
-  >
-    <div>
-      <form @submit.prevent="onSubmitForm">
-        <h3
-          class="mb-30 text-center font-hnd text-[30px] font-medium uppercase leading-tight tracking-[1.6px] text-button-black md:mb-40 md:text-[40px]"
-        >
-          Change your profile
-        </h3>
-        <div class="mb-30 md:mb-40">
-          <AppInput
-            v-model="v$.email.$model"
-            placeholder="e-mail"
-            class="mb-15"
-            v-bind="inputPropsMapper(v$.email)"
-          />
-          <AppInput
-            v-model="v$.phone.$model"
-            placeholder="phone number"
-            class="mb-15"
-            v-bind="inputPropsMapper(v$.phone)"
-          />
-          <AppInput
-            v-model="v$.firstName.$model"
-            placeholder="first name"
-            class="mb-15"
-            v-bind="inputPropsMapper(v$.firstName)"
-          />
-          <AppInput
-            v-model="v$.lastName.$model"
-            placeholder="last name"
-            class="mb-15"
-            v-bind="inputPropsMapper(v$.lastName)"
-          />
-          <AppInput
-            v-model="v$.password.$model"
-            placeholder="password"
-            type="password"
-            class="mb-15"
-            v-bind="inputPropsMapper(v$.password)"
-          />
-        </div>
-        <div
-          v-if="serverMessageVisible"
-          class="mb-10 px-5 text-[#d84949] text-medium-15"
-        >
-          {{ serverMessage }}
-        </div>
-        <AppButton
-          :disabled="isLoading || !isSuccess"
-          fluid
-          class="mb-25 h-65"
-          type="submit"
-        >
-          Submit
-        </AppButton>
-      </form>
-    </div>
-  </VueFinalModal>
+  <div>
+    <form @submit.prevent="onSubmitForm">
+      <h3
+        class="mb-30 text-center font-hnd text-[30px] font-medium uppercase leading-tight tracking-[1.6px] text-button-black md:mb-40 md:text-[40px]"
+      >
+        Change your profile
+      </h3>
+      <div class="mb-30 md:mb-40">
+        <AppInput
+          v-model="v$.email.$model"
+          placeholder="e-mail"
+          class="mb-15"
+          v-bind="inputPropsMapper(v$.email)"
+        />
+        <AppInput
+          v-model="v$.phone.$model"
+          placeholder="phone number"
+          class="mb-15"
+          v-bind="inputPropsMapper(v$.phone)"
+        />
+        <AppInput
+          v-model="v$.firstName.$model"
+          placeholder="first name"
+          class="mb-15"
+          v-bind="inputPropsMapper(v$.firstName)"
+        />
+        <AppInput
+          v-model="v$.lastName.$model"
+          placeholder="last name"
+          class="mb-15"
+          v-bind="inputPropsMapper(v$.lastName)"
+        />
+        <AppInput
+          v-model="v$.password.$model"
+          placeholder="password"
+          type="password"
+          class="mb-15"
+          v-bind="inputPropsMapper(v$.password)"
+        />
+      </div>
+      <div
+        v-if="serverMessageVisible"
+        class="mb-10 px-5 text-[#d84949] text-medium-15"
+      >
+        {{ serverMessage }}
+      </div>
+      <AppButton
+        :disabled="isLoading || !isSuccess"
+        fluid
+        class="h-65"
+        type="submit"
+      >
+        <template v-if="!isSuccess">
+          <div class="flex items-center justify-center">
+            <FormLoader></FormLoader>
+          </div>
+        </template>
+        <template v-else>Submit</template>
+      </AppButton>
+    </form>
+  </div>
 </template>

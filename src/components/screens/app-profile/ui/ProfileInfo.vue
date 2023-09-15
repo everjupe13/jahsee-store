@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { onMounted, reactive, watch } from 'vue'
-import { useModal } from 'vue-final-modal'
+import { useModal, useModalSlot } from 'vue-final-modal'
 
 import { useUserStore } from '@/api/modules/user'
+import AppModal from '@/components/widgets/AppModal.vue'
 
 import ProfileTabHeading from './ProfileTabHeading.vue'
 import UserEditFormModal from './UserEditFormModal.vue'
@@ -40,16 +41,27 @@ watch(
   { deep: true }
 )
 
-const { open: openUserForm, close: closeUserForm } = useModal({
-  component: UserEditFormModal,
-  attrs: {
-    onConfirm() {
-      closeUserForm()
+const useOpenModal = () => {
+  const { open: openUserForm, close: closeUserForm } = useModal({
+    component: AppModal,
+    attrs: {},
+    slots: {
+      default: useModalSlot({
+        component: UserEditFormModal,
+        attrs: {
+          onConfirm() {
+            closeUserForm()
+          }
+        }
+      })
     }
-  }
-})
+  })
+
+  return { openUserForm, closeUserForm }
+}
 
 const onInputClick = () => {
+  const { openUserForm } = useOpenModal()
   openUserForm()
 }
 </script>

@@ -4,6 +4,7 @@ import { required } from '@vuelidate/validators'
 import { computed, nextTick, onMounted, reactive, ref, unref, watch } from 'vue'
 
 import { useUserStore } from '@/api/modules/user'
+import { FormLoader } from '@/components/widgets/loaders'
 
 const emit = defineEmits<{
   (e: 'confirm'): void
@@ -181,10 +182,15 @@ const onSubmitForm = async () => {
       <AppButton
         :disabled="isLoading || !isSuccess"
         fluid
-        class="mb-25 h-65"
+        class="h-65"
         type="submit"
       >
-        Submit
+        <template v-if="!isSuccess">
+          <div class="flex items-center justify-center">
+            <FormLoader></FormLoader>
+          </div>
+        </template>
+        <template v-else>Submit</template>
       </AppButton>
     </form>
   </div>
