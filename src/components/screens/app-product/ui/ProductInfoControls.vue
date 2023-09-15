@@ -96,7 +96,7 @@ const handleBuy = async () => {
     <div v-if="props.sizes.length > 0" class="flex flex-wrap gap-x-10">
       <button
         v-for="size in props.sizes"
-        class="size-button group flex aspect-square w-[calc((100%-10px*5)/6)] flex-shrink-0 cursor-pointer items-center justify-center bg-[#242424] p-10 transition-all hover:opacity-80 disabled:!opacity-70"
+        class="size-button group flex h-50 w-[calc((100%-10px*5)/6)] flex-shrink-0 cursor-pointer items-center justify-center bg-[#242424] p-10 transition-all hover:opacity-80 disabled:!opacity-70 sm:h-64 lg:aspect-square"
         :class="sizeButtonClasses(size)"
         :key="size.label"
         type="button"
@@ -104,7 +104,7 @@ const handleBuy = async () => {
         @click="() => setSelectedSize(size.label)"
       >
         <span
-          class="block font-hnd text-[16px] font-medium uppercase leading-none text-white transition-all group-[.--active]:text-[#0a090a] group-[.--disabled]:text-[#545454]"
+          class="block font-hnd text-[14px] font-medium uppercase leading-none text-white transition-all group-[.--active]:text-[#0a090a] group-[.--disabled]:text-[#545454] sm:text-[16px]"
         >
           {{ size.label }}
         </span>
@@ -112,7 +112,7 @@ const handleBuy = async () => {
     </div>
     <div id="product-submit-button">
       <AppButton
-        class="h-80 w-full justify-center"
+        class="h-50 w-full justify-center sm:h-64 xl:h-60 2xl:h-80"
         theme="alternative"
         :disabled="!isSizeChoosed || isOutOfStock || longLoading"
         type="submit"

@@ -63,7 +63,7 @@ onMounted(() => {
 
 <template>
   <h1
-    class="outlined-text info-title relative font-hnd text-[64px] font-bold uppercase leading-none"
+    class="outlined-text info-title relative font-hnd !text-[34px] font-bold uppercase leading-none sm:!text-[38px] lg:!text-[40px] xl:!text-[44px]"
     style="--stroke-width: 2px; opacity: 1"
     ref="title"
   >
