@@ -1,14 +1,18 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useModal } from 'vue-final-modal'
 
 import {
   DropdownCollapseArrowIcon,
   ForwardLinkArrowIcon
 } from '@/components/shared/icons'
 
+import ProductInfoSizeImageModal from './ProductInfoSizeImageModal.vue'
+
 type Props = {
   dropSlug: string
   productAboutList: string[] | []
+  sizingImage: string
 }
 
 const props = withDefaults(defineProps<Partial<Props>>(), {
@@ -24,14 +28,29 @@ const toggleDetailsOpened = () => {
 const handleBlurDetails = () => {
   detailsOpened.value = false
 }
+
+const { open: openSizeImageModal, close: closeSizeImageModal } = useModal({
+  component: ProductInfoSizeImageModal,
+  attrs: {
+    image: computed(() => props.sizingImage).value,
+    onConfirm() {
+      closeSizeImageModal()
+    }
+  }
+})
+
+const openSizeGrid = () => {
+  openSizeImageModal()
+}
 </script>
 
 <template>
   <div
-    class="text-[24px] font-normal leading-normal text-[#f6f5ff] md:mb-50 md:text-[18px]"
+    class="text-16 font-normal leading-normal text-[#f6f5ff] xl:text-[18px] 2xl:text-[24px]"
   >
     <div
       class="group mb-10 flex cursor-pointer items-center justify-between gap-x-10 border-b-[1px] border-b-white/20 pb-10 transition-all duration-300"
+      @click="openSizeGrid"
     >
       <div
         class="select-none font-hnd text-[16px] font-bold uppercase leading-normal tracking-[0.64px] text-white"
