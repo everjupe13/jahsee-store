@@ -12,13 +12,15 @@ type Props = {
   aboutList: string[]
   dropSlug: string
   sizes: { label: string; soldOut: boolean }[]
+  sizingImage: string
 }
 
 const props = withDefaults(defineProps<Partial<Props>>(), {
   title: '',
   cost: 0,
   description: '',
-  dropSlug: ''
+  dropSlug: '',
+  sizingImage: ''
 })
 
 const emits = defineEmits(['handleProductAdd'])
@@ -28,7 +30,7 @@ const handleProductAdd = (size: string) => {
 </script>
 
 <template>
-  <div class="flex max-w-[490px] flex-col gap-y-40">
+  <div class="flex flex-col gap-y-40 lg:max-w-[490px] xl:gap-y-20 2xl:gap-y-40">
     <div>
       <ProductInfoTitle :text="props.title" class="mb-25" />
       <ProductInfoPrice
@@ -46,15 +48,16 @@ const handleProductAdd = (size: string) => {
 
     <div class="mt-auto">
       <ProductInfoNavigation
-        class="mb-10"
+        class="relative z-[10] mb-10"
         :drop-slug="props.dropSlug"
         :product-about-list="props.aboutList"
+        :sizing-image="props.sizingImage"
         data-aos="fade-down"
         data-aos-delay="250"
       />
       <ProductInfoControls
         :sizes="props.sizes"
-        class="controls"
+        class="controls relative z-[5]"
         data-aos="fade-down"
         data-aos-delay="300"
         @handle-product-add-to-cart="handleProductAdd"
