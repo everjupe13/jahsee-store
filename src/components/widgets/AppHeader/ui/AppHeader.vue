@@ -33,7 +33,8 @@ const marqueeHiddedPages: Set<RouteNamesEnum> = new Set([
   RouteNamesEnum.profile,
   RouteNamesEnum.login,
   RouteNamesEnum.signup,
-  RouteNamesEnum.cart
+  RouteNamesEnum.cart,
+  RouteNamesEnum.drop
 ])
 const isMarqueeHidden = computed(() =>
   marqueeHiddedPages.has(
@@ -62,27 +63,35 @@ watch(isMarqueeHidden, () => {
     class="header fixed inset-x-0 top-0 z-10 flex flex-col justify-center"
   >
     <AppMarquee v-if="!isMarqueeHidden">3rd drop coming soon</AppMarquee>
-    <div class="py-7 md:py-20">
+    <div class="py-7 md:py-10">
       <AppContainer>
         <div class="flex items-center">
           <div class="header__logo grid items-center">
             <AppLogo></AppLogo>
           </div>
-          <div class="mr-30 flex items-center gap-x-30">
+          <div class="mr-20 flex items-center gap-x-20 2xl:mr-30 2xl:gap-x-30">
             <template v-if="isAuth">
               <router-link to="/profile">
-                <ProfileUserIcon class="pointer-events-none" />
+                <ProfileUserIcon class="pointer-events-none w-26 2xl:w-32" />
               </router-link>
             </template>
             <template v-else>
-              <RouterLink class="header__links" to="/login">Log In</RouterLink>
-              <RouterLink class="header__links" to="/signup">
+              <RouterLink
+                class="text-[14px] font-semibold uppercase leading-none text-[#f6f5ff] max-md:hidden 2xl:text-[18px]"
+                to="/login"
+              >
+                Log In
+              </RouterLink>
+              <RouterLink
+                class="text-[14px] font-semibold uppercase leading-none text-[#f6f5ff] max-md:hidden 2xl:text-[18px]"
+                to="/signup"
+              >
                 Sign Up
               </RouterLink>
             </template>
           </div>
           <router-link to="/cart">
-            <CartBagIcon lass="pointer-events-none" />
+            <CartBagIcon class="pointer-events-none w-26 2xl:w-32" />
           </router-link>
         </div>
       </AppContainer>
@@ -108,17 +117,6 @@ watch(isMarqueeHidden, () => {
 
     @media (max-width: 767px) {
       height: 100%;
-    }
-  }
-
-  &__links {
-    color: #f6f5ff;
-    font-size: 18px;
-
-    @apply font-semibold uppercase leading-none;
-
-    @media (max-width: 767px) {
-      display: none;
     }
   }
 }

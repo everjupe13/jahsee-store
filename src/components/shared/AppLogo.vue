@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<IAppLogo>(), {
         <img
           src="@/assets/img/logo.svg"
           alt=""
-          class="pointer-events-none max-h-40"
+          class="pointer-events-none w-30 lg:w-40 2xl:w-56"
         />
       </router-link>
     </div>
