@@ -8,7 +8,15 @@
 
 .tippy-box[data-theme~=bkrv] {
   background-color: #C95454;
+  background-color: #fff;
+  color: #fff;
+  color: #3d3d3d;
   font-size: 16px !important;
+  // border-radius: 0 !important;
+  font-weight: 700;
+  padding: 0 10px;
+
+  @apply font-hnd;
 }
 
 .form {
