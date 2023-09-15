@@ -29,7 +29,7 @@ const renderTagsString = (drop: ICatalog): string => {
   <div>
     <div class="mb-20 flex flex-wrap justify-between md:flex-nowrap">
       <div
-        class="outlined-text heading grow-1 cursor-default select-none font-hnd"
+        class="outlined-text heading grow-1 cursor-default select-none font-hnd !text-[34px] sm:!text-[38px] lg:!text-[40px] xl:!text-[44px]"
         style="--stroke-width: 2px"
       >
         {{ props.name }}

@@ -27,7 +27,7 @@ const onClickNext = () => {
 <template>
   <div class="flex items-center gap-x-10">
     <button
-      class="flex h-46 w-46 items-center justify-center bg-white transition hover:bg-[#999999] active:bg-[#666666] disabled:bg-[#FFFFFF]/10"
+      class="flex h-28 w-28 items-center justify-center bg-white transition hover:bg-[#999999] active:bg-[#666666] disabled:bg-[#FFFFFF]/10 xl:h-38 xl:w-38 2xl:h-46 2xl:w-46"
       :disabled="isPrevDisabled"
       @click="onClickPrev"
     >
@@ -49,7 +49,7 @@ const onClickNext = () => {
       </svg>
     </button>
     <button
-      class="flex h-46 w-46 items-center justify-center bg-white transition hover:bg-[#999999] active:bg-[#666666] disabled:bg-[#FFFFFF]/10"
+      class="flex h-28 w-28 items-center justify-center bg-white transition hover:bg-[#999999] active:bg-[#666666] disabled:bg-[#FFFFFF]/10 xl:h-38 xl:w-38 2xl:h-46 2xl:w-46"
       :disabled="isNextDisabled"
       @click="onClickNext"
     >
