@@ -6,6 +6,11 @@
   color: var(--stroke-color, #E1E1F1)
 }
 
+.tippy-box[data-theme~=bkrv] {
+  background-color: #C95454;
+  font-size: 16px !important;
+}
+
 .form {
   display: flex;
   flex-direction: column;
