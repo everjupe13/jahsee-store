@@ -15,7 +15,7 @@ const nodes: string[] = Array.from({ length: 10 }).map(
 </script>
 
 <template>
-  <div class="overflow-x-hidden bg-white py-5 md:py-10">
+  <div class="overflow-x-hidden bg-white py-5 2xl:py-10">
     <Vue3Marquee :duration="30">
       <div
         v-for="(node, index) in nodes"
@@ -23,7 +23,7 @@ const nodes: string[] = Array.from({ length: 10 }).map(
         :key="index"
       >
         <div
-          class="flex-shrink-0 flex-grow-0 basis-auto uppercase leading-none text-[#202022] text-medium-14 md:text-medium-16"
+          class="flex-shrink-0 flex-grow-0 basis-auto uppercase leading-none text-[#202022] text-medium-14 2xl:text-medium-16"
         >
           {{ node }}
         </div>
