@@ -94,11 +94,9 @@ const openOnMobiles = () => {
                   <span
                     v-if="activeTab === tab.id"
                     class="flex flex-shrink-0 flex-grow-0 items-center justify-center lg:hidden"
+                    @click.self="openOnMobiles"
                   >
-                    <AppButton
-                      class="!px-14 !py-8 !text-[12px]"
-                      @click="openOnMobiles"
-                    >
+                    <AppButton class="h-26 w-38 !px-14 !py-8 !text-[12px]">
                       <span
                         :class="[
                           'relative h-10 w-10',
