@@ -185,22 +185,3 @@ const onSubmitForm = async () => {
     </div>
   </form>
 </template>
-
-<style lang="scss" scoped>
-.title {
-  color: #000;
-  text-align: center;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 120%;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-
-  @apply font-hnd;
-
-  @media (max-width: 767px) {
-    font-size: 30px;
-  }
-}
-</style>

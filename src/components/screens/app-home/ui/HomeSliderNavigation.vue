@@ -72,5 +72,3 @@ const onClickNext = () => {
     </button>
   </div>
 </template>
-
-<style lang=""></style>

@@ -165,5 +165,3 @@ const onSubmitForm = async () => {
     </div>
   </form>
 </template>
-
-<style lang="scss" scoped></style>

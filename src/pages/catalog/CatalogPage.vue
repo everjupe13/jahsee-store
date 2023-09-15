@@ -40,5 +40,3 @@ await catalogStore.fetchCatalog()
     </AppContainer>
   </section>
 </template>
-
-<style lang="scss" scoped></style>

@@ -1,3 +1,4 @@
+<!-- TODO: depricated -->
 <script lang="ts" setup></script>
 
 <template>
@@ -30,5 +31,3 @@
     </section>
   </AppContainer>
 </template>
-
-<style lang="scss" scoped></style>

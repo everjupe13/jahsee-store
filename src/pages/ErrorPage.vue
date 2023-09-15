@@ -9,5 +9,3 @@ import { NotFoundError } from '@/components/screens/app-error'
     </AppContainer>
   </section>
 </template>
-
-<style lang="scss"></style>

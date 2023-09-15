@@ -19,5 +19,3 @@ defineOptions({
   </main>
   <AppFooter class="pointer-events-none opacity-0"></AppFooter>
 </template>
-
-<style lang="scss"></style>

@@ -10,5 +10,3 @@ const route = useRoute()
     <slot></slot>
   </component>
 </template>
-
-<style lang="scss" scoped></style>
