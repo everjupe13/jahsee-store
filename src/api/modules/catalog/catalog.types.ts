@@ -48,6 +48,7 @@ export type ProductsResponseDataType = {
   aboutList: string[]
   images: { id: number; get_images: string }[]
   sizes: { label: string; soldOut: boolean }[]
+  get_size_grid: string
 }
 
 export interface IProduct {
@@ -56,6 +57,7 @@ export interface IProduct {
   description: string
   dropId?: number | string
   dropSlug?: string
+  sizingImage?: string
   cost: number
   aboutList: string[]
   gallery: string[]
