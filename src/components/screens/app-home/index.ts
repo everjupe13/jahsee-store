@@ -1,1 +1,1 @@
-export { default as HomeSlider } from './ui/HomeSlider.vue'
+export { default as HomeConfig } from './ui/HomeConfig.vue'
