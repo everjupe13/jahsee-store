@@ -88,38 +88,34 @@ const { open: openAddressForm, close: closeAddressForm } = useModal({
 </script>
 
 <template>
-  <AppContainer>
-    <AppBackNav />
-    <div class="my-20 md:my-40">
-      <div class="outlined-text title font-hnd" style="--stroke-width: 2px">
-        My bag
-      </div>
+  <AppBackNav />
+  <div class="my-20 md:my-40">
+    <div
+      class="outlined-text title relative font-hnd text-[34px] font-bold uppercase leading-none sm:text-[38px] lg:text-[40px] xl:text-[44px]"
+      style="--stroke-width: 2px"
+    >
+      My bag
     </div>
-    <div class="cart__grid">
-      <CartOrderList></CartOrderList>
-      <CartSummarySheet
-        @form-submit="onFormSubmit"
-        :cost="totalCost || 0"
-        :delivery-cost="deliveryCost || 0"
-        :server-message="serverMessage"
-        :server-message-visible="serverMessageVisible"
-        :is-loading="isLoading"
-        :is-succes="isSuccess"
-        :is-cart-empty="cartStore.cart.length === 0"
-      ></CartSummarySheet>
-    </div>
-  </AppContainer>
+  </div>
+  <div class="cart__grid">
+    <CartOrderList></CartOrderList>
+    <CartSummarySheet
+      @form-submit="onFormSubmit"
+      :cost="totalCost || 0"
+      :delivery-cost="deliveryCost || 0"
+      :server-message="serverMessage"
+      :server-message-visible="serverMessageVisible"
+      :is-loading="isLoading"
+      :is-succes="isSuccess"
+      :is-cart-empty="cartStore.cart.length === 0"
+    ></CartSummarySheet>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .title {
-  font-size: 64px;
-  letter-spacing: 2.56px;
-
-  @apply font-extrabold uppercase leading-none;
-
-  @media (max-width: 767px) {
-    font-size: 48px;
+  @include laptop-big {
+    -webkit-text-stroke-width: 1px;
   }
 }
 .cart {

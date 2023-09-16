@@ -151,15 +151,16 @@ const onFocus = () => {
 }
 
 .input {
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 100%;
+  @apply text-[14px] font-medium leading-none 2xl:text-[16px];
 
   &:-webkit-autofill {
     font-size: 15px !important;
     font-weight: 500 !important;
     transition: background-color 5000s ease-in-out 0s;
+
+    @include laptop {
+      font-size: 14px !important;
+    }
   }
 }
 
@@ -189,9 +190,5 @@ const onFocus = () => {
 .slightly-fade-enter-to,
 .slightly-fade-leave-from {
   @apply translate-y-0 py-7 leading-none text-white opacity-100;
-}
-
-.input {
-  @apply leading-none text-medium-16;
 }
 </style>

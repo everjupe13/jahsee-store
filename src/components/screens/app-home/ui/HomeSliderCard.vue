@@ -29,7 +29,7 @@ const renderTagsString = (drop: ICatalog): string => {
   <div>
     <div class="mb-20 flex flex-wrap justify-between md:flex-nowrap">
       <div
-        class="outlined-text heading grow-1 cursor-default select-none font-hnd !text-[34px] sm:!text-[38px] lg:!text-[40px] xl:!text-[44px]"
+        class="outlined-text heading grow-1 cursor-default select-none font-hnd text-[34px] font-bold uppercase leading-none sm:text-[38px] lg:text-[40px] xl:text-[44px]"
         style="--stroke-width: 2px"
       >
         {{ props.name }}
@@ -62,13 +62,8 @@ const renderTagsString = (drop: ICatalog): string => {
 
 <style lang="scss" scoped>
 .heading {
-  font-size: 64px;
-  letter-spacing: 2.56px;
-
-  @apply font-extrabold uppercase leading-none;
-
-  @media (max-width: 767px) {
-    font-size: 48px;
+  @include laptop-big {
+    -webkit-text-stroke-width: 1px;
   }
 }
 

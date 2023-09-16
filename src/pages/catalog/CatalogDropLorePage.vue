@@ -10,12 +10,14 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
         <div data-aos="fade-up" class="main__header">
           <div class="main__header-wrapper">
             <h1
-              class="outlined-text main__title font-hnd"
-              style="--stroke-width: 2px"
+              class="outlined-text font-hnd text-[34px] font-bold uppercase leading-none sm:text-[38px] lg:text-[40px] xl:text-[44px] 2xl:text-[56px]"
+              style="--stroke-width: 1px"
             >
               DROP LORE
             </h1>
-            <h2 class="outlined-text main__subtitle font-hnd">
+            <h2
+              class="outlined-text font-hnd text-[24px] font-bold uppercase leading-none sm:text-[26px] lg:text-[28px] xl:text-[32px] 2xl:text-[38px]"
+            >
               Solana Flipper
             </h2>
           </div>
@@ -103,30 +105,6 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
       transform: none;
 
       width: 100%;
-    }
-  }
-
-  &__title {
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 54px;
-    }
-  }
-
-  &__subtitle {
-    font-size: 35px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 20px;
     }
   }
 
