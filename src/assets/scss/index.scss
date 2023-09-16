@@ -19,102 +19,6 @@
   @apply font-hnd;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  max-width: 950px;
-  margin: 0 auto;
-  padding: 45px 15px 36px;
-  
-  background-color: #F6F5FF;
-
-  &__title {
-    color: #000;
-    font-size: 32px;
-    font-weight: 600;
-    text-transform: uppercase;
-
-    @include phone {
-      font-size: 28px;
-      text-align: center;
-    }
-  }
-
-  &__body {
-    max-width: 760px;
-    width: 100%;
-    margin: 0 auto;
-
-    @include phone {
-      max-width: 300px;      
-    }
-  }
-
-  &__link {
-    color: #969EAB;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-  }
-
-  &__input-hint {
-    position: absolute;
-    bottom: 15px;
-
-    color: #969EAB;
-    text-align: center;
-    font-family: Montserrat;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @include phone {
-      bottom: 0px;
-    }
-  }
-
-  &__error-message {
-    margin-bottom: 40px;
-
-    color: #C95454;
-    font-family: Montserrat;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @include phone {
-      max-width: 300px;
-      margin: 0 auto;
-      margin-bottom: 20px;
-    }
-  }
-
-  &__btn {
-    @include phone {
-      justify-content: center;
-
-      max-width: 300px;
-      width: 100%;
-    }
-  }
-}
-
-.drop {
-  .swiper-button-prev,
-  .swiper-button-next {
-    transform: translateY(-50%);
-    mix-blend-mode: exclusion;
-  }
-}
-
 .product-page {
   .swiper-button-prev {
     justify-content: flex-start;
@@ -153,23 +57,6 @@
     &:hover {
       opacity: 1
     }
-  }
-}
-
-.history-order {
-  .swiper-button-prev,
-  .swiper-button-next {
-    
-    &::after {
-      mix-blend-mode: difference;
-    }
-  }
-
-  .swiper-button-prev {
-    transform: scale(0.6) translateX(-25px);
-  }
-  .swiper-button-next {
-    transform: scale(0.6) translateX(25px);
   }
 }
 
