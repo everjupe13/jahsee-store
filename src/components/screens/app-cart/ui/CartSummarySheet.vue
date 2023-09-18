@@ -53,8 +53,8 @@ const handleRadiosClick = (index: number) => {
 </script>
 
 <template>
-  <div class="bg-[#e8e8e9] p-25">
-    <form @submit.prevent class="py-10 md:py-20">
+  <div class="bg-[#e8e8e9] p-20 lg:p-30 2xl:p-40">
+    <form @submit.prevent>
       <div
         class="border-0 border-b-[1px] border-b-[rgba(0,0,0,0.1)] pb-25 md:pb-20"
       >

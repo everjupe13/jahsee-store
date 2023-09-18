@@ -41,7 +41,7 @@ const orderCards = computed(() =>
 </script>
 
 <template>
-  <div class="bg-white p-30 md:p-40">
+  <div class="bg-white p-20 lg:p-30 2xl:p-40">
     <div
       class="grid grid-cols-[calc(100%/12*11)_calc(100%/12*1)] items-center border-0 border-b-[1px] border-b-[rgba(0,0,0,0.1)] pb-15 md:grid-cols-[calc(100%/3*2)_calc(100%/3*1)] md:pb-25"
     >

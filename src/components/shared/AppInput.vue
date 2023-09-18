@@ -151,10 +151,10 @@ const onFocus = () => {
 }
 
 .input {
-  @apply text-[14px] font-medium leading-none 2xl:text-[16px];
+  @apply text-[16px] font-medium leading-none;
 
   &:-webkit-autofill {
-    font-size: 15px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
     transition: background-color 5000s ease-in-out 0s;
 

@@ -129,9 +129,16 @@ const { open: openAddressForm, close: closeAddressForm } = useModal({
     display: grid;
     grid-template-columns: calc(100% - 440px) 440px;
 
-    @media (max-width: 991px) {
+    @include laptop-big {
+      grid-template-columns: calc(100% - 420px) 420px;
+    }
+
+    @include laptop {
+      grid-template-columns: calc(100% - 350px) 350px;
+    }
+
+    @include tablet {
       grid-template-columns: 100%;
-      // row-gap: 20px;
     }
   }
 }
