@@ -117,7 +117,7 @@ const onSubmitForm = async () => {
 
 <template>
   <form
-    class="mx-auto max-w-[580px] bg-white p-15 py-30 md:p-60 md:pb-50"
+    class="mx-auto max-w-[580px] bg-white p-30 py-30 md:p-60 md:pb-50"
     @submit.prevent="onSubmitForm"
   >
     <h3
