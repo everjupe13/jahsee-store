@@ -5,7 +5,7 @@ import 'swiper/css/free-mode'
 import type { Swiper as ISwiper } from 'swiper'
 import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { computed, provide, type Ref, ref } from 'vue'
+import { computed, inject, provide, type Ref, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { useCatalogStore } from '@/api/modules/catalog'
@@ -35,6 +35,13 @@ const onSwiper = (swiper: ISwiper) => {
 const swiperRef: Ref<ISwiper | null> = ref(null)
 const swiperActiveIndex = ref(0)
 const swiperSlidesPerView = ref(3)
+const breakpoints = {
+  768: {
+    slidesPerView: swiperSlidesPerView.value
+  }
+}
+const isMdScreen = inject('isMdScreen') as Ref<boolean | undefined>
+
 const route = useRoute()
 const catalogStore = useCatalogStore()
 await catalogStore.fetchCatalog()
@@ -52,10 +59,11 @@ const slidesProgress = computed(() => {
   }
 
   const currentIndex = swiperActiveIndex.value + 1
+  const currentIndexRange = isMdScreen.value
+    ? `${currentIndex}`
+    : `${currentIndex}-${currentIndex + swiperSlidesPerView.value - 1}`
 
-  return `${currentIndex}-${
-    currentIndex + swiperSlidesPerView.value - 1
-  } of ${slidesCount}`
+  return `${currentIndexRange} of ${slidesCount}`
 })
 </script>
 
@@ -70,8 +78,9 @@ const slidesProgress = computed(() => {
     class="mb-60"
     :space-between="24"
     :modules="modules"
-    :slides-per-view="swiperSlidesPerView"
+    :slides-per-view="1"
     :slides-per-group="swiperSlidesPerView"
+    :breakpoints="breakpoints"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
   >
@@ -85,10 +94,10 @@ const slidesProgress = computed(() => {
       />
     </swiper-slide>
 
-    <template #container-end>
+    <template #container-start>
       <div
         v-if="!swiperRef?.isLocked"
-        class="mt-20 flex flex-wrap items-center justify-between md:flex-nowrap"
+        class="mb-30 flex flex-wrap items-center justify-between md:flex-nowrap lg:mb-40"
       >
         <p class="font-medium leading-none tracking-[0.64px]">
           {{ slidesProgress }}

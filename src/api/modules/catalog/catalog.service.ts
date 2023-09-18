@@ -19,8 +19,8 @@ export const CatalogApiMapper = {
       status: catalog.status as ICatalog['status'],
       products: catalog.products?.map(product => ({
         id: Number(product.id),
-        productName: product.name,
-        thumbImage: product.get_image
+        productName: product.product_name,
+        thumbImage: product.get_thumb
       }))
     }))
   }

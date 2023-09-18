@@ -16,8 +16,8 @@ export type CatalogResponseDataType = {
   status: string
   products: {
     id: string
-    name: string
-    get_image: string
+    product_name: string
+    get_thumb: string
   }[]
 }
 
