@@ -18,7 +18,7 @@ await catalogStore.fetchCatalog()
 
 <template>
   <section>
-    <div v-if="!isBannerClosed" class="mb-50 bg-white pb-12">
+    <div v-if="!isBannerClosed" class="pb-12 lg:mb-50 lg:mt-40">
       <AppContainer>
         <AppCatalogVideoBanner>
           <template #close>
