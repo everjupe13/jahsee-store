@@ -1,6 +1,13 @@
 <script lang="ts" setup>
+import { useHead } from '@unhead/vue'
+
 import { useCatalogStore } from '@/api/modules/catalog'
 import { HomeConfig } from '@/components/screens/app-home'
+import { constructPageTitle } from '@/utils'
+
+useHead({
+  title: constructPageTitle('Home')
+})
 
 const catalogStore = useCatalogStore()
 await catalogStore.fetchCatalog()

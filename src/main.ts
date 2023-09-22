@@ -5,6 +5,7 @@ import '@/assets/scss/tailwind.scss'
 import '@/assets/scss/fonts.scss'
 import '@/assets/scss/custom-scrollbar.scss'
 
+import { createHead } from '@unhead/vue'
 import AOS from 'aos'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
@@ -18,12 +19,16 @@ import { router } from './router'
 
 const bootstrap = async () => {
   const app = createApp(App)
+
   const pinia = createPinia()
   const vfm = createVfm()
+  const head = createHead()
 
   app.use(pinia)
   app.use(router)
   app.use(vfm)
+  app.use(head)
+
   app.use(vGlobalComponentsPlugin)
 
   app.mount('#app')
