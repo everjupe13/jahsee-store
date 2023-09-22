@@ -9,5 +9,6 @@ export enum RouteNamesEnum {
   drop = 'drop',
   lore = 'lore',
   profile = 'profile',
-  'not-found' = 'not-found'
+  'not-found' = 'not-found',
+  deliveryInfo = 'delivery-info'
 }
