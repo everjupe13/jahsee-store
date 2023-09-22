@@ -1,4 +1,12 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useHead } from '@unhead/vue'
+
+import { constructPageTitle } from '@/utils'
+
+useHead({
+  title: constructPageTitle('FAQ')
+})
+</script>
 
 <template>
   <div class="container font-hnd">

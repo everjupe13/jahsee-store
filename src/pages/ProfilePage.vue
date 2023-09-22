@@ -1,5 +1,12 @@
 <script lang="ts" setup>
+import { useHead } from '@unhead/vue'
+
 import { ProfileConfig } from '@/components/screens/app-profile'
+import { constructPageTitle } from '@/utils'
+
+useHead({
+  title: constructPageTitle('Profile')
+})
 </script>
 
 <template>

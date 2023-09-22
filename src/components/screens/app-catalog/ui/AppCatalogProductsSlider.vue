@@ -43,7 +43,6 @@ const isMdScreen = inject('isMdScreen') as Ref<boolean | undefined>
 
 const route = useRoute()
 const catalogStore = useCatalogStore()
-await catalogStore.fetchCatalog()
 
 const currentCatalog =
   catalogStore.catalog &&

@@ -1,5 +1,12 @@
 <script lang="ts" setup>
+import { useHead } from '@unhead/vue'
+
 import { AppLoginForm } from '@/components/screens/app-auth'
+import { constructPageTitle } from '@/utils'
+
+useHead({
+  title: constructPageTitle('Sign in')
+})
 </script>
 
 <template>

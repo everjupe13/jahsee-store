@@ -1,11 +1,14 @@
 <script lang="ts" setup>
+import { useHead } from '@unhead/vue'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 import { useCatalogStore } from '@/api/modules/catalog'
 import {
   AppCatalogProductsSlider,
   AppCatalogVideoBanner
 } from '@/components/screens/app-catalog'
+import { constructPageTitle } from '@/utils'
 
 const isBannerClosed = ref(false)
 const handleCloseBannerClick = () => {
@@ -14,6 +17,18 @@ const handleCloseBannerClick = () => {
 
 const catalogStore = useCatalogStore()
 await catalogStore.fetchCatalog()
+
+const route = useRoute()
+
+const currentCatalog =
+  catalogStore.catalog &&
+  catalogStore.catalog?.find(
+    catalog => catalog.dropSlug === route.params.dropSlug
+  )
+
+useHead({
+  title: constructPageTitle(currentCatalog?.name)
+})
 </script>
 
 <template>
