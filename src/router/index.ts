@@ -84,6 +84,11 @@ export const routes = [
     name: RouteNamesEnum.lore,
     component: () => import('@/pages/catalog/CatalogDropLorePage.vue')
   },
+  {
+    path: '/delivery-info',
+    name: RouteNamesEnum.deliveryInfo,
+    component: () => import('@/pages/DeliveryInfoPage.vue')
+  },
   // {
   //   path: '/profile/edit',
   //   name: 'edit-profile',
