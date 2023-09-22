@@ -18,64 +18,72 @@ import { SOCIAL_LINKS } from '../model'
           <p class="text">Contacts</p>
         </div>
 
-        <div class="origin-top scale-75 transition-all group-hover:scale-100">
-          <div class="mb-20 flex items-center justify-center gap-x-20 md:mb-30">
+        <div
+          class="origin-top transition-all lg:scale-75 lg:group-hover:scale-100"
+        >
+          <div class="mb-20 flex items-center justify-center gap-x-20 lg:mb-30">
             <a
               :href="SOCIAL_LINKS.TELEGRAM"
               target="_blank"
               rel="norefferer nofollow noopener"
-              class="px-3 py-5"
+              class="group/icon px-3 py-5"
             >
               <SocialTelegramIcon
-                class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
+                class="h-23 w-23 fill-[#969eab] transition-colors group-hover/icon:fill-white lg:h-30 lg:w-30"
               />
             </a>
             <a
               :href="SOCIAL_LINKS.INSTAGRAM"
               target="_blank"
               rel="norefferer nofollow noopener"
-              class="px-3 py-5"
+              class="group/icon px-3 py-5"
             >
               <SocialInstagramIcon
-                class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
+                class="h-23 w-23 fill-[#969eab] transition-colors group-hover/icon:fill-white lg:h-30 lg:w-30"
               />
             </a>
             <a
               :href="SOCIAL_LINKS.VK"
               target="_blank"
               rel="norefferer nofollow noopener"
-              class="px-3 py-5"
+              class="group/icon px-3 py-5"
             >
               <SocialVkIcon
-                class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
+                class="h-23 w-23 fill-[#969eab] transition-colors group-hover/icon:fill-white lg:h-30 lg:w-30"
               />
             </a>
             <a
               :href="SOCIAL_LINKS.X"
               target="_blank"
               rel="norefferer nofollow noopener"
-              class="px-3 py-5"
+              class="group/icon px-3 py-5"
             >
               <SocialXIcon
-                class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
+                class="h-23 w-23 fill-[#969eab] transition-colors group-hover/icon:fill-white lg:h-30 lg:w-30"
               />
             </a>
             <a
               :href="SOCIAL_LINKS.DISCORD"
               target="_blank"
               rel="norefferer nofollow noopener"
-              class="px-3 py-5"
+              class="group/icon px-3 py-5"
             >
               <SocialDiscordIcon
-                class="h-30 w-30 fill-[#969eab] transition-colors hover:fill-white"
+                class="h-23 w-23 fill-[#969eab] transition-colors group-hover/icon:fill-white lg:h-30 lg:w-30"
               />
             </a>
           </div>
 
           <div
-            class="flex translate-y-[-20px] items-center justify-center transition-all group-hover:translate-y-0"
+            class="flex flex-col items-center justify-center gap-10 transition-all lg:translate-y-[-20px] lg:group-hover:translate-y-0"
           >
             <a href="/" class="text text-link">SUPPORT</a>
+            <RouterLink
+              to="/delivery-info"
+              class="text text-link min-w-[80px] text-center"
+            >
+              FAQ
+            </RouterLink>
           </div>
         </div>
       </div>
