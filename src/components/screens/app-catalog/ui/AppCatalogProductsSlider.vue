@@ -34,10 +34,9 @@ const onSwiper = (swiper: ISwiper) => {
 
 const swiperRef: Ref<ISwiper | null> = ref(null)
 const swiperActiveIndex = ref(0)
-const swiperSlidesPerView = ref(3)
 const breakpoints = {
   768: {
-    slidesPerView: swiperSlidesPerView.value
+    slidesPerView: 3
   }
 }
 const isMdScreen = inject('isMdScreen') as Ref<boolean | undefined>
@@ -61,7 +60,7 @@ const slidesProgress = computed(() => {
   const currentIndex = swiperActiveIndex.value + 1
   const currentIndexRange = isMdScreen.value
     ? `${currentIndex}`
-    : `${currentIndex}-${currentIndex + swiperSlidesPerView.value - 1}`
+    : `${currentIndex}-${currentIndex + 2}`
 
   return `${currentIndexRange} of ${slidesCount}`
 })
@@ -79,7 +78,7 @@ const slidesProgress = computed(() => {
     :space-between="24"
     :modules="modules"
     :slides-per-view="1"
-    :slides-per-group="swiperSlidesPerView"
+    :slides-per-group="1"
     :breakpoints="breakpoints"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
