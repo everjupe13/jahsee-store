@@ -3,10 +3,10 @@ import { isPlainObject } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, type Ref, ref } from 'vue'
 
-import { cartStorageProvider } from '@/api/modules/cart'
 import { useApiRequest } from '@/api/shared/network/http'
 
-import { useAuthStore } from '../auth/auth.store'
+import { useAuthStore } from '../auth'
+import { cartStorageProvider } from '../cart'
 import { IAddress, useAddressStore } from './address'
 import { UserApiMapper } from './user.service'
 import { IUser } from './user.types'
