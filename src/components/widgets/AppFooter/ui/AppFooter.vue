@@ -13,14 +13,12 @@ import { SOCIAL_LINKS } from '../model'
 <template>
   <footer class="mt-auto flex items-center py-50">
     <AppContainer>
-      <div class="group mx-auto max-w-[500px]">
+      <div class="mx-auto max-w-[500px]">
         <div class="mb-10 flex items-center justify-center md:mb-10">
           <p class="text">Contacts</p>
         </div>
 
-        <div
-          class="origin-top transition-all lg:scale-75 lg:group-hover:scale-100"
-        >
+        <div class="origin-top transition-all">
           <div class="mb-20 flex items-center justify-center gap-x-20 lg:mb-30">
             <a
               :href="SOCIAL_LINKS.TELEGRAM"
@@ -75,9 +73,15 @@ import { SOCIAL_LINKS } from '../model'
           </div>
 
           <div
-            class="flex flex-col items-center justify-center gap-10 transition-all lg:translate-y-[-20px] lg:group-hover:translate-y-0"
+            class="flex flex-col items-center justify-center gap-10 transition-all"
           >
-            <a href="/" class="text text-link">SUPPORT</a>
+            <a
+              :href="SOCIAL_LINKS.SUPPORT"
+              target="_blank"
+              class="text text-link"
+            >
+              SUPPORT
+            </a>
             <RouterLink
               to="/delivery-info"
               class="text text-link min-w-[80px] text-center"
