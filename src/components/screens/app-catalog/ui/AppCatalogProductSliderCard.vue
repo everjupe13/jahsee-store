@@ -26,7 +26,7 @@ const linkToProduct: Ref<RouteLocationRaw> = computed(() =>
 <template>
   <div class="group w-full max-w-full md:max-w-[460px]">
     <div
-      class="mb-40 block aspect-square min-h-[200px] max-w-full overflow-hidden bg-button-black/40 opacity-100 transition-all hover:bg-button-black group-hover:opacity-100 md:max-w-[460px]"
+      class="mb-20 block aspect-square min-h-[200px] max-w-full overflow-hidden bg-button-black/40 opacity-100 transition-all hover:bg-button-black group-hover:opacity-100 md:max-w-[460px] lg:mb-30"
     >
       <router-link :to="linkToProduct" class="relative block h-auto w-full">
         <img

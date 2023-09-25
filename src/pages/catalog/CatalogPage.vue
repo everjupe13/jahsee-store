@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 
 import { useCatalogStore } from '@/api/modules/catalog'
 import {
-  AppCatalogProductsSlider,
+  AppCatalogProducts,
   AppCatalogVideoBanner
 } from '@/components/screens/app-catalog'
 import { constructPageTitle } from '@/utils'
@@ -50,7 +50,7 @@ useHead({
     </div>
     <AppContainer>
       <div class="mt-60">
-        <AppCatalogProductsSlider />
+        <AppCatalogProducts />
       </div>
     </AppContainer>
   </section>
