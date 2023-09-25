@@ -88,6 +88,10 @@ const onDeleteItem = () => {
 
   background-color: #ffffff;
 
+  @include laptop-big {
+    padding: 15px;
+  }
+
   @media (max-width: 767px) {
     column-gap: 5px;
     padding: 10px 0;
@@ -117,8 +121,13 @@ const onDeleteItem = () => {
 
   &__glass {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 140px;
     height: 140px;
+    overflow: hidden;
 
     @media (max-width: 767px) {
       width: 80px;
@@ -129,7 +138,8 @@ const onDeleteItem = () => {
   &__img {
     display: block;
     width: 100%;
-    object-fit: fill;
+    height: 100%;
+    object-fit: cover;
 
     pointer-events: none;
   }

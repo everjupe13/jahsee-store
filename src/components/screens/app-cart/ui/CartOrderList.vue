@@ -35,7 +35,7 @@ const orderCartMapper = (product: ICartItem) => {
     count: product?.count || 0
   }
 }
-const orderCards = computed(() =>
+const orderItems = computed(() =>
   cartStore.cart.map(item => orderCartMapper(item))
 )
 </script>
@@ -43,7 +43,7 @@ const orderCards = computed(() =>
 <template>
   <div class="bg-white p-20 lg:p-30 2xl:p-40">
     <div
-      class="grid grid-cols-[calc(100%/12*11)_calc(100%/12*1)] items-center border-0 border-b-[1px] border-b-[rgba(0,0,0,0.1)] pb-15 md:grid-cols-[calc(100%/3*2)_calc(100%/3*1)] md:pb-25"
+      class="grid grid-cols-[calc(100%/12*11)_calc(100%/12*1)] items-center border-0 border-b-[1px] border-b-[rgba(0,0,0,0.1)] pb-15 md:grid-cols-[calc(100%/3*2)_calc(100%/3*1)] md:pb-20"
     >
       <div class="uppercase leading-none text-[#848a99] text-medium-14">
         Product
@@ -53,9 +53,9 @@ const orderCards = computed(() =>
       </div>
     </div>
 
-    <template v-if="localCart && localCart?.length > 0">
+    <template v-if="orderItems && orderItems?.length > 0">
       <CartOrder
-        v-for="item in orderCards"
+        v-for="item in orderItems"
         :key="item.id"
         v-bind="item"
         @incrementCount="handleIncrementItem(item.id as number, item.size)"

@@ -8,6 +8,7 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
 import { AddressFormModal } from '@/components/screens/app-profile'
 import AppModal from '@/components/widgets/AppModal.vue'
 
+import CartChangeAddressForm from './CartChangeAddressForm.vue'
 import CartOrderList from './CartOrderList.vue'
 import CartSummarySheet from './CartSummarySheet.vue'
 
@@ -15,6 +16,11 @@ const serverMessage = ref<string | undefined>()
 const serverMessageVisible = computed(
   () => !!serverMessage.value && serverMessage.value !== undefined
 )
+
+const promocode = ref('')
+const updatePromocode = (newPromo: string) => {
+  promocode.value = newPromo
+}
 
 const isLoading = ref(false)
 const isSuccess = ref(true)
@@ -29,7 +35,7 @@ const onFormSubmit = async () => {
   isLoading.value = true
   isSuccess.value = false
 
-  const response = await cartStore.createOrder()
+  const response = await cartStore.createOrder({})
 
   if (response.status) {
     isLoading.value = false
@@ -38,9 +44,17 @@ const onFormSubmit = async () => {
     isLoading.value = false
     isSuccess.value = true
 
-    const rawMessages = (response.error as { data: { [x: string]: string[] } })
-      .data
-    const pureMessage = Object.values(rawMessages).flat(1)[0]
+    const rawMessages = (
+      response.error as {
+        data: { [x: string]: string[] }
+        error: { [x: string]: string[] } | string
+      }
+    ).error
+
+    const pureMessage =
+      rawMessages instanceof Object
+        ? Object.values(rawMessages).flat(1)[0]
+        : rawMessages
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getFirstObjectValue = (tree: any): string => {
       if (!(tree instanceof Object)) {
@@ -85,6 +99,36 @@ const { open: openAddressForm, close: closeAddressForm } = useModal({
     })
   }
 })
+
+const currentAddress = ref(userStore.addresses?.[0])
+const changeCurrentAddress = (id: number) => {
+  currentAddress.value = userStore.addresses?.find(address => address.id === id)
+}
+
+const { open: openCurrentAddressForm, close: closeCurrentAddressForm } =
+  useModal({
+    component: AppModal,
+    attrs: {},
+    slots: {
+      default: useModalSlot({
+        component: CartChangeAddressForm,
+        attrs: {
+          currentAddressId: computed(() => currentAddress.value?.id || 0),
+          onConfirm() {
+            closeCurrentAddressForm()
+          },
+          'onAdd-address'() {
+            closeCurrentAddressForm()
+            openAddressForm()
+          },
+          'onChange-address'(id: number) {
+            closeCurrentAddressForm()
+            changeCurrentAddress(id)
+          }
+        }
+      })
+    }
+  })
 </script>
 
 <template>
@@ -108,6 +152,11 @@ const { open: openAddressForm, close: closeAddressForm } = useModal({
       :is-loading="isLoading"
       :is-succes="isSuccess"
       :is-cart-empty="cartStore.cart.length === 0"
+      :promocode="promocode"
+      :current-address="currentAddress"
+      :change-current-address="openCurrentAddressForm"
+      :open-address-form="openAddressForm"
+      @update-promo="updatePromocode"
     ></CartSummarySheet>
   </div>
 </template>
