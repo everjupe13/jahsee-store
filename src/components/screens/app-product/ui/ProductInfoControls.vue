@@ -96,8 +96,11 @@ const handleBuy = async () => {
     <div v-if="props.sizes.length > 0" class="flex flex-wrap gap-x-10">
       <button
         v-for="size in props.sizes"
-        class="size-button group flex h-50 w-[calc((100%-10px*5)/6)] flex-shrink-0 cursor-pointer items-center justify-center bg-[#242424] p-10 transition-all hover:opacity-80 disabled:!opacity-70 sm:h-64 lg:aspect-square"
-        :class="sizeButtonClasses(size)"
+        class="size-button group flex h-50 flex-shrink-0 cursor-pointer items-center justify-center bg-[#242424] p-10 transition-all hover:opacity-80 disabled:!opacity-70 sm:h-64 lg:aspect-square"
+        :class="[
+          ...sizeButtonClasses(size),
+          props.sizes.length === 1 ? 'w-full' : 'w-[calc((100%-10px*5)/6)]'
+        ]"
         :key="size.label"
         type="button"
         :disabled="loading || longLoading"
