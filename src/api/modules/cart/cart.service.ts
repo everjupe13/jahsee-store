@@ -106,6 +106,7 @@ export type OrderResponseType = {
 export type IOrder = {
   products: ICartItem[]
   address: IAddress
+  promocode?: string
 }
 export const OrderApiMapper = {
   toEntity(domainModel: IOrder): OrderResponseType {
@@ -146,11 +147,11 @@ export const OrderApiMapper = {
     }
     return {
       products: getProducts(),
-      type_of_payment_system: 'Helio',
+      type_of_payment_system: 'helio',
       delivery_address: AddressApiMapper.toEntity(
         domainModel.address
       ) as AddressResponseType,
-      promocode: ''
+      promocode: 'фыв'
     }
   }
 }
