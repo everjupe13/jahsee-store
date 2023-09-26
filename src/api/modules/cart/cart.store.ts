@@ -52,10 +52,11 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  async function createOrder() {
+  const createOrder = async ({ promocode }: { promocode?: string }) => {
     try {
       const fetchResponse = await useApiRequest.post('/create_order', {
         ...OrderApiMapper.toEntity({
+          promocode,
           products: cart.value,
           address: userStore.addresses![0]
         })
