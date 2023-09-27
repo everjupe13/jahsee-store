@@ -46,8 +46,8 @@ const renderTagsString = (drop: ICatalog): string => {
           class="z-1 relative block h-full w-full select-none object-cover"
         />
         <div
-          class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
-          v-if="props.status === 'sold out'"
+          class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
+          v-if="props.status === 'sold_out'"
         >
           Sold out
         </div>
