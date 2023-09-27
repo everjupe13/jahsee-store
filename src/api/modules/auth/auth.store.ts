@@ -60,12 +60,14 @@ export const useAuthStore = defineStore('auth', () => {
     email,
     name,
     lastName,
-    password
+    password,
+    phone
   }: {
     email: string
     name: string
     lastName?: string
     password: string
+    phone: string
   }) {
     try {
       const fetchResponse = await useApiRequest.post(
@@ -74,7 +76,8 @@ export const useAuthStore = defineStore('auth', () => {
           userEmail: email,
           userName: name,
           userLastName: lastName,
-          userPassword: password
+          userPassword: password,
+          userPhone: phone
         })
       )
 

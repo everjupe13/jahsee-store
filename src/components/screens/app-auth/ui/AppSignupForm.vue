@@ -14,6 +14,7 @@ import { sleep } from '@/utils'
 const formData = reactive({
   email: '',
   name: '',
+  phone: '',
   lastName: '',
   password: ''
 })
@@ -21,6 +22,7 @@ const formData = reactive({
 const rules = {
   email: { required, email },
   name: { required },
+  phone: { required },
   password: { required, minLengthValue: minLength(8) }
 }
 
@@ -99,7 +101,8 @@ const onSubmitForm = async () => {
     email: formData.email,
     name: formData.name,
     lastName: formData.lastName,
-    password: formData.password
+    password: formData.password,
+    phone: formData.phone
   })
 
   if (error) {
@@ -139,6 +142,15 @@ const onSubmitForm = async () => {
         :is-valid="v$.email.$dirty ? !v$.email.$invalid : true"
         :is-dirty="v$.email.$dirty"
         :validation-message="v$.email.$silentErrors[0]?.$message"
+      />
+      <AppInput
+        v-model="v$.phone.$model"
+        placeholder="phone number*"
+        class="mb-15"
+        :disabled="longLoading"
+        :is-valid="v$.phone.$dirty ? !v$.phone.$invalid : true"
+        :is-dirty="v$.phone.$dirty"
+        :validation-message="v$.phone.$silentErrors[0]?.$message"
       />
       <AppInput
         v-model="v$.name.$model"

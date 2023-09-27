@@ -2,6 +2,7 @@ export type AuthResponseDataType = {
   email: string
   first_name: string
   last_name?: string
+  phone: string
   password: string
 }
 
@@ -9,6 +10,7 @@ export type AuthDomainType = {
   userEmail: string
   userName: string
   userLastName?: string
+  userPhone: string
 }
 
 export const AuthApiMapper = {
@@ -16,7 +18,8 @@ export const AuthApiMapper = {
     return {
       userEmail: entity.email,
       userName: entity.first_name,
-      userLastName: entity.last_name
+      userLastName: entity.last_name,
+      userPhone: entity.phone
     }
   },
   toEntity(
@@ -26,7 +29,8 @@ export const AuthApiMapper = {
       email: domain.userEmail,
       first_name: domain.userName,
       last_name: domain.userLastName,
-      password: domain.userPassword
+      password: domain.userPassword,
+      phone: domain.userPhone
     }
   }
 }
