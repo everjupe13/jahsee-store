@@ -6,6 +6,8 @@ import { computed, nextTick, onMounted, reactive, ref, unref, watch } from 'vue'
 import { useUserStore } from '@/api/modules/user'
 import { FormLoader } from '@/components/widgets/loaders'
 
+import AddressFormAutoselectInput from './AddressFormAutoselectInput.vue'
+
 const emit = defineEmits<{
   (e: 'confirm'): void
 }>()
@@ -149,23 +151,56 @@ const onSubmitForm = async () => {
         {{ isEditMode ? 'Change address' : 'New address' }}
       </h3>
       <div class="mb-30 md:mb-40">
-        <AppInput
+        <AddressFormAutoselectInput
+          key="country"
           v-model="v$.country.$model"
           placeholder="country"
-          class="mb-15"
-          v-bind="inputPropsMapper(v$.country)"
+          input-classes="mb-15"
+          :vuelidate-model="v$.country"
+          address-key="country"
+          fetch-key="country"
+          :fetch-data="formData"
+          @field-update="
+            () => {
+              v$.city.$model = ''
+              v$.street.$model = ''
+              v$.zipCode.$model = ''
+              v$.$reset()
+            }
+          "
         />
-        <AppInput
+        <AddressFormAutoselectInput
+          key="city"
           v-model="v$.city.$model"
           placeholder="city"
-          class="mb-15"
-          v-bind="inputPropsMapper(v$.city)"
+          input-classes="mb-15"
+          :vuelidate-model="v$.city"
+          address-key="city_with_type"
+          fetch-key="city"
+          :fetch-data="formData"
+          @field-update="
+            () => {
+              v$.street.$model = ''
+              v$.zipCode.$model = ''
+              v$.$reset()
+            }
+          "
         />
-        <AppInput
+        <AddressFormAutoselectInput
+          key="street"
           v-model="v$.street.$model"
           placeholder="street"
-          class="mb-15"
-          v-bind="inputPropsMapper(v$.street)"
+          input-classes="mb-15"
+          :vuelidate-model="v$.street"
+          address-key="street_with_type"
+          fetch-key="street"
+          :fetch-data="formData"
+          @field-update="
+            () => {
+              v$.zipCode.$model = ''
+              v$.$reset()
+            }
+          "
         />
         <AppInput
           v-model="v$.zipCode.$model"
