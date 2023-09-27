@@ -30,7 +30,7 @@ const rules = {
   email: { required, email },
   firstName: { required },
   lastName: {},
-  phone: {},
+  phone: { required },
   password: { required, minLengthValue: minLength(8) }
 }
 
