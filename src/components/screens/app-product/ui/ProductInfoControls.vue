@@ -10,6 +10,7 @@ import { sleep } from '@/utils'
 
 type Props = {
   sizes: { label: string; soldOut: boolean }[]
+  isSoldOut: boolean
 }
 const props = withDefaults(defineProps<Partial<Props>>(), {
   sizes: () => []
@@ -17,9 +18,7 @@ const props = withDefaults(defineProps<Partial<Props>>(), {
 const emits = defineEmits(['handleProductAddToCart'])
 
 const selectedSize = ref()
-const isOutOfStock = computed(() =>
-  props.sizes.every(size => size.soldOut === true)
-)
+const isOutOfStock = computed(() => props.isSoldOut)
 const setSelectedSize = (key: string) => {
   const size = props.sizes.find(size => size.label === key)
   const isSizeSoldOut = Boolean(size?.soldOut)
@@ -48,7 +47,7 @@ onMounted(() => {
     }
   )
 
-  if (isSizeChoosed.value) {
+  if (isSizeChoosed.value || isOutOfStock.value) {
     submitTippy.value.disable()
   } else {
     submitTippy.value.enable()

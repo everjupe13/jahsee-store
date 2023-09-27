@@ -22,6 +22,8 @@ const currentCatalog: Ref<undefined | ICatalog> = computed(() => {
     : undefined
 })
 
+const isSoldOut = computed(() => currentCatalog.value?.status === 'sold_out')
+
 await catalogStore.fetchProducts(currentCatalog.value?.id || 0)
 const currentDrop: Ref<undefined | IProduct> = computed(() => {
   return catalogStore.products
@@ -60,6 +62,7 @@ const handleAddProductToCart = (size: string) => {
           :sizes="currentDrop!.sizes"
           :about-list="currentDrop!.aboutList"
           :sizing-image="currentDrop!.sizingImage"
+          :is-sold-out="isSoldOut"
           @handle-product-add="handleAddProductToCart"
         ></ProductInfo>
         <ProductGallery

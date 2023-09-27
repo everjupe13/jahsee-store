@@ -13,6 +13,7 @@ type Props = {
   dropSlug: string
   sizes: { label: string; soldOut: boolean }[]
   sizingImage: string
+  isSoldOut: boolean
 }
 
 const props = withDefaults(defineProps<Partial<Props>>(), {
@@ -57,6 +58,7 @@ const handleProductAdd = (size: string) => {
       />
       <ProductInfoControls
         :sizes="props.sizes"
+        :is-sold-out="props.isSoldOut"
         class="controls relative z-[5]"
         data-aos="fade-down"
         data-aos-delay="300"
