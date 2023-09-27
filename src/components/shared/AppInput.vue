@@ -56,7 +56,13 @@ const props = withDefaults(defineProps<Props>(), {
   isDirty: undefined,
   inputWrapperClasses: ''
 })
-const emits = defineEmits(['change', 'input', 'update:modelValue'])
+const emits = defineEmits([
+  'change',
+  'input',
+  'update:modelValue',
+  'focus',
+  'blur'
+])
 const { handleChange, handleInput } = useEvents(emits)
 
 const uuid = ref(randomID())
@@ -76,7 +82,10 @@ const inputRef = ref<HTMLElement | null>(null)
 const onFocus = () => {
   if (props.readonly && inputRef.value !== null) {
     inputRef.value.blur()
+    return
   }
+
+  emits('focus')
 }
 </script>
 
@@ -99,6 +108,7 @@ const onFocus = () => {
           @input="handleInput"
           @change="handleChange"
           @focus="onFocus"
+          @blur="emits('blur')"
         />
         <label
           :class="[
