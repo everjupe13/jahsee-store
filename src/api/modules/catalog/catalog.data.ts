@@ -64,7 +64,7 @@ export const CATALOG_DATA: ICatalog[] = [
     video: undefined,
     videoPoster: undefined,
     isCatalogExpanded: false,
-    status: 'sold out',
+    status: 'sold_out',
     yearTag: 'Q2 2023',
     products: [
       {
