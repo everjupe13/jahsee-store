@@ -88,6 +88,18 @@ import { SOCIAL_LINKS } from '../model'
             >
               FAQ
             </RouterLink>
+            <RouterLink
+              to="/privacy"
+              class="text text-link min-w-[80px] text-center"
+            >
+              PRIVACY
+            </RouterLink>
+            <RouterLink
+              to="/confident"
+              class="text text-link min-w-[80px] text-center"
+            >
+              CONFIDENT
+            </RouterLink>
           </div>
         </div>
       </div>

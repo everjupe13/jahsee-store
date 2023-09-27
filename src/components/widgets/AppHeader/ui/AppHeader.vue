@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { computed, nextTick, watch } from 'vue'
+import { computed, nextTick, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { useUserStore } from '@/api/modules/user'
@@ -34,7 +34,10 @@ const marqueeHiddedPages: Set<RouteNamesEnum> = new Set([
   RouteNamesEnum.login,
   RouteNamesEnum.signup,
   RouteNamesEnum.cart,
-  RouteNamesEnum.drop
+  RouteNamesEnum.drop,
+  RouteNamesEnum.deliveryInfo,
+  RouteNamesEnum.privacyInfo,
+  RouteNamesEnum.confidentInfo
 ])
 const isMarqueeHidden = computed(() =>
   marqueeHiddedPages.has(
@@ -43,6 +46,19 @@ const isMarqueeHidden = computed(() =>
     ? true
     : false
 )
+onMounted(() => {
+  nextTick(() => {
+    const _app = document.querySelector('#app') as HTMLElement
+    const _header = document.querySelector('#header') as HTMLElement
+
+    if (_app && _header) {
+      _app.style.paddingTop = `${
+        _header?.getBoundingClientRect().height || 0
+      }px`
+    }
+  })
+})
+
 watch(isMarqueeHidden, () => {
   nextTick(() => {
     const _app = document.querySelector('#app') as HTMLElement

@@ -89,6 +89,16 @@ export const routes = [
     name: RouteNamesEnum.deliveryInfo,
     component: () => import('@/pages/DeliveryInfoPage.vue')
   },
+  {
+    path: '/privacy',
+    name: RouteNamesEnum.privacyInfo,
+    component: () => import('@/pages/PrivacyInfoPage.vue')
+  },
+  {
+    path: '/confident',
+    name: RouteNamesEnum.confidentInfo,
+    component: () => import('@/pages/ConfidentInfoPage.vue')
+  },
   // {
   //   path: '/profile/edit',
   //   name: 'edit-profile',

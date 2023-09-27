@@ -10,5 +10,7 @@ export enum RouteNamesEnum {
   lore = 'lore',
   profile = 'profile',
   'not-found' = 'not-found',
-  deliveryInfo = 'delivery-info'
+  deliveryInfo = 'delivery-info',
+  privacyInfo = 'privacy',
+  confidentInfo = 'confident'
 }
