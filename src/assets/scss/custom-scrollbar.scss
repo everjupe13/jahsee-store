@@ -28,3 +28,28 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
 }
+
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+
+  &::-webkit-scrollbar {
+    @apply h-8 w-8;
+  }
+  
+  &::-webkit-scrollbar-track {
+    @apply bg-black/10;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    @apply bg-black;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-black/50;
+  }
+  
+  &::-webkit-scrollbar-corner {
+    @apply bg-black;
+  }
+}
