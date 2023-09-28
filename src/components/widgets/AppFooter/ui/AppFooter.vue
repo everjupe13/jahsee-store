@@ -73,7 +73,7 @@ import { SOCIAL_LINKS } from '../model'
           </div>
 
           <div
-            class="flex flex-col items-center justify-center gap-10 transition-all"
+            class="flex flex-wrap items-center justify-center gap-10 transition-all"
           >
             <a
               :href="SOCIAL_LINKS.SUPPORT"
@@ -82,22 +82,13 @@ import { SOCIAL_LINKS } from '../model'
             >
               SUPPORT
             </a>
-            <RouterLink
-              to="/delivery-info"
-              class="text text-link min-w-[80px] text-center"
-            >
+            <RouterLink to="/delivery-info" class="text text-link text-center">
               FAQ
             </RouterLink>
-            <RouterLink
-              to="/privacy"
-              class="text text-link min-w-[80px] text-center"
-            >
+            <RouterLink to="/privacy" class="text text-link text-center">
               PRIVACY
             </RouterLink>
-            <RouterLink
-              to="/confident"
-              class="text text-link min-w-[80px] text-center"
-            >
+            <RouterLink to="/confident" class="text text-link text-center">
               CONFIDENT
             </RouterLink>
           </div>
