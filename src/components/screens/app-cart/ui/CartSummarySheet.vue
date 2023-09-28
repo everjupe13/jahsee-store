@@ -179,12 +179,17 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
           <AppRadiosFieldset>
             <AppRadio
               :value="deliveryModel[0]"
+              name="delivery"
               @input="changeDeliveryModel(0)"
               class="mb-15"
             >
               CDEK (CIS)
             </AppRadio>
-            <AppRadio :value="deliveryModel[1]" @input="changeDeliveryModel(1)">
+            <AppRadio
+              name="delivery"
+              :value="deliveryModel[1]"
+              @input="changeDeliveryModel(1)"
+            >
               International shipping
             </AppRadio>
           </AppRadiosFieldset>
@@ -197,6 +202,7 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
           <AppRadiosFieldset>
             <AppRadio
               :value="addressModel[0]"
+              name="address"
               @input="changeAddressModel(0)"
               class="mb-15"
             >
@@ -204,6 +210,7 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
             </AppRadio>
             <AppRadio
               :value="addressModel[1]"
+              name="address"
               @input="changeAddressModel(1)"
               class="mb-15"
             >

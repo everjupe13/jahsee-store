@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps(['modelValue'])
+const props = defineProps(['modelValue', 'name'])
 defineEmits(['update:modelValue'])
 </script>
 
@@ -7,7 +7,7 @@ defineEmits(['update:modelValue'])
   <label :class="['radio-input', { '--active': props.modelValue }]">
     <input
       type="radio"
-      name="order-type"
+      :name="name || ''"
       class="radio-input__radio"
       :checked="props.modelValue"
       @input="$emit('update:modelValue', !props.modelValue)"
