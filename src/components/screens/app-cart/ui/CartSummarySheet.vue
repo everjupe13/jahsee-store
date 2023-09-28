@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 import { IAddress } from '@/api/modules/user/address'
 import {
@@ -20,12 +20,12 @@ type Props = {
   currentAddress?: IAddress
 }
 
-const handleUpdateRadios = (_e: InputEvent) => {
-  // TODO not todo just additional hook for radios change
-  // console.log(radiosModel)
-}
+// const handleUpdateRadios = (_e: InputEvent) => {
+//   // TODO not todo just additional hook for radios change
+//   // console.log(radiosModel)
+// }
 
-const emits = defineEmits(['form-submit', 'update-promo'])
+const emits = defineEmits(['form-submit', 'set-promo'])
 
 const props = withDefaults(defineProps<Props>(), {
   cost: 0,
@@ -43,22 +43,47 @@ const onCreateOrder = () => {
   emits('form-submit')
 }
 
-const radiosModel = reactive([true, false])
-const handleRadiosClick = (index: number) => {
-  if (radiosModel[index]) {
+const addressModel = reactive([true, false])
+const changeAddressModel = (index: number) => {
+  if (addressModel[index]) {
     return
   }
 
-  radiosModel[index] = true
-  for (let i = 0; i < radiosModel.length; i++) {
+  addressModel[index] = true
+  for (let i = 0; i < addressModel.length; i++) {
     if (i !== index) {
-      radiosModel[i] = false
+      addressModel[i] = false
     }
   }
 }
 
-const handelPromoChange = (value: string) => {
-  emits('update-promo', value)
+const deliveryModel = reactive([true, false])
+const changeDeliveryModel = (index: number) => {
+  if (deliveryModel[index]) {
+    return
+  }
+
+  deliveryModel[index] = true
+  for (let i = 0; i < deliveryModel.length; i++) {
+    if (i !== index) {
+      deliveryModel[i] = false
+    }
+  }
+}
+
+const localPromocode = ref('')
+const onPromoFieldAction = (action: 'apply' | 'reset') => {
+  switch (action) {
+    case 'apply': {
+      emits('set-promo', localPromocode.value)
+      break
+    }
+    case 'reset': {
+      localPromocode.value = ''
+      emits('set-promo', '')
+      break
+    }
+  }
 }
 </script>
 
@@ -90,42 +115,27 @@ const handelPromoChange = (value: string) => {
           </div>
         </div>
 
-        <!-- <AppRadiosFieldset class="mb-25" @update="handleUpdateRadios">
-          <AppRadio
-            :value="radiosModel[0]"
-            @input="handleRadiosClick(0)"
-            class="mb-15"
-          >
-            CDEK
-          </AppRadio>
-          <AppRadio
-            :value="radiosModel[1]"
-            @input="handleRadiosClick(1)"
-            class="mb-15"
-          >
-            Russian Post
-          </AppRadio>
-          <AppRadio :value="radiosModel[2]" @input="handleRadiosClick(2)">
-            International delivery and other
-          </AppRadio>
-        </AppRadiosFieldset> -->
-
         <fieldset class="mb-20 block h-full w-full">
           <div class="flex items-center">
             <AppInput
               class="w-full"
               placeholder="Coupon Code"
               input-wrapper-classes="!bg-transparent"
-              :model-value="promocode"
-              @update:model-value="handelPromoChange"
+              v-model="localPromocode"
+              :readonly="!!props.promocode"
             >
               <template #after-input>
                 <AppButton
                   type="button"
                   class="!p-12 !text-[12px]"
                   :disabled="isLoading || !isSuccess || isCartEmpty"
+                  @click="
+                    props.promocode
+                      ? onPromoFieldAction('reset')
+                      : onPromoFieldAction('apply')
+                  "
                 >
-                  Apply
+                  {{ props.promocode ? 'Reset' : 'Apply' }}
                 </AppButton>
               </template>
             </AppInput>
@@ -164,19 +174,37 @@ const handelPromoChange = (value: string) => {
 
         <div class="flex flex-col gap-y-20 pt-25">
           <p class="!leading-none text-[#848a99] text-medium-15">
+            Delivery options:
+          </p>
+          <AppRadiosFieldset>
+            <AppRadio
+              :value="deliveryModel[0]"
+              @input="changeDeliveryModel(0)"
+              class="mb-15"
+            >
+              CDEK (CIS)
+            </AppRadio>
+            <AppRadio :value="deliveryModel[1]" @input="changeDeliveryModel(1)">
+              International shipping
+            </AppRadio>
+          </AppRadiosFieldset>
+        </div>
+
+        <div class="flex flex-col gap-y-20 pt-25">
+          <p class="!leading-none text-[#848a99] text-medium-15">
             Payment options:
           </p>
-          <AppRadiosFieldset @update="handleUpdateRadios">
+          <AppRadiosFieldset>
             <AppRadio
-              :value="radiosModel[0]"
-              @input="handleRadiosClick(0)"
+              :value="addressModel[0]"
+              @input="changeAddressModel(0)"
               class="mb-15"
             >
               Helio (Solana)
             </AppRadio>
             <AppRadio
-              :value="radiosModel[1]"
-              @input="handleRadiosClick(1)"
+              :value="addressModel[1]"
+              @input="changeAddressModel(1)"
               class="mb-15"
             >
               YooKassa (Bank card)
@@ -184,7 +212,7 @@ const handelPromoChange = (value: string) => {
           </AppRadiosFieldset>
         </div>
 
-        <div class="mt-20 md:mt-[100px]">
+        <div class="mt-20 md:mt-[50px]">
           <div
             v-if="serverMessageVisible"
             class="mb-10 px-5 text-[#d84949] text-medium-15"

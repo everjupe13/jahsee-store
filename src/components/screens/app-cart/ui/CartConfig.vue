@@ -1,134 +1,123 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
-import { useModal, useModalSlot } from 'vue-final-modal'
+import { computed, onMounted, ref, watch } from 'vue'
 
 import { useCartStore } from '@/api/modules/cart'
-import { useUserStore } from '@/api/modules/user'
 import AppBackNav from '@/components/features/AppBackNav.vue'
-import { AddressFormModal } from '@/components/screens/app-profile'
-import AppModal from '@/components/widgets/AppModal.vue'
+import { formatDollars } from '@/utils/cost'
 
-import CartChangeAddressForm from './CartChangeAddressForm.vue'
+import { useAddress } from '../models/useAddress'
 import CartOrderList from './CartOrderList.vue'
 import CartSummarySheet from './CartSummarySheet.vue'
+
+const {
+  openCurrentAddressForm,
+  openAddressForm,
+  currentAddress,
+  isAddressValid
+} = useAddress()
+const cartStore = useCartStore()
+await cartStore.expandCartProducts()
+
+const isLoading = ref(false)
+const isSuccess = ref(true)
+const withLoader = async (callback: () => Promise<void>) => {
+  isLoading.value = true
+  isSuccess.value = false
+  await callback()
+  isLoading.value = false
+  isSuccess.value = true
+}
 
 const serverMessage = ref<string | undefined>()
 const serverMessageVisible = computed(
   () => !!serverMessage.value && serverMessage.value !== undefined
 )
 
-const promocode = ref('')
-const updatePromocode = (newPromo: string) => {
-  promocode.value = newPromo
-}
+const renderServerError = (apiError: {
+  data: { [x: string]: string[] }
+  error: { [x: string]: string[] } | string
+}) => {
+  const rawMessages = apiError.error
+  const pureMessage =
+    rawMessages instanceof Object
+      ? Object.values(rawMessages).flat(1)[0]
+      : rawMessages
 
-const isLoading = ref(false)
-const isSuccess = ref(true)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getFirstObjectValue = (tree: any): string => {
+    if (!(tree instanceof Object)) {
+      return tree
+    }
+
+    return getFirstObjectValue(Object.values(tree)[0])
+  }
+  serverMessage.value = getFirstObjectValue(pureMessage)
+}
 
 const onFormSubmit = async () => {
   serverMessage.value = undefined
   if (!isAddressValid.value) {
-    openAddressForm()
-    return
+    return openAddressForm()
   }
 
-  isLoading.value = true
-  isSuccess.value = false
-
-  const response = await cartStore.createOrder({})
-
-  if (response.status) {
-    isLoading.value = false
-    isSuccess.value = true
-  } else if (response.error) {
-    isLoading.value = false
-    isSuccess.value = true
-
-    const rawMessages = (
-      response.error as {
-        data: { [x: string]: string[] }
-        error: { [x: string]: string[] } | string
-      }
-    ).error
-
-    const pureMessage =
-      rawMessages instanceof Object
-        ? Object.values(rawMessages).flat(1)[0]
-        : rawMessages
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const getFirstObjectValue = (tree: any): string => {
-      if (!(tree instanceof Object)) {
-        return tree
-      }
-
-      return getFirstObjectValue(Object.values(tree)[0])
+  await withLoader(async () => {
+    const response = await cartStore.createOrder({ promocode: promocode.value })
+    if (response.error) {
+      renderServerError(
+        response.error as {
+          data: { [x: string]: string[] }
+          error: { [x: string]: string[] } | string
+        }
+      )
     }
-    serverMessage.value = getFirstObjectValue(pureMessage)
-  }
+  })
 }
 
-const cartStore = useCartStore()
-const userStore = useUserStore()
-await cartStore.expandCartProducts()
-const isAddressValid = computed(
-  () => userStore.addresses && userStore.addresses.length > 0
-)
-const totalCost = ref(cartStore.calculateCost())
-const deliveryCost = computed<string>(() => cartStore.calculateDeliveryCost())
+const promocode = ref('')
+const setPromocode = (newPromo: string) => {
+  promocode.value = newPromo
+  requestCost()
+}
 
+const totalCost = ref(cartStore.calculateCost())
+const deliveryCost = ref(cartStore.calculateDeliveryCost())
+
+const requestCost = async () => {
+  serverMessage.value = undefined
+  await withLoader(async () => {
+    const response = await cartStore.calcServerPrice({
+      promocode: promocode.value
+    })
+
+    if (response.error) {
+      return renderServerError(
+        response.error as {
+          data: { [x: string]: string[] }
+          error: { [x: string]: string[] } | string
+        }
+      )
+    }
+
+    totalCost.value = response?.data?.totalPrice
+      ? formatDollars(response.data.totalPrice)
+      : formatDollars(0)
+
+    if (response?.data?.discountedPrice) {
+      deliveryCost.value = formatDollars(response.data.discountedPrice)
+    }
+  })
+}
+
+onMounted(async () => {
+  await requestCost()
+})
 watch(
   () => cartStore.cart,
-  () => {
-    totalCost.value = cartStore.calculateCost()
-    serverMessage.value = undefined
+  async () => {
+    await requestCost()
   },
   { deep: true }
 )
-
-const { open: openAddressForm, close: closeAddressForm } = useModal({
-  component: AppModal,
-  attrs: {},
-  slots: {
-    default: useModalSlot({
-      component: AddressFormModal,
-      attrs: {
-        onConfirm() {
-          closeAddressForm()
-        }
-      }
-    })
-  }
-})
-
-const currentAddress = ref(userStore.addresses?.[0])
-const changeCurrentAddress = (id: number) => {
-  currentAddress.value = userStore.addresses?.find(address => address.id === id)
-}
-
-const { open: openCurrentAddressForm, close: closeCurrentAddressForm } =
-  useModal({
-    component: AppModal,
-    attrs: {},
-    slots: {
-      default: useModalSlot({
-        component: CartChangeAddressForm,
-        attrs: {
-          currentAddressId: computed(() => currentAddress.value?.id || 0),
-          onConfirm() {
-            closeCurrentAddressForm()
-          },
-          'onAdd-address'() {
-            closeCurrentAddressForm()
-            openAddressForm()
-          },
-          'onChange-address'(id: number) {
-            closeCurrentAddressForm()
-            changeCurrentAddress(id)
-          }
-        }
-      })
-    }
-  })
 </script>
 
 <template>
@@ -156,7 +145,7 @@ const { open: openCurrentAddressForm, close: closeCurrentAddressForm } =
       :current-address="currentAddress"
       :change-current-address="openCurrentAddressForm"
       :open-address-form="openAddressForm"
-      @update-promo="updatePromocode"
+      @set-promo="setPromocode"
     ></CartSummarySheet>
   </div>
 </template>
