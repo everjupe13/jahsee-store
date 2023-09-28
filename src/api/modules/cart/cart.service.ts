@@ -151,7 +151,20 @@ export const OrderApiMapper = {
       delivery_address: AddressApiMapper.toEntity(
         domainModel.address
       ) as AddressResponseType,
-      promocode: 'фыв'
+      promocode: domainModel.promocode || ''
+    }
+  }
+}
+
+type CalcResponseType = {
+  discounted_price: number
+  total_price: number
+}
+export const CalcApiMapper = {
+  toDomain(entity: CalcResponseType) {
+    return {
+      discountedPrice: entity.discounted_price,
+      totalPrice: entity.total_price
     }
   }
 }

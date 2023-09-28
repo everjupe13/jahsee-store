@@ -9,7 +9,7 @@ import { useApiRequest } from '@/api/shared/network/http'
 import { formatDollars } from '@/utils/cost'
 
 import { useUserStore } from '../user'
-import { cartStorageProvider } from './cart.service'
+import { CalcApiMapper, cartStorageProvider } from './cart.service'
 import { OrderApiMapper } from './cart.service'
 import { ICartItem } from './cart.types'
 
@@ -52,7 +52,7 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  const createOrder = async ({ promocode }: { promocode?: string }) => {
+  const createOrder = async ({ promocode }: { promocode?: string } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/create_order', {
         ...OrderApiMapper.toEntity({
@@ -134,6 +134,47 @@ export const useCartStore = defineStore('cart', () => {
     return formatDollars(_total)
   }
 
+  const calcServerPrice = async ({
+    promocode
+  }: { promocode?: string } = {}) => {
+    try {
+      const fetchResponse = await useApiRequest.post('/calculate_price', {
+        ...OrderApiMapper.toEntity({
+          promocode,
+          products: cart.value,
+          address: userStore.addresses![0]
+        })
+      })
+
+      if (fetchResponse?.status && fetchResponse.status <= 400) {
+        const serverData = fetchResponse.data.data
+        return {
+          error: false,
+          status: true,
+          data: CalcApiMapper.toDomain(serverData)
+        }
+      }
+
+      return {
+        error: false,
+        status: false
+      }
+    } catch (error) {
+      // TODO add notification observer center
+      // eslint-disable-next-line no-console
+      console.log(error)
+      const errors = (error as AxiosError)?.response?.data as {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [x: string]: any
+      }
+
+      if (errors instanceof Object && Object.entries(errors).length > 0) {
+        return { error: errors, status: false }
+      }
+      return { error: error, status: false }
+    }
+  }
+
   function calculateDeliveryCost() {
     return formatDollars(10)
   }
@@ -147,6 +188,7 @@ export const useCartStore = defineStore('cart', () => {
     deleteItem,
     createOrder,
     expandCartProducts,
-    forget
+    forget,
+    calcServerPrice
   }
 })
