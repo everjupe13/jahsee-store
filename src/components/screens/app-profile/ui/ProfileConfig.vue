@@ -31,7 +31,6 @@ const setActiveTab = async (id: number) => {
 
 const router = useRouter()
 const userStore = useUserStore()
-await userStore.fetchProfile()
 
 const onLogoutClick = async () => {
   userStore.forget()

@@ -9,8 +9,8 @@ export const authMiddleware: NavigationGuardWithThis<undefined> = async (
   to,
   _from
 ) => {
-  const store = useUserStore()
-  const { isAuth } = storeToRefs(store)
+  const userStore = useUserStore()
+  const { isAuth } = storeToRefs(userStore)
 
   if (
     to.meta?.requiresAuth &&
