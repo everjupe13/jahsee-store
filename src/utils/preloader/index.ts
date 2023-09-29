@@ -42,9 +42,9 @@ export class Preloader {
         await this.loading()
         await sleep(1000)
 
-        await this.afterLoading()
-        await sleep(200)
         await afterLoadingHook?.()
+        await sleep(200)
+        await this.afterLoading()
         await this.fadeOut(this.loaderDomElement)
         this.bodyDomElement.classList.remove('body-loading')
         return resolve()
