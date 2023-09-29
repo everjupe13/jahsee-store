@@ -56,6 +56,7 @@ const handleAddProductToCart = (size: string) => {
         class="product-page__grid grid gap-x-15 gap-y-50 pt-30 xl:pb-50 xl:pt-30 2xl:pb-85 2xl:pt-40"
       >
         <ProductInfo
+          :product-slug="currentDrop?.dropSlug || ''"
           :title="currentDrop!.productName"
           :cost="currentDrop!.cost"
           :description="currentDrop!.description"

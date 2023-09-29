@@ -10,7 +10,7 @@ type Props = {
   cost: number
   description: string
   aboutList: string[]
-  dropSlug: string
+  productSlug: string
   sizes: { label: string; soldOut: boolean }[]
   sizingImage: string
   isSoldOut: boolean
@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Partial<Props>>(), {
   title: '',
   cost: 0,
   description: '',
-  dropSlug: '',
+  productSlug: '',
   sizingImage: ''
 })
 
@@ -50,7 +50,7 @@ const handleProductAdd = (size: string) => {
     <div class="mt-auto">
       <ProductInfoNavigation
         class="relative z-[10] mb-10"
-        :drop-slug="props.dropSlug"
+        :product-slug="props.productSlug"
         :product-about-list="props.aboutList"
         :sizing-image="props.sizingImage"
         data-aos="fade-down"

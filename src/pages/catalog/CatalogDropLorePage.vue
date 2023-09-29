@@ -1,5 +1,17 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+import { ProductLoreService } from '@/api/services/product-lore'
 import AppBackNav from '@/components/features/AppBackNav.vue'
+
+const route = useRoute()
+const productSlug = Array.isArray(route.params.dropSlug)
+  ? route.params.dropSlug[0]
+  : route.params.dropSlug
+
+const { data, status } = await ProductLoreService.getLore({ productSlug })
+const loreData = computed(() => (status ? data : undefined))
 </script>
 
 <template>
@@ -18,36 +30,18 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
             <h2
               class="outlined-text font-hnd text-[24px] font-bold uppercase leading-none sm:text-[26px] lg:text-[28px] xl:text-[32px] 2xl:text-[38px]"
             >
-              Solana Flipper
+              {{ loreData?.title || '' }}
             </h2>
           </div>
         </div>
         <div class="main__body">
           <div class="main__body-glass">
-            <img src="@/assets/img/lore/solana.png" class="main__body-img" />
+            <img :src="loreData?.image || ''" class="main__body-img" />
           </div>
-          <div class="main__body-text">
-            We present you a T-shirt that will echo your rhythm of life in the
-            world of cryptocurrencies. "SOLANA FLIPPER" - red letters on a black
-            canvas, personifying the harmony of adrenaline and calculation,
-            speed and attentiveness. This T-shirt is for those who inhale the
-            rhythm of the Solana blockchain, those who play to the rhythm of the
-            rapidly changing pulse of the crypto market.
-            <br />
-            <br />
-            Like a dark sky before dawn, the black background of the T-shirt is
-            filled with anticipation of a new day in the cryptocurrency market.
-            The red inscription "SOLANA FLIPPER" symbolizes the sunrise, new
-            opportunities and a passionate passion for innovation.
-            <br />
-            <br />
-            The T-shirt is designed for those who live among numbers, charts and
-            volatility, but for whom it is more than just a business or hobby.
-            This is a lifestyle, this is the breath of the Web 3 era. And every
-            time you put on this T-shirt, you declare to the world: "I'M SOLANA
-            FLIPPER. I dance among the numbers and earn on the waves of the
-            crypto ocean."
-          </div>
+          <div
+            class="main__body-text"
+            v-html="loreData?.description || ''"
+          ></div>
         </div>
       </div>
     </AppContainer>

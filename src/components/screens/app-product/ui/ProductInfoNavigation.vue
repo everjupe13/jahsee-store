@@ -10,13 +10,13 @@ import {
 import ProductInfoSizeImageModal from './ProductInfoSizeImageModal.vue'
 
 type Props = {
-  dropSlug: string
+  productSlug: string
   productAboutList: string[] | []
   sizingImage: string
 }
 
 const props = withDefaults(defineProps<Partial<Props>>(), {
-  dropSlug: '0'
+  productSlug: ''
 })
 
 const detailsWrapper = ref()
@@ -42,6 +42,8 @@ const { open: openSizeImageModal, close: closeSizeImageModal } = useModal({
 const openSizeGrid = () => {
   openSizeImageModal()
 }
+
+const loreLink = `/lore/${props.productSlug}`
 </script>
 
 <template>
@@ -65,7 +67,7 @@ const openSizeGrid = () => {
     </div>
 
     <RouterLink
-      :to="{ name: 'lore', state: { id: props.dropSlug } }"
+      :to="loreLink"
       class="group mb-10 flex cursor-pointer items-center justify-between gap-x-10 border-b-[1px] border-b-white/20 pb-10 transition-all duration-300"
     >
       <div
