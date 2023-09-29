@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { isPlainObject } from 'lodash-es'
+// import { isPlainObject } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, type Ref, ref } from 'vue'
 
@@ -20,12 +20,11 @@ export const useUserStore = defineStore('user', () => {
   )
 
   const authStore = useAuthStore()
-  const isAuth = computed<boolean>(
-    () =>
-      !!profile.value &&
-      isPlainObject(profile.value) &&
-      Object.keys(profile.value as object).length > 0 &&
-      Boolean(authStore.token)
+  const isAuth = computed<boolean>(() =>
+    // isPlainObject(profile.value) &&
+    // Object.keys(profile.value as object).length > 0 &&
+    // Boolean(authStore.token) &&
+    Boolean(authStore.token)
   )
   async function initialize() {
     if (!authStore.token) {
