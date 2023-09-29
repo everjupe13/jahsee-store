@@ -6,7 +6,7 @@ const route = useRoute()
 
 <template>
   <!-- eslint-disable-next-line prettier/prettier -->
-  <component :is="(route.meta.layoutComponent)">
+  <component :is="(route.meta.layoutComponent as {})">
     <slot></slot>
   </component>
 </template>
