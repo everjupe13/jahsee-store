@@ -1,6 +1,8 @@
 import { sleep } from '..'
 
 export class Preloader {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   private static bodyDomElement: HTMLElement
   private static loaderDomElement: HTMLElement
   private static cssClasses = {
