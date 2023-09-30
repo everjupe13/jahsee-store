@@ -82,7 +82,7 @@ export const routes = [
   {
     path: '/lore/:dropSlug',
     name: RouteNamesEnum.lore,
-    component: () => import('@/pages/catalog/CatalogDropLorePage.vue')
+    component: () => import('@/pages/catalog/ProductLorePage.vue')
   },
   {
     path: '/delivery-info',

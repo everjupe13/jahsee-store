@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import { useHead } from '@unhead/vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { ProductLoreService } from '@/api/services/product-lore'
 import AppBackNav from '@/components/features/AppBackNav.vue'
+import { constructPageTitle } from '@/utils'
 
 const route = useRoute()
 const productSlug = Array.isArray(route.params.dropSlug)
@@ -12,6 +14,10 @@ const productSlug = Array.isArray(route.params.dropSlug)
 
 const { data, status } = await ProductLoreService.getLore({ productSlug })
 const loreData = computed(() => (status ? data : undefined))
+
+useHead({
+  title: constructPageTitle(loreData.value?.title)
+})
 </script>
 
 <template>
