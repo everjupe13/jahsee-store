@@ -28,7 +28,7 @@ const getLore = async ({ productSlug }: { productSlug: string }) => {
       fetchResponse.data &&
       Object.keys(fetchResponse.data).length > 0
     ) {
-      const normalizedData = ApiMapper.toDomain(fetchResponse.data)
+      const normalizedData = ApiMapper.toDomain(fetchResponse.data.data)
       return {
         error: false,
         status: true,
