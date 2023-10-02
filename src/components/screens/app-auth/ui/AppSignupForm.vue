@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core'
-import { email, minLength, required } from '@vuelidate/validators'
+import { email, helpers, minLength, required } from '@vuelidate/validators'
 import { computed, reactive, ref, watch } from 'vue'
 import { RouteLocationRaw, useRoute, useRouter } from 'vue-router'
 
@@ -9,6 +9,7 @@ import { useUserStore } from '@/api/modules/user'
 import { FormLoader } from '@/components/widgets/loaders'
 import { RouteNamesEnum } from '@/router/router.types'
 import { sleep } from '@/utils'
+import { emailValidator } from '@/utils/validators'
 // const emit = defineEmits(['submit'])
 
 const formData = reactive({
@@ -20,7 +21,14 @@ const formData = reactive({
 })
 
 const rules = {
-  email: { required, email },
+  email: {
+    required,
+    email,
+    customEmailLenghtValidator: helpers.withMessage(
+      emailValidator.validationMessage,
+      emailValidator.lengthValdator
+    )
+  },
   name: { required },
   phone: { required },
   password: { required, minLengthValue: minLength(8) }

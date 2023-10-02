@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core'
-import { email, minLength, required } from '@vuelidate/validators'
+import { email, helpers, minLength, required } from '@vuelidate/validators'
 import { computed, nextTick, onMounted, reactive, ref, unref, watch } from 'vue'
 
 import { useUserStore } from '@/api/modules/user'
 import { FormLoader } from '@/components/widgets/loaders'
+import { emailValidator } from '@/utils/validators'
 
 const emit = defineEmits<{
   (e: 'confirm'): void
@@ -27,7 +28,14 @@ const formData = reactive({
 })
 
 const rules = {
-  email: { required, email },
+  email: {
+    required,
+    email,
+    customEmailLenghtValidator: helpers.withMessage(
+      emailValidator.validationMessage,
+      emailValidator.lengthValdator
+    )
+  },
   firstName: { required },
   lastName: {},
   phone: { required },
