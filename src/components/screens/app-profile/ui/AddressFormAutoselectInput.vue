@@ -1,3 +1,4 @@
+<!-- eslint-disable unicorn/consistent-function-scoping -->
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script lang="ts" setup>
 import { AxiosError } from 'axios'
@@ -11,13 +12,15 @@ type Props = {
   placeholder: string
   vuelidateModel: any
   addressKey: string
+  addressLabelKeysComplex?: boolean
   fetchKey: string
   fetchData: Record<string, string>
   inputClasses?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  inputClasses: ''
+  inputClasses: '',
+  addressLabelKey: undefined
 })
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
@@ -80,7 +83,32 @@ const requestAddresses = async () => {
       if (fetchResponse.data?.data && Array.isArray(fetchResponse.data?.data)) {
         const uniqueNormalizedData: { id: number; label: string }[] = []
         fetchResponse.data.data.forEach((addressObject: any, index: number) => {
-          const currentDataValue = addressObject.data[props.addressKey]
+          const constructComplexDataValue = ({
+            street_with_type,
+            house_type,
+            house,
+            block_type,
+            block
+          }: {
+            street_with_type: string
+            house_type: string
+            house: string
+            block_type: string
+            block: string
+          }) => {
+            const label = `${street_with_type}${
+              house_type && house
+                ? block_type && block
+                  ? `, ${house_type} ${house} ${block_type} ${block}`
+                  : `, ${house_type} ${house}`
+                : ''
+            }`
+            return label
+          }
+
+          const currentDataValue = props.addressLabelKeysComplex
+            ? constructComplexDataValue(addressObject.data)
+            : addressObject.data[props.addressKey]
           if (!currentDataValue) {
             return
           }
@@ -93,7 +121,7 @@ const requestAddresses = async () => {
           ) {
             uniqueNormalizedData.push({
               id: index,
-              label: addressObject.data[props.addressKey]
+              label: currentDataValue
             })
           }
         })

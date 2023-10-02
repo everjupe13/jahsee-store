@@ -193,6 +193,7 @@ const onSubmitForm = async () => {
           input-classes="mb-15"
           :vuelidate-model="v$.street"
           address-key="street_with_type"
+          :address-label-keys-complex="true"
           fetch-key="street"
           :fetch-data="formData"
           @field-update="
