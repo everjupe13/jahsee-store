@@ -97,10 +97,11 @@ export type OrderResponseProductType = {
   }
 }
 export type OrderResponseType = {
-  promocode: string
+  promocode?: string
   delivery_address: AddressResponseType
   products: OrderResponseProductType[]
-  type_of_payment_system: string
+  type_of_payment_system: 'yookassa' | 'helio'
+  type_of_delivery: 'cdek' | 'International_shipping'
 }
 
 export type IOrder = {
@@ -109,7 +110,9 @@ export type IOrder = {
   promocode?: string
 }
 export const OrderApiMapper = {
-  toEntity(domainModel: IOrder): OrderResponseType {
+  toEntity(
+    domainModel: IOrder & { deliveryType?: string; paymentType?: string }
+  ): OrderResponseType {
     const getProducts = () => {
       // eslint-disable-next-line unicorn/no-array-reduce
       return domainModel.products.reduce(
@@ -147,11 +150,15 @@ export const OrderApiMapper = {
     }
     return {
       products: getProducts(),
-      type_of_payment_system: 'helio',
+      type_of_payment_system:
+        (domainModel.paymentType as 'yookassa' | 'helio') || 'helio',
+      type_of_delivery:
+        (domainModel.deliveryType as 'cdek' | 'International_shipping') ||
+        'cdek',
       delivery_address: AddressApiMapper.toEntity(
         domainModel.address
       ) as AddressResponseType,
-      promocode: domainModel.promocode || ''
+      ...(domainModel.promocode ? { promocode: domainModel.promocode } : {})
     }
   }
 }

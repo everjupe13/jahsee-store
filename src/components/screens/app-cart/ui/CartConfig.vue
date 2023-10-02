@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { debounce } from 'lodash-es'
 import { computed, onMounted, ref, watch } from 'vue'
 
 import { useCartStore } from '@/api/modules/cart'
@@ -15,6 +16,7 @@ const {
   currentAddress,
   isAddressValid
 } = useAddress()
+
 const cartStore = useCartStore()
 await cartStore.expandCartProducts()
 
@@ -61,7 +63,11 @@ const onFormSubmit = async () => {
   }
 
   await withLoader(async () => {
-    const response = await cartStore.createOrder({ promocode: promocode.value })
+    const response = await cartStore.createOrder({
+      promocode: promocode.value,
+      deliveryType: delivery.value,
+      paymentType: payment.value
+    })
     if (response.error) {
       renderServerError(
         response.error as {
@@ -79,14 +85,30 @@ const setPromocode = (newPromo: string) => {
   requestCost()
 }
 
+const delivery = ref('')
+const deliverySchema = ['cdek', 'International_shipping']
+const setDelivery = (index: number) => {
+  delivery.value = deliverySchema[index]
+  requestCost()
+}
+
+const payment = ref('')
+const paymentSchema = ['helio', 'yookassa']
+const setPayment = (index: number) => {
+  payment.value = paymentSchema[index]
+  requestCost()
+}
+
 const totalCost = ref(cartStore.calculateCost())
 const deliveryCost = ref(cartStore.calculateDeliveryCost())
 
-const requestCost = async () => {
+const requestCost = debounce(async () => {
   serverMessage.value = undefined
   await withLoader(async () => {
     const response = await cartStore.calcServerPrice({
-      promocode: promocode.value
+      promocode: promocode.value,
+      deliveryType: delivery.value,
+      paymentType: payment.value
     })
 
     if (response.error) {
@@ -106,7 +128,7 @@ const requestCost = async () => {
       deliveryCost.value = formatDollars(response.data.discountedPrice)
     }
   })
-}
+}, 500)
 
 onMounted(async () => {
   await requestCost()
@@ -146,6 +168,8 @@ watch(
       :change-current-address="openCurrentAddressForm"
       :open-address-form="openAddressForm"
       @set-promo="setPromocode"
+      @set-delivery="setDelivery"
+      @set-payment="setPayment"
     ></CartSummarySheet>
   </div>
 </template>

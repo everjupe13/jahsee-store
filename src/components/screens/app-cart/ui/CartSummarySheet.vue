@@ -25,7 +25,12 @@ type Props = {
 //   // console.log(radiosModel)
 // }
 
-const emits = defineEmits(['form-submit', 'set-promo'])
+const emits = defineEmits([
+  'form-submit',
+  'set-promo',
+  'set-delivery',
+  'set-payment'
+])
 
 const props = withDefaults(defineProps<Props>(), {
   cost: 0,
@@ -43,16 +48,17 @@ const onCreateOrder = () => {
   emits('form-submit')
 }
 
-const addressModel = reactive([true, false])
-const changeAddressModel = (index: number) => {
-  if (addressModel[index]) {
+const paymentModel = reactive([true, false])
+const changePaymentModel = (index: number) => {
+  if (paymentModel[index]) {
     return
   }
 
-  addressModel[index] = true
-  for (let i = 0; i < addressModel.length; i++) {
+  paymentModel[index] = true
+  emits('set-payment', index)
+  for (let i = 0; i < paymentModel.length; i++) {
     if (i !== index) {
-      addressModel[i] = false
+      paymentModel[i] = false
     }
   }
 }
@@ -64,6 +70,7 @@ const changeDeliveryModel = (index: number) => {
   }
 
   deliveryModel[index] = true
+  emits('set-delivery', index)
   for (let i = 0; i < deliveryModel.length; i++) {
     if (i !== index) {
       deliveryModel[i] = false
@@ -201,17 +208,17 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
           </p>
           <AppRadiosFieldset>
             <AppRadio
-              :value="addressModel[0]"
+              :value="paymentModel[0]"
               name="address"
-              @input="changeAddressModel(0)"
+              @input="changePaymentModel(0)"
               class="mb-15"
             >
               Helio (Solana)
             </AppRadio>
             <AppRadio
-              :value="addressModel[1]"
+              :value="paymentModel[1]"
               name="address"
-              @input="changeAddressModel(1)"
+              @input="changePaymentModel(1)"
               class="mb-15"
             >
               YooKassa (Bank card)

@@ -52,11 +52,21 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  const createOrder = async ({ promocode }: { promocode?: string } = {}) => {
+  const createOrder = async ({
+    promocode,
+    deliveryType,
+    paymentType
+  }: {
+    promocode?: string
+    deliveryType?: string
+    paymentType?: string
+  } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/create_order', {
         ...OrderApiMapper.toEntity({
           promocode,
+          deliveryType,
+          paymentType,
           products: cart.value,
           address: userStore.addresses![0]
         })
@@ -135,12 +145,20 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   const calcServerPrice = async ({
-    promocode
-  }: { promocode?: string } = {}) => {
+    promocode,
+    deliveryType,
+    paymentType
+  }: {
+    promocode?: string
+    deliveryType?: string
+    paymentType?: string
+  } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/calculate_price', {
         ...OrderApiMapper.toEntity({
           promocode,
+          deliveryType,
+          paymentType,
           products: cart.value,
           address: userStore.addresses![0]
         })
