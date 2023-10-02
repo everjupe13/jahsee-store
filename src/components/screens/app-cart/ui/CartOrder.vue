@@ -105,7 +105,7 @@ const onDeleteItem = () => {
     width: 100%;
 
     @media (max-width: 767px) {
-      grid-template-columns: calc(100% / 12 * 11) calc(100% / 12 * 1);
+      grid-template-columns: calc(100% / 12 * 10) calc(100% / 12 * 2);
     }
   }
 
@@ -161,11 +161,11 @@ const onDeleteItem = () => {
   }
 
   &__size {
-    @apply text-[16px] font-semibold uppercase leading-none text-button-black;
+    @apply text-[14px] font-semibold uppercase leading-none text-button-black md:text-[16px];
   }
 
   &__cancel {
-    @apply absolute top-15 z-[2] cursor-pointer transition-all duration-300 md:relative;
+    @apply absolute right-0 top-15 z-[2] flex cursor-pointer items-center justify-center transition-all duration-300 md:relative md:top-0;
 
     &:hover {
       svg {

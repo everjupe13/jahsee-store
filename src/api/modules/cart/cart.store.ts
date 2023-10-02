@@ -6,7 +6,6 @@ import { type Ref, ref } from 'vue'
 import { IProduct } from '@/api/modules/catalog'
 import { useCatalogStore } from '@/api/modules/catalog'
 import { useApiRequest } from '@/api/shared/network/http'
-import { formatDollars } from '@/utils/cost'
 
 import { useUserStore } from '../user'
 import { CalcApiMapper, cartStorageProvider } from './cart.service'
@@ -119,7 +118,7 @@ export const useCartStore = defineStore('cart', () => {
 
   function calculateCost() {
     if (cart.value.length === 0) {
-      return formatDollars(0)
+      return 0
     }
 
     let _total = 0
@@ -141,7 +140,7 @@ export const useCartStore = defineStore('cart', () => {
     // ) {
     //   console.log(fetchResponse.data)
     // }
-    return formatDollars(_total)
+    return _total
   }
 
   const calcServerPrice = async ({
@@ -165,7 +164,7 @@ export const useCartStore = defineStore('cart', () => {
       })
 
       if (fetchResponse?.status && fetchResponse.status <= 400) {
-        const serverData = fetchResponse.data.data
+        const serverData = fetchResponse.data
         return {
           error: false,
           status: true,
@@ -194,7 +193,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function calculateDeliveryCost() {
-    return formatDollars(10)
+    return 10
   }
 
   return {

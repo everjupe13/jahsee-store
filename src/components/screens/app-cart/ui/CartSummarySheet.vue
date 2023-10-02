@@ -6,10 +6,12 @@ import {
   AppRadio,
   AppRadiosFieldset
 } from '@/components/features/AppRadiosFieldset'
+import { formatDollars } from '@/utils/cost'
 
 type Props = {
-  cost?: string | number
-  deliveryCost?: string | number
+  cost?: number
+  discountedPrice?: number
+  deliveryCost?: number
   serverMessage?: string
   serverMessageVisible?: boolean
   isLoading?: boolean
@@ -34,6 +36,7 @@ const emits = defineEmits([
 
 const props = withDefaults(defineProps<Props>(), {
   cost: 0,
+  discountedPrice: undefined,
   deliveryCost: 0,
   serverMessage: '',
   serverMessageVisible: false,
@@ -110,14 +113,28 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
           >
             <p class="!leading-none text-[#848a99] text-medium-16">Sub-total</p>
             <div class="uppercase !leading-none text-black text-medium-16">
-              {{ props.cost }}
+              <span
+                :class="{
+                  'pr-10 font-semibold line-through':
+                    props.discountedPrice && props.discountedPrice < props.cost
+                }"
+              >
+                {{ formatDollars(props.cost) }}
+              </span>
+              <span
+                v-if="
+                  props.discountedPrice && props.discountedPrice < props.cost
+                "
+              >
+                {{ formatDollars(props.discountedPrice) }}
+              </span>
             </div>
           </div>
 
           <div class="flex items-center justify-between py-20 md:py-25">
             <p class="!leading-none text-[#848a99] text-medium-16">Delivery</p>
             <div class="uppercase !leading-none text-black text-medium-16">
-              {{ props.deliveryCost }}
+              {{ formatDollars(props.deliveryCost) }}
             </div>
           </div>
         </div>

@@ -166,12 +166,14 @@ export const OrderApiMapper = {
 type CalcResponseType = {
   discounted_price: number
   total_price: number
+  delivery_sum: number
 }
 export const CalcApiMapper = {
   toDomain(entity: CalcResponseType) {
     return {
       discountedPrice: entity.discounted_price,
-      totalPrice: entity.total_price
+      totalPrice: entity.total_price,
+      deliveryPrice: entity.delivery_sum
     }
   }
 }

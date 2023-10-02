@@ -4,7 +4,6 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import { useCartStore } from '@/api/modules/cart'
 import AppBackNav from '@/components/features/AppBackNav.vue'
-import { formatDollars } from '@/utils/cost'
 
 import { useAddress } from '../models/useAddress'
 import CartOrderList from './CartOrderList.vue'
@@ -100,6 +99,7 @@ const setPayment = (index: number) => {
 }
 
 const totalCost = ref(cartStore.calculateCost())
+const discountedPrice = ref()
 const deliveryCost = ref(cartStore.calculateDeliveryCost())
 
 const requestCost = debounce(async () => {
@@ -120,12 +120,12 @@ const requestCost = debounce(async () => {
       )
     }
 
-    totalCost.value = response?.data?.totalPrice
-      ? formatDollars(response.data.totalPrice)
-      : formatDollars(0)
+    totalCost.value = response?.data?.totalPrice ?? 0
 
-    if (response?.data?.discountedPrice) {
-      deliveryCost.value = formatDollars(response.data.discountedPrice)
+    discountedPrice.value = response.data?.discountedPrice || null
+
+    if (response?.data?.deliveryPrice) {
+      deliveryCost.value = response.data.deliveryPrice
     }
   })
 }, 500)
@@ -157,6 +157,7 @@ watch(
     <CartSummarySheet
       @form-submit="onFormSubmit"
       :cost="totalCost || 0"
+      :discounted-price="discountedPrice"
       :delivery-cost="deliveryCost || 0"
       :server-message="serverMessage"
       :server-message-visible="serverMessageVisible"
