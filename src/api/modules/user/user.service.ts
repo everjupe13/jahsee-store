@@ -1,4 +1,9 @@
-import { IUser, UserResponseDataType } from './user.types'
+import {
+  IUser,
+  UserOrderResponseType,
+  UserOrderType,
+  UserResponseDataType
+} from './user.types'
 
 export const UserApiMapper = {
   toDomain(entity: UserResponseDataType): IUser {
@@ -15,6 +20,17 @@ export const UserApiMapper = {
       first_name: domainModel.userName,
       last_name: domainModel.userLastName,
       ...(domainModel.userPhone ? { phone: domainModel.userPhone } : {})
+    }
+  }
+}
+
+export const UserOrdersApiMapper = {
+  toDomain(entity: UserOrderResponseType): UserOrderType {
+    return {
+      id: entity.id,
+      products: entity.products,
+      cost: entity.paid_amount,
+      status: entity.status
     }
   }
 }

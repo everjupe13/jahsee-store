@@ -18,3 +18,38 @@ export type UserResponseDataType = {
   phone: string
   addresses: AddressResponseType[]
 }
+
+export type UserOrderResponseType = {
+  id: number
+  products: {
+    id: number
+    contents: {
+      size: string
+      amount: number
+    }[]
+  }[]
+  paid_amount: string
+  type_of_payment_system: string
+  status: string
+  delivery_address: {
+    id: number
+    city: string
+    country: string
+    zipcode: string
+    street_address: string
+  }
+  promocode: string
+}
+
+export type UserOrderType = {
+  id: number
+  products: {
+    id: number
+    contents: {
+      size: string
+      amount: number
+    }[]
+  }[]
+  cost: string
+  status: string
+}

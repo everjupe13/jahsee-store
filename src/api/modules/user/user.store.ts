@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 import { AxiosError } from 'axios'
 // import { isPlainObject } from 'lodash-es'
 import { defineStore } from 'pinia'
@@ -8,8 +9,8 @@ import { useApiRequest } from '@/api/shared/network/http'
 import { useAuthStore } from '../auth'
 import { cartStorageProvider } from '../cart'
 import { IAddress, useAddressStore } from './address'
-import { UserApiMapper } from './user.service'
-import { IUser } from './user.types'
+import { UserApiMapper, UserOrdersApiMapper } from './user.service'
+import { IUser, UserOrderResponseType } from './user.types'
 
 export const useUserStore = defineStore('user', () => {
   const profile = ref<IUser | null>(null)
@@ -169,6 +170,82 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  async function getOrders() {
+    try {
+      const fetchResponse = await useApiRequest.get(`/orders`)
+
+      if (fetchResponse?.status && fetchResponse.status <= 400) {
+        return {
+          error: false,
+          status: true,
+          data: fetchResponse.data.map((data: UserOrderResponseType) =>
+            UserOrdersApiMapper.toDomain(data)
+          )
+        }
+      }
+
+      return {
+        error: false,
+        status: false,
+        data: null
+      }
+    } catch (error) {
+      // TODO add notification observer center
+      // eslint-disable-next-line no-console
+      console.log(error)
+      const errors = (error as AxiosError)?.response?.data as {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [x: string]: any
+      }
+
+      if (errors instanceof Object && Object.entries(errors).length > 0) {
+        return { error: errors, status: false, data: null }
+      }
+      return { error: error, status: false, data: null }
+    }
+  }
+
+  async function getOrder({
+    orderId,
+    orderHash
+  }: {
+    orderId?: number | string
+    orderHash: string
+  }) {
+    try {
+      const fetchResponse = await useApiRequest.get(
+        `/orders/${orderId ?? orderHash ?? ''}`
+      )
+
+      if (fetchResponse?.status && fetchResponse.status <= 400) {
+        return {
+          error: false,
+          status: true,
+          data: UserOrdersApiMapper.toDomain(fetchResponse.data)
+        }
+      }
+
+      return {
+        error: false,
+        status: false,
+        data: null
+      }
+    } catch (error) {
+      // TODO add notification observer center
+      // eslint-disable-next-line no-console
+      console.log(error)
+      const errors = (error as AxiosError)?.response?.data as {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [x: string]: any
+      }
+
+      if (errors instanceof Object && Object.entries(errors).length > 0) {
+        return { error: errors, status: false, data: null }
+      }
+      return { error: error, status: false, data: null }
+    }
+  }
+
   function forget() {
     authStore.forget()
     profile.value = null
@@ -187,6 +264,9 @@ export const useUserStore = defineStore('user', () => {
     deleteAddress,
     initialize,
     isAuth,
-    forget
+    forget,
+
+    getOrders,
+    getOrder
   }
 })
