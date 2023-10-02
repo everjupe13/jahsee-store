@@ -10,16 +10,25 @@ const cartStore = useCartStore()
 const catalogStore = useCatalogStore()
 const localCart = computed(() => catalogStore.products)
 
+const emit = defineEmits<{
+  (e: 'add-item', itemId: number, size: string): void
+  (e: 'decrease-item', itemId: number, size: string): void
+  (e: 'remove-item', itemId: number, size: string): void
+}>()
+
 const handleIncrementItem = (itemId: number, size: string) => {
   cartStore.addItem(itemId, size)
+  emit('add-item', itemId, size)
 }
 
 const handleDecrementItem = (itemId: number, size: string) => {
   cartStore.removeItem(itemId, size)
+  emit('decrease-item', itemId, size)
 }
 
 const handleDeleteItem = (itemId: number, size: string) => {
   cartStore.deleteItem(itemId, size)
+  emit('remove-item', itemId, size)
 }
 
 const orderCartMapper = (product: ICartItem) => {
