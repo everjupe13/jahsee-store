@@ -59,7 +59,7 @@ const onDeleteItem = () => {
           </div>
         </div>
       </div>
-      <div class="cart-order__controls h-full">
+      <div class="h-full">
         <div
           class="flex h-full items-end justify-center md:items-center md:justify-between"
         >
@@ -136,109 +136,44 @@ const onDeleteItem = () => {
   }
 
   &__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    pointer-events: none;
+    @apply pointer-events-none block h-full w-full object-cover;
   }
 
   &__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @apply flex flex-col justify-center;
   }
 
   &__title {
-    color: #000;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 100%;
-    letter-spacing: 0.72px;
-    text-transform: uppercase;
-
-    @apply font-hnd;
-
-    @media (max-width: 767px) {
-      font-size: 16px;
-    }
+    @apply font-hnd text-[16px] font-extrabold uppercase leading-none tracking-[0.72px] text-button-black md:text-[18px];
   }
 
   &__cost {
-    color: #000;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
-    letter-spacing: 0.64px;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-    }
+    @apply text-[14px] font-medium uppercase leading-none tracking-[0.64px] text-button-black md:text-[16px];
   }
 
   &__count {
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
+    @apply flex items-center gap-x-5;
   }
 
   &__count-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-width: 25px;
-
-    color: #000;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
-    letter-spacing: 0.64px;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      font-size: 14px;
-    }
+    @apply text-[14px] font-medium uppercase leading-none tracking-[0.64px] text-button-black md:text-[16px];
+    @apply flex min-w-[25px] items-center justify-center;
   }
 
   &__size {
-    color: #000;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-transform: uppercase;
-
-    @media (max-width: 767px) {
-      // font-size: 18px;
-    }
+    @apply text-[16px] font-semibold uppercase leading-none text-button-black;
   }
 
   &__cancel {
-    position: relative;
-    z-index: 2;
-
-    cursor: pointer;
-    transition: 0.3s ease all;
-
-    svg {
-      fill: rgba(0, 0, 0, 0.5);
-    }
+    @apply absolute top-15 z-[2] cursor-pointer transition-all duration-300 md:relative;
 
     &:hover {
       svg {
         fill: #fff;
       }
     }
-
-    @media (max-width: 767px) {
-      position: absolute;
-      top: 15px;
+    svg {
+      fill: rgba(0, 0, 0, 0.5);
     }
   }
 }
