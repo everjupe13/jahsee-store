@@ -33,6 +33,14 @@ const bootstrap = async () => {
 
   app.mount('#app')
 
+  // eslint-disable-next-line unicorn/numeric-separators-style
+  window.ym(95021540, 'init', {
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true
+  })
+
   await Preloader.invoke(() => {
     AOS.init({
       once: true,

@@ -1,94 +1,117 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/ayaysee-favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-    <title>AYAYSEE</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;900&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/ayaysee-favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <title>AYAYSEE</title>
 
-    <meta name="description" content="Bridging two internet generations through Web2.0 businesses integration into Web3.0 to create a profit-focused ecosystem for our community.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;900&display=swap" rel="stylesheet">
 
-    <meta property="og:title" content="AYAYSEE" />
-    <meta property="og:site_name" content="AYAYSEE"/>
-    <meta property="og:description" content="Bridging two internet generations through Web2.0 businesses integration into Web3.0 to create a profit-focused ecosystem for our community." />
-    <meta property="og:image" content="https://ayaysee.com/ayaysee-og-logo-black.png" />
+  <meta name="description"
+    content="Bridging two internet generations through Web2.0 businesses integration into Web3.0 to create a profit-focused ecosystem for our community.">
 
-    <style>
-      .body-loading {
-        overflow: hidden;
-        height: 100vh;
-        width: 100vw;
-      }
+  <meta property="og:title" content="AYAYSEE" />
+  <meta property="og:site_name" content="AYAYSEE" />
+  <meta property="og:description"
+    content="Bridging two internet generations through Web2.0 businesses integration into Web3.0 to create a profit-focused ecosystem for our community." />
+  <meta property="og:image" content="https://ayaysee.com/ayaysee-og-logo-black.png" />
 
-      .loader {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
+  <style>
+    .body-loading {
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .loader {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
 
-        width: calc(120vmax);
-        height: calc(120vmax);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-        background: rgba(0, 0, 0);
+      width: calc(120vmax);
+      height: calc(120vmax);
 
-        overflow: hidden;
-      }
+      background: rgba(0, 0, 0);
 
-      .loader__content {
-        opacity: 0;
+      overflow: hidden;
+    }
 
-        transition-property: all;
-        transition-duration: .5s;
-        transition-timing-function: ease;
-      }
+    .loader__content {
+      opacity: 0;
 
-      .loader.before-loading .loader__content,
-      .loader.loading .loader__content {
-        animation: MainLoaderPulseOut 1.5s ease-in-out infinite !important;
+      transition-property: all;
+      transition-duration: .5s;
+      transition-timing-function: ease;
+    }
+
+    .loader.before-loading .loader__content,
+    .loader.loading .loader__content {
+      animation: MainLoaderPulseOut 1.5s ease-in-out infinite !important;
+      filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0.0));
+    }
+
+    .loader.loading .loader__content {
+      opacity: 1;
+    }
+
+    .loader.after-loading .loader__content {
+      opacity: 1;
+    }
+
+    @keyframes MainLoaderPulseOut {
+
+      0%,
+      100% {
         filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0.0));
       }
 
-      .loader.loading .loader__content {
-        opacity: 1;
+      50% {
+        filter: drop-shadow(0 0 3em rgba(255, 255, 255, 0.55));
       }
-      .loader.after-loading .loader__content {
-        opacity: 1;
-      }
+    }
+  </style>
+</head>
 
-      @keyframes MainLoaderPulseOut {
-        0%,
-        100% {
-          filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0.0));
-        }
-        50% {
-          filter: drop-shadow(0 0 3em rgba(255, 255, 255, 0.55));
-        }
-      }
-    </style>
-  </head>
-  <body class="body-loading">
-    <div id="loader" class="loader">
-      <div class="loader__content">
-        <img src="/src/assets/img/logo-loader.svg" alt="ayaysee logo">
-      </div>
+<body class="body-loading">
+  <div id="loader" class="loader">
+    <div class="loader__content">
+      <img src="/src/assets/img/logo-loader.svg" alt="ayaysee logo">
     </div>
+  </div>
 
-    <div id="app" class="app-background-effects animated"></div>
+  <div id="app" class="app-background-effects animated"></div>
 
-    <div class="modal">
-      <div class="modal-content"></div>
-    </div>
+  <div class="modal">
+    <div class="modal-content"></div>
+  </div>
 
-    <script>window.history.scrollRestoration = 'manual'</script>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  <script>window.history.scrollRestoration = 'manual'</script>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+      })
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/95021540" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
+  <!-- /Yandex.Metrika counter -->
+</body>
+
 </html>
