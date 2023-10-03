@@ -33,13 +33,16 @@ const bootstrap = async () => {
 
   app.mount('#app')
 
-  // eslint-disable-next-line unicorn/numeric-separators-style
-  window.ym(95021540, 'init', {
+  const YMoptions = {
     clickmap: true,
     trackLinks: true,
     accurateTrackBounce: true,
     webvisor: true
-  })
+  }
+  if (import.meta.env.PROD) {
+    // eslint-disable-next-line unicorn/numeric-separators-style
+    window.ym(95021540, 'init', YMoptions)
+  }
 
   await Preloader.invoke(() => {
     AOS.init({
