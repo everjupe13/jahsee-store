@@ -230,9 +230,8 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
               name="address"
               @input="changePaymentModel(0)"
               class="mb-15"
-              :disabled="true"
             >
-              Helio (Solana)
+              DePay (Solana)
             </AppRadio>
             <AppRadio
               :value="paymentModel[1]"

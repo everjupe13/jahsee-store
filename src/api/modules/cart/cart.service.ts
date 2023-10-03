@@ -100,7 +100,7 @@ export type OrderResponseType = {
   promocode?: string
   delivery_address: AddressResponseType
   products: OrderResponseProductType[]
-  type_of_payment_system: 'yookassa' | 'helio'
+  type_of_payment_system: 'yookassa' | 'depay'
   type_of_delivery: 'cdek' | 'International_shipping'
 }
 
@@ -151,7 +151,7 @@ export const OrderApiMapper = {
     return {
       products: getProducts(),
       type_of_payment_system:
-        (domainModel.paymentType as 'yookassa' | 'helio') || 'helio',
+        (domainModel.paymentType as 'yookassa' | 'depay') || 'depay',
       type_of_delivery:
         (domainModel.deliveryType as 'cdek' | 'International_shipping') ||
         'cdek',

@@ -100,7 +100,7 @@ const setDelivery = (index: number) => {
 }
 
 const payment = ref('yookassa')
-const paymentSchema = ['helio', 'yookassa']
+const paymentSchema = ['depay', 'yookassa']
 const setPayment = (index: number) => {
   payment.value = paymentSchema[index]
   requestCost()
