@@ -231,7 +231,7 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
               @input="changePaymentModel(0)"
               class="mb-15"
             >
-              DePay (Solana)
+              DePay (Crypto)
             </AppRadio>
             <AppRadio
               :value="paymentModel[1]"
