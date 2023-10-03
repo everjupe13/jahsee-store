@@ -4,6 +4,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import { useCartStore } from '@/api/modules/cart'
 import AppBackNav from '@/components/features/AppBackNav.vue'
+import { sleep } from '@/utils'
 
 import { useAddress } from '../models/useAddress'
 import CartOrderList from './CartOrderList.vue'
@@ -68,12 +69,19 @@ const onFormSubmit = async () => {
       paymentType: payment.value
     })
     if (response.error) {
-      renderServerError(
+      return renderServerError(
         response.error as {
           data: { [x: string]: string[] }
           error: { [x: string]: string[] } | string
         }
       )
+    }
+
+    const redirectUrl = response.data?.redirectUrl
+
+    if (redirectUrl) {
+      await sleep(500)
+      window.location.assign(redirectUrl)
     }
   })
 }
@@ -84,14 +92,14 @@ const setPromocode = (newPromo: string) => {
   requestCost()
 }
 
-const delivery = ref('')
+const delivery = ref('cdek')
 const deliverySchema = ['cdek', 'International_shipping']
 const setDelivery = (index: number) => {
   delivery.value = deliverySchema[index]
   requestCost()
 }
 
-const payment = ref('')
+const payment = ref('yookassa')
 const paymentSchema = ['helio', 'yookassa']
 const setPayment = (index: number) => {
   payment.value = paymentSchema[index]

@@ -74,12 +74,17 @@ export const useCartStore = defineStore('cart', () => {
       if (fetchResponse?.status && fetchResponse.status <= 400) {
         cartStorageProvider.deleteAll()
         cart.value = []
-        return { error: false, status: true }
+        const response = {
+          redirectUrl: fetchResponse.data?.data?.redirect_url,
+          transactionHash: fetchResponse.data.data?.transaction_hash
+        }
+        return { error: false, status: true, data: response }
       }
 
       return {
         error: false,
-        status: false
+        status: false,
+        data: null
       }
     } catch (error) {
       // TODO add notification observer center
@@ -91,9 +96,9 @@ export const useCartStore = defineStore('cart', () => {
       }
 
       if (errors instanceof Object && Object.entries(errors).length > 0) {
-        return { error: errors, status: false }
+        return { error: errors, status: false, data: null }
       }
-      return { error: error, status: false }
+      return { error: error, status: false, data: null }
     }
   }
 
