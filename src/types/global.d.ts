@@ -5,6 +5,6 @@ export {}
 
 declare global {
   interface Window {
-    ym: (id: number, action: string, AnyObject) => void
+    ym: (id: number, action: string, options: AnyObject) => void
   }
 }
