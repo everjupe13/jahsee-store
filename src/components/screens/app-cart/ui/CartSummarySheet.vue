@@ -6,6 +6,7 @@ import {
   AppRadio,
   AppRadiosFieldset
 } from '@/components/features/AppRadiosFieldset'
+import { FormAlternativeLoader } from '@/components/widgets/loaders'
 import { formatDollars } from '@/utils/cost'
 
 type Props = {
@@ -51,7 +52,7 @@ const onCreateOrder = () => {
   emits('form-submit')
 }
 
-const paymentModel = reactive([true, false])
+const paymentModel = reactive([false, true])
 const changePaymentModel = (index: number) => {
   if (paymentModel[index]) {
     return
@@ -229,6 +230,7 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
               name="address"
               @input="changePaymentModel(0)"
               class="mb-15"
+              :disabled="true"
             >
               Helio (Solana)
             </AppRadio>
@@ -256,7 +258,12 @@ const onPromoFieldAction = (action: 'apply' | 'reset') => {
             class="mb-25 h-65"
             @click="onCreateOrder"
           >
-            Checkout
+            <template v-if="isLoading">
+              <div class="flex items-center justify-center">
+                <FormAlternativeLoader></FormAlternativeLoader>
+              </div>
+            </template>
+            <template v-else>Checkout</template>
           </AppButton>
         </div>
       </div>

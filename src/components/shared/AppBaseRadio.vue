@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps(['modelValue', 'name'])
+const props = defineProps(['modelValue', 'name', 'disabled'])
 defineEmits(['update:modelValue'])
 </script>
 
@@ -8,11 +8,12 @@ defineEmits(['update:modelValue'])
     <input
       type="radio"
       :name="name || ''"
-      class="radio-input__radio"
+      class="radio-input__radio peer"
       :checked="props.modelValue"
       @input="$emit('update:modelValue', !props.modelValue)"
+      :disabled="!!props.disabled"
     />
-    <span class="radio-input__text">
+    <span class="radio-input__text peer-disabled:hover:!text-[#848a99]">
       <slot></slot>
     </span>
   </label>
@@ -40,8 +41,10 @@ defineEmits(['update:modelValue'])
   }
 
   &:hover {
-    .radio-input__text {
-      color: #000;
+    & .radio-input__radio:not(:disabled) {
+      & + .radio-input__text {
+        color: #000;
+      }
     }
   }
 
