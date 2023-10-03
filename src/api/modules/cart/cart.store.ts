@@ -75,8 +75,8 @@ export const useCartStore = defineStore('cart', () => {
         cartStorageProvider.deleteAll()
         cart.value = []
         const response = {
-          redirectUrl: fetchResponse.data?.data?.redirect_url,
-          transactionHash: fetchResponse.data.data?.transaction_hash
+          redirectUrl: fetchResponse.data?.redirect_url,
+          transactionHash: fetchResponse.data?.transaction_hash
         }
         return { error: false, status: true, data: response }
       }
