@@ -5,8 +5,8 @@ import { useRoute } from 'vue-router'
 
 import { useCatalogStore } from '@/api/modules/catalog'
 import {
-  AppCatalogProducts,
-  AppCatalogVideoBanner
+  CatalogProducts,
+  CatalogVideoBanner
 } from '@/components/screens/app-catalog'
 import { constructPageTitle } from '@/utils'
 
@@ -35,7 +35,7 @@ useHead({
   <section>
     <div v-if="!isBannerClosed" class="pb-12 lg:mb-50 lg:mt-40">
       <AppContainer>
-        <AppCatalogVideoBanner>
+        <CatalogVideoBanner>
           <template #close>
             <button
               v-if="false"
@@ -45,12 +45,12 @@ useHead({
               X
             </button>
           </template>
-        </AppCatalogVideoBanner>
+        </CatalogVideoBanner>
       </AppContainer>
     </div>
     <AppContainer>
       <div class="mt-60">
-        <AppCatalogProducts />
+        <CatalogProducts />
       </div>
     </AppContainer>
   </section>

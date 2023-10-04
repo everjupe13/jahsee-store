@@ -10,8 +10,8 @@ import { useRoute } from 'vue-router'
 
 import { useCatalogStore } from '@/api/modules/catalog'
 
-import AppCatalogProductSliderCard from './AppCatalogProductSliderCard.vue'
-import AppCatalogSliderButtons from './AppCatalogSliderButtons.vue'
+import CatalogProductSliderCard from './CatalogProductSliderCard.vue'
+import CatalogSliderButtons from './CatalogSliderButtons.vue'
 
 const modules = [FreeMode]
 
@@ -83,7 +83,7 @@ const slidesProgress = computed(() => {
     @slideChange="onSlideChange"
   >
     <swiper-slide v-for="item in currentCatalog?.products || []" :key="item.id">
-      <AppCatalogProductSliderCard
+      <CatalogProductSliderCard
         v-bind="{
           productName: item.productName,
           productId: item.id,
@@ -100,7 +100,7 @@ const slidesProgress = computed(() => {
         <p class="font-medium leading-none tracking-[0.64px]">
           {{ slidesProgress }}
         </p>
-        <AppCatalogSliderButtons />
+        <CatalogSliderButtons />
       </div>
     </template>
   </swiper>

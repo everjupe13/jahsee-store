@@ -51,6 +51,12 @@ const renderTagsString = (drop: ICatalog): string => {
         >
           Sold out
         </div>
+        <div
+          class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
+          v-else
+        >
+          Buy now
+        </div>
       </router-link>
     </div>
     <div
@@ -92,7 +98,7 @@ const renderTagsString = (drop: ICatalog): string => {
       @apply opacity-0;
 
       @media (max-width: 767px) {
-        @apply hidden;
+        // @apply hidden;
       }
     }
 
