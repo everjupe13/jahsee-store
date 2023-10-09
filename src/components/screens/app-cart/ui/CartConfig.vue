@@ -4,6 +4,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import { useCartStore } from '@/api/modules/cart'
 import AppBackNav from '@/components/features/AppBackNav.vue'
+import { useCryptoWalletModal } from '@/components/screens/app-cart/models/useCryptoWalletModal'
 import { sleep } from '@/utils'
 
 import { useAddress } from '../models/useAddress'
@@ -22,7 +23,7 @@ await cartStore.expandCartProducts()
 
 const isLoading = ref(false)
 const isSuccess = ref(true)
-const withLoader = async (callback: () => Promise<void>) => {
+const withLoader = async (callback: () => Promise<void | string>) => {
   isLoading.value = true
   isSuccess.value = false
   await callback()
@@ -77,6 +78,15 @@ const onFormSubmit = async () => {
       )
     }
 
+    if (payment.value === 'depay') {
+      const { openCryptoWallet } = useCryptoWalletModal({
+        payload: JSON.stringify({
+          transaction_hash: response.data?.transactionHash
+        })
+      })
+      return openCryptoWallet()
+    }
+
     const redirectUrl = response.data?.redirectUrl
 
     if (redirectUrl) {
@@ -99,7 +109,7 @@ const setDelivery = (index: number) => {
   requestCost()
 }
 
-const payment = ref('yookassa')
+const payment = ref('depay')
 const paymentSchema = ['depay', 'yookassa']
 const setPayment = (index: number) => {
   payment.value = paymentSchema[index]

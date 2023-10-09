@@ -52,7 +52,7 @@ const onCreateOrder = () => {
   emits('form-submit')
 }
 
-const paymentModel = reactive([false, true])
+const paymentModel = reactive([true, false])
 const changePaymentModel = (index: number) => {
   if (paymentModel[index]) {
     return
