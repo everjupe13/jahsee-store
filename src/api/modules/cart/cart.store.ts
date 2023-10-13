@@ -7,7 +7,7 @@ import { IProduct } from '@/api/modules/catalog'
 import { useCatalogStore } from '@/api/modules/catalog'
 import { useApiRequest } from '@/api/shared/network/http'
 
-import { useUserStore } from '../user'
+import { IAddress, useUserStore } from '../user'
 import { CalcApiMapper, cartStorageProvider } from './cart.service'
 import { OrderApiMapper } from './cart.service'
 import { ICartItem } from './cart.types'
@@ -54,11 +54,13 @@ export const useCartStore = defineStore('cart', () => {
   const createOrder = async ({
     promocode,
     deliveryType,
-    paymentType
+    paymentType,
+    address
   }: {
     promocode?: string
     deliveryType?: string
     paymentType?: string
+    address?: IAddress
   } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/create_order', {
@@ -67,7 +69,7 @@ export const useCartStore = defineStore('cart', () => {
           deliveryType,
           paymentType,
           products: cart.value,
-          address: userStore.addresses![0]
+          address: address || userStore.addresses![0]
         })
       })
 
@@ -151,11 +153,13 @@ export const useCartStore = defineStore('cart', () => {
   const calcServerPrice = async ({
     promocode,
     deliveryType,
-    paymentType
+    paymentType,
+    address
   }: {
     promocode?: string
     deliveryType?: string
     paymentType?: string
+    address?: IAddress
   } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/calculate_price', {
@@ -164,7 +168,7 @@ export const useCartStore = defineStore('cart', () => {
           deliveryType,
           paymentType,
           products: cart.value,
-          address: userStore.addresses![0]
+          address: address || userStore.addresses![0]
         })
       })
 

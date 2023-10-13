@@ -67,7 +67,8 @@ const onFormSubmit = async () => {
     const response = await cartStore.createOrder({
       promocode: promocode.value,
       deliveryType: delivery.value,
-      paymentType: payment.value
+      paymentType: payment.value,
+      address: currentAddress.value
     })
     if (response.error) {
       return renderServerError(
@@ -126,7 +127,8 @@ const requestCost = debounce(async () => {
     const response = await cartStore.calcServerPrice({
       promocode: promocode.value,
       deliveryType: delivery.value,
-      paymentType: payment.value
+      paymentType: payment.value,
+      address: currentAddress.value
     })
 
     if (response.error) {
