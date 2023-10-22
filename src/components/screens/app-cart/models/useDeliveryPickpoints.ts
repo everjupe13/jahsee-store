@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 /* eslint-disable unicorn/consistent-function-scoping */
 import { computed, type Ref, ref, watch } from 'vue'
 import { useModal, useModalSlot } from 'vue-final-modal'

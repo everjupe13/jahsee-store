@@ -16,13 +16,14 @@ export const useCartStore = defineStore('cart', () => {
   const cart: Ref<ICartItem[] | []> = ref(cartStorageProvider.getAll())
   const catalogStore = useCatalogStore()
   const userStore = useUserStore()
-  const productsCount = computed(() =>
-    // eslint-disable-next-line unicorn/no-array-reduce
-    cart.value.reduce((acc, cartItem) => {
+  const productsCount = computed(() => {
+    let acc = 0
+    for (const cartItem of cart.value) {
       acc += cartItem.count
-      return acc
-    }, 0)
-  )
+    }
+
+    return acc
+  })
 
   function addItem(id: number, size: string) {
     try {
