@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { computed, nextTick, onMounted, watch } from 'vue'
+import { computed, inject, nextTick, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
+import { useCartStore } from '@/api/modules/cart'
 import { useUserStore } from '@/api/modules/user'
 import AppMarquee from '@/components/features/AppMarquee.vue'
 import AppLogo from '@/components/shared/AppLogo.vue'
@@ -28,6 +29,7 @@ import { RouteNamesEnum } from '@/router/router.types'
 const store = useUserStore()
 const { isAuth } = storeToRefs(store)
 const route = useRoute()
+const cartStore = useCartStore()
 
 const marqueeHiddedPages: Set<RouteNamesEnum> = new Set([
   RouteNamesEnum.profile,
@@ -71,6 +73,8 @@ watch(isMarqueeHidden, () => {
     }
   })
 })
+
+const isMdScreen = inject('isMdScreen')
 </script>
 
 <template>
@@ -86,28 +90,44 @@ watch(isMarqueeHidden, () => {
             <AppLogo></AppLogo>
           </div>
           <div class="mr-20 flex items-center gap-x-20 2xl:mr-30 2xl:gap-x-30">
-            <template v-if="isAuth">
+            <template v-if="isMdScreen">
               <router-link to="/profile">
                 <ProfileUserIcon class="pointer-events-none w-26 2xl:w-32" />
               </router-link>
             </template>
+
             <template v-else>
-              <RouterLink
-                class="text-[14px] font-semibold uppercase leading-none text-[#f6f5ff] max-md:hidden 2xl:text-[18px]"
-                to="/login"
-              >
-                Log In
-              </RouterLink>
-              <RouterLink
-                class="text-[14px] font-semibold uppercase leading-none text-[#f6f5ff] max-md:hidden 2xl:text-[18px]"
-                to="/signup"
-              >
-                Sign Up
-              </RouterLink>
+              <template v-if="isAuth">
+                <router-link to="/profile">
+                  <ProfileUserIcon class="pointer-events-none w-26 2xl:w-32" />
+                </router-link>
+              </template>
+              <template v-else>
+                <RouterLink
+                  class="text-[14px] font-semibold uppercase leading-none text-[#f6f5ff] max-md:hidden 2xl:text-[18px]"
+                  to="/login"
+                >
+                  Log In
+                </RouterLink>
+                <RouterLink
+                  class="text-[14px] font-semibold uppercase leading-none text-[#f6f5ff] max-md:hidden 2xl:text-[18px]"
+                  to="/signup"
+                >
+                  Sign Up
+                </RouterLink>
+              </template>
             </template>
           </div>
           <router-link to="/cart">
-            <CartBagIcon class="pointer-events-none w-26 2xl:w-32" />
+            <span class="relative block">
+              <CartBagIcon class="pointer-events-none w-26 2xl:w-32" />
+              <span
+                v-if="cartStore.productsCount && cartStore.productsCount > 0"
+                class="absolute left-[calc(100%)] top-[-2px] flex -translate-x-1/2 items-center justify-center overflow-hidden rounded-full bg-[rgb(225,29,72)] px-6 py-3 text-[12px] leading-none text-white"
+              >
+                {{ cartStore.productsCount }}
+              </span>
+            </span>
           </router-link>
         </div>
       </AppContainer>
