@@ -11,6 +11,7 @@ import { sleep } from '@/utils'
 type Props = {
   sizes: { label: string; soldOut: boolean }[]
   isSoldOut: boolean
+  isSoon: boolean
 }
 const props = withDefaults(defineProps<Partial<Props>>(), {
   sizes: () => []
@@ -47,7 +48,7 @@ onMounted(() => {
     }
   )
 
-  if (isSizeChoosed.value || isOutOfStock.value) {
+  if (isSizeChoosed.value || isOutOfStock.value || props.isSoon) {
     submitTippy.value.disable()
   } else {
     submitTippy.value.enable()
@@ -102,7 +103,7 @@ const handleBuy = async () => {
         ]"
         :key="size.label"
         type="button"
-        :disabled="loading || longLoading"
+        :disabled="loading || longLoading || props.isSoon"
         @click="() => setSelectedSize(size.label)"
       >
         <span
@@ -116,10 +117,13 @@ const handleBuy = async () => {
       <AppButton
         class="h-50 w-full justify-center sm:h-64 xl:h-60 2xl:h-80"
         theme="alternative"
-        :disabled="!isSizeChoosed || isOutOfStock || longLoading"
+        :disabled="
+          !isSizeChoosed || isOutOfStock || props.isSoon || longLoading
+        "
         type="submit"
       >
         <template v-if="isOutOfStock">Sold out</template>
+        <template v-else-if="props.isSoon">Soon</template>
         <template v-else>
           <template v-if="loading">
             <div class="flex items-center justify-center">
@@ -127,7 +131,7 @@ const handleBuy = async () => {
             </div>
           </template>
           <template v-else>
-            {{ longLoading ? 'Added' : 'Buy' }}
+            {{ longLoading ? 'Added' : 'add to cart' }}
           </template>
         </template>
       </AppButton>
