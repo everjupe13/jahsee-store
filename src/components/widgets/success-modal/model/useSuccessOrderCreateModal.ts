@@ -5,6 +5,7 @@ import { useModal, useModalSlot } from 'vue-final-modal'
 import { RouteLocation, useRoute, useRouter } from 'vue-router'
 
 import AppModal from '@/components/widgets/AppModal.vue'
+import { sleep } from '@/utils'
 
 import SuccessOrderCreateModal from '../ui/SuccessOrderCreateModal.vue'
 
@@ -59,8 +60,9 @@ export const useSuccessOrderCreateModal = () => {
     { deep: true }
   )
 
-  onMounted(() => {
+  onMounted(async () => {
     if (checkStateAtQuery(route.query)) {
+      await sleep(500)
       nextTick(() => {
         openSuccessOrderForm()
       })
