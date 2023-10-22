@@ -30,6 +30,7 @@ export const UserOrdersApiMapper = {
       id: entity.id,
       products: entity.products,
       cost: entity.paid_amount,
+      trackNumber: entity.delivery_track_number || 'In process',
       status: entity.status
     }
   }

@@ -15,6 +15,7 @@ type Props = {
   }[]
   cost: string
   status: string
+  trackNumber: string
 }
 const props = defineProps<Props>()
 
@@ -37,9 +38,11 @@ const productsData = await Promise.all(
         <div
           v-for="product in productsData"
           :key="product!.id"
-          class="mb-25 grid h-[110px] grid-cols-[calc(100%/12*9)_calc(100%/12*3)] last:mb-0 md:h-[140px] md:grid-cols-[calc(100%/3*2)_calc(100%/3*1)]"
+          class="mb-25 grid h-[110px] grid-cols-[calc(100%/12*6)_calc(100%/12*6)] last:mb-0 md:h-[140px] md:grid-cols-[calc(100%/12*8)_calc(100%/12*2)_calc(100%/12*2)]"
         >
-          <div class="flex items-center gap-x-10 md:gap-x-40">
+          <div
+            class="col-span-2 flex items-center gap-x-10 md:col-span-1 md:gap-x-40"
+          >
             <div
               class="flex h-[110px] w-[110px] items-center justify-center overflow-hidden md:h-[140px] md:w-[140px]"
             >
@@ -64,9 +67,16 @@ const productsData = await Promise.all(
           </div>
           <div class="flex flex-col justify-center">
             <p
-              class="text-[16px] font-semibold uppercase leading-none text-button-black"
+              class="text-[12px] font-semibold uppercase leading-none text-button-black md:text-[14px]"
             >
               {{ props.status.replaceAll('_', ' ') }}
+            </p>
+          </div>
+          <div class="flex flex-col justify-center">
+            <p
+              class="text-[12px] font-semibold uppercase leading-none text-[#848a99] md:text-[14px]"
+            >
+              {{ props.trackNumber }}
             </p>
           </div>
         </div>

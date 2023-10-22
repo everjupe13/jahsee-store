@@ -16,13 +16,20 @@ const orders = computed(() => data || null)
     <ProfileTabHeading>Orders</ProfileTabHeading>
     <template v-if="orders && orders.length > 0">
       <div
-        class="grid grid-cols-[calc(100%/12*9)_calc(100%/12*3)] items-center border-0 border-b-[1px] border-b-[rgba(0,0,0,0.1)] pb-15 md:grid-cols-[calc(100%/3*2)_calc(100%/3*1)] md:pb-20"
+        class="grid grid-cols-1 items-center border-0 border-b-[1px] border-b-[rgba(0,0,0,0.1)] pb-15 md:grid-cols-[calc(100%/12*8)_calc(100%/12*2)_calc(100%/12*2)] md:pb-20"
       >
         <div class="uppercase leading-none text-[#848a99] text-medium-14">
           Product
         </div>
-        <div class="uppercase leading-none text-[#848a99] text-medium-14">
+        <div
+          class="hidden uppercase leading-none text-[#848a99] text-medium-14 md:block"
+        >
           Status
+        </div>
+        <div
+          class="hidden uppercase leading-none text-[#848a99] text-medium-14 md:block"
+        >
+          Track
         </div>
       </div>
 

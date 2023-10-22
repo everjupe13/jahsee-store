@@ -30,6 +30,7 @@ export type UserOrderResponseType = {
   }[]
   paid_amount: string
   type_of_payment_system: string
+  delivery_track_number: string | null
   status: string
   delivery_address: {
     id: number
@@ -52,4 +53,5 @@ export type UserOrderType = {
   }[]
   cost: string
   status: string
+  trackNumber: string
 }
