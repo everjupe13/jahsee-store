@@ -15,7 +15,7 @@ const handleSubmitClick = () => {
     >
       Thank you for your purchase
     </h3>
-    <p class="mb-20 font-hnd text-[22px] text-button-black">
+    <p class="mb-20 text-center font-hnd text-[22px] text-button-black">
       You can track your order status in your profile
     </p>
     <AppButton outlined fluid class="px-48 py-24" @click="handleSubmitClick">
