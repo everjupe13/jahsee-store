@@ -43,6 +43,7 @@ onMounted(() => {
     hideControls: true,
     controls: [],
     displayDuration: false,
+    ratio: '16:9',
     fullscreen: { enabled: false, fallback: false },
     ...(import.meta.env.DEV ? { debug: true } : {})
   })

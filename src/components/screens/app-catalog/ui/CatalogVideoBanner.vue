@@ -16,8 +16,11 @@ const dropName = computed(() => route.params.dropSlug)
 
 <template>
   <div class="grid-wrapper">
-    <CatalogVideo class="max-w-[630px]" />
-    <div class="mb-20 flex flex-grow flex-col justify-center lg:mb-0 lg:pl-30">
+    <CatalogVideo class="w-full" />
+    <div
+      v-if="false"
+      class="mb-20 flex flex-grow flex-col justify-center lg:mb-0 lg:pl-30"
+    >
       <div class="close-icon">
         <slot name="close"></slot>
       </div>
@@ -41,7 +44,7 @@ const dropName = computed(() => route.params.dropSlug)
 
 <style lang="scss" scoped>
 .grid-wrapper {
-  @apply flex flex-col-reverse lg:flex-row;
+  @apply flex flex-col-reverse;
 }
 
 .heading {
