@@ -27,6 +27,9 @@ export const useSuccessOrderCreateModal = () => {
             onConfirm() {
               closeSuccessOrderForm()
               router.push('/profile')
+            },
+            onClose() {
+              router.push('/profile')
             }
           }
         })
