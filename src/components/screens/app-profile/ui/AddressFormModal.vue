@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, unref, watch } from 'vue'
 
 import { useUserStore } from '@/api/modules/user'
 import { FormLoader } from '@/components/widgets/loaders'
@@ -63,6 +63,15 @@ const v$ = useVuelidate(rules, formData)
 onMounted(() => {
   // v$.value.$validate()
 })
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const inputPropsMapper = (props: { [x: string]: any }) => {
+  return {
+    isValid: props.$dirty ? !props.$invalid : true,
+    isDirty: props.$dirty,
+    validationMessage: unref(props.$silentErrors[0]?.$message)
+  }
+}
 
 const serverMessage = ref<string | null>(null)
 const serverMessageVisible = computed(
@@ -194,14 +203,10 @@ const onSubmitForm = async () => {
             }
           "
         />
-        <AddressFormAutoselectInput
-          key="zip code"
+        <AppInput
           v-model="v$.zipCode.$model"
           placeholder="zip code"
-          :vuelidate-model="v$.zipCode"
-          address-key="postal_code"
-          fetch-key="zip_code"
-          :fetch-data="formData"
+          v-bind="inputPropsMapper(v$.zipCode)"
         />
       </div>
       <div
