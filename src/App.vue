@@ -5,6 +5,7 @@ import { NetworkLoader } from '@/components/widgets/loaders'
 import Layout from '@/layout/default.vue'
 
 import { AuthController } from './components/screens/app-root'
+import { useSuccessOrderCreateModal } from './components/widgets/success-modal'
 
 const appWidth = ref(window.innerWidth)
 
@@ -25,6 +26,8 @@ const isLgScreen = computed(() => appWidth.value > 992)
 
 provide('isMdScreen', isMdScreen)
 provide('isLgScreen', isLgScreen)
+
+useSuccessOrderCreateModal()
 </script>
 
 <template>
