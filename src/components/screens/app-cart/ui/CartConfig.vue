@@ -8,6 +8,7 @@ import { useCryptoWalletModal } from '@/components/screens/app-cart/models/useCr
 import { sleep } from '@/utils'
 
 import { useAddress } from '../models/useAddress'
+import { useDeliveryPickpoints } from '../models/useDeliveryPickpoints'
 import CartOrderList from './CartOrderList.vue'
 import CartSummarySheet from './CartSummarySheet.vue'
 
@@ -17,6 +18,9 @@ const {
   currentAddress,
   isAddressValid
 } = useAddress()
+
+const { currentPickpointAddress, openDeliveryPickpointForm } =
+  useDeliveryPickpoints(currentAddress)
 
 const cartStore = useCartStore()
 await cartStore.expandCartProducts()
@@ -68,7 +72,8 @@ const onFormSubmit = async () => {
       promocode: promocode.value,
       deliveryType: delivery.value,
       paymentType: payment.value,
-      address: currentAddress.value
+      address: currentAddress.value,
+      office_code_cdek: currentPickpointAddress.value?.code
     })
     if (response.error) {
       return renderServerError(
@@ -188,6 +193,8 @@ watch(
       :current-address="currentAddress"
       :change-current-address="openCurrentAddressForm"
       :open-address-form="openAddressForm"
+      :pickpoint-address="currentPickpointAddress?.address"
+      :change-pickpoint-address="openDeliveryPickpointForm"
       @set-promo="setPromocode"
       @set-delivery="setDelivery"
       @set-payment="setPayment"

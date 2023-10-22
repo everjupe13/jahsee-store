@@ -102,6 +102,7 @@ export type OrderResponseType = {
   products: OrderResponseProductType[]
   type_of_payment_system: 'yookassa' | 'depay'
   type_of_delivery: 'cdek' | 'International_shipping'
+  office_code_cdek?: string
 }
 
 export type IOrder = {
@@ -111,7 +112,11 @@ export type IOrder = {
 }
 export const OrderApiMapper = {
   toEntity(
-    domainModel: IOrder & { deliveryType?: string; paymentType?: string }
+    domainModel: IOrder & {
+      deliveryType?: string
+      paymentType?: string
+      office_code_cdek?: string
+    }
   ): OrderResponseType {
     const getProducts = () => {
       // eslint-disable-next-line unicorn/no-array-reduce
@@ -158,7 +163,8 @@ export const OrderApiMapper = {
       delivery_address: AddressApiMapper.toEntity(
         domainModel.address
       ) as AddressResponseType,
-      ...(domainModel.promocode ? { promocode: domainModel.promocode } : {})
+      ...(domainModel.promocode ? { promocode: domainModel.promocode } : {}),
+      office_code_cdek: domainModel.office_code_cdek
     }
   }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
-import { type Ref, ref } from 'vue'
+import { computed, type Ref, ref } from 'vue'
 
 import { IProduct } from '@/api/modules/catalog'
 import { useCatalogStore } from '@/api/modules/catalog'
@@ -16,6 +16,13 @@ export const useCartStore = defineStore('cart', () => {
   const cart: Ref<ICartItem[] | []> = ref(cartStorageProvider.getAll())
   const catalogStore = useCatalogStore()
   const userStore = useUserStore()
+  const productsCount = computed(() =>
+    // eslint-disable-next-line unicorn/no-array-reduce
+    cart.value.reduce((acc, cartItem) => {
+      acc += cartItem.count
+      return acc
+    }, 0)
+  )
 
   function addItem(id: number, size: string) {
     try {
@@ -55,12 +62,14 @@ export const useCartStore = defineStore('cart', () => {
     promocode,
     deliveryType,
     paymentType,
-    address
+    address,
+    office_code_cdek
   }: {
     promocode?: string
     deliveryType?: string
     paymentType?: string
     address?: IAddress
+    office_code_cdek?: string
   } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/create_order', {
@@ -69,7 +78,8 @@ export const useCartStore = defineStore('cart', () => {
           deliveryType,
           paymentType,
           products: cart.value,
-          address: address || userStore.addresses![0]
+          address: address || userStore.addresses![0],
+          office_code_cdek: office_code_cdek
         })
       })
 
@@ -215,6 +225,7 @@ export const useCartStore = defineStore('cart', () => {
     createOrder,
     expandCartProducts,
     forget,
-    calcServerPrice
+    calcServerPrice,
+    productsCount
   }
 })
