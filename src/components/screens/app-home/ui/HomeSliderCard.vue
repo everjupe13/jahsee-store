@@ -18,7 +18,7 @@ const renderTagsString = (drop: ICatalog): string => {
   return [
     `${drop.products.length} ${drop.products.length > 1 ? 'items' : 'item'}`,
     drop.yearTag,
-    drop.status
+    drop.status.replaceAll('_', ' ')
   ]
     .map(tag => `<span>${tag}</span>`)
     .join(HomeCardTagDividerIconRaw)
@@ -50,6 +50,12 @@ const renderTagsString = (drop: ICatalog): string => {
           v-if="props.status === 'sold_out'"
         >
           Sold out
+        </div>
+        <div
+          class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
+          v-else-if="props.status === 'soon'"
+        >
+          soon
         </div>
         <div
           class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
