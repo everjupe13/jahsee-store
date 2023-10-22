@@ -51,8 +51,9 @@ export const useSuccessOrderCreateModal = () => {
 
   watch(
     () => route.query,
-    newQuery => {
+    async newQuery => {
       if (checkStateAtQuery(newQuery)) {
+        await sleep(1000)
         nextTick(() => {
           openSuccessOrderForm()
         })
@@ -65,7 +66,7 @@ export const useSuccessOrderCreateModal = () => {
 
   onMounted(async () => {
     if (checkStateAtQuery(route.query)) {
-      await sleep(500)
+      await sleep(1000)
       nextTick(() => {
         openSuccessOrderForm()
       })
