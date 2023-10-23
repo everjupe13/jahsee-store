@@ -5,7 +5,7 @@
 @layer components {
   .app-background-effects {
     @apply relative overflow-hidden;
-    @apply after:absolute after:inset-x-0 after:top-0 after:h-full after:w-full after:z-[-2] after:bg-[url('@/assets/img/bg-with-lesser.png')] after:bg-center after:bg-no-repeat after:bg-cover;
+    @apply after:absolute after:inset-x-0 after:top-0 after:h-full after:w-full after:z-[-2] after:bg-[url('@/assets/img/bg-with-mesh-lesser.png')] after:bg-center after:bg-no-repeat after:bg-cover;
 
     &.animated {
       // @apply before:absolute before:top-[-520px] before:right-[-270px] before:z-[-1] before:w-[1334px] before:h-[1960px] before:bg-[url('@/assets/img/big-logo-back.svg')] before:bg-center before:bg-no-repeat before:bg-cover before:opacity-[0.02] before:animate-logo-levitation
