@@ -12,6 +12,7 @@ type Props = {
   sizes: { label: string; soldOut: boolean }[]
   isSoldOut: boolean
   isSoon: boolean
+  isPreOrder: boolean
 }
 const props = withDefaults(defineProps<Partial<Props>>(), {
   sizes: () => []
@@ -48,7 +49,12 @@ onMounted(() => {
     }
   )
 
-  if (isSizeChoosed.value || isOutOfStock.value || props.isSoon) {
+  if (
+    isSizeChoosed.value ||
+    isOutOfStock.value ||
+    props.isSoon ||
+    props.isPreOrder
+  ) {
     submitTippy.value.disable()
   } else {
     submitTippy.value.enable()
@@ -103,7 +109,7 @@ const handleBuy = async () => {
         ]"
         :key="size.label"
         type="button"
-        :disabled="loading || longLoading || props.isSoon"
+        :disabled="loading || longLoading || props.isSoon || props.isPreOrder"
         @click="() => setSelectedSize(size.label)"
       >
         <span
@@ -118,7 +124,11 @@ const handleBuy = async () => {
         class="h-50 w-full justify-center sm:h-64 xl:h-60 2xl:h-80"
         theme="alternative"
         :disabled="
-          !isSizeChoosed || isOutOfStock || props.isSoon || longLoading
+          !isSizeChoosed ||
+          isOutOfStock ||
+          props.isSoon ||
+          props.isPreOrder ||
+          longLoading
         "
         type="submit"
       >

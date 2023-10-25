@@ -31,7 +31,7 @@ export interface ICatalog {
   video?: string
   videoPoster?: string
   isCatalogExpanded: boolean
-  status: 'active' | 'sold_out' | 'soon'
+  status: 'active' | 'sold_out' | 'soon' | 'pre-order'
   products: {
     id: number
     productName: string

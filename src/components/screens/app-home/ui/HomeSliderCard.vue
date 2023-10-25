@@ -59,6 +59,12 @@ const renderTagsString = (drop: ICatalog): string => {
         </div>
         <div
           class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
+          v-else-if="props.status === 'pre-order'"
+        >
+          pre order
+        </div>
+        <div
+          class="sold-out z-2 pointer-events-none absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 cursor-default select-none"
           v-else
         >
           Buy now

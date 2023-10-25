@@ -15,6 +15,7 @@ type Props = {
   sizingImage: string
   isSoldOut: boolean
   isSoon: boolean
+  isPreOrder: boolean
 }
 
 const props = withDefaults(defineProps<Partial<Props>>(), {
@@ -61,6 +62,7 @@ const handleProductAdd = (size: string) => {
         :sizes="props.sizes"
         :is-sold-out="props.isSoldOut"
         :is-soon="props.isSoon"
+        :is-pre-order="props.isPreOrder"
         class="controls relative z-[5]"
         data-aos="fade-down"
         data-aos-delay="300"
