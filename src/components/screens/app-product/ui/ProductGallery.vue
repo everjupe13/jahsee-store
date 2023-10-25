@@ -5,6 +5,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
+import type { Swiper as ISwiper } from 'swiper'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { inject, ref } from 'vue'
@@ -17,8 +18,8 @@ const props = defineProps<Partial<Props>>()
 
 const isMdScreen = inject('isMdScreen')
 
-const thumbsSwiper = ref(null)
-const setThumbsSwiper = (swiper: any) => {
+const thumbsSwiper = ref<ISwiper | null>(null)
+const setThumbsSwiper = (swiper: ISwiper) => {
   thumbsSwiper.value = swiper
 }
 const modules = [FreeMode, Navigation, Thumbs]
