@@ -205,6 +205,7 @@ const onBlur = () => {
             class="block w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap px-10 py-10 text-left hover:bg-black/5 focus:bg-black/5"
             type="button"
             @click="onChooseValidValue(address.id)"
+            @touch="onChooseValidValue(address.id)"
           >
             {{ address.label }}
           </button>
