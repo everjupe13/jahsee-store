@@ -47,7 +47,7 @@ const searchedAdresses = computed(() =>
 <template>
   <form
     @submit.prevent="onSubmitForm"
-    class="h-full max-h-[80vh] min-h-[670px] flex-col"
+    class="flex h-full max-h-[80vh] min-h-[670px] flex-col flex-col"
   >
     <h3
       class="mb-30 text-center font-hnd text-[30px] font-medium uppercase leading-tight tracking-[1.6px] text-button-black md:mb-40 md:text-[40px]"
@@ -55,7 +55,9 @@ const searchedAdresses = computed(() =>
       delivery pickpoint
     </h3>
     <AppInput v-model="filterValue" class="mb-20" placeholder="Search" />
-    <div class="max-h-[500px] flex-grow overflow-y-scroll py-5 transition-all">
+    <div
+      class="max-h-[500px] w-full flex-grow overflow-y-auto py-5 transition-all"
+    >
       <template v-if="props.addresses.length > 0">
         <TransitionGroup name="list-complete">
           <div
@@ -82,7 +84,10 @@ const searchedAdresses = computed(() =>
         <p
           class="text-center text-[12px] font-semibold leading-none text-[#d84949] lg:text-[14px]"
         >
-          {{ props.errorMessage || 'not found' }}
+          {{
+            props.errorMessage ||
+            "We can't find the pickup address. Check if the address in your profile is correct. If the error is repeated, please contact support."
+          }}
         </p>
       </template>
     </div>

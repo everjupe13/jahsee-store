@@ -73,7 +73,9 @@ const onFormSubmit = async () => {
       deliveryType: delivery.value,
       paymentType: payment.value,
       address: currentAddress.value,
-      office_code_cdek: currentPickpointAddress.value?.code
+      ...(delivery.value === deliverySchema[0]
+        ? { office_code_cdek: currentPickpointAddress.value?.code }
+        : {})
     })
     if (response.error) {
       return renderServerError(
@@ -133,7 +135,10 @@ const requestCost = debounce(async () => {
       promocode: promocode.value,
       deliveryType: delivery.value,
       paymentType: payment.value,
-      address: currentAddress.value
+      address: currentAddress.value,
+      ...(delivery.value === deliverySchema[0]
+        ? { office_code_cdek: currentPickpointAddress.value?.code }
+        : {})
     })
 
     if (response.error) {
@@ -160,6 +165,13 @@ onMounted(async () => {
 })
 watch(
   () => cartStore.cart,
+  async () => {
+    await requestCost()
+  },
+  { deep: true }
+)
+watch(
+  [currentPickpointAddress, currentAddress, payment],
   async () => {
     await requestCost()
   },

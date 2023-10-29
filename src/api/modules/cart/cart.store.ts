@@ -165,12 +165,14 @@ export const useCartStore = defineStore('cart', () => {
     promocode,
     deliveryType,
     paymentType,
-    address
+    address,
+    office_code_cdek
   }: {
     promocode?: string
     deliveryType?: string
     paymentType?: string
     address?: IAddress
+    office_code_cdek?: string
   } = {}) => {
     try {
       const fetchResponse = await useApiRequest.post('/calculate_price', {
@@ -179,7 +181,8 @@ export const useCartStore = defineStore('cart', () => {
           deliveryType,
           paymentType,
           products: cart.value,
-          address: address || userStore.addresses![0]
+          address: address || userStore.addresses![0],
+          office_code_cdek
         })
       })
 
