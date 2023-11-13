@@ -47,7 +47,7 @@ export type ProductsResponseDataType = {
   price: string
   aboutList: string[]
   images: { id: number; get_images: string }[]
-  sizes: { label: string; soldOut: boolean }[]
+  sizes: { label: string; sold_out: boolean }[]
   get_size_grid: string
 }
 

@@ -37,7 +37,7 @@ export const ProductsApiMapper = {
       cost: Number.parseFloat(product.price),
       aboutList: product.aboutList,
       gallery: product.images?.map(imageObject => imageObject.get_images) || [],
-      sizes: product.sizes
+      sizes: product.sizes.map(size => ({ ...size, soldOut: size.sold_out }))
     }))
   },
   toPrimitiveDomain(entity: ProductsResponseDataType): IProduct {
@@ -50,7 +50,7 @@ export const ProductsApiMapper = {
       cost: Number.parseFloat(entity.price),
       aboutList: entity.aboutList,
       gallery: entity.images?.map(imageObject => imageObject.get_images) || [],
-      sizes: entity.sizes
+      sizes: entity.sizes.map(size => ({ ...size, soldOut: size.sold_out }))
     }
   }
 }
