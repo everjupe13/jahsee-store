@@ -2,129 +2,28 @@ import { ICatalog, IProduct } from './catalog.types'
 
 export const CATALOG_DATA: ICatalog[] = [
   {
-    id: 0,
-    dropSlug: 'first-drop',
-    name: 'Heading',
-    thumbImage: new URL(
-      '@/assets/img/catalog/1st-drop-plug.png',
-      import.meta.url
-    ).href,
-    video: new URL('@/assets/media/catalog-video-plug.mp4', import.meta.url)
-      .href,
-    videoPoster: new URL(
-      '@/assets/media/catalog-video-plug-poster.png',
-      import.meta.url
-    ).href,
-    isCatalogExpanded: true,
-    status: 'active',
-    yearTag: 'Q2 2023',
-    products: [
-      {
-        id: 0,
-        productName: 'Zip hoodie',
-        thumbImage: new URL(
-          '@/assets/img/products/zip-hoodie-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 1,
-        productName: 'Sweatshirt',
-        thumbImage: new URL(
-          '@/assets/img/products/sweatshirt-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 2,
-        productName: 'Zip hoodie',
-        thumbImage: new URL(
-          '@/assets/img/products/zip-hoodie-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 3,
-        productName: 'Sweatshirt',
-        thumbImage: new URL(
-          '@/assets/img/products/sweatshirt-plug/1.png',
-          import.meta.url
-        ).href
-      }
-    ]
-  },
-  {
     id: 1,
-    dropSlug: 'second-drop',
-    name: 'Heading',
-    thumbImage: new URL(
-      '@/assets/img/catalog/2nd-drop-plug.png',
-      import.meta.url
-    ).href,
+    dropSlug: '1st-drop',
+    name: '1st drop',
+    thumbImage: '/mock/1d-cover.png',
     video: undefined,
     videoPoster: undefined,
     isCatalogExpanded: false,
-    status: 'sold_out',
-    yearTag: 'Q2 2023',
+    status: 'active',
+    yearTag: 'Q1 2023',
     products: [
       {
-        id: 4,
-        productName: 'Zip hoodie',
-        thumbImage: new URL(
-          '@/assets/img/products/zip-hoodie-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 5,
-        productName: 'Sweatshirt',
-        thumbImage: new URL(
-          '@/assets/img/products/sweatshirt-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 6,
-        productName: 'Zip hoodie',
-        thumbImage: new URL(
-          '@/assets/img/products/zip-hoodie-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 7,
-        productName: 'Sweatshirt',
-        thumbImage: new URL(
-          '@/assets/img/products/sweatshirt-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 8,
-        productName: 'Zip hoodie',
-        thumbImage: new URL(
-          '@/assets/img/products/zip-hoodie-plug/1.png',
-          import.meta.url
-        ).href
-      },
-      {
-        id: 9,
-        productName: 'Sweatshirt',
-        thumbImage: new URL(
-          '@/assets/img/products/sweatshirt-plug/1.png',
-          import.meta.url
-        ).href
+        id: 1,
+        productName: 'ZIP HOODIE',
+        thumbImage: '/mock/1d-1.jpg'
       }
     ]
   },
   {
     id: 2,
-    dropSlug: 'third-drop',
-    name: 'Heading',
-    thumbImage: new URL(
-      '@/assets/img/catalog/3rd-drop-plug.png',
-      import.meta.url
-    ).href,
+    dropSlug: '2nd-drop',
+    name: '2nd drop',
+    thumbImage: '/mock/2d-cover.png',
     video: undefined,
     videoPoster: undefined,
     isCatalogExpanded: false,
@@ -132,20 +31,42 @@ export const CATALOG_DATA: ICatalog[] = [
     yearTag: 'Q2 2023',
     products: [
       {
-        id: 10,
-        productName: 'Zip hoodie',
-        thumbImage: new URL(
-          '@/assets/img/products/zip-hoodie-plug/1.png',
-          import.meta.url
-        ).href
+        id: 2,
+        productName: 'SWEATSHIRT',
+        thumbImage: '/mock/2d-1.jpg'
+      }
+    ]
+  },
+  {
+    id: 3,
+    dropSlug: '3rd-drop',
+    name: '3rd drop',
+    thumbImage: '/mock/3d-cover.png',
+    video: undefined,
+    videoPoster: undefined,
+    isCatalogExpanded: true,
+    status: 'active',
+    yearTag: 'Q4 2023',
+    products: [
+      {
+        id: 6,
+        productName: 'AYAYSEE BAG',
+        thumbImage: '/mock/3d-1.png'
       },
       {
-        id: 11,
-        productName: 'Sweatshirt',
-        thumbImage: new URL(
-          '@/assets/img/products/sweatshirt-plug/1.png',
-          import.meta.url
-        ).href
+        id: 5,
+        productName: 'BLUR MEMORIES',
+        thumbImage: '/mock/3d-2.png'
+      },
+      {
+        id: 4,
+        productName: 'ETH DOMINATION',
+        thumbImage: '/mock/3d-3.png'
+      },
+      {
+        id: 3,
+        productName: 'SOLANA FLIPPER',
+        thumbImage: '/mock/3d-4.png'
       }
     ]
   }
@@ -153,12 +74,14 @@ export const CATALOG_DATA: ICatalog[] = [
 
 export const PRODUCTS_DATA: IProduct[] = [
   {
-    id: 0,
-    productName: 'Zip hoodie',
+    id: 1,
+    productName: 'ZIP HOODIE',
     description:
-      'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
+      "<p>Speed. Rapid decisions. Adrenaline. This legendary T-shirt embodies the dynamics of the cryptocurrency ocean. It's made for those who live amidst numbers, charts, and volatility, but for whom it's more than just a business or a hobby. It's a lifestyle, the breath of the Web3 era.\r\n<br>\r\n<br>\r\nThis is pre-order. Item will be delivered in November.\r\n</p>",
     cost: 125,
-    dropId: 0,
+    dropId: 1,
+    dropSlug: 'zip-hoodie',
+    sizingImage: '/mock/1d-1-size.jpg',
     aboutList: [
       'Fabric density - 360gr/m',
       '80% cotton',
@@ -168,16 +91,10 @@ export const PRODUCTS_DATA: IProduct[] = [
       'Back - silkscreen'
     ],
     gallery: [
-      new URL('@/assets/img/products/zip-hoodie-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/4.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/5.png', import.meta.url)
-        .href
+      '/mock/1d-1.jpg',
+      '/mock/1d-1-2.jpeg',
+      '/mock/1d-1-3.jpeg',
+      '/mock/1d-1-4.jpeg'
     ],
     sizes: [
       { label: 'XS', soldOut: false },
@@ -189,12 +106,14 @@ export const PRODUCTS_DATA: IProduct[] = [
     ]
   },
   {
-    id: 1,
-    productName: 'Sweatshirt',
+    id: 2,
+    productName: 'SWEATSHIRT',
     description:
-      'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
+      "<p>Speed. Rapid decisions. Adrenaline. This legendary T-shirt embodies the dynamics of the cryptocurrency ocean. It's made for those who live amidst numbers, charts, and volatility, but for whom it's more than just a business or a hobby. It's a lifestyle, the breath of the Web3 era.\r\n<br>\r\n<br>\r\nThis is pre-order. Item will be delivered in November.\r\n</p>",
     cost: 80,
-    dropId: 0,
+    dropId: 2,
+    dropSlug: 'sweatshirt',
+    sizingImage: '/mock/2d-1-size.jpg',
     aboutList: [
       'Fabric density - 360gr/m',
       '80% cotton',
@@ -204,50 +123,10 @@ export const PRODUCTS_DATA: IProduct[] = [
       'Tag that allows you to choose your individual nickname printed on it'
     ],
     gallery: [
-      new URL('@/assets/img/products/sweatshirt-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/4.png', import.meta.url)
-        .href
-    ],
-    sizes: [
-      { label: 'XS', soldOut: false },
-      { label: 'S', soldOut: false },
-      { label: 'M', soldOut: false },
-      { label: 'L', soldOut: true },
-      { label: 'XL', soldOut: true },
-      { label: 'XXL', soldOut: false }
-    ]
-  },
-  {
-    id: 2,
-    productName: 'Zip hoodie',
-    description:
-      'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: 125,
-    dropId: 0,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Hood - Puff',
-      'Back - silkscreen'
-    ],
-    gallery: [
-      new URL('@/assets/img/products/zip-hoodie-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/4.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/5.png', import.meta.url)
-        .href
+      '/mock/2d-1.jpg',
+      '/mock/2d-1-2.jpg',
+      '/mock/2d-1-3.jpeg',
+      '/mock/2d-1-4.jpeg'
     ],
     sizes: [
       { label: 'XS', soldOut: false },
@@ -260,64 +139,44 @@ export const PRODUCTS_DATA: IProduct[] = [
   },
   {
     id: 3,
-    productName: 'Sweatshirt',
+    productName: 'SOLANA FLIPPER',
     description:
-      'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: 80,
-    dropId: 0,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Branded patch that tells you the bear market is about to end',
-      'Tag that allows you to choose your individual nickname printed on it'
-    ],
+      "<p>Speed. Rapid decisions. Adrenaline. This legendary T-shirt embodies the dynamics of the cryptocurrency ocean. It's made for those who live amidst numbers, charts, and volatility, but for whom it's more than just a business or a hobby. It's a lifestyle, the breath of the Web3 era.\r\n<br>\r\n<br>\r\nThis is pre-order. Item will be delivered in November.\r\n</p>",
+    cost: 35,
+    dropId: 3,
+    dropSlug: 'solana-flipper',
+    sizingImage: '/mock/3d-4-size.png',
+    aboutList: ['Fabric density - 240g/m', '100% cotton', 'Chest - Puff'],
     gallery: [
-      new URL('@/assets/img/products/sweatshirt-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/4.png', import.meta.url)
-        .href
+      '/mock/3d-4.png',
+      '/mock/3d-4-2.png',
+      '/mock/3d-4-3.png',
+      '/mock/3d-4-4.png'
     ],
     sizes: [
       { label: 'XS', soldOut: false },
       { label: 'S', soldOut: false },
       { label: 'M', soldOut: false },
-      { label: 'L', soldOut: true },
+      { label: 'L', soldOut: false },
       { label: 'XL', soldOut: true },
       { label: 'XXL', soldOut: false }
     ]
   },
   {
     id: 4,
-    productName: 'Zip hoodie',
+    productName: 'ETH DOMINATION',
     description:
-      'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: 125,
-    dropId: 1,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Hood - Puff',
-      'Back - silkscreen'
-    ],
+      "<p>T-shirt appears to be forged from the darkness and majesty of Ethereum, the second-largest cryptocurrency by market capitalization. By wearing this t-shirt, you underscore your engagement with cutting-edge technological trends, your active role in shaping the digital asset epoch, and your readiness to boldly embrace the future that's already here.\r\n<br>\r\n<br>\r\nThis is pre-order. Item will be delivered in November.\r\n</p>",
+    cost: 35,
+    dropId: 3,
+    dropSlug: 'eth',
+    sizingImage: '/mock/3d-3-size.png',
+    aboutList: ['Fabric density - 240g/m', '100% cotton', 'Chest - Puff'],
     gallery: [
-      new URL('@/assets/img/products/zip-hoodie-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/4.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/5.png', import.meta.url)
-        .href
+      '/mock/3d-3.png',
+      '/mock/3d-3-2.png',
+      '/mock/3d-3-3.png',
+      '/mock/3d-3-4.png'
     ],
     sizes: [
       { label: 'XS', soldOut: false },
@@ -330,244 +189,51 @@ export const PRODUCTS_DATA: IProduct[] = [
   },
   {
     id: 5,
-    productName: 'Sweatshirt',
+    productName: 'BLUR MEMORIES',
     description:
-      'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: 80,
-    dropId: 1,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Branded patch that tells you the bear market is about to end',
-      'Tag that allows you to choose your individual nickname printed on it'
-    ],
+      "<p>This unique oversized T-shirt is a true reflection of the Web3.0 era and the NFT universe. It's designed to appeal not only to cryptocurrency and digital asset enthusiasts but to anyone keeping track of trends in fashion and technology.\r\n<br>\r\n<br>\r\nThis is pre-order. Item will be delivered in November.\r\n</p>",
+    cost: 35,
+    dropId: 3,
+    dropSlug: 'blur',
+    sizingImage: '/mock/3d-2-size.png',
+    aboutList: ['Fabric density - 240g/m', '100% cotton', 'Chest - Puff'],
     gallery: [
-      new URL('@/assets/img/products/sweatshirt-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/4.png', import.meta.url)
-        .href
+      '/mock/3d-2.png',
+      '/mock/3d-2-2.png',
+      '/mock/3d-2-3.png',
+      '/mock/3d-2-4.png'
     ],
     sizes: [
       { label: 'XS', soldOut: false },
       { label: 'S', soldOut: false },
       { label: 'M', soldOut: false },
-      { label: 'L', soldOut: true },
+      { label: 'L', soldOut: false },
       { label: 'XL', soldOut: true },
       { label: 'XXL', soldOut: false }
     ]
   },
   {
     id: 6,
-    productName: 'Zip hoodie',
+    productName: 'AYAYSEE BAG',
     description:
-      'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: 125,
-    dropId: 1,
+      "<p>The capacity of this Bag is comparable to a spaceship. From keys, headphones, and lighter to passport, hardware wallet, and credit cards. Everything you need with it will definitely be with you. It's like a black hole where things disappear and appear just when you need them.\r\n<br>\r\n<br>\r\nThis is pre-order. Item will be delivered in November.\r\n</p>",
+    cost: 45,
+    dropId: 3,
+    dropSlug: 'bag',
+    sizingImage: '/mock/3d-1-size.png',
     aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Hood - Puff',
-      'Back - silkscreen'
+      '3 compartments for your belongings.',
+      'YKK hardware.',
+      'Fabric - corduroy.',
+      'Maximum strap length: 60 cm.',
+      'Minimum strap length: 30 cm.'
     ],
-    gallery: [
-      new URL('@/assets/img/products/zip-hoodie-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/4.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/5.png', import.meta.url)
-        .href
-    ],
+    gallery: ['/mock/3d-1.png', '/mock/3d-1-2.png', '/mock/3d-1-3.png'],
     sizes: [
       { label: 'XS', soldOut: false },
       { label: 'S', soldOut: false },
       { label: 'M', soldOut: false },
       { label: 'L', soldOut: false },
-      { label: 'XL', soldOut: true },
-      { label: 'XXL', soldOut: false }
-    ]
-  },
-  {
-    id: 7,
-    productName: 'Sweatshirt',
-    description:
-      'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: 80,
-    dropId: 1,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Branded patch that tells you the bear market is about to end',
-      'Tag that allows you to choose your individual nickname printed on it'
-    ],
-    gallery: [
-      new URL('@/assets/img/products/sweatshirt-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/4.png', import.meta.url)
-        .href
-    ],
-    sizes: [
-      { label: 'XS', soldOut: false },
-      { label: 'S', soldOut: false },
-      { label: 'M', soldOut: false },
-      { label: 'L', soldOut: true },
-      { label: 'XL', soldOut: true },
-      { label: 'XXL', soldOut: false }
-    ]
-  },
-  {
-    id: 8,
-    productName: 'Zip hoodie',
-    description:
-      'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: 125,
-    dropId: 1,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Hood - Puff',
-      'Back - silkscreen'
-    ],
-    gallery: [
-      new URL('@/assets/img/products/zip-hoodie-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/4.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/5.png', import.meta.url)
-        .href
-    ],
-    sizes: [
-      { label: 'XS', soldOut: false },
-      { label: 'S', soldOut: false },
-      { label: 'M', soldOut: false },
-      { label: 'L', soldOut: false },
-      { label: 'XL', soldOut: true },
-      { label: 'XXL', soldOut: false }
-    ]
-  },
-  {
-    id: 9,
-    productName: 'Sweatshirt',
-    description:
-      'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: 80,
-    dropId: 1,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Branded patch that tells you the bear market is about to end',
-      'Tag that allows you to choose your individual nickname printed on it'
-    ],
-    gallery: [
-      new URL('@/assets/img/products/sweatshirt-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/4.png', import.meta.url)
-        .href
-    ],
-    sizes: [
-      { label: 'XS', soldOut: false },
-      { label: 'S', soldOut: false },
-      { label: 'M', soldOut: false },
-      { label: 'L', soldOut: true },
-      { label: 'XL', soldOut: true },
-      { label: 'XXL', soldOut: false }
-    ]
-  },
-  {
-    id: 10,
-    productName: 'Zip hoodie',
-    description:
-      'Oversize Zip Hoodie that provides lightness, comfort and a sense of individual style that hardly anyone can comprehend.',
-    cost: 125,
-    dropId: 2,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Hood - Puff',
-      'Back - silkscreen'
-    ],
-    gallery: [
-      new URL('@/assets/img/products/zip-hoodie-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/4.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/zip-hoodie-plug/5.png', import.meta.url)
-        .href
-    ],
-    sizes: [
-      { label: 'XS', soldOut: false },
-      { label: 'S', soldOut: false },
-      { label: 'M', soldOut: false },
-      { label: 'L', soldOut: false },
-      { label: 'XL', soldOut: true },
-      { label: 'XXL', soldOut: false }
-    ]
-  },
-  {
-    id: 11,
-    productName: 'Sweatshirt',
-    description:
-      'A perfectly shaped limited edition oversized sweatshirt with excellent quality and name tags that will fit almost any look.',
-    cost: 80,
-    dropId: 2,
-    aboutList: [
-      'Fabric density - 360gr/m',
-      '80% cotton',
-      '20% polyester',
-      'Chest - embroidery',
-      'Branded patch that tells you the bear market is about to end',
-      'Tag that allows you to choose your individual nickname printed on it'
-    ],
-    gallery: [
-      new URL('@/assets/img/products/sweatshirt-plug/1.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/2.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/3.png', import.meta.url)
-        .href,
-      new URL('@/assets/img/products/sweatshirt-plug/4.png', import.meta.url)
-        .href
-    ],
-    sizes: [
-      { label: 'XS', soldOut: false },
-      { label: 'S', soldOut: false },
-      { label: 'M', soldOut: false },
-      { label: 'L', soldOut: true },
       { label: 'XL', soldOut: true },
       { label: 'XXL', soldOut: false }
     ]

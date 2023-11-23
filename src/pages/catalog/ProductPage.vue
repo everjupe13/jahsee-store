@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useHead } from '@unhead/vue'
 import { computed, type Ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 import { useCartStore } from '@/api/modules/cart'
 import { ICatalog, IProduct, useCatalogStore } from '@/api/modules/catalog'
@@ -9,7 +9,6 @@ import AppBackNav from '@/components/features/AppBackNav.vue'
 import { ProductGallery, ProductInfo } from '@/components/screens/app-product'
 import { constructPageTitle } from '@/utils'
 
-const router = useRouter()
 const route = useRoute()
 const catalogStore = useCatalogStore()
 
@@ -38,10 +37,6 @@ const currentDrop: Ref<undefined | IProduct> = computed(() => {
 useHead({
   title: constructPageTitle(currentDrop.value?.productName)
 })
-
-if (!currentDrop?.value || !currentCatalog?.value) {
-  await router.push('/')
-}
 
 const cartStore = useCartStore()
 const handleAddProductToCart = (size: string) => {

@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 
 import { useApiRequest } from '@/api/shared/network/http'
 
+import { CATALOG_DATA, PRODUCTS_DATA } from './catalog.data'
 import { CatalogApiMapper, ProductsApiMapper } from './catalog.service'
 import {
   CatalogResponseDataType,
@@ -22,6 +23,9 @@ export const useCatalogStore = defineStore('catalog', () => {
     if (catalog.value !== null) {
       return true
     }
+
+    catalog.value = CATALOG_DATA
+    return true
 
     try {
       const fetchResponse = await useApiRequest.get('/catalog')
@@ -53,6 +57,8 @@ export const useCatalogStore = defineStore('catalog', () => {
       return null
     }
 
+    return PRODUCTS_DATA.find(product => product.id === productId) || null
+
     try {
       const fetchResponse = await useApiRequest.get(`/product/${productId}`)
 
@@ -79,6 +85,11 @@ export const useCatalogStore = defineStore('catalog', () => {
     if (catalogId === undefined) {
       return false
     }
+
+    const _domainProducts =
+      PRODUCTS_DATA.filter(product => product.dropId === catalogId) || null
+    products.value = _domainProducts
+    return true
 
     try {
       const fetchResponse = await useApiRequest.get(
