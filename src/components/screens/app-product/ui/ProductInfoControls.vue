@@ -100,7 +100,7 @@ const handleSelectChange = (e: Event) => {
 const onMouseMoveButton = () => {
   if (isSizesVersion()) {
     if (isSizeChoosed.value) {
-      window.ym(95_590_253, 'reachGoal', 'v_sizes_before')
+      window.ym(95_590_253, 'reachGoal', 'v_sizes_after')
     } else {
       window.ym(95_590_253, 'reachGoal', 'v_sizes_before')
     }
