@@ -16,8 +16,15 @@ import { vGlobalComponentsPlugin } from '@/plugins/vGlobalComponentsPlugin'
 import { Preloader } from '@/utils/preloader'
 
 import { router } from './router'
+import { getRandomInt } from './utils'
 
 const bootstrap = async () => {
+  const lsVersion = localStorage.getItem('ab_version')
+  if (!lsVersion) {
+    const version = getRandomInt(1, 4)
+    localStorage.setItem('ab_version', String(version))
+  }
+
   const app = createApp(App)
 
   const pinia = createPinia()
@@ -41,7 +48,7 @@ const bootstrap = async () => {
   }
   if (import.meta.env.PROD) {
     // eslint-disable-next-line unicorn/numeric-separators-style
-    window.ym(95021540, 'init', YMoptions)
+    window.ym(95590253, 'init', YMoptions)
   }
 
   await Preloader.invoke(() => {

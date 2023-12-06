@@ -6,6 +6,7 @@ import tippy from 'tippy.js'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 
 import { FormLoader } from '@/components/widgets/loaders'
+import { isSizesVersion } from '@/config/tracker'
 import { sleep } from '@/utils'
 
 type Props = {
@@ -90,30 +91,73 @@ const handleBuy = async () => {
     selectedSize.value = undefined
   }
 }
+
+const handleSelectChange = (e: Event) => {
+  const t = e.target as HTMLSelectElement
+  setSelectedSize(t.value)
+}
+
+const onMouseMoveButton = () => {
+  if (isSizesVersion()) {
+    if (isSizeChoosed.value) {
+      window.ym(95_590_253, 'reachGoal', 'v_sizes_before')
+    } else {
+      window.ym(95_590_253, 'reachGoal', 'v_sizes_before')
+    }
+  } else {
+    if (isSizeChoosed.value) {
+      window.ym(95_590_253, 'reachGoal', 'v_default_sizes_after')
+    } else {
+      window.ym(95_590_253, 'reachGoal', 'v_default_sizes_before')
+    }
+  }
+}
 </script>
 
 <template>
   <form @submit.prevent="handleBuy" class="flex flex-col gap-y-10">
-    <div v-if="props.sizes.length > 0" class="flex flex-wrap gap-x-10">
-      <button
-        v-for="size in props.sizes"
-        class="size-button group flex h-50 flex-shrink-0 cursor-pointer items-center justify-center bg-[#242424] p-10 transition-all hover:opacity-80 disabled:!opacity-70 sm:h-64 lg:aspect-square"
-        :class="[
-          ...sizeButtonClasses(size),
-          props.sizes.length === 1 ? 'w-full' : 'w-[calc((100%-10px*5)/6)]'
-        ]"
-        :key="size.label"
-        type="button"
-        :disabled="loading || longLoading || props.isSoon"
-        @click="() => setSelectedSize(size.label)"
-      >
-        <span
-          class="block font-hnd text-[14px] font-medium uppercase leading-none text-white transition-all group-[.--active]:text-[#0a090a] group-[.--disabled]:text-[#545454] sm:text-[16px]"
+    <template v-if="isSizesVersion()">
+      <div class="mb-20">
+        <select
+          class="h-40 w-full rounded-[5px] px-10 font-medium text-black"
+          value=""
+          @change="handleSelectChange"
         >
-          {{ size.label }}
-        </span>
-      </button>
-    </div>
+          <option disabled value="">Choose the size</option>
+          <option
+            v-for="size in props.sizes"
+            :key="size.label"
+            :value="size.label"
+          >
+            {{ size.label }}
+          </option>
+        </select>
+      </div>
+    </template>
+
+    <template v-else>
+      <div v-if="props.sizes.length > 0" class="flex flex-wrap gap-x-10">
+        <button
+          v-for="size in props.sizes"
+          class="size-button group flex h-50 flex-shrink-0 cursor-pointer items-center justify-center bg-[#242424] p-10 transition-all hover:opacity-80 disabled:!opacity-70 sm:h-64 lg:aspect-square"
+          :class="[
+            ...sizeButtonClasses(size),
+            props.sizes.length === 1 ? 'w-full' : 'w-[calc((100%-10px*5)/6)]'
+          ]"
+          :key="size.label"
+          type="button"
+          :disabled="loading || longLoading || props.isSoon"
+          @click="() => setSelectedSize(size.label)"
+        >
+          <span
+            class="block font-hnd text-[14px] font-medium uppercase leading-none text-white transition-all group-[.--active]:text-[#0a090a] group-[.--disabled]:text-[#545454] sm:text-[16px]"
+          >
+            {{ size.label }}
+          </span>
+        </button>
+      </div>
+    </template>
+
     <div id="product-submit-button">
       <AppButton
         class="h-50 w-full justify-center sm:h-64 xl:h-60 2xl:h-80"
@@ -122,6 +166,7 @@ const handleBuy = async () => {
           !isSizeChoosed || isOutOfStock || props.isSoon || longLoading
         "
         type="submit"
+        @mouseenter="onMouseMoveButton"
       >
         <template v-if="isOutOfStock">Sold out</template>
         <template v-else-if="props.isSoon">Soon</template>

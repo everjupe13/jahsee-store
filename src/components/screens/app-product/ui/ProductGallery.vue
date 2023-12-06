@@ -8,21 +8,53 @@ import 'swiper/css/thumbs'
 import type { Swiper as ISwiper } from 'swiper'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { inject, ref } from 'vue'
+import { inject, type Ref, ref } from 'vue'
+
+import { isSliderVersion } from '@/config/tracker'
 
 type Props = {
   gallery: string[]
 }
 
 const props = defineProps<Partial<Props>>()
-
 const isMdScreen = inject('isMdScreen')
 
 const thumbsSwiper = ref<ISwiper | null>(null)
 const setThumbsSwiper = (swiper: ISwiper) => {
   thumbsSwiper.value = swiper
 }
+
 const modules = [FreeMode, Navigation, Thumbs]
+
+const swiperRef: Ref<ISwiper | null> = ref(null)
+const swiperActiveIndex = ref(0)
+
+const isSlideActionSended = ref(false)
+const onSlideChange = (swiper: ISwiper) => {
+  swiperActiveIndex.value = swiper.activeIndex
+
+  if (!isSlideActionSended.value) {
+    isSlideActionSended.value = true
+
+    if (isSliderVersion()) {
+      window.ym(95_590_253, 'reachGoal', 'v_slider')
+    } else {
+      window.ym(95_590_253, 'reachGoal', 'v_default_slider')
+    }
+  }
+}
+
+const onSwiper = (swiper: ISwiper) => {
+  swiperRef.value = swiper
+}
+
+const isSwiperMoving = ref(false)
+const onSwiperMove = (_swiper: ISwiper) => {
+  isSwiperMoving.value = true
+}
+const onSwiperMoveEnd = (_swiper: ISwiper) => {
+  isSwiperMoving.value = false
+}
 </script>
 
 <template>
@@ -37,10 +69,15 @@ const modules = [FreeMode, Navigation, Thumbs]
       :thumbs="{ swiper: thumbsSwiper }"
       :modules="modules"
       :space-between="5"
-      class="drop-gallery"
+      :allow-touch-move="!isSliderVersion()"
+      :class="['drop-gallery', { 'arrows-visible': isSliderVersion() }]"
       data-aos="zoom-out"
       data-aos-delay="50"
       data-aos-duration="600"
+      @swiper="onSwiper"
+      @slide-change="onSlideChange"
+      @slider-move="onSwiperMove"
+      @slide-change-transition-end="onSwiperMoveEnd"
     >
       <swiper-slide v-for="(item, index) in props.gallery" :key="index">
         <div class="drop-gallery__item">

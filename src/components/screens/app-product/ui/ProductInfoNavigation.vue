@@ -6,6 +6,7 @@ import {
   DropdownCollapseArrowIcon,
   ForwardLinkArrowIcon
 } from '@/components/shared/icons'
+import { isSizeGridVersion } from '@/config/tracker'
 
 import ProductInfoSizeImageModal from './ProductInfoSizeImageModal.vue'
 
@@ -39,7 +40,17 @@ const { open: openSizeImageModal, close: closeSizeImageModal } = useModal({
   }
 })
 
+const isActionSended = ref(false)
 const openSizeGrid = () => {
+  if (!isActionSended.value) {
+    isActionSended.value = true
+    if (isSizeGridVersion()) {
+      window.ym(95_590_253, 'reachGoal', 'v_size_grid')
+    } else {
+      window.ym(95_590_253, 'reachGoal', 'v_default_size_grid')
+    }
+  }
+
   openSizeImageModal()
 }
 
@@ -51,6 +62,28 @@ const loreLink = `/lore/${props.productSlug}`
     class="text-16 font-normal leading-normal text-[#f6f5ff] xl:text-[18px] 2xl:text-[24px]"
   >
     <div
+      v-if="isSizeGridVersion()"
+      class="mb-40 flex cursor-pointer gap-x-8"
+      @click="openSizeGrid"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-20 w-20"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+        />
+      </svg>
+      <p class="text-[14px] font-bold text-[#f3f3f3]">Open size grid</p>
+    </div>
+    <div
+      v-else
       class="group mb-10 flex cursor-pointer items-center justify-between gap-x-10 border-b-[1px] border-b-white/20 pb-10 transition-all duration-300"
       @click="openSizeGrid"
     >

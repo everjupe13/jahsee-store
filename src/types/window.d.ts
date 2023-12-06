@@ -3,7 +3,7 @@ export {}
 
 declare global {
   interface Window {
-    ym: (id: number, action: string, options: AnyObject) => void
+    ym: (id: number, action: string, options: AnyObject | string) => void
     DePayButtons: any
   }
 }
