@@ -19,10 +19,10 @@ import { router } from './router'
 import { getRandomInt } from './utils'
 
 const bootstrap = async () => {
-  const lsVersion = localStorage.getItem('ab_version')
+  const lsVersion = sessionStorage.getItem('ab_version')
   if (!lsVersion) {
     const version = getRandomInt(1, 4)
-    localStorage.setItem('ab_version', String(version))
+    sessionStorage.setItem('ab_version', String(version))
   }
 
   const app = createApp(App)

@@ -10,7 +10,7 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { inject, type Ref, ref } from 'vue'
 
-import { isSliderVersion } from '@/config/tracker'
+import { isDefaultVersion, isSliderVersion } from '@/config/tracker'
 
 type Props = {
   gallery: string[]
@@ -38,7 +38,7 @@ const onSlideChange = (swiper: ISwiper) => {
 
     if (isSliderVersion()) {
       window.ym(95_590_253, 'reachGoal', 'v_slider')
-    } else {
+    } else if (isDefaultVersion()) {
       window.ym(95_590_253, 'reachGoal', 'v_default_slider')
     }
   }

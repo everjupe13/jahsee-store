@@ -6,7 +6,7 @@ import {
   DropdownCollapseArrowIcon,
   ForwardLinkArrowIcon
 } from '@/components/shared/icons'
-import { isSizeGridVersion } from '@/config/tracker'
+import { isDefaultVersion, isSizeGridVersion } from '@/config/tracker'
 
 import ProductInfoSizeImageModal from './ProductInfoSizeImageModal.vue'
 
@@ -46,7 +46,7 @@ const openSizeGrid = () => {
     isActionSended.value = true
     if (isSizeGridVersion()) {
       window.ym(95_590_253, 'reachGoal', 'v_size_grid')
-    } else {
+    } else if (isDefaultVersion()) {
       window.ym(95_590_253, 'reachGoal', 'v_default_size_grid')
     }
   }
