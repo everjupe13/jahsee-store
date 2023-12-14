@@ -6,7 +6,7 @@ import tippy from 'tippy.js'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 
 import { FormLoader } from '@/components/widgets/loaders'
-import { isDefaultVersion, isSizesVersion } from '@/config/tracker'
+import { isSizesVersion } from '@/config/tracker'
 import { sleep } from '@/utils'
 
 type Props = {
@@ -104,7 +104,7 @@ const onMouseMoveButton = () => {
     } else {
       window.ym(95_590_253, 'reachGoal', 'v_sizes_before')
     }
-  } else if (isDefaultVersion()) {
+  } else {
     if (isSizeChoosed.value) {
       window.ym(95_590_253, 'reachGoal', 'v_default_sizes_after')
     } else {
