@@ -15,6 +15,7 @@ import App from '@/App.vue'
 import { vGlobalComponentsPlugin } from '@/plugins/vGlobalComponentsPlugin'
 import { Preloader } from '@/utils/preloader'
 
+import { notifyer } from './config/tracker'
 import { router } from './router'
 import { getRandomInt } from './utils'
 
@@ -50,6 +51,8 @@ const bootstrap = async () => {
     // eslint-disable-next-line unicorn/numeric-separators-style
     window.ym(95590253, 'init', YMoptions)
   }
+
+  notifyer()
 
   await Preloader.invoke(() => {
     AOS.init({
