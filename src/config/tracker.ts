@@ -8,7 +8,7 @@ const isSizeGridVersion = () =>
 const isSliderVersion = () => Number(sessionStorage.getItem('ab_version')) === 4
 
 const notifyer = () => {
-  if (Number.isFinite(currentVersion)) {
+  if (Number.isFinite(Number(currentVersion))) {
     window.ym(95_590_253, 'reachGoal', `v${currentVersion}`)
   }
 }
