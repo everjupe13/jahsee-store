@@ -81,6 +81,14 @@ const afterRequestLoaders = async () => {
 }
 
 const handleBuy = async () => {
+  if (isSizesVersion()) {
+    console.log('v_product_proceed')
+    window.ym(95_590_253, 'reachGoal', 'v_product_proceed')
+  } else {
+    console.log('v_default_product_proceed')
+    window.ym(95_590_253, 'reachGoal', 'v_default_product_proceed')
+  }
+
   if (isSizeChoosed.value) {
     await beforeRequestLoaders()
 
@@ -95,26 +103,6 @@ const handleBuy = async () => {
 const handleSelectChange = (e: Event) => {
   const t = e.target as HTMLSelectElement
   setSelectedSize(t.value)
-}
-
-const onMouseMoveButton = () => {
-  if (isSizesVersion()) {
-    if (isSizeChoosed.value) {
-      console.log('v_sizes_after')
-      window.ym(95_590_253, 'reachGoal', 'v_sizes_after')
-    } else {
-      console.log('v_sizes_before')
-      window.ym(95_590_253, 'reachGoal', 'v_sizes_before')
-    }
-  } else {
-    if (isSizeChoosed.value) {
-      console.log('v_default_sizes_after')
-      window.ym(95_590_253, 'reachGoal', 'v_default_sizes_after')
-    } else {
-      console.log('v_default_sizes_before')
-      window.ym(95_590_253, 'reachGoal', 'v_default_sizes_before')
-    }
-  }
 }
 </script>
 
@@ -170,7 +158,6 @@ const onMouseMoveButton = () => {
           !isSizeChoosed || isOutOfStock || props.isSoon || longLoading
         "
         type="submit"
-        @click="onMouseMoveButton"
       >
         <template v-if="isOutOfStock">Sold out</template>
         <template v-else-if="props.isSoon">Soon</template>
