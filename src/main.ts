@@ -52,8 +52,9 @@ const bootstrap = async () => {
   }
 
   setTimeout(() => {
-    window.ym(95_590_253, 'reachGoal', `v${lsVersion}`)
-    console.log('target version is sent -' + ' ', lsVersion)
+    const version = sessionStorage.getItem('ab_version')
+    window.ym(95_590_253, 'reachGoal', `v${version}`)
+    console.log('target version is sent -' + ' ', version)
   }, 500)
 
   await Preloader.invoke(() => {
