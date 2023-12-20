@@ -15,7 +15,6 @@ import App from '@/App.vue'
 import { vGlobalComponentsPlugin } from '@/plugins/vGlobalComponentsPlugin'
 import { Preloader } from '@/utils/preloader'
 
-import { notifyer } from './config/tracker'
 import { router } from './router'
 import { getRandomInt } from './utils'
 
@@ -50,9 +49,12 @@ const bootstrap = async () => {
   if (import.meta.env.PROD) {
     // eslint-disable-next-line unicorn/numeric-separators-style
     window.ym(95590253, 'init', YMoptions)
-
-    notifyer()
   }
+
+  setTimeout(() => {
+    window.ym(95_590_253, 'reachGoal', `v${lsVersion}`)
+    console.log('target version is sent -' + ' ', lsVersion)
+  }, 500)
 
   await Preloader.invoke(() => {
     AOS.init({
