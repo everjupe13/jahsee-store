@@ -50,9 +50,9 @@ const bootstrap = async () => {
   if (import.meta.env.PROD) {
     // eslint-disable-next-line unicorn/numeric-separators-style
     window.ym(95590253, 'init', YMoptions)
-  }
 
-  notifyer()
+    notifyer()
+  }
 
   await Preloader.invoke(() => {
     AOS.init({

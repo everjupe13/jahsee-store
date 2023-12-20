@@ -170,7 +170,7 @@ const onMouseMoveButton = () => {
           !isSizeChoosed || isOutOfStock || props.isSoon || longLoading
         "
         type="submit"
-        @mouseenter="onMouseMoveButton"
+        @click="onMouseMoveButton"
       >
         <template v-if="isOutOfStock">Sold out</template>
         <template v-else-if="props.isSoon">Soon</template>
