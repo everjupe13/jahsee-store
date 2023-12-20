@@ -77,7 +77,9 @@ const onInputClick = () => {
         @click="onInputClick"
       />
       <AppInput
+        ref="phoneInput"
         placeholder="phone number"
+        only-numbers
         v-model="userData.phone"
         readonly
         @click="onInputClick"

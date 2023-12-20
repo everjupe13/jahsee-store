@@ -7,10 +7,12 @@ import { CheckIcon } from '@/components/shared/icons'
 
 function useEvents(context: (e: any, value: any) => void) {
   const handleChange = (e: Event) => {
-    context('update:modelValue', (e.target as HTMLTextAreaElement).value)
+    const inputValue = (e.target as HTMLTextAreaElement).value
+    context('update:modelValue', inputValue)
   }
   const handleInput = (e: Event) => {
-    context('update:modelValue', (e.target as HTMLTextAreaElement).value)
+    const inputValue = (e.target as HTMLTextAreaElement).value
+    context('update:modelValue', inputValue)
   }
 
   return {
@@ -45,6 +47,7 @@ interface Props {
   validatable?: boolean
   isValid?: boolean
   isDirty?: boolean
+  onlyNumbers?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
