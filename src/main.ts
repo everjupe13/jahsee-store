@@ -16,12 +16,12 @@ import { vGlobalComponentsPlugin } from '@/plugins/vGlobalComponentsPlugin'
 import { Preloader } from '@/utils/preloader'
 
 import { router } from './router'
-import { getRandomInt } from './utils'
+// import { getRandomInt } from './utils'
 
 const bootstrap = async () => {
   const lsVersion = sessionStorage.getItem('ab_version')
   if (!lsVersion) {
-    const _version = getRandomInt(1, 4)
+    // const _version = getRandomInt(1, 4)
     const OVERRIDE_VERSION = 1
     sessionStorage.setItem('ab_version', String(OVERRIDE_VERSION))
   }
