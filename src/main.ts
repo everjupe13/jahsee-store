@@ -21,8 +21,9 @@ import { getRandomInt } from './utils'
 const bootstrap = async () => {
   const lsVersion = sessionStorage.getItem('ab_version')
   if (!lsVersion) {
-    const version = getRandomInt(1, 4)
-    sessionStorage.setItem('ab_version', String(version))
+    const _version = getRandomInt(1, 4)
+    const OVERRIDE_VERSION = 1
+    sessionStorage.setItem('ab_version', String(OVERRIDE_VERSION))
   }
 
   const app = createApp(App)
@@ -55,7 +56,7 @@ const bootstrap = async () => {
     const version = sessionStorage.getItem('ab_version')
     window.ym(95_590_253, 'reachGoal', `v${version}`)
     console.log('target version is sent -' + ' ', version)
-  }, 500)
+  }, 1000)
 
   await Preloader.invoke(() => {
     AOS.init({
